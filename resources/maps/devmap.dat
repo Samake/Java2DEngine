@@ -16562,6 +16562,10 @@ levelTiles:16384
 {type:Prefab,name:SPAWNEGG_BUNNY,x:1117.0,y:863.0}
 {type:Prefab,name:SPAWNEGG_BUNNY,x:1137.0,y:874.0}
 {type:Prefab,name:SPAWNEGG_BUNNY,x:1108.0,y:882.0}
+{type:Prefab,name:SPAWNEGG_BUNNY_02,x:1088.0,y:1036.0}
+{type:Prefab,name:SPAWNEGG_BUNNY_02,x:1069.0,y:1042.0}
+{type:Prefab,name:SPAWNEGG_BUNNY_02,x:1082.0,y:1020.0}
+{type:Prefab,name:SPAWNEGG_BUNNY_02,x:1066.0,y:1027.0}
 [LIGHTS]
 {type:PointLight,x:1053.0,y:950.0,r:166,g:89,b:96,radius:135,pulsing:false,flickering:false,delay:200,enabledAtDay:false}
 {type:PointLight,x:1131.0,y:861.0,r:130,g:143,b:241,radius:101,pulsing:false,flickering:false,delay:200,enabledAtDay:false}

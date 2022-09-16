@@ -24,6 +24,7 @@ public class NPCs {
 	
 	public static final EntityBluePrint ANIMAL_CHICKEN_01 = new EntityBluePrint(npcList, 100, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_CHICKEN_01", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 0, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint ANIMAL_BUNNY_01 = new EntityBluePrint(npcList, 101, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_BUNNY_01", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 1, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint ANIMAL_BUNNY_02 = new EntityBluePrint(npcList, 102, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_BUNNY_02", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 2, false, 0, 0, false), true, true, true);
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -41,6 +42,8 @@ public class NPCs {
 				case "ANIMAL_CHICKEN_01":
 					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_BUNNY_01":
+					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
+				case "ANIMAL_BUNNY_02":
 					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
 			}
 		}

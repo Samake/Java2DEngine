@@ -24,6 +24,7 @@ public class Prefabs {
 
 	public static final EntityBluePrint SPAWNEGG_CHICKEN = new EntityBluePrint(entityList, 200, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	public static final EntityBluePrint SPAWNEGG_BUNNY = new EntityBluePrint(entityList, 201, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint SPAWNEGG_BUNNY_02 = new EntityBluePrint(entityList, 202, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -44,6 +45,8 @@ public class Prefabs {
 					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_01));
 				case "SPAWNEGG_BUNNY" :
 					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_BUNNY_01));
+				case "SPAWNEGG_BUNNY_02" :
+					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_BUNNY_02));
 			}
 		}
 		

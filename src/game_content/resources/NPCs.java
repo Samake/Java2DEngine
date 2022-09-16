@@ -27,6 +27,9 @@ public class NPCs {
 	public static final EntityBluePrint ANIMAL_BUNNY_BROWN_BABY = new EntityBluePrint(npcList, 102, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_BUNNY_BROWN_BABY", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 2, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint ANIMAL_BUNNY_GREY = new EntityBluePrint(npcList, 103, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_BUNNY_GREY", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 3, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint ANIMAL_BUNNY_GREY_BABY = new EntityBluePrint(npcList, 104, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_BUNNY_GREY_BABY", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 4, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint ANIMAL_CHICKEN_BABY_WHITE = new EntityBluePrint(npcList, 105, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_CHICKEN_BABY_WHITE", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 5, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint ANIMAL_CHICKEN_BABY_YELLOW = new EntityBluePrint(npcList, 106, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_CHICKEN_BABY_YELLOW", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 6, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint ANIMAL_CHICKEN_BABY_BROWN = new EntityBluePrint(npcList, 107, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_CHICKEN_BABY_BROWN", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 7, false, 0, 0, false), true, true, true);
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -51,6 +54,12 @@ public class NPCs {
 					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_BUNNY_GREY_BABY":
 					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
+				case "ANIMAL_CHICKEN_BABY_WHITE":
+					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
+				case "ANIMAL_CHICKEN_BABY_YELLOW":
+					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
+				case "ANIMAL_CHICKEN_BABY_BROWN":
+					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
 			}
 		}
 		

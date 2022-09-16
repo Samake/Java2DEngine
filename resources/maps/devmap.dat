@@ -16572,6 +16572,16 @@ levelTiles:16384
 {type:Prefab,name:SPAWNEGG_BUNNY_GREY_BABY,x:934.0,y:1025.0}
 {type:Prefab,name:SPAWNEGG_BUNNY_GREY_BABY,x:950.0,y:1025.0}
 {type:Prefab,name:SPAWNEGG_BUNNY_GREY_BABY,x:966.0,y:1027.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:959.0,y:907.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:960.0,y:922.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:971.0,y:932.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:975.0,y:918.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:1027.0,y:951.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:1032.0,y:961.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:1035.0,y:973.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:1036.0,y:998.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:1026.0,y:1011.0}
+{type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:1019.0,y:1019.0}
 [LIGHTS]
 {type:PointLight,x:1053.0,y:950.0,r:166,g:89,b:96,radius:135,pulsing:false,flickering:false,delay:200,enabledAtDay:false}
 {type:PointLight,x:1131.0,y:861.0,r:130,g:143,b:241,radius:101,pulsing:false,flickering:false,delay:200,enabledAtDay:false}

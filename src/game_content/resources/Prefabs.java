@@ -27,6 +27,9 @@ public class Prefabs {
 	public static final EntityBluePrint SPAWNEGG_BUNNY_BROWN_BABY = new EntityBluePrint(entityList, 202, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY_BROWN_BABY", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	public static final EntityBluePrint SPAWNEGG_BUNNY_GREY = new EntityBluePrint(entityList, 203, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY_GREY", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	public static final EntityBluePrint SPAWNEGG_BUNNY_GREY_BABY = new EntityBluePrint(entityList, 204, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY_GREY_BABY", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_WHITE = new EntityBluePrint(entityList, 205, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_WHITE", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_YELLOW = new EntityBluePrint(entityList, 206, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_YELLOW", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_BROWN = new EntityBluePrint(entityList, 207, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_BROWN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -53,6 +56,12 @@ public class Prefabs {
 					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_BUNNY_GREY));
 				case "SPAWNEGG_BUNNY_GREY_BABY" :
 					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_BUNNY_GREY_BABY));
+				case "SPAWNEGG_CHICKEN_BABY_WHITE" :
+					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_WHITE));
+				case "SPAWNEGG_CHICKEN_BABY_YELLOW" :
+					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_YELLOW));
+				case "SPAWNEGG_CHICKEN_BABY_BROWN" :
+					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_BROWN));
 			}
 		}
 		

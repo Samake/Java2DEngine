@@ -22,5 +22,5 @@ public class Sheets {
 	public final static SpriteSheet WOMEN_03_SHEET = new SpriteSheet(sheetTypes, 102, "/textures/women03.png", 32);
 	public final static SpriteSheet WOMEN_04_SHEET = new SpriteSheet(sheetTypes, 103, "/textures/women04.png", 32);
 	
-	public final static SpriteSheet CHICKEN_01_SHEET = new SpriteSheet(sheetTypes, 200, "/textures/chicken01.png", 32);
+	public final static SpriteSheet ANIMALS_SHEET = new SpriteSheet(sheetTypes, 200, "/textures/animals.png", 32);
 }

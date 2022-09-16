@@ -7,6 +7,7 @@ import engine.entities.EntityBluePrint;
 import engine.entities.npc.NPCHuman;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
+import game_content.entities.npc.Bunny_01;
 import game_content.entities.npc.Chicken_01;
 import game_content.entities.player.Player;
 
@@ -21,7 +22,8 @@ public class NPCs {
 	public static final EntityBluePrint HUMAN_WOMAN_03 = new EntityBluePrint(npcList, 2, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_WOMAN_03", new SpriteAtlas(Sheets.WOMEN_03_SHEET, 0, 0, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint HUMAN_WOMAN_04 = new EntityBluePrint(npcList, 3, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_WOMAN_04", new SpriteAtlas(Sheets.WOMEN_04_SHEET, 0, 0, false, 0, 0, false), true, true, true);
 	
-	public static final EntityBluePrint ANIMAL_CHICKEN_01 = new EntityBluePrint(npcList, 100, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_CHICKEN_01", new SpriteAtlas(Sheets.CHICKEN_01_SHEET, 0, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint ANIMAL_CHICKEN_01 = new EntityBluePrint(npcList, 100, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_CHICKEN_01", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint ANIMAL_BUNNY_01 = new EntityBluePrint(npcList, 101, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_BUNNY_01", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 1, false, 0, 0, false), true, true, true);
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -38,6 +40,8 @@ public class NPCs {
 					return level.addEntity(new NPCHuman(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_CHICKEN_01":
 					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
+				case "ANIMAL_BUNNY_01":
+					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
 			}
 		}
 		

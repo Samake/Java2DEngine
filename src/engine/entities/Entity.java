@@ -73,6 +73,13 @@ public class Entity {
 				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - 2;
 			}
 			
+			if (bluePrint.renderType.equals(RENDERTYPE.R2X3)) {
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize) + 2;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize) - 2;
+				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize * 1.5f) + 2;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - 2;
+			}
+			
 			if (bluePrint.renderType.equals(RENDERTYPE.R4X4)) {
 				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 2) + 2;
 				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 2) - 2;
@@ -139,6 +146,16 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
+		if (bluePrint.renderType.equals(RENDERTYPE.R2X3)) {
+			float rows = 2;
+			float columns = 3;
+			
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
 		if (bluePrint.renderType.equals(RENDERTYPE.R4X6)) {
 			float rows = 4;
 			float columns = 6;
@@ -151,8 +168,8 @@ public class Entity {
 	}
 
 	private void renderEntityPart(Screen screen, List<PointLight> renderListLights, int rows, int columns, float baseXOffset, float baseYOffset) {
-		int xTileID;
-		int yTileID;
+		int xTileID = bluePrint.atlas.column;
+		int yTileID = bluePrint.atlas.row;
 		
 		if (bluePrint.castShadow) {
 			for (int row = 0; row < rows; row++) {

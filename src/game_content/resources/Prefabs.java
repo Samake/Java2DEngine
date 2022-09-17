@@ -33,7 +33,13 @@ public class Prefabs {
 	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_BROWN = new EntityBluePrint(entityList, 207, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_BROWN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	
 	public static final EntityBluePrint LAMPPOST_01 = new EntityBluePrint(entityList, 300, ENTITYTYPE.PREFAB, RENDERTYPE.R1X3, "LAMPPOST_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 5, false, 0, 0, false), false, true, true);
-	
+	public static final EntityBluePrint LAMPPOST_02 = new EntityBluePrint(entityList, 301, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 5, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint LAMPPOST_03 = new EntityBluePrint(entityList, 302, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_03", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 5, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint LAMPPOST_04 = new EntityBluePrint(entityList, 303, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_04", new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 5, false, 0, 0, false), false, true, true);	
+	public static final EntityBluePrint LAMPPOST_05 = new EntityBluePrint(entityList, 304, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_05", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 5, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint LAMPPOST_06 = new EntityBluePrint(entityList, 305, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_06", new SpriteAtlas(Sheets.OBJECTS_SHEET, 9, 5, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint LAMPPOST_07 = new EntityBluePrint(entityList, 306, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_07", new SpriteAtlas(Sheets.OBJECTS_SHEET, 11, 5, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint LAMPPOST_08 = new EntityBluePrint(entityList, 307, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_08", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 5, false, 0, 0, false), false, true, true);
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -67,6 +73,20 @@ public class Prefabs {
 				case "SPAWNEGG_CHICKEN_BABY_BROWN" :
 					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_BROWN));
 				case "LAMPPOST_01" :
+					return level.addEntity(new LampPost(blueprint, level, x, y));
+				case "LAMPPOST_02" :
+					return level.addEntity(new LampPost(blueprint, level, x, y));
+				case "LAMPPOST_03" :
+					return level.addEntity(new LampPost(blueprint, level, x, y));
+				case "LAMPPOST_04" :
+					return level.addEntity(new LampPost(blueprint, level, x, y));
+				case "LAMPPOST_05" :
+					return level.addEntity(new LampPost(blueprint, level, x, y));
+				case "LAMPPOST_06" :
+					return level.addEntity(new LampPost(blueprint, level, x, y));
+				case "LAMPPOST_07" :
+					return level.addEntity(new LampPost(blueprint, level, x, y));
+				case "LAMPPOST_08" :
 					return level.addEntity(new LampPost(blueprint, level, x, y));
 			}
 		}

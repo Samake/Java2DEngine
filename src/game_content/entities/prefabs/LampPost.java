@@ -16,12 +16,18 @@ public class LampPost extends Prefab {
 	private Vector2f lightOffset = new Vector2f();
 	private Vector2f smokeOffset = new Vector2f();
 	
+	private int yTileEnabled = 0;
+	private int yTileDisabled = 0;
+	
 	public LampPost(EntityBluePrint blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
 		
 		smokeOffset.y = -bluePrint.atlas.sheet.tileSize;
+		yTileEnabled = yTile;
+		yTileDisabled = yTile + 3;
 		
 		light = new PointLight(level, x, y, new Color(255, 200, 90, 255), 96, false, false, 200, false);
+		light.enabledAtDay = false;
 		light.saveToMap = false;
 	}
 
@@ -32,6 +38,14 @@ public class LampPost extends Prefab {
 		if (light != null) {
 			light.position.x = position.x + lightOffset.x;
 			light.position.y = position.y + lightOffset.y;
+			
+			if (!light.enabledAtDay) {
+				if (light.enabled) {
+					yTile = yTileEnabled;
+				} else {
+					yTile = yTileDisabled;
+				}
+			}
 		}
 	}
 	

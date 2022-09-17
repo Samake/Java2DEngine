@@ -6,7 +6,7 @@ public class Ambient {
 	
 	public int dayTime = 0;
 	private int dayTimeCounter = 0;
-	private int dayTimeFactor = 15000;
+	private int dayTimeFactor = 100;
 	private float fadeValue = 0;
 	
 	private Color morningColor = new Color(120, 120, 150, 255);

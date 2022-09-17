@@ -18,7 +18,7 @@ public class Entity {
 	}
 	
 	public enum RENDERTYPE {
-		R1X1, R2X2, R4X4, R4X6, R6X6
+		R1X1, R1X3, R2X2, R2X3, R3X2, R4X4, R4X6, R6X6
 	}
 	
 	public EntityBluePrint bluePrint;
@@ -57,6 +57,13 @@ public class Entity {
 				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
 				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
 				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize / 2) - 2;
+			}
+			
+			if (bluePrint.renderType.equals(RENDERTYPE.R1X3)) {
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
+				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize * 1.5f) + 2;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - 2;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R2X2)) {
@@ -103,33 +110,43 @@ public class Entity {
 		modifier = bluePrint.atlas.sheet.tileSize * (int) scale;
 
 		if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
-			int rows = 1;
-			int columns = 1;
+			float rows = 1;
+			float columns = 1;
 			
 			float baseXOffset = position.x - modifier / 2;
 			float baseYOffset = position.y - modifier / 2 + heightOffsetModifier;
 			
-			renderEntityPart(screen, renderListLights, rows, columns, baseXOffset, baseYOffset);
+			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R1X3)) {
+			float rows = 1;
+			float columns = 3;
+			
+			float baseXOffset = position.x - modifier / 2;
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
 		if (bluePrint.renderType.equals(RENDERTYPE.R2X2)) {
-			int rows = 2;
-			int columns = 2;
+			float rows = 2;
+			float columns = 2;
 			
-			float baseXOffset = position.x - (modifier * (rows / 2));
-			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2));
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
 			
-			renderEntityPart(screen, renderListLights, rows, columns, baseXOffset, baseYOffset);
+			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
 		if (bluePrint.renderType.equals(RENDERTYPE.R4X6)) {
-			int rows = 4;
-			int columns = 6;
+			float rows = 4;
+			float columns = 6;
 			
-			float baseXOffset = position.x - (modifier * (rows / 2));
-			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2));
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
 			
-			renderEntityPart(screen, renderListLights, rows, columns, baseXOffset, baseYOffset);
+			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 	}
 

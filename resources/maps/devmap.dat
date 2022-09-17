@@ -16562,6 +16562,7 @@ levelTiles:16384
 {type:Prefab,name:SPAWNEGG_CHICKEN_BABY_WHITE,x:1090.0,y:1052.0}
 {type:Prefab,name:SPAWNEGG_CHICKEN,x:1092.0,y:1036.0}
 {type:Prefab,name:SPAWNEGG_WOMAN_04,x:1091.0,y:847.0}
+{type:Prefab,name:LAMPPOST_01,x:1040.0,y:982.0}
 [LIGHTS]
 {type:PointLight,x:1053.0,y:950.0,r:166,g:89,b:96,radius:135,pulsing:false,flickering:false,delay:200,enabledAtDay:false}
 {type:PointLight,x:1131.0,y:861.0,r:130,g:143,b:241,radius:101,pulsing:false,flickering:false,delay:200,enabledAtDay:false}

@@ -8,6 +8,7 @@ import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import game_content.entities.prefabs.Ball;
 import game_content.entities.prefabs.CampFire;
+import game_content.entities.prefabs.LampPost;
 import game_content.entities.prefabs.SpawnEgg;
 
 public class Prefabs {
@@ -30,6 +31,9 @@ public class Prefabs {
 	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_WHITE = new EntityBluePrint(entityList, 205, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_WHITE", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_YELLOW = new EntityBluePrint(entityList, 206, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_YELLOW", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_BROWN = new EntityBluePrint(entityList, 207, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_BROWN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
+	
+	public static final EntityBluePrint LAMPPOST_01 = new EntityBluePrint(entityList, 300, ENTITYTYPE.PREFAB, RENDERTYPE.R1X3, "LAMPPOST_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 5, false, 0, 0, false), false, true, true);
+	
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -62,6 +66,8 @@ public class Prefabs {
 					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_YELLOW));
 				case "SPAWNEGG_CHICKEN_BABY_BROWN" :
 					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_BROWN));
+				case "LAMPPOST_01" :
+					return level.addEntity(new LampPost(blueprint, level, x, y));
 			}
 		}
 		

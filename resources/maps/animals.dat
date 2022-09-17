@@ -16435,9 +16435,10 @@ levelTiles:16384
 {type:Prefab,name:SPAWNEGG_CHICKEN_BABY_BROWN,x:971.0,y:1008.0}
 {type:Prefab,name:SPAWNEGG_CHICKEN_BABY_BROWN,x:963.0,y:1020.0}
 {type:Prefab,name:SPAWNEGG_CHICKEN_BABY_BROWN,x:977.0,y:1026.0}
+{type:Prefab,name:LAMPPOST_01,x:1099.0,y:993.0}
+{type:Prefab,name:LAMPPOST_01,x:940.0,y:1003.0}
+{type:Prefab,name:LAMPPOST_01,x:1037.0,y:982.0}
+{type:Prefab,name:LAMPPOST_01,x:1106.0,y:1041.0}
+{type:Prefab,name:LAMPPOST_01,x:1069.0,y:1038.0}
+{type:Prefab,name:LAMPPOST_01,x:993.0,y:1004.0}
 [LIGHTS]
-{type:PointLight,x:1163.0,y:957.0,r:255,g:255,b:255,radius:200,pulsing:false,flickering:false,delay:200,enabledAtDay:false}
-{type:PointLight,x:1165.0,y:1097.0,r:255,g:255,b:255,radius:200,pulsing:false,flickering:false,delay:200,enabledAtDay:false}
-{type:PointLight,x:876.0,y:1103.0,r:255,g:255,b:255,radius:200,pulsing:false,flickering:false,delay:200,enabledAtDay:false}
-{type:PointLight,x:882.0,y:956.0,r:254,g:255,b:255,radius:200,pulsing:false,flickering:false,delay:200,enabledAtDay:false}
-{type:PointLight,x:1021.0,y:1022.0,r:255,g:255,b:255,radius:200,pulsing:false,flickering:false,delay:200,enabledAtDay:false}

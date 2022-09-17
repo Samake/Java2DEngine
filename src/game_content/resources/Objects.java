@@ -28,6 +28,7 @@ public class Objects {
 	
 	public static final EntityBluePrint STONE_01 = new EntityBluePrint(entityList, 101, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 0, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint STONE_02 = new EntityBluePrint(entityList, 102, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 2, 0, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint STONE_03 = new EntityBluePrint(entityList, 103, ENTITYTYPE.OBJECT, RENDERTYPE.R2X2, "STONE_03", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 0, false, 0, 0, false), false, true, true);
 
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {

@@ -7,8 +7,8 @@ import engine.entities.EntityBluePrint;
 import engine.entities.npc.NPCHuman;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
-import game_content.entities.npc.Bunny_01;
-import game_content.entities.npc.Chicken_01;
+import game_content.entities.npc.AnimalBunny;
+import game_content.entities.npc.AnimalChicken;
 import game_content.entities.player.Player;
 
 public class NPCs {
@@ -45,21 +45,21 @@ public class NPCs {
 				case "HUMAN_WOMAN_04":
 					return level.addEntity(new NPCHuman(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_CHICKEN":
-					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_BUNNY_BROWN":
-					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new AnimalBunny(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_BUNNY_BROWN_BABY":
-					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new AnimalBunny(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_BUNNY_GREY":
-					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new AnimalBunny(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_BUNNY_GREY_BABY":
-					return level.addEntity(new Bunny_01(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new AnimalBunny(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_CHICKEN_BABY_WHITE":
-					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_CHICKEN_BABY_YELLOW":
-					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_CHICKEN_BABY_BROWN":
-					return level.addEntity(new Chicken_01(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 			}
 		}
 		

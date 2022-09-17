@@ -6,9 +6,9 @@ import engine.input.InputHandler;
 import engine.level.Level;
 import game_content.entities.player.Player;
 
-public class Chicken_01 extends NPCAnimalSmall {
+public class AnimalBunny extends NPCAnimalSmall {
 
-	public Chicken_01(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
+	public AnimalBunny(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, x, y, speed);
 	}
 	

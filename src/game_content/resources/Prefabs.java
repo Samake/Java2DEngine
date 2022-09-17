@@ -6,7 +6,7 @@ import engine.entities.Entity.RENDERTYPE;
 import engine.entities.EntityBluePrint;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
-import game_content.entities.prefabs.Ball_01;
+import game_content.entities.prefabs.Ball;
 import game_content.entities.prefabs.CampFire;
 import game_content.entities.prefabs.SpawnEgg;
 
@@ -37,7 +37,7 @@ public class Prefabs {
 				case "CAMPFIRE" :
 					return level.addEntity(new CampFire(blueprint, level, x, y));
 				case "BALL_01" :
-					return level.addEntity(new Ball_01(blueprint, level, x, y));
+					return level.addEntity(new Ball(blueprint, level, x, y));
 				case "SPAWNEGG_WOMAN_01" :
 					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.HUMAN_WOMAN_01));
 				case "SPAWNEGG_WOMAN_02" :

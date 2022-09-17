@@ -7,7 +7,7 @@ import engine.input.InputHandler;
 import engine.level.Level;
 import game_content.entities.effects.EffectSmokePuff01;
 
-public class Ball_01 extends ObjectPhysical {
+public class Ball extends ObjectPhysical {
 	
 	private float xAxisValue = 0;
 	private float yAxisValue = 0;
@@ -17,7 +17,7 @@ public class Ball_01 extends ObjectPhysical {
 	
 	private boolean isMoving = false;
 
-	public Ball_01(EntityBluePrint blueprint, Level level, int x, int y) {
+	public Ball(EntityBluePrint blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
 	}
 

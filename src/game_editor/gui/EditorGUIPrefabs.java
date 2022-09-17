@@ -295,7 +295,7 @@ public class EditorGUIPrefabs {
 		int lineSize = buttonDimension.height;
 		int height = lines * lineSize;
 		
-		Dimension scrollPaneDimension = new Dimension(width - 20, 600);
+		Dimension scrollPaneDimension = new Dimension(width, 440);
 		Dimension panelDimension = new Dimension(width - 20, height);
 
 		prefabsPanel.setLayout(new BoxLayout(prefabsPanel, BoxLayout.PAGE_AXIS));
@@ -333,7 +333,9 @@ public class EditorGUIPrefabs {
 		
 		int index = 0;
 		
-		for (EntityBluePrint entityBlueprint : Prefabs.entityList) {
+		for (int i = 0; i < Prefabs.entityList.length; i++) {
+			EntityBluePrint entityBlueprint = Prefabs.entityList[i];
+		
 			if (entityBlueprint != null) {
 				EntityPanel buttonPanel = generatePrefabCard(entityBlueprint);
 				prefabPanels[index] = buttonPanel;

@@ -298,7 +298,7 @@ public class EditorGUIEntities {
 		int lineSize = buttonDimension.height;
 		int height = lines * lineSize;
 		
-		Dimension scrollPaneDimension = new Dimension(width - 20, 600);
+		Dimension scrollPaneDimension = new Dimension(width, 440);
 		Dimension panelDimension = new Dimension(width - 20, height);
 
 		entitiesPanel.setLayout(new BoxLayout(entitiesPanel, BoxLayout.PAGE_AXIS));
@@ -336,7 +336,9 @@ public class EditorGUIEntities {
 		
 		int index = 0;
 		
-		for (EntityBluePrint entityBlueprint : Objects.entityList) {
+		for (int i = 0; i < Objects.entityList.length; i++) {
+			EntityBluePrint entityBlueprint = Objects.entityList[i];
+			
 			if (entityBlueprint != null) {
 				EntityPanel buttonPanel = generateEntityCard(entityBlueprint);
 				entityPanels[index] = buttonPanel;
@@ -437,7 +439,7 @@ public class EditorGUIEntities {
 		
 		for (EntityPanel entityPanel : entityPanels) {
 			if (entityPanel !=  null) {
-				if (entityPanel.name.contains(name)) {
+				if (entityPanel.name.contains(name.trim())) {
 					entitiesPanel.add(entityPanel);
 					entitiesPanel.revalidate();
 					entitiesPanel.repaint();

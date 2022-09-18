@@ -292,7 +292,7 @@ public class Entity {
 	}
 
 	private void renderEntityPartBody(Screen screen, int xTileID, int yTileID) {
-		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, 1.0f, 1.0f);
+		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, 1.0f, 1.0f, 1.0f);
 	}
 
 	public void renderDebug(Screen screen) {

@@ -103,7 +103,7 @@ public class Screen {
 		}
 	}
 	
-	public void render(SpriteAtlas atlas, float inX, float inY, int tileID, int mirrorDir, float scale, float alpha) {
+	public void render(SpriteAtlas atlas, float inX, float inY, int tileID, int mirrorDir, float scale, float alpha, float brightness) {
 		int xPos = (int) (inX - xOffset);
 		int yPos = (int) (inY - yOffset);
 		
@@ -136,7 +136,13 @@ public class Screen {
 					int col = sheet.pixels[xSheet + ySheet * sheet.width + tileOffset];
 		
 					if (col < 255) {
-						Color drawColor = new Color(col, true);
+						Color drawBaseColor = new Color(col, true);
+						
+						float redValue = (float) (drawBaseColor.getRed() * brightness);
+						float greenValue = (float) (drawBaseColor.getGreen() * brightness);
+						float blueValue = (float) (drawBaseColor.getBlue() * brightness);
+						
+						Color drawColor = new Color((int) redValue, (int) greenValue, (int) blueValue, drawBaseColor.getAlpha());
 						
 						if (drawColor.getAlpha() > 0) {
 							for (int yScale = 0; yScale < scale; yScale++) {
@@ -147,7 +153,7 @@ public class Screen {
 									
 									int currentColor = pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH];
 									
-									pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH] = mergeIntColors(currentColor, col, alpha);
+									pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH] = mergeIntColors(currentColor, drawColor, alpha);
 								}
 							}
 						} else {
@@ -159,10 +165,9 @@ public class Screen {
 		}
 	}
 	
-	private int mergeIntColors(int color1, int color2, float alpha) {
+	private int mergeIntColors(int color1, Color drawColor, float alpha) {
 		if (alpha < 1.0f) {
 			Color baseColor = new Color(color1, true);
-			Color drawColor = new Color(color2, true);
 			
 			int red = (int) (baseColor.getRed() * (1.0 - alpha)) + (int) (drawColor.getRed() * alpha);
 			int green = (int) (baseColor.getGreen() * (1.0 - alpha)) + (int) (drawColor.getGreen() * alpha);
@@ -174,7 +179,7 @@ public class Screen {
 			return mergedColor.getRGB();
 		}
 		
-		return color2; 
+		return drawColor.getRGB(); 
 	}
 	
 	public void renderFont(SpriteAtlas atlas, float inX, float inY, int tileID, int mirrorDir, float scale, Color fontColor) {

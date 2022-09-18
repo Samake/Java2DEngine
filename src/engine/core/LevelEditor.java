@@ -57,7 +57,7 @@ public class LevelEditor extends Engine {
 	public JPanel worldSettings;
 	
 	public LevelEditor() {
-		super(1280, 720, 4);
+		super(1280, 720, 1);
 		
 		Log.print("LevelEditor starting...");
 		
@@ -364,6 +364,12 @@ public class LevelEditor extends Engine {
 	
 	public void setEditorModeDayTime(int value) {
 		Editor.changeDayTime(value);
+	}
+	
+	public void generateWorld() {
+		if (scene.level != null) {
+			scene.level.generateNewRandomLevel();
+		}
 	}
 	
 	@Override

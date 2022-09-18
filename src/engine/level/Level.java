@@ -17,13 +17,10 @@ import engine.rendering.Canvas;
 import engine.rendering.Screen;
 import engine.scene.environment.Ambient;
 import engine.sprites.SpriteAtlas;
-import engine.tiles.BasicTile;
 import engine.tiles.Tile;
-import engine.tiles.TileBluePrint;
 import game_content.entities.lights.PointLight;
 import game_content.entities.player.Player;
 import game_content.resources.Sheets;
-import game_content.resources.Tiles;
 
 public class Level {
 	
@@ -64,33 +61,22 @@ public class Level {
 		this.height = height;
 		tiles = new Tile[width][height];
 		
-		loadNewLevelTiles(tileName);
+		generateNewEmptyLevel(tileName);
 	}
 	
 	public void setSize(int width, int height) {
 		this.width = width;
 		this.height = height;
 		tiles = new Tile[width][height];
-		
-		loadNewLevelTiles(null);
 	}
 	
-	private void loadNewLevelTiles(String tileName) {
-		TileBluePrint tileBluePrint = Tiles.GRASS_CLEAN;
+	private void generateNewEmptyLevel(String tileName) {
+		tiles = LevelGenerator.generateEmptyLevel(width, height, tileName);
 		
-		if (tileName != null) {
-			tileBluePrint = Tiles.getBluePrintByName(tileName);
-		}
-		
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				int id = x + y * width;
+	}
 	
-				if (tiles[x][y] == null) {
-					tiles[x][y] = new BasicTile(id, x, y, tileBluePrint);
-				}
-			}
-		}
+	public void generateNewRandomLevel() {
+		tiles = LevelGenerator.generateRandomLevel(width, height);
 	}
 	
 	

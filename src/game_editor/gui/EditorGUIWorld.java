@@ -31,6 +31,7 @@ public class EditorGUIWorld {
 
 		addCaption(finalPanel);
 		addTimeChange(levelEditor,  finalPanel);
+		addWorldGenerator(levelEditor,  finalPanel);
 		
 		return finalPanel;
 	}
@@ -79,5 +80,21 @@ public class EditorGUIWorld {
 		});
 		
 		finalPanel.add(editorChangeDayTime);
+	}
+	
+	private static void addWorldGenerator(LevelEditor levelEditor, JPanel finalPanel) {
+		JButton generateLevelButton = new JButton("Generate");
+		generateLevelButton.setBackground(Color.GRAY);
+		
+		generateLevelButton.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent e){
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					levelEditor.generateWorld();
+            	}
+			}
+		});
+		
+		finalPanel.add(generateLevelButton);
 	}
 }

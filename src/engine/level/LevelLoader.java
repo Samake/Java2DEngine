@@ -135,7 +135,7 @@ public class LevelLoader {
 				int x = Integer.valueOf(posXParts[1]);
 				int y = Integer.valueOf(posYParts[1]);
 				
-				level.setTile(x, y, new BasicTile(id, x, y, Tiles.getBluePrintByID(blueprint)));
+				level.setTile(x, y, new BasicTile(id, x, y, Tiles.getBluePrintByID(blueprint), 1.0f));
 			}
 		}
 	}

@@ -17,8 +17,9 @@ public abstract class Tile {
 	public int mapColor;
 	public float hesitation;
 	public boolean selected = false;
+	public float brightness;
 	
-	public Tile(int id, int x, int y, TileBluePrint blueprint) {
+	public Tile(int id, int x, int y, TileBluePrint blueprint, float brightness) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -28,6 +29,7 @@ public abstract class Tile {
 		this.hasCollission = blueprint.isSolid;
 		this.mapColor = blueprint.mapColor;
 		this.hesitation = blueprint.hestitation;
+		this.brightness = brightness;
 	}
 	
 	public abstract void update();

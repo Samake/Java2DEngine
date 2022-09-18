@@ -124,13 +124,13 @@ public class Editor extends Scene {
 			if (input.lmouse.isClicked()) {
 				int id = tile.x + tile.y * level.width;
 				
-				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDLeft)));
+				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDLeft), tile.brightness));
 			}
 			
 			if (input.rmouse.isClicked()) {
 				int id = tile.x + tile.y * level.width;
 				
-				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDRight)));
+				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDRight), tile.brightness));
 			}
 		}
 	}

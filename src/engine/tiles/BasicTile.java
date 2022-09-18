@@ -6,10 +6,10 @@ import engine.rendering.Screen;
 
 public class BasicTile extends Tile {
 
-	private int tileID;
+	public int tileID;
 	
-	public BasicTile(int id, int x, int y, TileBluePrint blueprint) {
-		super(id, x ,y, blueprint);
+	public BasicTile(int id, int x, int y, TileBluePrint blueprint, float brightness) {
+		super(id, x ,y, blueprint, brightness);
 		
 		setTileID(blueprint.atlas.column + blueprint.atlas.row * blueprint.atlas.sheet.slots);
 		updated = blueprint.atlas.animated;
@@ -31,10 +31,10 @@ public class BasicTile extends Tile {
 	public void render(Screen screen, Level level, int x, int y) {
 		if (hasCollission) {
 			if (!Debug.renderCollission) {
-				screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f);
+				screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness);
 			} 
 		} else {
-			screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f);
+			screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness);
 		}
 
 		

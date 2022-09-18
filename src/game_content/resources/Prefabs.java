@@ -8,6 +8,7 @@ import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import game_content.entities.prefabs.Ball;
 import game_content.entities.prefabs.CampFire;
+import game_content.entities.prefabs.Fountain;
 import game_content.entities.prefabs.LampPost;
 import game_content.entities.prefabs.SpawnEgg;
 
@@ -40,6 +41,9 @@ public class Prefabs {
 	public static final EntityBluePrint LAMPPOST_06 = new EntityBluePrint(entityList, 305, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_06", new SpriteAtlas(Sheets.OBJECTS_SHEET, 9, 5, false, 0, 0, false), false, true, true);
 	public static final EntityBluePrint LAMPPOST_07 = new EntityBluePrint(entityList, 306, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_07", new SpriteAtlas(Sheets.OBJECTS_SHEET, 11, 5, false, 0, 0, false), false, true, true);
 	public static final EntityBluePrint LAMPPOST_08 = new EntityBluePrint(entityList, 307, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_08", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 5, false, 0, 0, false), false, true, true);
+	
+	public static final EntityBluePrint FOUNTAIN_01 = new EntityBluePrint(entityList, 350, ENTITYTYPE.PREFAB, RENDERTYPE.R2X2, "FOUNTAIN_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 6, false, 0, 0, false), true, true, true);
+	
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -88,6 +92,8 @@ public class Prefabs {
 					return level.addEntity(new LampPost(blueprint, level, x, y));
 				case "LAMPPOST_08" :
 					return level.addEntity(new LampPost(blueprint, level, x, y));
+				case "FOUNTAIN_01" :
+					return level.addEntity(new Fountain(blueprint, level, x, y));
 			}
 		}
 		

@@ -11,7 +11,8 @@ public abstract class Tile {
 	public int id;
 	public int x;
 	public int y;
-	public boolean solid;
+	public boolean isSolid;
+	public boolean hasCollission;
 	public boolean updated = false;
 	public int mapColor;
 	public float hesitation;
@@ -23,7 +24,8 @@ public abstract class Tile {
 		this.y = y;
 		this.blueprint = blueprint;
 		this.atlas = blueprint.atlas;
-		this.solid = blueprint.solid;
+		this.isSolid = blueprint.isSolid;
+		this.hasCollission = blueprint.isSolid;
 		this.mapColor = blueprint.mapColor;
 		this.hesitation = blueprint.hestitation;
 	}

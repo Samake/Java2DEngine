@@ -47,7 +47,11 @@ public class Renderer {
 		}
 		
 		if (input.keyF3.isTyped()) {
-			Debug.toggle();
+			Debug.toggleEnabled();
+		}
+		
+		if (input.keyF4.isTyped()) {
+			Debug.toggleCollission();
 		}
 	}
 	

@@ -81,7 +81,7 @@ public class NPCAnimalSmall extends NPCCore {
 				Tile tile = level.getTile(targetX >> bluePrint.atlas.sheet.getShiftOperator(), targetY >> bluePrint.atlas.sheet.getShiftOperator());
 				
 				if (tile != null) {
-					if (!tile.solid && tile.blueprint != Tiles.WATER_CLEAN) {
+					if (!tile.isSolid && !tile.hasCollission && tile.blueprint != Tiles.WATER_CLEAN) {
 						targetPosition.set(targetX, targetY);
 						hasJob = true;
 						isSneaking = true;

@@ -1,5 +1,6 @@
 package engine.tiles;
 
+import engine.debug.Debug;
 import engine.level.Level;
 import engine.rendering.Screen;
 
@@ -16,6 +17,10 @@ public class BasicTile extends Tile {
 	
 
 	public void update() {
+		if (!isSolid) {
+			hasCollission = false;
+		}
+		
 		if (updated) {
 			if (atlas.animated) {
 				atlas.update();
@@ -24,7 +29,14 @@ public class BasicTile extends Tile {
 	}
 
 	public void render(Screen screen, Level level, int x, int y) {
-		screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f);
+		if (hasCollission) {
+			if (!Debug.renderCollission) {
+				screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f);
+			} 
+		} else {
+			screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f);
+		}
+
 		
 		if (selected) {
 			renderSelected(screen, x, y, atlas.sheet.tileSize, atlas.sheet.tileSize);

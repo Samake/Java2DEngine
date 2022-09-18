@@ -41,6 +41,7 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
     public Key keyF1 = new Key();
     public Key keyF2 = new Key();
     public Key keyF3 = new Key();
+    public Key keyF4 = new Key();
     
     public MouseKey lmouse = new MouseKey();
     public MouseKey mmouse = new MouseKey();
@@ -153,6 +154,10 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (keyCode == KeyEvent.VK_F3) {
         	keyF3.setPressed(isPressed);
         }
+        
+        if (keyCode == KeyEvent.VK_F4) {
+        	keyF4.setPressed(isPressed);
+        }
     }
 	
 	public void toggleKeyTyped(int keyCode, boolean isTyped) {
@@ -250,6 +255,10 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         
         if (keyCode == KeyEvent.VK_F3) {
         	keyF3.setTyped(isTyped);
+        }
+        
+        if (keyCode == KeyEvent.VK_F4) {
+        	keyF4.setTyped(isTyped);
         }
     }
 

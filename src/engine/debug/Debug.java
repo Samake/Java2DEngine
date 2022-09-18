@@ -4,6 +4,7 @@ public class Debug {
 
 	public static boolean enabled = false;
 	public static boolean renderLights = false;
+	public static boolean renderCollission = false;
 	
 	public static int tiles = 0;
 	public static int tilesRendered = 0;
@@ -14,7 +15,11 @@ public class Debug {
 	public static int lights = 0;
 	public static int lightsRendered = 0;
 	
-	public static void toggle() {
+	public static void toggleEnabled() {
 		enabled = !enabled;
+	}
+	
+	public static void toggleCollission() {
+		renderCollission = !renderCollission;
 	}
 }

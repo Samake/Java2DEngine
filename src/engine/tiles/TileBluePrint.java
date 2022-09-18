@@ -12,7 +12,7 @@ public class TileBluePrint {
 	public Icon icon;
 	public int mapColor;
 	public float hestitation;
-	public boolean solid;
+	public boolean isSolid;
 	
 	public TileBluePrint(TileBluePrint[] tileTypes, int id, String name, SpriteAtlas atlas, float hestitation, boolean solid) {
 		if (tileTypes[id] != null) throw new RuntimeException("Duplicate tileType id on " + id);
@@ -21,7 +21,7 @@ public class TileBluePrint {
 		this.name = name;
 		this.atlas = atlas;
 		this.hestitation = hestitation;
-		this.solid = solid;
+		this.isSolid = solid;
 		
 		int iconScale = 4;
 		

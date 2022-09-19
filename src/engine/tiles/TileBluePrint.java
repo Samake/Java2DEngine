@@ -4,9 +4,11 @@ import javax.swing.Icon;
 
 import engine.sprites.IconLoader;
 import engine.sprites.SpriteAtlas;
+import game_content.resources.Tiles.TILETYPE;
 
 public class TileBluePrint {
 	public int id;
+	public TILETYPE type;
 	public String name;
 	public SpriteAtlas atlas;
 	public Icon icon;
@@ -14,10 +16,11 @@ public class TileBluePrint {
 	public float hestitation;
 	public boolean isSolid;
 	
-	public TileBluePrint(TileBluePrint[] tileTypes, int id, String name, SpriteAtlas atlas, float hestitation, boolean solid) {
+	public TileBluePrint(TileBluePrint[] tileTypes, int id, TILETYPE type, String name, SpriteAtlas atlas, float hestitation, boolean solid) {
 		if (tileTypes[id] != null) throw new RuntimeException("Duplicate tileType id on " + id);
 		
 		this.id = id;
+		this.type = type;
 		this.name = name;
 		this.atlas = atlas;
 		this.hestitation = hestitation;

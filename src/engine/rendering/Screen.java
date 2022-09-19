@@ -136,13 +136,19 @@ public class Screen {
 					int col = sheet.pixels[xSheet + ySheet * sheet.width + tileOffset];
 		
 					if (col < 255) {
-						Color drawBaseColor = new Color(col, true);
+						Color drawColor;
 						
-						float redValue = (float) (drawBaseColor.getRed() * brightness);
-						float greenValue = (float) (drawBaseColor.getGreen() * brightness);
-						float blueValue = (float) (drawBaseColor.getBlue() * brightness);
-						
-						Color drawColor = new Color((int) redValue, (int) greenValue, (int) blueValue, drawBaseColor.getAlpha());
+						if (Config.HEIGHT_INFORMATIONS) {
+							Color drawBaseColor = new Color(col, true);
+							
+							float redValue = (float) (drawBaseColor.getRed() * brightness);
+							float greenValue = (float) (drawBaseColor.getGreen() * brightness);
+							float blueValue = (float) (drawBaseColor.getBlue() * brightness);
+							
+							drawColor = new Color((int) redValue, (int) greenValue, (int) blueValue, drawBaseColor.getAlpha());
+						} else {
+							drawColor = new Color(col, true);
+						}
 						
 						if (drawColor.getAlpha() > 0) {
 							for (int yScale = 0; yScale < scale; yScale++) {

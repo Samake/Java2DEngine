@@ -1,5 +1,6 @@
 package engine.level;
 
+import engine.core.Config;
 import engine.tiles.BasicTile;
 import engine.tiles.Tile;
 import engine.tiles.TileBluePrint;
@@ -54,7 +55,11 @@ public class LevelGenerator {
 				double noiseBaseValue4 = noise.eval((double) (x / featureSizeLayer3), (double) (y / featureSizeLayer3), (double) (y / featureSizeLayer3), (double) (x / featureSizeLayer3));
 				double noiseBaseValue = (noiseBaseValue1 + noiseBaseValue2 + noiseBaseValue3 + noiseBaseValue4) / 4;
 				float noiseValue = (float) (((noiseBaseValue + 1) * 127.5)) / 255;
-				float heightValue = Math.min((noiseValue - 0.35f) * 3.0f, 1.0f);
+				float heightValue = 1.0f;
+						
+				if (Config.HEIGHT_INFORMATIONS) {
+					heightValue = Math.min((noiseValue - 0.35f) * 3.0f, 1.0f);
+				}
 				
 				if (noiseValue > highNoise) {
 					highNoise = noiseValue;

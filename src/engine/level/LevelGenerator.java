@@ -110,12 +110,18 @@ public class LevelGenerator {
 			
 		// smooth borders
 		for (int finalX = 0; finalX < width; finalX++) {
-				for (int finalY = 0; finalY < height; finalY++) {
-					smoothBorders(tiles, finalX, finalY, width, height);
+			for (int finalY = 0; finalY < height; finalY++) {
+				smoothBorders(tiles, finalX, finalY, width, height);
 			}
 		}
 		
-		//System.err.println("Seed: " + seed + ", featureSize: " + featureSizeBase + ", lowNoise: " + lowNoise + ", highNoise" + highNoise);
+		for (int finalX = 0; finalX < width; finalX++) {
+			for (int finalY = 0; finalY < height; finalY++) {
+				smoothBorders(tiles, finalX, finalY, width, height);
+			}
+		}
+		
+		System.err.println("Seed: " + seed + ", featureSize: " + featureSizeBase + ", lowNoise: " + lowNoise + ", highNoise" + highNoise);
 		
 		return tiles;
 	}
@@ -215,7 +221,7 @@ public class LevelGenerator {
 				tileName.append(currenTileType.toString());
 				tileName.append("_U_L");
 				
-				replaceTile(tiles, xPos, yPosU, width, tileName);
+				//replaceTile(tiles, xPos, yPosU, width, tileName);
 			} else if (changeUp && changeRight) {
 				tileName = new StringBuilder();
 				tileName.append(upTileType.toString());
@@ -223,15 +229,7 @@ public class LevelGenerator {
 				tileName.append(currenTileType.toString());
 				tileName.append("_U_R");
 				
-				replaceTile(tiles, xPos, yPosU, width, tileName);
-			}  else if (changeUp) {
-				tileName = new StringBuilder();
-				tileName.append(upTileType.toString());
-				tileName.append("_");
-				tileName.append(currenTileType.toString());
-				tileName.append("_U_M");
-				
-				replaceTile(tiles, xPos, yPosU, width, tileName);
+				//replaceTile(tiles, xPos, yPosU, width, tileName);
 			} else if (changeDown && changeLeft) {
 				tileName = new StringBuilder();
 				tileName.append(downTileType.toString());
@@ -239,7 +237,7 @@ public class LevelGenerator {
 				tileName.append(currenTileType.toString());
 				tileName.append("_B_L");
 				
-				replaceTile(tiles, xPos, yPosD, width, tileName);
+				//replaceTile(tiles, xPos, yPosD, width, tileName);
 			} else if (changeDown && changeRight) {
 				tileName = new StringBuilder();
 				tileName.append(downTileType.toString());
@@ -247,7 +245,15 @@ public class LevelGenerator {
 				tileName.append(currenTileType.toString());
 				tileName.append("_B_R");
 				
-				replaceTile(tiles, xPos, yPosD, width, tileName);
+				//replaceTile(tiles, xPos, yPosD, width, tileName);
+			} else if (changeUp) {
+				tileName = new StringBuilder();
+				tileName.append(upTileType.toString());
+				tileName.append("_");
+				tileName.append(currenTileType.toString());
+				tileName.append("_U_M");
+				
+				replaceTile(tiles, xPos, yPosU, width, tileName);
 			} else if (changeDown) {
 				tileName = new StringBuilder();
 				tileName.append(downTileType.toString());
@@ -256,6 +262,22 @@ public class LevelGenerator {
 				tileName.append("_B_M");
 				
 				replaceTile(tiles, xPos, yPosD, width, tileName);
+			} else if (changeLeft) {
+				tileName = new StringBuilder();
+				tileName.append(leftTileType.toString());
+				tileName.append("_");
+				tileName.append(currenTileType.toString());
+				tileName.append("_M_L");
+				
+				replaceTile(tiles, xPosL, yPos, width, tileName);
+			}  else if (changeRight) {
+				tileName = new StringBuilder();
+				tileName.append(rightTileType.toString());
+				tileName.append("_");
+				tileName.append(currenTileType.toString());
+				tileName.append("_M_R");
+				
+				replaceTile(tiles, xPosR, yPos, width, tileName);
 			}
 		}
 	}
@@ -264,13 +286,14 @@ public class LevelGenerator {
 		TileBluePrint newTile = Tiles.getBluePrintByName(tileName.toString());
 		
 		if (newTile != null) {
-			//if (!tiles[x][y].replaced) {
+			if (!tiles[x][y].replaced) {
 				int id = x + y * width;
-				tiles[x][y] = new BasicTile(id, x, y, newTile, 1.0f);
-				//tiles[x][y].replaced = true;
+				float brightness = tiles[x][y].brightness;
+				tiles[x][y] = new BasicTile(id, x, y, newTile, brightness);
+				tiles[x][y].replaced = true;
 				
 				System.err.println(tileName.toString());
-			//}
+			}
 		}
 	}
 

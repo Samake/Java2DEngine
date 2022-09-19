@@ -145,6 +145,10 @@ public class Screen {
 							float greenValue = (float) (drawBaseColor.getGreen() * brightness);
 							float blueValue = (float) (drawBaseColor.getBlue() * brightness);
 							
+//							float redValue = 255 * brightness;
+//							float greenValue = 255 * brightness;
+//							float blueValue = 255 * brightness;
+							
 							drawColor = new Color((int) redValue, (int) greenValue, (int) blueValue, drawBaseColor.getAlpha());
 						} else {
 							drawColor = new Color(col, true);

@@ -13,7 +13,7 @@ public class Camera {
 	public Vector2f focus = new Vector2f();
 	public Vector2f targetPosition = new Vector2f();
 	public Vector2f velocity = new Vector2f();
-	public float cameraSpeed = 1.0f;
+	public float cameraSpeed = 5.0f;
 	public boolean freecam = false;
 	
 	private Entity target;

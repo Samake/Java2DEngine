@@ -32,6 +32,7 @@ public class EditorGUIWorld {
 		addCaption(finalPanel);
 		addTimeChange(levelEditor,  finalPanel);
 		addWorldGenerator(levelEditor,  finalPanel);
+		addWorldSmooth(levelEditor,  finalPanel);
 		
 		return finalPanel;
 	}
@@ -96,5 +97,21 @@ public class EditorGUIWorld {
 		});
 		
 		finalPanel.add(generateLevelButton);
+	}
+	
+	private static void addWorldSmooth(LevelEditor levelEditor, JPanel finalPanel) {
+		JButton smoothLevelButton = new JButton("Smooth");
+		smoothLevelButton.setBackground(Color.GRAY);
+		
+		smoothLevelButton.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent e){
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					levelEditor.smoothLevel();
+            	}
+			}
+		});
+		
+		finalPanel.add(smoothLevelButton);
 	}
 }

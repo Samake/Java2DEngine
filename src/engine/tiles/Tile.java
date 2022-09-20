@@ -14,7 +14,7 @@ public abstract class Tile {
 	public boolean isSolid = false;
 	public boolean hasCollission = false;
 	public boolean updated = false;
-	public boolean replaced = false;
+	public boolean smoothed = false;
 	public int mapColor;
 	public float hesitation;
 	public boolean selected = false;

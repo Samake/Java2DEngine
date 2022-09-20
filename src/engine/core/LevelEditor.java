@@ -57,7 +57,7 @@ public class LevelEditor extends Engine {
 	public JPanel worldSettings;
 	
 	public LevelEditor() {
-		super(1280, 720, 1);
+		super(1280, 720, 3);
 		
 		Log.print("LevelEditor starting...");
 		
@@ -369,6 +369,12 @@ public class LevelEditor extends Engine {
 	public void generateWorld() {
 		if (scene.level != null) {
 			scene.level.generateNewRandomLevel();
+		}
+	}
+	
+	public void smoothLevel() {
+		if (scene.level != null) {
+			scene.level.smoothLevel();
 		}
 	}
 	

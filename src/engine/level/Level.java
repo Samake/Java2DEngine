@@ -79,6 +79,10 @@ public class Level {
 		tiles = LevelGenerator.generateRandomLevel(width, height);
 	}
 	
+	public void smoothLevel() {
+		LevelGenerator.smoothWorld(tiles, width, height);
+	}
+	
 	
 	public void changeLevelTile(int x, int y, Tile tile) {
 		tiles[x][y] = tile;

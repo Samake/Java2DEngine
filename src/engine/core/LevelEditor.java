@@ -57,7 +57,7 @@ public class LevelEditor extends Engine {
 	public JPanel worldSettings;
 	
 	public LevelEditor() {
-		super(1280, 720, 3);
+		super(1280, 720, 1);
 		
 		Log.print("LevelEditor starting...");
 		

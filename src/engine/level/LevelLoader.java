@@ -331,7 +331,7 @@ public class LevelLoader {
 				Tile tile = level.getTile(x, y);
 				
 				if (tile != null) {
-					bufferedWriter.write("{id:" + tile.id + ",tile:" + tile.blueprint.id + ",x:" + x + ",y:" + y + "}");
+					bufferedWriter.write("{id:" + tile.id + ",tile:" + tile.bluePrint.id + ",x:" + x + ",y:" + y + "}");
 					bufferedWriter.newLine();
 				} else {
 					bufferedWriter.write("{NULL"+ ",x:" + x + ",y:" + y + "}");

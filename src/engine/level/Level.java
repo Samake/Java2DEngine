@@ -1,6 +1,5 @@
 package engine.level;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,7 +23,6 @@ import game_content.resources.Sheets;
 
 public class Level {
 	
-	public BufferedImage image;
 	public Tile[][] tiles;
 	
 	public int width;
@@ -81,12 +79,6 @@ public class Level {
 	
 	public void smoothLevel() {
 		LevelGenerator.smoothWorld(tiles, width, height);
-	}
-	
-	
-	public void changeLevelTile(int x, int y, Tile tile) {
-		tiles[x][y] = tile;
-		image.setRGB(x, y, tile.mapColor);
 	}
 	
 	public void update(InputHandler input, Camera camera, Ambient ambient) {
@@ -350,7 +342,7 @@ public class Level {
 	}
 	
 	public Tile getTile(int x, int y) {
-		if (0 > x || x > width - 1 || 0 > y || y >= height - 1) {
+		if (x < 0 || x > width - 1 || y < 0 || y > height - 1) {
 			return null;
 		}
 		

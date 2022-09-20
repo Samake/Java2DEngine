@@ -1,9 +1,5 @@
 package engine.level;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import engine.core.Config;
 import engine.debug.Log;
 import engine.tiles.BasicTile;
@@ -17,6 +13,11 @@ import game_content.resources.Tiles.TILETYPE;
 public class LevelGenerator {
 	
 	public static Tile[][] tiles;
+	
+	private static boolean changeUp = false;
+	private static boolean changeDown = false;
+	private static boolean changeLeft = false;
+	private static boolean changeRight = false;
 
 	public static Tile[][] generateEmptyLevel(int width, int height, String tileName) {
 		
@@ -35,10 +36,8 @@ public class LevelGenerator {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				int id = x + y * width;
-	
-				if (tiles[x][y] == null) {
-					tiles[x][y] = new BasicTile(id, x, y, tileBluePrint, 1.0f);
-				}
+
+				tiles[x][y] = new BasicTile(id, x, y, tileBluePrint, 1.0f);
 			}
 		}
 		
@@ -125,321 +124,223 @@ public class LevelGenerator {
 	}
 	
 	public static void smoothWorld(Tile[][] tiles, int width, int height) {
+		int iterations = 3;
 		
-		Log.print("Start smoothing level tiles...");
-		
-		// simplify borders
-		Log.print("Simplify level tiles...");
-		
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				simplifyBorders(tiles, x, y, width, height);
-			}
-		}
-		
-		Log.print("Level tiles simplified!");
-		
-		// smooth borders
-		int iterations = 1;
-		
-		Log.print("Smoothing level tiles with " + iterations + " iterations...");
+		Log.print("Start Smoothing level tiles with " + iterations + " iterations...");
 		
 		for (int iteration = 0; iteration < iterations; iteration++) {
-			for (int x = 0; x < width; x++) {
-				for (int y = 0; y < height; y++) {
-					smoothBorders(tiles, x, y, width, height);
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+//					smoothBorders(tiles, x, y, width, height, TILETYPE.WATER);
+//					smoothBorders(tiles, x, y, width, height, TILETYPE.SAND);
+//					smoothBorders(tiles, x, y, width, height, TILETYPE.DIRT);
+//					smoothBorders(tiles, x, y, width, height, TILETYPE.GRASS);
+//					smoothBorders(tiles, x, y, width, height, TILETYPE.STONE);
+					
+					smoothBorders(tiles, x, y, width, height, TILETYPE.STONE);
+					smoothBorders(tiles, x, y, width, height, TILETYPE.GRASS);
+					smoothBorders(tiles, x, y, width, height, TILETYPE.DIRT);
+					smoothBorders(tiles, x, y, width, height, TILETYPE.SAND);
+					smoothBorders(tiles, x, y, width, height, TILETYPE.WATER);
 				}
 			}
 		}
 		
 		Log.print("Level tiles smoothed!");
 	}
-	
-	private static void simplifyBorders(Tile[][] tiles, int x, int y, int width, int height) {
-		Tile currentTile = tiles[x][y];
-		
-		if (currentTile != null) {
-			int xLlength = width;
-			int yLlength = height;
-			int xPos = x;
-			int xPosL = xPos - 1;
-			int xPosR = xPos + 1;
-			int yPos = y;
-			int yPosU = yPos - 1;
-			int yPosD = yPos + 1;
 
-			boolean changeUp = false;
-			boolean changeDown = false;
-			boolean changeLeft = false;
-			boolean changeRight = false;
+	private static void smoothBorders(Tile[][] tiles, int x, int y, int width, int height, TILETYPE searchType) {
+		Tile currentTile = tiles[x][y];
+		changeUp = false;
+		changeDown = false;
+		changeLeft = false;
+		changeRight = false;
+		
+		if (currentTile != null && !currentTile.smoothed) {
+			int xL = x - 1;
+			int xR = x + 1;
+			int yU = y - 1;
+			int yD = y + 1;
 			
 			Tile upTile = null;
 			Tile downTile = null;
 			Tile leftTile = null;
 			Tile rightTile = null;
 			
-			TILETYPE currenTileType = null;
+			TILETYPE currenTileType = currentTile.bluePrint.type;
 			TILETYPE upTileType = null;
 			TILETYPE downTileType = null;
 			TILETYPE leftTileType = null;
 			TILETYPE rightTileType = null;
 			
-			boolean startProcess = true;
-
-			Map<TileBluePrint, Integer> replaceOptions = new HashMap<TileBluePrint, Integer>();
-			
-			if (startProcess) {
-				currenTileType = currentTile.blueprint.type;
-
-				if (xPosL > 0 && xPosL < xLlength) {
-					leftTile = tiles[xPosL][yPos];
-				}
-				
-				if (xPosR > 0 && xPosR < xLlength) {
-					rightTile = tiles[xPosR][yPos];
-				}
-				
-				if (yPosU > 0 && yPosU < yLlength) {
-					upTile = tiles[xPos][yPosU];
-				}
-				
-				if (yPosD > 0 && yPosD < yLlength) {
-					downTile = tiles[xPos][yPosD];
-				}
-				
-				if (upTile != null) {
-					upTileType = upTile.blueprint.type;
+			if (currenTileType.equals(searchType)) {
+				if (xL >= 0 && xL < width) {
+					leftTile = tiles[xL][y];
 					
-					if (upTileType != null) {
-						if (!upTileType.equals(currenTileType)) {
-							changeUp = true;
-				
-							if (!replaceOptions.containsKey(upTile.blueprint)) {
-								replaceOptions.put(upTile.blueprint, 1);
-							} else {
-								int counter = replaceOptions.get(upTile.blueprint) + 1;
-								replaceOptions.replace(upTile.blueprint, counter);
-							}
-						}
-					}
-				}
-				
-				if (downTile != null) {
-					downTileType = downTile.blueprint.type;
-					
-					if (downTileType != null) {
-						if (!downTileType.equals(currenTileType)) {
-							changeDown = true;
-							
-							if (!replaceOptions.containsKey(downTile.blueprint)) {
-								replaceOptions.put(downTile.blueprint, 1);
-							} else {
-								int counter = replaceOptions.get(downTile.blueprint) + 1;
-								replaceOptions.replace(downTile.blueprint, counter);
-							}
-						}
-					}
-				}
-				
-				if (leftTile != null) {
-					leftTileType = leftTile.blueprint.type;
-					
-					if (leftTileType != null) {
+					if (leftTile != null) {
+						leftTileType = leftTile.bluePrint.type;
+						
 						if (!leftTileType.equals(currenTileType)) {
-							changeLeft = true;
-							
-							if (!replaceOptions.containsKey(leftTile.blueprint)) {
-								replaceOptions.put(leftTile.blueprint, 1);
-							} else {
-								int counter = replaceOptions.get(leftTile.blueprint) + 1;
-								replaceOptions.replace(leftTile.blueprint, counter);
-							}
-						}
-					}
-				}
-				
-				if (rightTile != null) {
-					rightTileType = rightTile.blueprint.type;
-					
-					if (rightTileType != null) {
-						if (!rightTileType.equals(currenTileType)) {
-							changeRight = true;
-							
-							if (!replaceOptions.containsKey(rightTile.blueprint)) {
-								replaceOptions.put(rightTile.blueprint, 1);
-							} else {
-								int counter = replaceOptions.get(rightTile.blueprint) + 1;
-								replaceOptions.replace(rightTile.blueprint, counter);
-							}
-						}
-					}
-				}
-				
-				if (changeUp && changeDown && changeLeft && changeRight) {
-					int count = 0;
-					TileBluePrint bluePrint = null; 
-					
-					for (Entry<TileBluePrint, Integer> entry : replaceOptions.entrySet()) {
-						if (entry != null) {
-							if (entry.getValue() >= count) {
-								count = entry.getValue();
-								bluePrint = entry.getKey();
-							}
-						}
-					}
-					
-					if (bluePrint != null) {
-						replaceTile(tiles, xPos, yPos, width, bluePrint, false);
-					}
-				}
-				
-				replaceOptions = null;
-			}
-		}
-	}
-	
-	private static void smoothBorders(Tile[][] tiles, int x, int y, int width, int height) {
-		Tile currentTile = tiles[x][y];
-		
-		if (currentTile != null) {
-			int xLlength = width;
-			int yLlength = height;
-			int xPos = x;
-			int xPosL = xPos - 1;
-			int xPosR = xPos + 1;
-			int yPos = y;
-			int yPosU = yPos - 1;
-			int yPosD = yPos + 1;
-
-			boolean changeUp = false;
-			boolean changeDown = false;
-			boolean changeLeft = false;
-			boolean changeRight = false;
-			
-			Tile upTile = null;
-			Tile downTile = null;
-			Tile leftTile = null;
-			Tile rightTile = null;
-			
-			TILETYPE currenTileType = null;
-			TILETYPE upTileType = null;
-			TILETYPE downTileType = null;
-			TILETYPE leftTileType = null;
-			TILETYPE rightTileType = null;
-			
-			boolean startProcess = true;
-			
-			//startProcess = !currentTile.blueprint.name.contains("CLEAN");
-
-			if (startProcess) {
-				currenTileType = currentTile.blueprint.type;
-
-				if (xPosL > 0 && xPosL < xLlength) {
-					leftTile = tiles[xPosL][yPos];
-				}
-				
-				if (xPosR > 0 && xPosR < xLlength) {
-					rightTile = tiles[xPosR][yPos];
-				}
-				
-				if (yPosU > 0 && yPosU < yLlength) {
-					upTile = tiles[xPos][yPosU];
-				}
-				
-				if (yPosD > 0 && yPosD < yLlength) {
-					downTile = tiles[xPos][yPosD];
-				}
-				
-				if (upTile != null && !upTile.smoothed) {
-					upTileType = upTile.blueprint.type;
-					
-					if (upTileType != null) {
-						if (!upTileType.equals(currenTileType)) {
-							changeUp = true;
-						}
-					}
-				}
-				
-				if (downTile != null && !downTile.smoothed) {
-					downTileType = downTile.blueprint.type;
-					
-					if (downTileType != null) {
-						if (!downTileType.equals(currenTileType)) {
-							changeDown = true;
-						}
-					}
-				}
-				
-				if (leftTile != null && !leftTile.smoothed) {
-					leftTileType = leftTile.blueprint.type;
-					
-					if (leftTileType != null) {
-						if (!leftTileType.equals(currenTileType)) {
+							//leftTile.selected = true;
 							changeLeft = true;
 						}
 					}
 				}
 				
-				if (rightTile != null && !rightTile.smoothed) {
-					rightTileType = rightTile.blueprint.type;
+				if (xR >= 0 && xR < width) {
+					rightTile = tiles[xR][y];
 					
-					if (rightTileType != null) {
+					if (rightTile != null) {
+						rightTileType = rightTile.bluePrint.type;
+						
 						if (!rightTileType.equals(currenTileType)) {
+							//rightTile.selected = true;
 							changeRight = true;
 						}
 					}
 				}
 				
-
-				if (changeUp && !changeDown) {
-					StringBuilder tileName = new StringBuilder();
-
-					tileName = new StringBuilder();
-					tileName.append(upTileType.toString());
-					tileName.append("_");
-					tileName.append(currenTileType.toString());
-					tileName.append("_B_M");
+				if (yU >= 0 && yU < height) {
+					upTile = tiles[x][yU];
 					
-					TileBluePrint newTile = Tiles.getBluePrintByName(tileName.toString());
-					
-					if (newTile != null) {
-						replaceTile(tiles, xPos, yPosU, width, newTile, true);
+					if (upTile != null) {
+						upTileType = upTile.bluePrint.type;
+						
+						if (!upTileType.equals(currenTileType)) {
+							//upTile.selected = true;
+							changeUp = true;
+						}
 					}
 				}
 				
-				if (changeDown && !changeUp) {
-					StringBuilder tileName = new StringBuilder();
-
-					tileName = new StringBuilder();
-					tileName.append(downTileType.toString());
-					tileName.append("_");
-					tileName.append(currenTileType.toString());
-					tileName.append("_U_M");
+				if (yD >= 0 && yD < height) {
+					downTile = tiles[x][yD];
 					
-					TileBluePrint newTile = Tiles.getBluePrintByName(tileName.toString());
-					
-					if (newTile != null) {
-						replaceTile(tiles, xPos, yPosD, width, newTile, true);
+					if (downTile != null) {
+						downTileType = downTile.bluePrint.type;
+						
+						if (!downTileType.equals(currenTileType)) {
+							//downTile.selected = true;
+							changeDown = true;
+						}
 					}
 				}
-//				
-//				if (changeLeft && !changeUp && !changeDown && !changeRight) {
-//					StringBuilder tileName = new StringBuilder();
-//
-//					tileName = new StringBuilder();
-//					tileName.append(leftTileType.toString());
-//					tileName.append("_");
-//					tileName.append(currenTileType.toString());
-//					tileName.append("_M_R");
-//					
-//					TileBluePrint newTile = Tiles.getBluePrintByName(tileName.toString());
-//					
-//					if (newTile != null) {
-//						replaceTile(tiles, xPosL, yPos, width, newTile, true);
-//					}
-//				}
 				
-				//TileBluePrint newTile = Tiles.getBluePrintByName(tileName.toString());
+				if (changeLeft && changeRight && changeUp && changeDown) {
+					currentTile.smoothed = true;
+				}
+				
+				if (changeLeft) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currenTileType.toString());
+					fileName.append("_");
+					fileName.append(leftTileType.toString());
+					fileName.append("_M_L");
+					
+					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
+					
+					if (newBluePrint != null) {
+						replaceTile(tiles, xL, y, width, newBluePrint, true);
+					}
+				}
+				
+				if (changeRight) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currenTileType.toString());
+					fileName.append("_");
+					fileName.append(rightTileType.toString());
+					fileName.append("_M_R");
+					
+					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
+					
+					if (newBluePrint != null) {
+						replaceTile(tiles, xR, y, width, newBluePrint, true);
+					}
+				}
+				
+				if (changeUp) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currenTileType.toString());
+					fileName.append("_");
+					fileName.append(upTileType.toString());
+					fileName.append("_U_M");
+					
+					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
+					
+					if (newBluePrint != null) {
+						replaceTile(tiles, x, yU, width, newBluePrint, true);
+					}
+				}
+				
+				if (changeDown) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currenTileType.toString());
+					fileName.append("_");
+					fileName.append(downTileType.toString());
+					fileName.append("_B_M");
+					
+					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
+					
+					if (newBluePrint != null) {
+						replaceTile(tiles, x, yD, width, newBluePrint, true);
+					}
+				}
+				
+				if (changeUp && changeLeft) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currenTileType.toString());
+					fileName.append("_");
+					fileName.append(upTileType.toString());
+					fileName.append("_U_L");
+					
+					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
+					
+					if (newBluePrint != null) {
+						replaceTile(tiles, xL, yU, width, newBluePrint, true);
+					}
+				}
+				
+				if (changeUp && changeRight) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currenTileType.toString());
+					fileName.append("_");
+					fileName.append(upTileType.toString());
+					fileName.append("_U_R");
+					
+					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
+					
+					if (newBluePrint != null) {
+						replaceTile(tiles, xR, yU, width, newBluePrint, true);
+					}
+				}
+				
+				if (changeDown && changeLeft) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currenTileType.toString());
+					fileName.append("_");
+					fileName.append(downTileType.toString());
+					fileName.append("_B_L");
+					
+					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
+					
+					if (newBluePrint != null) {
+						replaceTile(tiles, xL, yD, width, newBluePrint, true);
+					}
+				}
+				
+				if (changeDown && changeRight) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currenTileType.toString());
+					fileName.append("_");
+					fileName.append(downTileType.toString());
+					fileName.append("_B_R");
+					
+					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
+					
+					if (newBluePrint != null) {
+						replaceTile(tiles, xR, yD, width, newBluePrint, true);
+					}
+				}
 			}
 		}
 	}
@@ -451,6 +352,7 @@ public class LevelGenerator {
 				float brightness = tiles[x][y].brightness;
 				tiles[x][y] = new BasicTile(id, x, y, newTile, brightness);
 				tiles[x][y].smoothed = smoothed;
+				//tiles[x][y].selected = true;
 			}
 		}
 	}

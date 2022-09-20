@@ -199,7 +199,7 @@ public class Tiles {
 	public static final TileBluePrint STONE_EARTH_B_R = new TileBluePrint(tileTypes, stoneIndex + 48, TILETYPE.STONE, "STONE_EARTH_B_R",  new SpriteAtlas(Sheets.TILES_SHEET, 17, 9, false, 0, 0, false), stoneHestitation, false);
 	
 	/** WATER **/
-	public static final TileBluePrint WATER_CLEAN = new TileBluePrint(tileTypes, waterIndex + 0, TILETYPE.WATER, "WATER_CLEAN",  new SpriteAtlas(Sheets.TILES_SHEET, 18, 10, false, 0, 0, false), waterHestitation, false);	
+	public static final TileBluePrint WATER_CLEAN = new TileBluePrint(tileTypes, waterIndex + 0, TILETYPE.WATER, "WATER_CLEAN",  new SpriteAtlas(Sheets.TILES_SHEET, 18, 10, true, 250, 3, true), waterHestitation, false);	
 	public static final TileBluePrint WATER_SAND_U_L = new TileBluePrint(tileTypes, waterIndex + 1, TILETYPE.WATER, "WATER_SAND_U_L",  new SpriteAtlas(Sheets.TILES_SHEET, 0, 10, false, 0, 0, false), waterHestitation, false);
 	public static final TileBluePrint WATER_SAND_U_M = new TileBluePrint(tileTypes, waterIndex + 2, TILETYPE.WATER, "WATER_SAND_U_M",  new SpriteAtlas(Sheets.TILES_SHEET, 1, 10, false, 0, 0, false), waterHestitation, false);
 	public static final TileBluePrint WATER_SAND_U_R = new TileBluePrint(tileTypes, waterIndex + 3, TILETYPE.WATER, "WATER_SAND_U_R",  new SpriteAtlas(Sheets.TILES_SHEET, 2, 10, false, 0, 0, false), waterHestitation, false);

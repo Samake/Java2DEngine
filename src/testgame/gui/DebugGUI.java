@@ -65,7 +65,7 @@ public class DebugGUI extends GUI {
 					graphics.drawString("Tiles: " + Debug.tiles + ", Tiles rendered: " + Debug.tilesRendered, x + 10, y + lineSpace * index++);
 					graphics.drawString("Decals: " + Debug.decals + ", Decals rendered: " + Debug.decalsRendered, x + 10, y + lineSpace * index++);
 					graphics.drawString("Entities: " + Debug.entities + ", Entities rendered: " + Debug.entitiesRendered, x + 10, y + lineSpace * index++);
-					graphics.drawString("Lights: " + Debug.lights + ", Entities rendered: " + Debug.lightsRendered, x + 10, y + lineSpace * index++);
+					graphics.drawString("Lights: " + Debug.lights + ", Lights rendered: " + Debug.lightsRendered, x + 10, y + lineSpace * index++);
 				}
 			}
 		}

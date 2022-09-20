@@ -12,7 +12,6 @@ public class TileBluePrint {
 	public String name;
 	public SpriteAtlas atlas;
 	public Icon icon;
-	public int mapColor;
 	public float hestitation;
 	public boolean isSolid;
 	

@@ -106,7 +106,7 @@ public class NPCCore extends Entity {
 			if (tile != null) {
 				speed = maxSpeed * tile.hesitation;
 				
-				if (tile.blueprint.equals(Tiles.WATER_CLEAN)) {
+				if (tile.bluePrint.equals(Tiles.WATER_CLEAN)) {
 					isSwimming = true;
 					speed = maxSpeed / 2;
 				} else {

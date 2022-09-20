@@ -7,7 +7,7 @@ import engine.sprites.SpriteAtlas;
 public abstract class Tile {
 
 	public SpriteAtlas atlas;
-	public TileBluePrint blueprint;
+	public TileBluePrint bluePrint;
 	public int id;
 	public int x;
 	public int y;
@@ -15,7 +15,6 @@ public abstract class Tile {
 	public boolean hasCollission = false;
 	public boolean updated = false;
 	public boolean smoothed = false;
-	public int mapColor;
 	public float hesitation;
 	public boolean selected = false;
 	public float brightness;
@@ -24,11 +23,10 @@ public abstract class Tile {
 		this.id = id;
 		this.x = x;
 		this.y = y;
-		this.blueprint = blueprint;
+		this.bluePrint = blueprint;
 		this.atlas = blueprint.atlas;
 		this.isSolid = blueprint.isSolid;
 		this.hasCollission = blueprint.isSolid;
-		this.mapColor = blueprint.mapColor;
 		this.hesitation = blueprint.hestitation;
 		this.brightness = brightness;
 	}

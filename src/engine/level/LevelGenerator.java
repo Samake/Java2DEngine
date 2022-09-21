@@ -12,18 +12,16 @@ import game_content.resources.Tiles.TILETYPE;
 
 public class LevelGenerator {
 	
-	public static Tile[][] tiles;
-	
 	private static boolean changeUp = false;
 	private static boolean changeDown = false;
 	private static boolean changeLeft = false;
 	private static boolean changeRight = false;
 
-	public static Tile[][] generateEmptyLevel(int width, int height, String tileName) {
+	public static void generateEmptyLevel(int width, int height, String tileName, Level level) {
 		
 		Log.print("Generate new empty level " + width + "x" + height + "!");	
 		
-		tiles = new Tile[width][height];
+		Tile[][] tiles = new Tile[width][height];
 		
 		TileBluePrint tileBluePrint = addGrassVariations();
 		
@@ -41,14 +39,14 @@ public class LevelGenerator {
 			}
 		}
 		
-		return tiles;
+		level.tiles = tiles;
 	}
 
-	public static Tile[][] generateRandomLevel(int width, int height) {
+	public static void generateRandomLevel(int width, int height, Level level) {
 		
 		Log.print("Generate new random level " + width + "x" + height + "!");
 		
-		tiles = new Tile[width][height];
+		Tile[][] tiles = new Tile[width][height];
 		
 		long seed = generateRandomSeed();
 		OpenSimplexNoise noise = new OpenSimplexNoise(seed);
@@ -90,7 +88,7 @@ public class LevelGenerator {
 				
 				if (noiseValue > 0) {
 					// Grass layer
-					tiles[x][y] = new BasicTile(id, x, y, Tiles.GRASS_CLEAN, heightValue);
+					tiles[x][y] = new BasicTile(id, x, y, addGrassVariations(), heightValue);
 					
 					// Sand layer
 					if (noiseValue > 0.57 && noiseValue <= 0.59) {
@@ -120,10 +118,10 @@ public class LevelGenerator {
 
 		System.err.println("Seed: " + seed + ", featureSize: " + featureSizeBase + ", lowNoise: " + lowNoise + ", highNoise" + highNoise);
 		
-		return tiles;
+		level.tiles = tiles;
 	}
 	
-	public static void smoothWorld(Tile[][] tiles, int width, int height) {
+	public static void smoothWorld(Tile[][] tiles, int width, int height, Level level) {
 		int iterations = 3;
 		
 		Log.print("Start Smoothing level tiles with " + iterations + " iterations...");
@@ -131,17 +129,7 @@ public class LevelGenerator {
 		for (int iteration = 0; iteration < iterations; iteration++) {
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
-//					smoothBorders(tiles, x, y, width, height, TILETYPE.WATER);
-//					smoothBorders(tiles, x, y, width, height, TILETYPE.SAND);
-//					smoothBorders(tiles, x, y, width, height, TILETYPE.DIRT);
-//					smoothBorders(tiles, x, y, width, height, TILETYPE.GRASS);
-//					smoothBorders(tiles, x, y, width, height, TILETYPE.STONE);
-					
-					smoothBorders(tiles, x, y, width, height, TILETYPE.STONE);
-					smoothBorders(tiles, x, y, width, height, TILETYPE.GRASS);
-					smoothBorders(tiles, x, y, width, height, TILETYPE.DIRT);
-					smoothBorders(tiles, x, y, width, height, TILETYPE.SAND);
-					smoothBorders(tiles, x, y, width, height, TILETYPE.WATER);
+					smoothBorders(level, x, y, tiles[x][y]);
 				}
 			}
 		}
@@ -149,14 +137,13 @@ public class LevelGenerator {
 		Log.print("Level tiles smoothed!");
 	}
 
-	private static void smoothBorders(Tile[][] tiles, int x, int y, int width, int height, TILETYPE searchType) {
-		Tile currentTile = tiles[x][y];
+	public static void smoothBorders(Level level, int x, int y, Tile currentTile) {
 		changeUp = false;
 		changeDown = false;
 		changeLeft = false;
 		changeRight = false;
 		
-		if (currentTile != null && !currentTile.smoothed) {
+		if (currentTile != null) {
 			int xL = x - 1;
 			int xR = x + 1;
 			int yU = y - 1;
@@ -167,194 +154,188 @@ public class LevelGenerator {
 			Tile leftTile = null;
 			Tile rightTile = null;
 			
-			TILETYPE currenTileType = currentTile.bluePrint.type;
-			TILETYPE upTileType = null;
-			TILETYPE downTileType = null;
-			TILETYPE leftTileType = null;
-			TILETYPE rightTileType = null;
+			TILETYPE currentTileType = currentTile.bluePrint.type;
+			String currentTileName = currentTile.bluePrint.name;
 			
-			if (currenTileType.equals(searchType)) {
-				if (xL >= 0 && xL < width) {
-					leftTile = tiles[xL][y];
+			TILETYPE upTileType = null;
+			String upTileName = null;
+			
+			TILETYPE downTileType = null;
+			String downTileName = null;
+			
+			TILETYPE leftTileType = null;
+			String leftTileName = null;
+			
+			TILETYPE rightTileType = null;
+			String rightTileName = null;
+			
+			if (xL >= 0 && xL < level.width) {
+				leftTile = level.tiles[xL][y];
+
+				if (leftTile != null) {
+					leftTileName = leftTile.bluePrint.name;
+					leftTileType = leftTile.bluePrint.type;
 					
-					if (leftTile != null) {
-						leftTileType = leftTile.bluePrint.type;
-						
-						if (!leftTileType.equals(currenTileType)) {
-							//leftTile.selected = true;
-							changeLeft = true;
-						}
+					if (!leftTileName.contains(currentTileName)) {
+						leftTile.marked = true;
+						changeLeft = true;
 					}
 				}
+			}
+			
+			if (xR >= 0 && xR < level.width) {
+				rightTile = level.tiles[xR][y];
 				
-				if (xR >= 0 && xR < width) {
-					rightTile = tiles[xR][y];
+				if (rightTile != null) {
+					rightTileName = rightTile.bluePrint.name;
+					rightTileType = rightTile.bluePrint.type;
 					
-					if (rightTile != null) {
-						rightTileType = rightTile.bluePrint.type;
-						
-						if (!rightTileType.equals(currenTileType)) {
-							//rightTile.selected = true;
-							changeRight = true;
-						}
+					if (!rightTileName.contains(currentTileName)) {
+						rightTile.marked = true;
+						changeRight = true;
 					}
 				}
+			}
+			
+			if (yU >= 0 && yU < level.height) {
+				upTile = level.tiles[x][yU];
 				
-				if (yU >= 0 && yU < height) {
-					upTile = tiles[x][yU];
+				if (upTile != null) {
+					upTileName = upTile.bluePrint.name;
+					upTileType = upTile.bluePrint.type;
 					
-					if (upTile != null) {
-						upTileType = upTile.bluePrint.type;
-						
-						if (!upTileType.equals(currenTileType)) {
-							//upTile.selected = true;
-							changeUp = true;
-						}
+					if (!upTileName.contains(currentTileName)) {
+						upTile.marked = true;
+						changeUp = true;
 					}
 				}
+			}
+			
+			if (yD >= 0 && yD < level.height) {
+				downTile = level.tiles[x][yD];
 				
-				if (yD >= 0 && yD < height) {
-					downTile = tiles[x][yD];
+				if (downTile != null) {
+					downTileName = downTile.bluePrint.name;
+					downTileType = downTile.bluePrint.type;
 					
-					if (downTile != null) {
-						downTileType = downTile.bluePrint.type;
-						
-						if (!downTileType.equals(currenTileType)) {
-							//downTile.selected = true;
-							changeDown = true;
-						}
+					if (!downTileName.contains(currentTileName)) {
+						downTile.marked = true;
+						changeDown = true;
 					}
 				}
+			}
+			
+			if (changeUp && changeLeft) {
+				StringBuilder fileName = new StringBuilder();
+				fileName.append(currentTileType.toString());
+				fileName.append("_");
+				fileName.append(upTileType.toString());
+				fileName.append("_U_L");
 				
-				if (changeLeft && changeRight && changeUp && changeDown) {
-					currentTile.smoothed = true;
-				}
+				findTileAndReplace(level, xL, yU, fileName, currentTile, upTile, "_U_L");
+			}
+			
+			if (changeUp && changeRight) {
+				StringBuilder fileName = new StringBuilder();
+				fileName.append(currentTileType.toString());
+				fileName.append("_");
+				fileName.append(upTileType.toString());
+				fileName.append("_U_R");
 				
-				if (changeLeft) {
-					StringBuilder fileName = new StringBuilder();
-					fileName.append(currenTileType.toString());
-					fileName.append("_");
-					fileName.append(leftTileType.toString());
-					fileName.append("_M_L");
-					
-					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
-					
-					if (newBluePrint != null) {
-						replaceTile(tiles, xL, y, width, newBluePrint, true);
-					}
-				}
+				findTileAndReplace(level, xR, yU, fileName, currentTile, upTile, "_U_R");
+			}
+			
+			if (changeDown && changeLeft) {
+				StringBuilder fileName = new StringBuilder();
+				fileName.append(currentTileType.toString());
+				fileName.append("_");
+				fileName.append(downTileType.toString());
+				fileName.append("_B_L");
 				
-				if (changeRight) {
-					StringBuilder fileName = new StringBuilder();
-					fileName.append(currenTileType.toString());
-					fileName.append("_");
-					fileName.append(rightTileType.toString());
-					fileName.append("_M_R");
-					
-					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
-					
-					if (newBluePrint != null) {
-						replaceTile(tiles, xR, y, width, newBluePrint, true);
-					}
-				}
+				findTileAndReplace(level, xL, yD, fileName, currentTile, downTile, "_B_L");
+			}
+			
+			if (changeDown && changeRight) {
+				StringBuilder fileName = new StringBuilder();
+				fileName.append(currentTileType.toString());
+				fileName.append("_");
+				fileName.append(downTileType.toString());
+				fileName.append("_B_R");
 				
-				if (changeUp) {
-					StringBuilder fileName = new StringBuilder();
-					fileName.append(currenTileType.toString());
-					fileName.append("_");
-					fileName.append(upTileType.toString());
-					fileName.append("_U_M");
-					
-					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
-					
-					if (newBluePrint != null) {
-						replaceTile(tiles, x, yU, width, newBluePrint, true);
-					}
-				}
+				findTileAndReplace(level, xR, yD, fileName, currentTile, downTile, "_B_R");
+			}
+			
+			if (changeLeft) {
+				StringBuilder fileName = new StringBuilder();
+				fileName.append(currentTileType.toString());
+				fileName.append("_");
+				fileName.append(leftTileType.toString());
+				fileName.append("_M_L");
 				
-				if (changeDown) {
-					StringBuilder fileName = new StringBuilder();
-					fileName.append(currenTileType.toString());
-					fileName.append("_");
-					fileName.append(downTileType.toString());
-					fileName.append("_B_M");
-					
-					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
-					
-					if (newBluePrint != null) {
-						replaceTile(tiles, x, yD, width, newBluePrint, true);
-					}
-				}
+				findTileAndReplace(level, xL, y, fileName, currentTile, leftTile, "_M_L");
+			}
+			
+			if (changeRight) {
+				StringBuilder fileName = new StringBuilder();
+				fileName.append(currentTileType.toString());
+				fileName.append("_");
+				fileName.append(rightTileType.toString());
+				fileName.append("_M_R");
 				
-				if (changeUp && changeLeft) {
-					StringBuilder fileName = new StringBuilder();
-					fileName.append(currenTileType.toString());
-					fileName.append("_");
-					fileName.append(upTileType.toString());
-					fileName.append("_U_L");
-					
-					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
-					
-					if (newBluePrint != null) {
-						replaceTile(tiles, xL, yU, width, newBluePrint, true);
-					}
-				}
+				findTileAndReplace(level, xR, y, fileName, currentTile, rightTile, "_M_R");
+			}
+			
+			if (changeUp) {
+				StringBuilder fileName = new StringBuilder();
+				fileName.append(currentTileType.toString());
+				fileName.append("_");
+				fileName.append(upTileType.toString());
+				fileName.append("_U_M");
 				
-				if (changeUp && changeRight) {
-					StringBuilder fileName = new StringBuilder();
-					fileName.append(currenTileType.toString());
-					fileName.append("_");
-					fileName.append(upTileType.toString());
-					fileName.append("_U_R");
-					
-					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
-					
-					if (newBluePrint != null) {
-						replaceTile(tiles, xR, yU, width, newBluePrint, true);
-					}
-				}
+				findTileAndReplace(level, x, yU, fileName, currentTile, upTile, "_U_M");
+			}
+			
+			if (changeDown) {
+				StringBuilder fileName = new StringBuilder();
+				fileName.append(currentTileType.toString());
+				fileName.append("_");
+				fileName.append(downTileType.toString());
+				fileName.append("_B_M");
 				
-				if (changeDown && changeLeft) {
-					StringBuilder fileName = new StringBuilder();
-					fileName.append(currenTileType.toString());
-					fileName.append("_");
-					fileName.append(downTileType.toString());
-					fileName.append("_B_L");
-					
-					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
-					
-					if (newBluePrint != null) {
-						replaceTile(tiles, xL, yD, width, newBluePrint, true);
-					}
-				}
-				
-				if (changeDown && changeRight) {
-					StringBuilder fileName = new StringBuilder();
-					fileName.append(currenTileType.toString());
-					fileName.append("_");
-					fileName.append(downTileType.toString());
-					fileName.append("_B_R");
-					
-					TileBluePrint newBluePrint = Tiles.getBluePrintByName(fileName.toString());
-					
-					if (newBluePrint != null) {
-						replaceTile(tiles, xR, yD, width, newBluePrint, true);
-					}
-				}
+				findTileAndReplace(level, x, yD, fileName, currentTile, downTile, "_B_M");
 			}
 		}
 	}
 
-	private static void replaceTile(Tile[][] tiles, int x, int y, int width, TileBluePrint newTile, boolean smoothed) {
-		if (newTile != null) {
-			if (!tiles[x][y].smoothed) {
-				int id = x + y * width;
-				float brightness = tiles[x][y].brightness;
-				tiles[x][y] = new BasicTile(id, x, y, newTile, brightness);
-				tiles[x][y].smoothed = smoothed;
-				//tiles[x][y].selected = true;
+	private static void findTileAndReplace(Level level, int x, int y, StringBuilder fileName, Tile currentTile, Tile newtile, String alternativeTilePart) {
+		TileBluePrint blueluePrint = Tiles.getBluePrintByName(fileName.toString());
+		
+		if (blueluePrint != null) {
+			replaceTile(level, x, y, blueluePrint);
+		} else {
+			String alternativeTile = newtile.bluePrint.name.replace(currentTile.bluePrint.type.toString() + "_", "");
+			String [] alternativeTileParts = alternativeTile.split("_");
+
+			StringBuilder fileNameNew = new StringBuilder();
+			fileNameNew.append(currentTile.bluePrint.type.toString());
+			fileNameNew.append("_");
+			fileNameNew.append(alternativeTileParts[0]);
+			fileNameNew.append(alternativeTilePart);
+		
+			System.err.println(fileName.toString() + " failed. Alternative >> " + fileNameNew);
+			
+			blueluePrint = Tiles.getBluePrintByName(fileNameNew.toString());
+			
+			if (blueluePrint != null) {
+				replaceTile(level, x, y, blueluePrint);
 			}
 		}
+	}
+
+	private static void replaceTile(Level level, int x, int y, TileBluePrint bluePrint) {
+		int id = x + y * level.width;
+		level.tiles[x][y] = new BasicTile(id, x, y, bluePrint, 1.0f);
+		level.tiles[x][y].marked = true;
 	}
 
 	private static long generateRandomSeed() {

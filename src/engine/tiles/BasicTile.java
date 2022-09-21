@@ -1,5 +1,7 @@
 package engine.tiles;
 
+import java.awt.Color;
+
 import engine.debug.Debug;
 import engine.level.Level;
 import engine.rendering.Screen;
@@ -39,7 +41,11 @@ public class BasicTile extends Tile {
 
 		
 		if (selected) {
-			renderSelected(screen, x, y, atlas.sheet.tileSize, atlas.sheet.tileSize);
+			renderSelected(screen, x, y, atlas.sheet.tileSize, atlas.sheet.tileSize, selectedColor);
+		}
+		
+		if (marked) {
+			renderSelected(screen, x, y, atlas.sheet.tileSize, atlas.sheet.tileSize, markedColor);
 		}
 	}
 
@@ -48,8 +54,8 @@ public class BasicTile extends Tile {
 
 	}
 	
-	public void renderSelected(Screen screen, int x, int y, int w, int h) {
-		screen.renderSelected(x, y, w, h);
+	public void renderSelected(Screen screen, int x, int y, int w, int h, Color color) {
+		screen.renderSelectedTile(x, y, w, h, color);
 	}
 
 

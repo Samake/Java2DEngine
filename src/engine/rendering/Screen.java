@@ -24,8 +24,6 @@ public class Screen {
 	private int minY = 0;
 	private int maxY = 0;
 	
-	private Color selectedColor = Color.GREEN;
-	
 	public Screen() {
 		this.maxX = Config.WINDOW_WIDTH;
 		this.maxY = Config.WINDOW_HEIGHT;
@@ -339,7 +337,7 @@ public class Screen {
 		}
 	}
 
-	public void renderSelected(float inX, float inY, int inWidth, int inHeight) {
+	public void renderSelectedTile(float inX, float inY, int inWidth, int inHeight, Color color) {
 		int xPos = (int) (inX - xOffset);
 		int yPos = (int) (inY - yOffset);
 		
@@ -349,11 +347,11 @@ public class Screen {
 			int downValue = x + (yPos + inHeight - 1) * Config.WINDOW_WIDTH;
 			
 			if (pixelsGUI.length > upperValue && upperValue >= 0) {
-				pixelsGUI[upperValue] = selectedColor.getRGB();
+				pixelsGUI[upperValue] = color.getRGB();
 			}
 			
 			if (pixelsGUI.length > downValue && downValue >= 0) {
-				pixelsGUI[downValue] = selectedColor.getRGB();
+				pixelsGUI[downValue] = color.getRGB();
 			}
 		}
 		
@@ -362,11 +360,11 @@ public class Screen {
 			int downValue = (xPos + inWidth - 1) + y * Config.WINDOW_WIDTH;
 			
 			if (pixelsGUI.length > upperValue && upperValue >= 0) {
-				pixelsGUI[upperValue] = selectedColor.getRGB();
+				pixelsGUI[upperValue] = color.getRGB();
 			}
 			
 			if (pixelsGUI.length > downValue && downValue >= 0) {
-				pixelsGUI[downValue] = selectedColor.getRGB();
+				pixelsGUI[downValue] = color.getRGB();
 			}
 		}
 	}

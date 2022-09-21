@@ -69,16 +69,16 @@ public class Level {
 	}
 	
 	private void generateNewEmptyLevel(String tileName) {
-		tiles = LevelGenerator.generateEmptyLevel(width, height, tileName);
+		LevelGenerator.generateEmptyLevel(width, height, tileName, this);
 		
 	}
 	
 	public void generateNewRandomLevel() {
-		tiles = LevelGenerator.generateRandomLevel(width, height);
+		LevelGenerator.generateRandomLevel(width, height, this);
 	}
 	
 	public void smoothLevel() {
-		LevelGenerator.smoothWorld(tiles, width, height);
+		LevelGenerator.smoothWorld(tiles, width, height, this);
 	}
 	
 	public void update(InputHandler input, Camera camera, Ambient ambient) {
@@ -339,6 +339,10 @@ public class Level {
 		}
 		
 		tiles[x][y] = tile;
+		
+		deMarkTiles();
+		
+		LevelGenerator.smoothBorders(this, x, y, tile);
 	}
 	
 	public Tile getTile(int x, int y) {
@@ -367,6 +371,17 @@ public class Level {
 		}
 	}
 	
+	public void deMarkTiles() {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				Tile tile = getTile(x, y);
+				
+				if (tile != null) { 
+					tile.marked = false;
+				}
+			}
+		}
+	}
 	
 	public void deselectEntities() {
 		for (Entity entity : entities) {

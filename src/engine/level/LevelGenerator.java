@@ -122,14 +122,18 @@ public class LevelGenerator {
 	}
 	
 	public static void smoothWorld(Tile[][] tiles, int width, int height, Level level) {
-		int iterations = 3;
+		int iterations = 1;
 		
 		Log.print("Start Smoothing level tiles with " + iterations + " iterations...");
 		
 		for (int iteration = 0; iteration < iterations; iteration++) {
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
-					smoothBorders(level, x, y, tiles[x][y]);
+					smoothBorders(level, x, y, tiles[x][y], TILETYPE.SAND, false, true);
+					smoothBorders(level, x, y, tiles[x][y], TILETYPE.DIRT, false, true);
+					smoothBorders(level, x, y, tiles[x][y], TILETYPE.GRASS, false, true);
+					smoothBorders(level, x, y, tiles[x][y], TILETYPE.STONE, false, true);
+					smoothBorders(level, x, y, tiles[x][y], TILETYPE.WATER, false, true);
 				}
 			}
 		}
@@ -137,13 +141,13 @@ public class LevelGenerator {
 		Log.print("Level tiles smoothed!");
 	}
 
-	public static void smoothBorders(Level level, int x, int y, Tile currentTile) {
+	public static void smoothBorders(Level level, int x, int y, Tile currentTile, TILETYPE searchType, boolean findAlternativeTile, boolean lockTiles) {
 		changeUp = false;
 		changeDown = false;
 		changeLeft = false;
 		changeRight = false;
 		
-		if (currentTile != null) {
+		if (currentTile != null && !currentTile.locked) {
 			int xL = x - 1;
 			int xR = x + 1;
 			int yU = y - 1;
@@ -169,173 +173,201 @@ public class LevelGenerator {
 			TILETYPE rightTileType = null;
 			String rightTileName = null;
 			
-			if (xL >= 0 && xL < level.width) {
-				leftTile = level.tiles[xL][y];
+			if (searchType.equals(currentTileType)) {
+				if (xL >= 0 && xL < level.width) {
+					leftTile = level.tiles[xL][y];
 
-				if (leftTile != null) {
-					leftTileName = leftTile.bluePrint.name;
-					leftTileType = leftTile.bluePrint.type;
-					
-					if (!leftTileName.contains(currentTileName)) {
-						leftTile.marked = true;
-						changeLeft = true;
+					if (leftTile != null) {
+						leftTileName = leftTile.bluePrint.name;
+						leftTileType = leftTile.bluePrint.type;
+						
+						if (!leftTileType.equals(currentTileType)) {
+							if (!leftTileName.equals(currentTileName)) {
+								changeLeft = true;
+							}
+						}
 					}
 				}
-			}
-			
-			if (xR >= 0 && xR < level.width) {
-				rightTile = level.tiles[xR][y];
 				
-				if (rightTile != null) {
-					rightTileName = rightTile.bluePrint.name;
-					rightTileType = rightTile.bluePrint.type;
+				if (xR >= 0 && xR < level.width) {
+					rightTile = level.tiles[xR][y];
 					
-					if (!rightTileName.contains(currentTileName)) {
-						rightTile.marked = true;
-						changeRight = true;
+					if (rightTile != null) {
+						rightTileName = rightTile.bluePrint.name;
+						rightTileType = rightTile.bluePrint.type;
+						
+						if (!rightTileType.equals(currentTileType)) {
+							if (!rightTileName.equals(currentTileName)) {
+								changeRight = true;
+							}
+						}
 					}
 				}
-			}
-			
-			if (yU >= 0 && yU < level.height) {
-				upTile = level.tiles[x][yU];
 				
-				if (upTile != null) {
-					upTileName = upTile.bluePrint.name;
-					upTileType = upTile.bluePrint.type;
+				if (yU >= 0 && yU < level.height) {
+					upTile = level.tiles[x][yU];
 					
-					if (!upTileName.contains(currentTileName)) {
-						upTile.marked = true;
-						changeUp = true;
+					if (upTile != null) {
+						upTileName = upTile.bluePrint.name;
+						upTileType = upTile.bluePrint.type;
+						
+						if (!upTileType.equals(currentTileType)) {
+							if (!upTileName.equals(currentTileName)) {
+								changeUp = true;
+							}
+						}
 					}
 				}
-			}
-			
-			if (yD >= 0 && yD < level.height) {
-				downTile = level.tiles[x][yD];
 				
-				if (downTile != null) {
-					downTileName = downTile.bluePrint.name;
-					downTileType = downTile.bluePrint.type;
+				if (yD >= 0 && yD < level.height) {
+					downTile = level.tiles[x][yD];
 					
-					if (!downTileName.contains(currentTileName)) {
-						downTile.marked = true;
-						changeDown = true;
+					if (downTile != null) {
+						downTileName = downTile.bluePrint.name;
+						downTileType = downTile.bluePrint.type;
+						
+						if (!downTileType.equals(currentTileType)) {
+							if (!downTileName.equals(currentTileName)) {
+								changeDown = true;
+							}
+						}
 					}
 				}
-			}
-			
-			if (changeUp && changeLeft) {
-				StringBuilder fileName = new StringBuilder();
-				fileName.append(currentTileType.toString());
-				fileName.append("_");
-				fileName.append(upTileType.toString());
-				fileName.append("_U_L");
 				
-				findTileAndReplace(level, xL, yU, fileName, currentTile, upTile, "_U_L");
-			}
-			
-			if (changeUp && changeRight) {
-				StringBuilder fileName = new StringBuilder();
-				fileName.append(currentTileType.toString());
-				fileName.append("_");
-				fileName.append(upTileType.toString());
-				fileName.append("_U_R");
+				if (changeUp && changeLeft) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currentTileType.toString());
+					fileName.append("_");
+					fileName.append(upTileType.toString());
+					fileName.append("_U_L");
+					
+					findTileAndReplace(level, xL, yU, fileName, currentTile, upTile, "_U_L", findAlternativeTile, lockTiles);
+				}
 				
-				findTileAndReplace(level, xR, yU, fileName, currentTile, upTile, "_U_R");
-			}
-			
-			if (changeDown && changeLeft) {
-				StringBuilder fileName = new StringBuilder();
-				fileName.append(currentTileType.toString());
-				fileName.append("_");
-				fileName.append(downTileType.toString());
-				fileName.append("_B_L");
+				if (changeUp && changeRight) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currentTileType.toString());
+					fileName.append("_");
+					fileName.append(upTileType.toString());
+					fileName.append("_U_R");
+					
+					findTileAndReplace(level, xR, yU, fileName, currentTile, upTile, "_U_R", findAlternativeTile, lockTiles);
+				}
 				
-				findTileAndReplace(level, xL, yD, fileName, currentTile, downTile, "_B_L");
-			}
-			
-			if (changeDown && changeRight) {
-				StringBuilder fileName = new StringBuilder();
-				fileName.append(currentTileType.toString());
-				fileName.append("_");
-				fileName.append(downTileType.toString());
-				fileName.append("_B_R");
+				if (changeDown && changeLeft) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currentTileType.toString());
+					fileName.append("_");
+					fileName.append(downTileType.toString());
+					fileName.append("_B_L");
+					
+					findTileAndReplace(level, xL, yD, fileName, currentTile, downTile, "_B_L", findAlternativeTile, lockTiles);
+				}
 				
-				findTileAndReplace(level, xR, yD, fileName, currentTile, downTile, "_B_R");
-			}
-			
-			if (changeLeft) {
-				StringBuilder fileName = new StringBuilder();
-				fileName.append(currentTileType.toString());
-				fileName.append("_");
-				fileName.append(leftTileType.toString());
-				fileName.append("_M_L");
+				if (changeDown && changeRight) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currentTileType.toString());
+					fileName.append("_");
+					fileName.append(downTileType.toString());
+					fileName.append("_B_R");
+					
+					findTileAndReplace(level, xR, yD, fileName, currentTile, downTile, "_B_R", findAlternativeTile, lockTiles);
+				}
 				
-				findTileAndReplace(level, xL, y, fileName, currentTile, leftTile, "_M_L");
-			}
-			
-			if (changeRight) {
-				StringBuilder fileName = new StringBuilder();
-				fileName.append(currentTileType.toString());
-				fileName.append("_");
-				fileName.append(rightTileType.toString());
-				fileName.append("_M_R");
+				if (changeLeft) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currentTileType.toString());
+					fileName.append("_");
+					fileName.append(leftTileType.toString());
+					fileName.append("_M_L");
+					
+					findTileAndReplace(level, xL, y, fileName, currentTile, leftTile, "_M_L", findAlternativeTile, lockTiles);
+				}
 				
-				findTileAndReplace(level, xR, y, fileName, currentTile, rightTile, "_M_R");
-			}
-			
-			if (changeUp) {
-				StringBuilder fileName = new StringBuilder();
-				fileName.append(currentTileType.toString());
-				fileName.append("_");
-				fileName.append(upTileType.toString());
-				fileName.append("_U_M");
+				if (changeRight) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currentTileType.toString());
+					fileName.append("_");
+					fileName.append(rightTileType.toString());
+					fileName.append("_M_R");
+					
+					findTileAndReplace(level, xR, y, fileName, currentTile, rightTile, "_M_R", findAlternativeTile, lockTiles);
+				}
 				
-				findTileAndReplace(level, x, yU, fileName, currentTile, upTile, "_U_M");
-			}
-			
-			if (changeDown) {
-				StringBuilder fileName = new StringBuilder();
-				fileName.append(currentTileType.toString());
-				fileName.append("_");
-				fileName.append(downTileType.toString());
-				fileName.append("_B_M");
+				if (changeUp) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currentTileType.toString());
+					fileName.append("_");
+					fileName.append(upTileType.toString());
+					fileName.append("_U_M");
+					
+					findTileAndReplace(level, x, yU, fileName, currentTile, upTile, "_U_M", findAlternativeTile, lockTiles);
+				}
 				
-				findTileAndReplace(level, x, yD, fileName, currentTile, downTile, "_B_M");
+				if (changeDown) {
+					StringBuilder fileName = new StringBuilder();
+					fileName.append(currentTileType.toString());
+					fileName.append("_");
+					fileName.append(downTileType.toString());
+					fileName.append("_B_M");
+					
+					findTileAndReplace(level, x, yD, fileName, currentTile, downTile, "_B_M", findAlternativeTile, lockTiles);
+				}
 			}
 		}
 	}
 
-	private static void findTileAndReplace(Level level, int x, int y, StringBuilder fileName, Tile currentTile, Tile newtile, String alternativeTilePart) {
+	private static void findTileAndReplace(Level level, int x, int y, StringBuilder fileName, Tile currentTile, Tile newtile, String alternativeTilePart, boolean findAlternativeTile, boolean lockTiles) {
 		TileBluePrint blueluePrint = Tiles.getBluePrintByName(fileName.toString());
 		
 		if (blueluePrint != null) {
-			replaceTile(level, x, y, blueluePrint);
+			replaceTile(level, x, y, blueluePrint, lockTiles);
 		} else {
-			String alternativeTile = newtile.bluePrint.name.replace(currentTile.bluePrint.type.toString() + "_", "");
-			String [] alternativeTileParts = alternativeTile.split("_");
+			if (findAlternativeTile) {
+				String alternativeTile = newtile.bluePrint.name.replace(currentTile.bluePrint.type.toString() + "_", "");
+				String [] alternativeTileParts = alternativeTile.split("_");
 
-			StringBuilder fileNameNew = new StringBuilder();
-			fileNameNew.append(currentTile.bluePrint.type.toString());
-			fileNameNew.append("_");
-			fileNameNew.append(alternativeTileParts[0]);
-			fileNameNew.append(alternativeTilePart);
-		
-			System.err.println(fileName.toString() + " failed. Alternative >> " + fileNameNew);
+				StringBuilder fileNameNew = new StringBuilder();
+				fileNameNew.append(currentTile.bluePrint.type.toString());
+				fileNameNew.append("_");
+				fileNameNew.append(alternativeTileParts[0]);
+				fileNameNew.append(alternativeTilePart);
 			
-			blueluePrint = Tiles.getBluePrintByName(fileNameNew.toString());
-			
-			if (blueluePrint != null) {
-				replaceTile(level, x, y, blueluePrint);
+				System.err.println(fileName.toString() + " failed. Alternative >> " + fileNameNew);
+				
+				blueluePrint = Tiles.getBluePrintByName(fileNameNew.toString());
+				
+				if (blueluePrint != null) {
+					replaceTile(level, x, y, blueluePrint, lockTiles);
+				}
 			}
 		}
 	}
 
-	private static void replaceTile(Level level, int x, int y, TileBluePrint bluePrint) {
+	private static void replaceTile(Level level, int x, int y, TileBluePrint bluePrint, boolean lockTiles) {
 		int id = x + y * level.width;
-		level.tiles[x][y] = new BasicTile(id, x, y, bluePrint, 1.0f);
-		level.tiles[x][y].marked = true;
+		
+		if (level.tiles[x][y] != null) {
+			if (!level.tiles[x][y].locked) {
+				level.tiles[x][y] = new BasicTile(id, x, y, bluePrint, 1.0f);
+				level.tiles[x][y].locked = lockTiles;
+				
+				if (!lockTiles) {
+					level.tiles[x][y].marked = true;
+				} else {
+					level.tiles[x][y].selected = true;
+				}
+			}
+		} else {
+			level.tiles[x][y] = new BasicTile(id, x, y, bluePrint, 1.0f);
+			level.tiles[x][y].locked = lockTiles;
+			
+			if (!lockTiles) {
+				level.tiles[x][y].marked = true;
+			} else {
+				level.tiles[x][y].selected = true;
+			}
+		}
 	}
 
 	private static long generateRandomSeed() {

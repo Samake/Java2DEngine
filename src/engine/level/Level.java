@@ -342,7 +342,7 @@ public class Level {
 		
 		deMarkTiles();
 		
-		LevelGenerator.smoothBorders(this, x, y, tile);
+		LevelGenerator.smoothBorders(this, x, y, tile, tile.bluePrint.type, true, false);
 	}
 	
 	public Tile getTile(int x, int y) {
@@ -378,6 +378,20 @@ public class Level {
 				
 				if (tile != null) { 
 					tile.marked = false;
+				}
+			}
+		}
+	}
+	
+	public void unlockTiles() {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				Tile tile = getTile(x, y);
+				
+				if (tile != null) { 
+					tile.locked = false;
+					tile.marked = false;
+					tile.selected = false;
 				}
 			}
 		}

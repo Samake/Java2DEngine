@@ -57,7 +57,7 @@ public class LevelEditor extends Engine {
 	public JPanel worldSettings;
 	
 	public LevelEditor() {
-		super(1280, 720, 4);
+		super(1280, 720, 1);
 		
 		Log.print("LevelEditor starting...");
 		
@@ -375,6 +375,12 @@ public class LevelEditor extends Engine {
 	public void smoothLevel() {
 		if (scene.level != null) {
 			scene.level.smoothLevel();
+		}
+	}
+	
+	public void unlockTiles() {
+		if (scene.level != null) {
+			scene.level.unlockTiles();
 		}
 	}
 	

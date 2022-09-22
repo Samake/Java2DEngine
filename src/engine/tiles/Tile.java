@@ -16,6 +16,7 @@ public abstract class Tile {
 	public boolean isSolid = false;
 	public boolean hasCollission = false;
 	public boolean updated = false;
+	public boolean locked = false;
 	public float hesitation;
 	public boolean marked = false;
 	public boolean selected = false;

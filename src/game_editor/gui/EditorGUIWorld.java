@@ -30,9 +30,10 @@ public class EditorGUIWorld {
 		finalPanel.setBackground(Color.DARK_GRAY);
 
 		addCaption(finalPanel);
-		addTimeChange(levelEditor,  finalPanel);
-		addWorldGenerator(levelEditor,  finalPanel);
-		addWorldSmooth(levelEditor,  finalPanel);
+		addTimeChange(levelEditor, finalPanel);
+		addWorldGenerator(levelEditor, finalPanel);
+		addWorldSmooth(levelEditor, finalPanel);
+		addUnlock(levelEditor, finalPanel);
 		
 		return finalPanel;
 	}
@@ -113,5 +114,21 @@ public class EditorGUIWorld {
 		});
 		
 		finalPanel.add(smoothLevelButton);
+	}
+	
+	private static void addUnlock(LevelEditor levelEditor, JPanel finalPanel) {
+		JButton unlockTilesButton = new JButton("Unlock");
+		unlockTilesButton.setBackground(Color.GRAY);
+		
+		unlockTilesButton.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent e){
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					levelEditor.unlockTiles();
+            	}
+			}
+		});
+		
+		finalPanel.add(unlockTilesButton);
 	}
 }

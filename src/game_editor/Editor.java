@@ -30,6 +30,7 @@ public class Editor extends Scene {
 	public static int editorSlot = 1;
 	public static int dayTime = 0;
 	public static int dayTimeValue = 3;
+	public static boolean smoothTiles = false;
 	
 	public Editor() {
 		super();

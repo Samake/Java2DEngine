@@ -28,7 +28,8 @@ public class Game extends Engine {
 		
 		input = new InputHandler(this);
 		renderer = new Renderer();
-		scene = new TestGame("worldgen");
+		//scene = new TestGame("worldgen");
+		scene = new TestGame("devmap");
 		
 		Log.print("Game started!");
 	}

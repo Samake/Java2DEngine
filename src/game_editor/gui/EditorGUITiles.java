@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -12,6 +14,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,6 +53,7 @@ public class EditorGUITiles {
 
 		addCaption(finalPanel);
 		addEditorSlots(finalPanel);
+		addSmoothOptions(finalPanel);
 		addFilter(finalPanel);
 		addTiles(finalPanel);
 		
@@ -121,6 +125,40 @@ public class EditorGUITiles {
 		slotsFinalPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		
 		finalPanel.add(slotsFinalPanel);
+	}
+	
+	private static void addSmoothOptions(JPanel finalPanel) {
+		Dimension smoothPanelDimension = new Dimension(width - 20, (int) (lineHeight * 1.5));
+		Dimension smoothDimension = new Dimension(width - 20, lineHeight);
+		
+		JPanel smoothPanel = new JPanel();
+		smoothPanel.setLayout(new BoxLayout(smoothPanel, BoxLayout.LINE_AXIS));
+		smoothPanel.setBackground(Color.DARK_GRAY);
+		smoothPanel.setSize(smoothPanelDimension);
+		smoothPanel.setMaximumSize(smoothPanelDimension);
+		smoothPanel.setMinimumSize(smoothPanelDimension);
+		smoothPanel.setPreferredSize(smoothPanelDimension);
+		
+		JCheckBox checkBoxSmooth = new JCheckBox("Smooth tiles");
+		checkBoxSmooth.setBackground(Color.DARK_GRAY);
+		checkBoxSmooth.setForeground(Color.LIGHT_GRAY);
+		checkBoxSmooth.setSize(smoothDimension);
+		checkBoxSmooth.setMaximumSize(smoothDimension);
+		checkBoxSmooth.setMinimumSize(smoothDimension);
+		checkBoxSmooth.setPreferredSize(smoothDimension);
+		
+		checkBoxSmooth.setSelected(Editor.smoothTiles);
+		
+		checkBoxSmooth.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Editor.smoothTiles = checkBoxSmooth.isSelected();
+            }
+        });
+		
+		smoothPanel.add(checkBoxSmooth);
+		
+		finalPanel.add(smoothPanel);
 	}
 	
 	private static void addFilter(JPanel finalPanel) {

@@ -20,6 +20,7 @@ import engine.tiles.Tile;
 import game_content.entities.lights.PointLight;
 import game_content.entities.player.Player;
 import game_content.resources.Sheets;
+import game_editor.Editor;
 
 public class Level {
 	
@@ -342,7 +343,9 @@ public class Level {
 		
 		deMarkTiles();
 		
-		LevelGenerator.smoothBorders(this, x, y, tile, tile.bluePrint.type, true, false);
+		if (Editor.smoothTiles) {
+			LevelGenerator.smoothBorders(this, x, y, tile, tile.bluePrint.type, true, false);
+		}
 	}
 	
 	public Tile getTile(int x, int y) {

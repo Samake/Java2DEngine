@@ -236,20 +236,22 @@ public class LevelGenerator {
 				
 				if (changeUp && changeLeft) {
 					StringBuilder fileName = new StringBuilder();
-					fileName.append(currentTileType.toString());
-					fileName.append("_");
+					fileName.append("F_");
 					fileName.append(upTileType.toString());
-					fileName.append("_U_L");
+					fileName.append("_T_");
+					fileName.append(currentTileType.toString());
+					fileName.append("_B_R");
 					
 					findTileAndReplace(level, xL, yU, fileName, currentTile, upTile, "_U_L", findAlternativeTile, lockTiles);
 				}
 				
 				if (changeUp && changeRight) {
 					StringBuilder fileName = new StringBuilder();
-					fileName.append(currentTileType.toString());
-					fileName.append("_");
+					fileName.append("F_");
 					fileName.append(upTileType.toString());
-					fileName.append("_U_R");
+					fileName.append("_T_");
+					fileName.append(currentTileType.toString());
+					fileName.append("_B_L");
 					
 					findTileAndReplace(level, xR, yU, fileName, currentTile, upTile, "_U_R", findAlternativeTile, lockTiles);
 				}

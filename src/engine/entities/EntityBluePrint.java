@@ -36,6 +36,59 @@ public class EntityBluePrint {
 		
 		int iconScale = 4;
 		
-		icon = IconLoader.getIconfromSheet(atlas.sheet, atlas.column, atlas.row, iconScale);
+		
+		createIcon(atlas, renderType, iconScale);
+	}
+
+	private void createIcon(SpriteAtlas atlas, RENDERTYPE renderType, int iconScale) {
+		int width = 1;
+		int height = 1;
+		
+		if (renderType.equals(RENDERTYPE.R1X2)) {
+			width = 1;
+			height = 2;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R1X3)) {
+			width = 1;
+			height = 3;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R2X1)) {
+			width = 2;
+			height = 1;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R2X2)) {
+			width = 2;
+			height = 2;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R2X3)) {
+			width = 2;
+			height = 3;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R3X2)) {
+			width = 3;
+			height = 2;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R4X4)) {
+			width = 4;
+			height = 4;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R4X6)) {
+			width = 4;
+			height = 6;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R6X6)) {
+			width = 6;
+			height = 6;
+		}
+		
+		icon = IconLoader.getIconfromSheet(atlas.sheet, atlas.column, atlas.row, width, height, iconScale);
 	}
 }

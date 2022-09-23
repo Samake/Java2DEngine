@@ -65,7 +65,7 @@ public class EditorGUIWorld {
 		
 		JButton editorChangeDayTime= new JButton();
 		editorChangeDayTime.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorChangeDayTime.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 8, 1, iconScale));
+		editorChangeDayTime.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 8, 1, 1, 1, iconScale));
 		editorChangeDayTime.setBackground(Color.GRAY);
 		
 		editorChangeDayTime.addMouseListener(new MouseAdapter(){

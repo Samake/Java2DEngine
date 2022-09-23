@@ -27,7 +27,7 @@ public class TileBluePrint {
 		
 		int iconScale = 4;
 		
-		icon = IconLoader.getIconfromSheet(atlas.sheet, atlas.column, atlas.row, iconScale);
+		icon = IconLoader.getIconfromSheet(atlas.sheet, atlas.column, atlas.row, 1, 1, iconScale);
 		
 		tileTypes[id] = this;
 	}

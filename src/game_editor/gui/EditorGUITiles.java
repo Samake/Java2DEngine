@@ -212,7 +212,7 @@ public class EditorGUITiles {
 		int lines = getLinesCount(tilesCount, tilesPerLine);
 		int height = lines * (iconSize + tilesGap * 2);
 		
-		Dimension scrollPaneDimension = new Dimension(width - 20, 600);
+		Dimension scrollPaneDimension = new Dimension(width - 20, 530);
 		Dimension panelDimension = new Dimension(width - 50, height);
 		
 		tilesPanel.setLayout(new GridLayout(lines, tilesPerLine, tilesGap, tilesGap));

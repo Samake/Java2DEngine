@@ -57,7 +57,7 @@ public class LevelEditor extends Engine {
 	public JPanel worldSettings;
 	
 	public LevelEditor() {
-		super(1280, 720, 1);
+		super(1280, 720, 2);
 		
 		Log.print("LevelEditor starting...");
 		
@@ -144,7 +144,7 @@ public class LevelEditor extends Engine {
 		JTextField heightField = new JTextField();
 		
 		// Array für unsere JComboBox
-        String comboBoxListe[] = {Tiles.VOID.name, Tiles.GRASS_CLEAN.name, Tiles.DIRT_CLEAN.name, Tiles.STONE_CLEAN.name, Tiles.SAND_CLEAN.name, Tiles.WATER_CLEAN.name};
+        String comboBoxListe[] = {Tiles.VOID.name, Tiles.GRASS_CLEAN.name, Tiles.EARTH_CLEAN.name, Tiles.STONE_CLEAN.name, Tiles.SAND_CLEAN.name, Tiles.WATER_CLEAN.name};
  
         //JComboBox mit Bundesländer-Einträgen wird erstellt
         JComboBox<String> tileChoose = new JComboBox<String>(comboBoxListe);

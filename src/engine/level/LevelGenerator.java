@@ -91,18 +91,18 @@ public class LevelGenerator {
 					tiles[x][y] = new BasicTile(id, x, y, addGrassVariations(), heightValue);
 					
 					// Sand layer
-					if (noiseValue > 0.57 && noiseValue <= 0.59) {
+					if (noiseValue > 0.57 && noiseValue <= 0.60) {
 						tiles[x][y] = new BasicTile(id, x, y, Tiles.SAND_CLEAN, heightValue);
 					}
 					
 					// Dirt layer
-					if (noiseValue > 0.59 && noiseValue <= 0.60) {
-						tiles[x][y] = new BasicTile(id, x, y, Tiles.DIRT_CLEAN, heightValue);
+					if (noiseValue > 0.60 && noiseValue <= 0.62) {
+						tiles[x][y] = new BasicTile(id, x, y, Tiles.EARTH_CLEAN, heightValue);
 					}
 					
 					// Dirt layer
 					if (noiseValue > 0.73 && noiseValue < 0.75) {
-						tiles[x][y] = new BasicTile(id, x, y, Tiles.DIRT_CLEAN, heightValue);
+						tiles[x][y] = new BasicTile(id, x, y, Tiles.EARTH_CLEAN, heightValue);
 					}
 					
 					// Stone layer
@@ -130,7 +130,7 @@ public class LevelGenerator {
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
 					smoothBorders(level, x, y, tiles[x][y], TILETYPE.SAND, false, true);
-					smoothBorders(level, x, y, tiles[x][y], TILETYPE.DIRT, false, true);
+					smoothBorders(level, x, y, tiles[x][y], TILETYPE.EARTH, false, true);
 					smoothBorders(level, x, y, tiles[x][y], TILETYPE.GRASS, false, true);
 					smoothBorders(level, x, y, tiles[x][y], TILETYPE.STONE, false, true);
 					smoothBorders(level, x, y, tiles[x][y], TILETYPE.WATER, false, true);

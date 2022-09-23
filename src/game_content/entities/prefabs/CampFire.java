@@ -43,6 +43,7 @@ public class CampFire extends Prefab {
 		if (smoke != null) {
 			smoke.position.x = position.x + smokeOffset.x;
 			smoke.position.y = position.y + smokeOffset.y;
+			smoke.collissionBox = collissionBox;
 		}
 		
 		if (player != null) {

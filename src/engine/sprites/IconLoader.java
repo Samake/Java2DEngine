@@ -12,8 +12,6 @@ public class IconLoader {
 		int rowPixels = row * sheet.tileSize;
 		int iconScale = scale * sheet.tileSize;
 		
-		//System.err.println("columPixels:" + columPixels + ", rowPixels: " + rowPixels + ", scale: " + scale + ", iconScale: " + iconScale);
-		
 		Image before = sheet.image.getSubimage(columPixels, rowPixels, sheet.tileSize * width, sheet.tileSize * height).getScaledInstance(iconScale, iconScale, Image.SCALE_AREA_AVERAGING);
 		
 		return new ImageIcon(before);

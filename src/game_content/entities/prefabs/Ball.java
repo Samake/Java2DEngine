@@ -36,6 +36,9 @@ public class Ball extends ObjectPhysical {
 			isMoving = false;
 		}
 		
+		//scale += 0.01f;
+		//System.err.println(scale);
+		
 		xAxisValue /= frictionValue;
 		yAxisValue /= frictionValue;
 		

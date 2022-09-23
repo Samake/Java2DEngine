@@ -16391,4 +16391,15 @@ levelTiles:16384
 {type:Player,x:981.0,y:1009.0,speed:1.0}
 [ENTITIES]
 [PREFABS]
+{type:Prefab,name:BALL_01,x:1093.0,y:1034.0}
+{type:Prefab,name:CAMPFIRE,x:980.0,y:922.0}
+{type:Prefab,name:LAMPPOST_08,x:892.0,y:878.0}
+{type:Prefab,name:LAMPPOST_08,x:920.0,y:963.0}
+{type:Prefab,name:LAMPPOST_08,x:1009.0,y:1021.0}
+{type:Prefab,name:LAMPPOST_08,x:1076.0,y:1067.0}
+{type:Prefab,name:LAMPPOST_08,x:1108.0,y:1159.0}
+{type:Prefab,name:LAMPPOST_08,x:1031.0,y:1206.0}
+{type:Prefab,name:LAMPPOST_08,x:942.0,y:1196.0}
+{type:Prefab,name:LAMPPOST_08,x:896.0,y:1132.0}
+{type:Prefab,name:LAMPPOST_08,x:798.0,y:1114.0}
 [LIGHTS]

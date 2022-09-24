@@ -23,13 +23,6 @@ public class NPCHuman extends NPCCore {
 	
 	public NPCHuman(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, "Svenja", x, y, speed);
-		
-		if (collissionBox != null) {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-			collissionBox.minY = (-bluePrint.atlas.sheet.tileSize) + 2;
-			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - 2;
-		}
 	}
 	
 	@Override

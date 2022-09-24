@@ -16,6 +16,9 @@ public class Ball extends ObjectPhysical {
 	private float frictionValue = 1.035f;
 	
 	private boolean isMoving = false;
+	
+	private float basisScale = 1.0f;
+	private float moveSpeed = 0.0f;
 
 	public Ball(EntityBluePrint blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
@@ -36,8 +39,8 @@ public class Ball extends ObjectPhysical {
 			isMoving = false;
 		}
 		
-		//scale += 0.01f;
-		//System.err.println(scale);
+		moveSpeed = Math.abs((xAxisValue + yAxisValue) / 2);
+		scale = (float) (basisScale + (Math.sin(moveSpeed) / 2.0f));
 		
 		xAxisValue /= frictionValue;
 		yAxisValue /= frictionValue;

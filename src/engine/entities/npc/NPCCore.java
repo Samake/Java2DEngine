@@ -37,6 +37,7 @@ public class NPCCore extends Entity {
 	public int flipValue = 0;
 	
 	public Animation animation;
+	public int animationSpeed = 2;
 	
 	public NPCCore(EntityBluePrint bluePrint, Level level, String name, float x, float y, float speed) {
 		super(bluePrint, level, x, y);
@@ -141,7 +142,7 @@ public class NPCCore extends Entity {
 		flipValue = (numSteps >> (int) walkingSpeed) & 1;
 		
 		if (isSwimming) {
-			flipValue = (animValue >> (int) 4) & 1;
+			flipValue = (animValue >> (int) animationSpeed * animationSpeed) & 1;
 			heightOffsetModifier = bluePrint.atlas.sheet.tileSize / 2;
 			inWater = true;
 		} else {
@@ -150,7 +151,7 @@ public class NPCCore extends Entity {
 		}
 			
 		if (!isMoving && !isSwimming) {
-			flipValue = (animValue >> (int) 6) & 1;
+			flipValue = (animValue >> (int) animationSpeed * 3) & 1;
 		}
 		
 		flipValue *= 2;

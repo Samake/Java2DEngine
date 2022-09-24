@@ -17,10 +17,10 @@ public class Player extends NPCCore {
 		super(bluePrint, level, "Test", x, y, speed);
 
 		if (collissionBox != null) {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-			collissionBox.minY = (-bluePrint.atlas.sheet.tileSize) + 2;
-			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - 2;
+			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
 		}
 
 		debugColor = Color.RED;

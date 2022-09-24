@@ -17,19 +17,12 @@ public class NPCAnimalSmall extends NPCCore {
 	public int targetRange = 48;
 	
 	private long lastTimeStamp = System.currentTimeMillis();
-	private int jobDelay = 1000;
-	private int jobDelayValue = jobDelay;
+	public int jobDelay = 1000;
+	public int jobDelayValue = jobDelay;
 
 	
 	public NPCAnimalSmall(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, "Svenja", x, y, speed);
-		
-		if (collissionBox != null) {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-			collissionBox.minY = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-		}
 	}
 	
 	@Override

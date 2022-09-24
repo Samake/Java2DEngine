@@ -24,6 +24,13 @@ public class Effect extends Entity {
 		alive = true;
 		lastTick = System.currentTimeMillis();
 		
+		if (collissionBox != null) {
+			collissionBox.minX = -1;
+			collissionBox.maxX = 1;
+			collissionBox.minY = -1;
+			collissionBox.maxY = 1;
+		}
+		
 		level.addEntity(this);
 	}
 	

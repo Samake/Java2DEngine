@@ -30,6 +30,7 @@ public class Entity {
 	public float scale = 1;
 	public float xOffset = 0;
 	public float yOffset = 0;
+	public int collissionOffset = 3;
 
 	public Level level;
 	
@@ -53,66 +54,66 @@ public class Entity {
 		
 		if (collissionBox != null) {
 			if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize / 2) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
+				collissionBox.minY = 0;
+				collissionBox.maxY = bluePrint.atlas.sheet.tileSize / 2;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R1X2)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
+				collissionBox.minY = collissionOffset;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R1X3)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize * 1.5f) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
+				collissionBox.minY = (bluePrint.atlas.sheet.tileSize / 2) + collissionOffset ;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R2X2)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
+				collissionBox.minY = collissionOffset;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R2X3)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize * 1.5f) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
+				collissionBox.minY = collissionOffset;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R3X2)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 1.5f) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 1.5f) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+				collissionBox.minY = collissionOffset;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R4X4)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 2) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 2) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize * 2) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 2) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 2) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 2) - collissionOffset;
+				collissionBox.minY = collissionOffset;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 2) - collissionOffset;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R4X6)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 2) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 2) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize * 3) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 3) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 2) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 2) - collissionOffset;
+				collissionBox.minY = collissionOffset;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 3) - collissionOffset;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R6X6)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 3) + 2;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 3) - 2;
-				collissionBox.minY = (-bluePrint.atlas.sheet.tileSize * 3) + 2;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 3) - 2;
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 3) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 3) - collissionOffset;
+				collissionBox.minY = collissionOffset;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 3) - collissionOffset;
 			}
 		}
 	}
@@ -266,7 +267,7 @@ public class Entity {
 					if (distance < light.radius) {
 						int xValue = (int) (Math.ceil(Math.atan(light.position.x - position.x)) - 0.5);
 						int yValue = (int) (Math.ceil(Math.atan(light.position.y - position.y)) - 0.5);
-						int shadwowDistance = (int) (Math.cbrt(distance) / 1.5);
+						int shadwowDistance = (int) ((int) (scale * Math.cbrt(distance) / 1.5));
 						
 						float shadowStrength = (1.0f - ((1.0f / light.radius) * distance)) / 2;
 

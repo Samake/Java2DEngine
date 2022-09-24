@@ -17,6 +17,13 @@ public class SpawnEgg extends Prefab {
 	public SpawnEgg(EntityBluePrint blueprint, Level level, int x, int y, EntityBluePrint spawnBlueprint) {
 		super(blueprint, level, x, y);
 		
+		if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
+			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 5;
+			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 5;
+			collissionBox.minY = 0;
+			collissionBox.maxY = bluePrint.atlas.sheet.tileSize / 2;
+		}
+		
 		this.spawnBlueprint = spawnBlueprint;
 	}
 

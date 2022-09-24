@@ -16,7 +16,7 @@ public class Prefabs {
 	
 	public static final EntityBluePrint[] entityList = new EntityBluePrint[2048];
 	
-	public static final EntityBluePrint CAMPFIRE = new EntityBluePrint(entityList, 0, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "CAMPFIRE", new SpriteAtlas(Sheets.EFFECTS_SHEET, 0, 1, true, 250, 3, false), false, true, true);
+	public static final EntityBluePrint CAMPFIRE = new EntityBluePrint(entityList, 0, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "CAMPFIRE", new SpriteAtlas(Sheets.EFFECTS_SHEET, 0, 1, true, 250, 3, false), true, true, true);
 	public static final EntityBluePrint BALL_01 = new EntityBluePrint(entityList, 1, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "BALL_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 1, false, 0, 0, false), true, true, true);
 	
 	public static final EntityBluePrint SPAWNEGG_WOMAN_01 = new EntityBluePrint(entityList, 101, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_WOMAN_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
@@ -33,14 +33,14 @@ public class Prefabs {
 	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_YELLOW = new EntityBluePrint(entityList, 206, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_YELLOW", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_BROWN = new EntityBluePrint(entityList, 207, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_BROWN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
 	
-	public static final EntityBluePrint LAMPPOST_01 = new EntityBluePrint(entityList, 300, ENTITYTYPE.PREFAB, RENDERTYPE.R1X3, "LAMPPOST_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 5, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint LAMPPOST_02 = new EntityBluePrint(entityList, 301, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 5, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint LAMPPOST_03 = new EntityBluePrint(entityList, 302, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_03", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 5, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint LAMPPOST_04 = new EntityBluePrint(entityList, 303, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_04", new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 5, false, 0, 0, false), false, true, true);	
-	public static final EntityBluePrint LAMPPOST_05 = new EntityBluePrint(entityList, 304, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_05", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 5, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint LAMPPOST_06 = new EntityBluePrint(entityList, 305, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_06", new SpriteAtlas(Sheets.OBJECTS_SHEET, 9, 5, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint LAMPPOST_07 = new EntityBluePrint(entityList, 306, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_07", new SpriteAtlas(Sheets.OBJECTS_SHEET, 11, 5, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint LAMPPOST_08 = new EntityBluePrint(entityList, 307, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_08", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 5, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint LAMPPOST_01 = new EntityBluePrint(entityList, 300, ENTITYTYPE.PREFAB, RENDERTYPE.R1X3, "LAMPPOST_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 5, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint LAMPPOST_02 = new EntityBluePrint(entityList, 301, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 5, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint LAMPPOST_03 = new EntityBluePrint(entityList, 302, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_03", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 5, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint LAMPPOST_04 = new EntityBluePrint(entityList, 303, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_04", new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 5, false, 0, 0, false), true, true, true);	
+	public static final EntityBluePrint LAMPPOST_05 = new EntityBluePrint(entityList, 304, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_05", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 5, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint LAMPPOST_06 = new EntityBluePrint(entityList, 305, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_06", new SpriteAtlas(Sheets.OBJECTS_SHEET, 9, 5, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint LAMPPOST_07 = new EntityBluePrint(entityList, 306, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_07", new SpriteAtlas(Sheets.OBJECTS_SHEET, 11, 5, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint LAMPPOST_08 = new EntityBluePrint(entityList, 307, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_08", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 5, false, 0, 0, false), true, true, true);
 	
 	public static final EntityBluePrint FOUNTAIN_01 = new EntityBluePrint(entityList, 350, ENTITYTYPE.PREFAB, RENDERTYPE.R2X2, "FOUNTAIN_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 6, false, 0, 0, false), true, true, true);
 	

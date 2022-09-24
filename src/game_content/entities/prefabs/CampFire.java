@@ -21,6 +21,13 @@ public class CampFire extends Prefab {
 	public CampFire(EntityBluePrint blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
 		
+		if (collissionBox != null) {
+			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
+			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
+			collissionBox.minY = bluePrint.atlas.sheet.tileSize / 8;
+			collissionBox.maxY = bluePrint.atlas.sheet.tileSize / 2;
+		}
+		
 		smokeOffset.y = -bluePrint.atlas.sheet.tileSize;
 		
 		light = new PointLight(level, x, y, new Color(255, 128, 64, 255), 48, false, true, 200, false);
@@ -43,7 +50,8 @@ public class CampFire extends Prefab {
 		if (smoke != null) {
 			smoke.position.x = position.x + smokeOffset.x;
 			smoke.position.y = position.y + smokeOffset.y;
-			smoke.collissionBox = collissionBox;
+			smoke.collissionBox.position.x = collissionBox.position.x;
+			smoke.collissionBox.position.y = collissionBox.position.y + collissionOffset;
 		}
 		
 		if (player != null) {

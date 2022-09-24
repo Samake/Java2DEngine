@@ -57,10 +57,24 @@ public class Objects {
 	public static final EntityBluePrint SCARECROW_01 = new EntityBluePrint(entityList, 303, ENTITYTYPE.OBJECT, RENDERTYPE.R1X2, "SCARECROW_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 19, 0, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint SCARECROW_02 = new EntityBluePrint(entityList, 304, ENTITYTYPE.OBJECT, RENDERTYPE.R1X2, "SCARECROW_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 20, 0, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint SCARECROW_03 = new EntityBluePrint(entityList, 305, ENTITYTYPE.OBJECT, RENDERTYPE.R1X2, "SCARECROW_03", new SpriteAtlas(Sheets.OBJECTS_SHEET, 21, 0, false, 0, 0, false), true, true, true);
-	
-	public static final EntityBluePrint FENCE_D_C_LB = new EntityBluePrint(entityList, 400, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_D_C_LB", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 2, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C_LB = new EntityBluePrint(entityList, 401, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_LB", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 3, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_DOOR_C_LB = new EntityBluePrint(entityList, 402, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_DOOR_C_LB", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 4, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_D_C = new EntityBluePrint(entityList, 400, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_D_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 2, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_U_C = new EntityBluePrint(entityList, 401, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 2, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_L_C = new EntityBluePrint(entityList, 402, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_L_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 4, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_R_C = new EntityBluePrint(entityList, 403, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 3, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_N_C = new EntityBluePrint(entityList, 404, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_N_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 2, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_D_C_R_C = new EntityBluePrint(entityList, 405, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_D_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 2, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_L_C_R_C = new EntityBluePrint(entityList, 406, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_L_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 2, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_L_C_D_C = new EntityBluePrint(entityList, 407, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_L_C_D_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 2, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_U_C_D_C = new EntityBluePrint(entityList, 408, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_D_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 3, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_U_C_R_C = new EntityBluePrint(entityList, 409, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 4, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_U_C_L_C = new EntityBluePrint(entityList, 410, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_L_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 4, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_U_C_D_C_R_C = new EntityBluePrint(entityList, 411, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_D_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 3, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_U_C_D_C_L_C = new EntityBluePrint(entityList, 412, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_D_C_L_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 4, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_U_C_D_C_L_C_R_C = new EntityBluePrint(entityList, 413, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_D_C_L_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 2, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_U_C_L_C_R_C = new EntityBluePrint(entityList, 414, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_L_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 3, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_D_C_L_C_R_C = new EntityBluePrint(entityList, 415, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_D_C_L_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 4, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_DOOR_H_L = new EntityBluePrint(entityList, 416, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_DOOR_H_L", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 3, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint FENCE_DOOR_H_R = new EntityBluePrint(entityList, 417, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_DOOR_H_R", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 4, false, 0, 0, false), true, true, true);
 
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
@@ -70,12 +84,46 @@ public class Objects {
 					return level.addEntity(new Tree(blueprint, level, x, y));
 				case "TREE_BIG_02" :
 					return level.addEntity(new Tree(blueprint, level, x, y));
-				case "FENCE_D_C_LB" :
+				case "FENCE_D_C" :
 					return level.addEntity(new Fence(blueprint, level, x, y));
-				case "FENCE_U_C_LB" :
+				case "FENCE_U_C" :
 					return level.addEntity(new Fence(blueprint, level, x, y));
-				case "FENCE_DOOR_C_LB" :
+				case "FENCE_L_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));
+				case "FENCE_R_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));
+				case "FENCE_N_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));
+				case "FENCE_D_C_R_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_L_C_R_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_L_C_D_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_U_C_D_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_U_C_R_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_U_C_L_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_U_C_D_C_R_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_U_C_D_C_L_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_U_C_D_C_L_C_R_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_U_C_L_C_R_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				case "FENCE_D_C_L_C_R_C" :
+					return level.addEntity(new Fence(blueprint, level, x, y));	
+				
+				
+				case "FENCE_DOOR_H_L" :
 					return level.addEntity(new FenceDoor(blueprint, level, x, y));
+				case "FENCE_DOOR_H_R" :
+					return level.addEntity(new FenceDoor(blueprint, level, x, y));
+					
+					
 				case "IRON_ORE" :
 					return level.addEntity(new CollectableItem(blueprint, level, x, y));
 				case "STONE" :

@@ -16,6 +16,8 @@ public class Fence extends ObjectStatic {
 	public Fence(EntityBluePrint bluePrint, Level level, float x, float y) {
 		super(bluePrint, level, x, y);
 		
+		collissionOffset = 1;
+		
 		if (collissionBox != null) {
 			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
 			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;

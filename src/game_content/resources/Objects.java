@@ -8,6 +8,8 @@ import engine.entities.objects.ObjectStatic;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import game_content.entities.objects.CollectableItem;
+import game_content.entities.objects.Fence;
+import game_content.entities.objects.FenceDoor;
 import game_content.entities.objects.Tree;
 
 public class Objects {
@@ -68,6 +70,12 @@ public class Objects {
 					return level.addEntity(new Tree(blueprint, level, x, y));
 				case "TREE_BIG_02" :
 					return level.addEntity(new Tree(blueprint, level, x, y));
+				case "FENCE_D_C_LB" :
+					return level.addEntity(new Fence(blueprint, level, x, y));
+				case "FENCE_U_C_LB" :
+					return level.addEntity(new Fence(blueprint, level, x, y));
+				case "FENCE_DOOR_C_LB" :
+					return level.addEntity(new FenceDoor(blueprint, level, x, y));
 				case "IRON_ORE" :
 					return level.addEntity(new CollectableItem(blueprint, level, x, y));
 				case "STONE" :

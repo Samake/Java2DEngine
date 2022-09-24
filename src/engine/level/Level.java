@@ -374,6 +374,36 @@ public class Level {
 		}
 	}
 	
+	public void deSelectTiles() {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				Tile tile = getTile(x, y);
+				
+				if (tile != null) { 
+					tile.selected = false;
+				}
+			}
+		}
+	}
+	
+	public void markTile(Tile tileToSelect) {
+		if (tileToSelect != null) {
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+					Tile tile = getTile(x, y);
+					
+					if (tile != null) { 
+						if (tile.equals(tileToSelect)) { 
+							tile.marked = true;
+						} else {
+							tile.marked = false;
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	public void deMarkTiles() {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {

@@ -188,17 +188,19 @@ public class Screen {
 			
 			if (isInWater) {
 				float waterFade = (size - height) / 16.0f;
+				alpha = waterFade;
 
-				red = (int) (baseColor.getRed() * (1.0 - waterFade)) + (int) (drawColor.getRed() * waterFade);
-				green = (int) (baseColor.getGreen() * (1.0 - waterFade)) + (int) (drawColor.getGreen() * waterFade);
-				blue = (int) (baseColor.getBlue() * (1.0 - waterFade)) + (int) (drawColor.getBlue() * waterFade);
-				red *= baseColor.getBlue();
-				green *= baseColor.getGreen();
-				blue *= baseColor.getBlue();
+				red = (int) (baseColor.getRed() * (1.0 - alpha)) + (int) (drawColor.getRed() * alpha);
+				green = (int) (baseColor.getGreen() * (1.0 - alpha)) + (int) (drawColor.getGreen() * alpha);
+				blue = (int) (baseColor.getBlue() * (1.0 - alpha)) + (int) (drawColor.getBlue() * alpha);
 				
-				red /= 255;
-				green /= 255;
-				blue /= 255;
+				red += baseColor.getRed();
+				green += baseColor.getGreen();
+				blue += baseColor.getBlue();
+				
+				red /= 2;
+				green /= 2;
+				blue /= 2;
 			} else {
 				red = (int) (baseColor.getRed() * (1.0 - alpha)) + (int) (drawColor.getRed() * alpha);
 				green = (int) (baseColor.getGreen() * (1.0 - alpha)) + (int) (drawColor.getGreen() * alpha);

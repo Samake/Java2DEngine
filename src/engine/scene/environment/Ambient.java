@@ -5,8 +5,8 @@ import java.awt.Color;
 public class Ambient {
 	
 	public int dayTime = 0;
-	private int currentTime = 18000;
-	private int endOfDay = 24000;//100;
+	private int currentTime = 25000;
+	private int endOfDay = 100000;//100;
 	private int timeSpeed = 1;
 	private float fadeValue = 0;
 	
@@ -20,19 +20,20 @@ public class Ambient {
 	
 	public Ambient(boolean dayCycle) {
 		this.dayCycle = dayCycle;
-
-		fadeValue = (1.0f / endOfDay) * (currentTime);
 	}
 	
 	public void update() {
 		if (dayCycle) {
 			currentTime = currentTime + timeSpeed;
-			fadeValue = (1.0f / endOfDay) * (currentTime);
+			fadeValue = 1.0f;//(1.0f / ((endOfDay)%(endOfDay / 10))) * (currentTime)%(currentTime / 10);
+			
+			fadeValue = ((1.0f / (endOfDay / 10.0f)) * (currentTime))%1.0f ;
 			
 			if (currentTime > endOfDay) {
 				currentTime = 0;
-				dayTime = (dayTime + 1)%9;
 			}
+			
+			dayTime = (int) ((10.0f / endOfDay) * currentTime);
 		}
 			
 		float r = 0;

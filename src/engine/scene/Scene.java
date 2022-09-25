@@ -25,7 +25,7 @@ public class Scene {
 	public Ambient ambient = new Ambient(true);
 	public GUI gui;
 	
-	public boolean isEditor = false;
+	public static boolean isEditor = false;
 	
 	public Scene() {
 

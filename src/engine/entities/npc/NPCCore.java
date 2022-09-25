@@ -113,17 +113,12 @@ public class NPCCore extends Entity {
 			animValue = (animValue + 1)%100;
 			
 			if (level != null && bluePrint.atlas != null) {
-				Tile tile = level.getTile((int) position.x + bluePrint.atlas.sheet.tileSize/ 2 >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y + bluePrint.atlas.sheet.tileSize/ 2 >> bluePrint.atlas.sheet.getShiftOperator());
+				Tile tile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
 				
 				if (tile != null) {
 					speed = maxSpeed * tile.hesitation;
 					
-					if (tile.bluePrint.equals(Tiles.WATER_CLEAN)) {
-						isSwimming = true;
-						speed = maxSpeed / 2;
-					} else {
-						isSwimming = false;
-					}
+					checkIfInWater(tile);
 				} else {
 					speed = maxSpeed;
 				}
@@ -168,6 +163,20 @@ public class NPCCore extends Entity {
 			flipValue *= 2;
 			
 			velocity.set(0, 0);
+		}
+	}
+
+	private void checkIfInWater(Tile tile) {
+		Tile leftCornerTile = level.getTile((int) (collissionBox.minX + position.x) >> bluePrint.atlas.sheet.getShiftOperator(), (int) (collissionBox.maxY + position.y) >> bluePrint.atlas.sheet.getShiftOperator());
+		Tile rightCornerTile = level.getTile((int) (collissionBox.maxX + position.x)>> bluePrint.atlas.sheet.getShiftOperator(), (int) (int) (collissionBox.maxY + position.y) >> bluePrint.atlas.sheet.getShiftOperator());
+		
+		if (leftCornerTile!= null && rightCornerTile != null) {
+			if (leftCornerTile.bluePrint.equals(Tiles.WATER_CLEAN) && rightCornerTile.bluePrint.equals(Tiles.WATER_CLEAN)) {
+				isSwimming = true;
+				speed = maxSpeed / 2;
+			} else {
+				isSwimming = false;
+			}
 		}
 	}
 	

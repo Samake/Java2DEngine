@@ -12,7 +12,7 @@ public class Log {
 	public static final String LOG_FOLDER = "/logs/";
 	
 	public enum OUTPUTTYPE {
-		TEXT, ERROR, EXCEPTION
+		TEXT, ERROR, EXCEPTION, DEBUG
 	}
 	
 	private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd-hh:mm:ss");
@@ -31,6 +31,11 @@ public class Log {
         case ERROR: 
         	System.err.println(text);
         	saveToErrorFile(dateFormat.format(date) + " >> " + text);
+        	break;
+        case DEBUG: 
+        	if (Debug.enabled) {
+        		System.err.println(text);
+        	}
         	break;
         case EXCEPTION:
         	System.err.println(text);

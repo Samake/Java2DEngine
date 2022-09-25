@@ -4,11 +4,11 @@ import engine.entities.Entity;
 import engine.entities.Entity.ENTITYTYPE;
 import engine.entities.Entity.RENDERTYPE;
 import engine.entities.EntityBluePrint;
-import engine.entities.npc.NPCHuman;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import game_content.entities.npc.AnimalBunny;
 import game_content.entities.npc.AnimalChicken;
+import game_content.entities.npc.NPCWoman;
 import game_content.entities.player.Player;
 
 public class NPCs {
@@ -37,13 +37,13 @@ public class NPCs {
 				case "PLAYER":
 					return level.setPlayer(new Player(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_01":
-					return level.addEntity(new NPCHuman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_02":
-					return level.addEntity(new NPCHuman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_03":
-					return level.addEntity(new NPCHuman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_04":
-					return level.addEntity(new NPCHuman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_CHICKEN":
 					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_BUNNY_BROWN":

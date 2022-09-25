@@ -3,6 +3,7 @@ package engine.entities.npc;
 import java.util.Map;
 
 import engine.debug.Log;
+import engine.debug.Log.OUTPUTTYPE;
 import engine.pathfinding.PathNode;
 import engine.pathfinding.Pathfinder;
 import engine.utils.Misc;
@@ -40,9 +41,8 @@ public class NPCJobs {
 				if (currentJob.equals(JOBS.WALK_AROUND)) {
 					if (path != null) {
 						if (path.get(path.size()).resolved) {
-							hasJob = false;
-							
-							Log.print("NPC >> Job stopped: WALK_AROUND");
+							resetJob();
+							Log.print("NPC >> Job stopped: WALK_AROUND", OUTPUTTYPE.DEBUG);
 						} else {
 							walkPath();
 						}
@@ -54,6 +54,12 @@ public class NPCJobs {
 				setJob(JOBS.WALK_AROUND);
 			}
 		}
+	}
+
+	private void resetJob() {
+		hasJob = false;
+		lastTimeStamp = System.currentTimeMillis();
+		jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
 	}
 	
 	private void walkPath() {
@@ -91,6 +97,7 @@ public class NPCJobs {
 							}
 						} else {
 							node.resolved = true;
+							node.tile.marked = false;
 						}
 						return;
 					}
@@ -98,70 +105,23 @@ public class NPCJobs {
 			}
 		}
 	}
-
-	private void handleJobs() {
-//		//pathfinder;
-//		if (!hasJob) {
-//			if (lastTimeStamp + jobDelayValue < System.currentTimeMillis()) {
-//				int targetX = (int) (position.x+ Misc.randomInteger(-targetRange, targetRange));
-//				int targetY = (int) (position.y + Misc.randomInteger(-targetRange, targetRange));
-//	
-//				Tile tile = level.getTile(targetX >> bluePrint.atlas.sheet.getShiftOperator(), targetY >> bluePrint.atlas.sheet.getShiftOperator());
-//				
-//				if (tile != null) {
-//					if (!tile.isSolid && !tile.hasCollission && tile.bluePrint != Tiles.WATER_CLEAN) {
-//						targetPosition.set(targetX, targetY);
-//						hasJob = true;
-//						isSneaking = true;
-//					}
-//				}
-//			}
-//		} else {
-//			if ((int) position.x> (int) targetPosition.x) {
-//				velocity.add(-speed, 0);
-//			}
-//			
-//			if ((int) position.x< (int) targetPosition.x) {
-//				velocity.add(speed, 0);
-//			}
-//			
-//			if ((int) position.y > (int) targetPosition.y) {
-//				velocity.add(0, -speed);
-//			}
-//			
-//			if ((int) position.y < (int) targetPosition.y) {
-//				velocity.add(0, speed);
-//			}
-//
-//			int distance = (int) (position.distance(targetPosition) / 16);
-//			
-//			if (distance <= 0) {
-//				hasJob = false;
-//				lastTimeStamp = System.currentTimeMillis();
-//				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
-//			}
-//		}
-	}
 	
 	public void setJob(JOBS job) {
 		switch(job) {
 			case IDLE:
-				currentJob = job;
-				lastTimeStamp = System.currentTimeMillis();
-				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
-				hasJob = true;
+				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
 				
-				Log.print("NPC >> Job started: " + job.toString());
+				currentJob = job;
+				hasJob = true;
 				
 				break;
 			case WALK_AROUND:
-				Log.print("NPC >> Job started: " + job.toString());
+				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+				
+				currentJob = job;
+				hasJob = true;
 				
 				path = null;
-				currentJob = job;
-				lastTimeStamp = System.currentTimeMillis();
-				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
-				hasJob = true;
 				
 				if (npc != null) {
 					int tileSize = npc.bluePrint.atlas.sheet.tileSize;
@@ -184,57 +144,44 @@ public class NPCJobs {
 
 				break;
 			case WALK_PATH:
+				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+				
 				currentJob = job;
-				lastTimeStamp = System.currentTimeMillis();
-				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
 				hasJob = true;
-	
-				Log.print("NPC >> Job started: " + job.toString());
 				
 				break;
 			case FOLLOW:
+				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+				
 				currentJob = job;
-				lastTimeStamp = System.currentTimeMillis();
-				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
 				hasJob = true;
-				
-				Log.print("NPC >> Job started: " + job.toString());
-				
+
 				break;
 			case FLEE:
+				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+				
 				currentJob = job;
-				lastTimeStamp = System.currentTimeMillis();
-				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
 				hasJob = true;
-				
-				Log.print("NPC >> Job started: " + job.toString());
-				
 				break;
 			case FIGHT:
-				currentJob = job;
-				lastTimeStamp = System.currentTimeMillis();
-				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
-				hasJob = true;
+				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
 				
-				Log.print("NPC >> Job started: " + job.toString());
+				currentJob = job;
+				hasJob = true;
 				
 				break;
 			case FOOD:
-				currentJob = job;
-				lastTimeStamp = System.currentTimeMillis();
-				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
-				hasJob = true;
+				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
 				
-				Log.print("NPC >> Job started: " + job.toString());
+				currentJob = job;
+				hasJob = true;
 				
 				break;
 			case SLEEP:
-				currentJob = job;
-				lastTimeStamp = System.currentTimeMillis();
-				jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
-				hasJob = true;
+				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
 				
-				Log.print("NPC >> Job started: " + job.toString());
+				currentJob = job;
+				hasJob = true;
 				
 				break;
 		}

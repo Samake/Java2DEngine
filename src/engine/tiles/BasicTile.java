@@ -33,10 +33,10 @@ public class BasicTile extends Tile {
 	public void render(Screen screen, Level level, int x, int y) {
 		if (hasCollission) {
 			if (!Debug.renderCollission) {
-				screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness);
+				screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness, false);
 			} 
 		} else {
-			screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness);
+			screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness, false);
 		}
 
 		

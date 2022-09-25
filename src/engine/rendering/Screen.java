@@ -101,7 +101,7 @@ public class Screen {
 		}
 	}
 	
-	public void render(SpriteAtlas atlas, float inX, float inY, int tileID, int mirrorDir, float scale, float alpha, float brightness) {
+	public void render(SpriteAtlas atlas, float inX, float inY, int tileID, int mirrorDir, float scale, float alpha, float brightness, boolean isInWater) {
 		int xPos = (int) (inX - xOffset);
 		int yPos = (int) (inY - yOffset);
 		
@@ -161,7 +161,7 @@ public class Screen {
 									
 									int currentColor = pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH];
 									
-									pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH] = mergeIntColors(currentColor, drawColor, alpha);
+									pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH] = mergeIntColors(currentColor, drawColor, alpha, isInWater, sheet.tileSize, y);
 								}
 							}
 						} else {
@@ -173,14 +173,37 @@ public class Screen {
 		}
 	}
 	
-	private int mergeIntColors(int color1, Color drawColor, float alpha) {
+	private int mergeIntColors(int currentColor, Color drawColor, float alpha, boolean isInWater, int size, int height) {
+		if (isInWater) {
+			alpha *= 0.99f;
+		}
+
 		if (alpha < 1.0f) {
-			Color baseColor = new Color(color1, true);
+			Color baseColor = new Color(currentColor, true);
 			
-			int red = (int) (baseColor.getRed() * (1.0 - alpha)) + (int) (drawColor.getRed() * alpha);
-			int green = (int) (baseColor.getGreen() * (1.0 - alpha)) + (int) (drawColor.getGreen() * alpha);
-			int blue = (int) (baseColor.getBlue() * (1.0 - alpha)) + (int) (drawColor.getBlue() * alpha);
+			int red;
+			int green;
+			int blue;
 			int alphaValue = baseColor.getAlpha();
+			
+			if (isInWater) {
+				float waterFade = (size - height) / 16.0f;
+
+				red = (int) (baseColor.getRed() * (1.0 - waterFade)) + (int) (drawColor.getRed() * waterFade);
+				green = (int) (baseColor.getGreen() * (1.0 - waterFade)) + (int) (drawColor.getGreen() * waterFade);
+				blue = (int) (baseColor.getBlue() * (1.0 - waterFade)) + (int) (drawColor.getBlue() * waterFade);
+				red *= baseColor.getBlue();
+				green *= baseColor.getGreen();
+				blue *= baseColor.getBlue();
+				
+				red /= 255;
+				green /= 255;
+				blue /= 255;
+			} else {
+				red = (int) (baseColor.getRed() * (1.0 - alpha)) + (int) (drawColor.getRed() * alpha);
+				green = (int) (baseColor.getGreen() * (1.0 - alpha)) + (int) (drawColor.getGreen() * alpha);
+				blue = (int) (baseColor.getBlue() * (1.0 - alpha)) + (int) (drawColor.getBlue() * alpha);
+			}
 			
 			Color mergedColor = new Color(red , green, blue, alphaValue);
 		

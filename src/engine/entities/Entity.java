@@ -120,7 +120,7 @@ public class Entity {
 	
 	public void update(InputHandler input) {
 		if (collissionBox != null) {
-			collissionBox.update(position.x, position.y);
+			collissionBox.update(position.x, position.y + heightOffsetModifier);
 		}
 		
 		if (bluePrint != null) {
@@ -225,7 +225,7 @@ public class Entity {
 							xOffset = baseXOffset + (modifier * row);
 							yOffset = baseYOffset + (modifier * column);
 							
-							renderEntityPartBody(screen, xTileID, yTileID);
+							renderEntityPartBody(screen, xTileID, yTileID, inWater);
 						}
 					}
 				}
@@ -241,7 +241,7 @@ public class Entity {
 					xOffset = baseXOffset + (modifier * row);
 					yOffset = baseYOffset + (modifier * column);
 					
-					renderEntityPartBody(screen, xTileID, yTileID);
+					renderEntityPartBody(screen, xTileID, yTileID, false);
 				} else {
 					if (column < (columns / 2)) {
 						xTileID = xTile + row;
@@ -250,7 +250,15 @@ public class Entity {
 						xOffset = baseXOffset + (modifier * row);
 						yOffset = baseYOffset + (modifier * column);
 						
-						renderEntityPartBody(screen, xTileID, yTileID);
+						renderEntityPartBody(screen, xTileID, yTileID, false);
+					} else {
+						xTileID = xTile + row;
+						yTileID = yTile + column;
+						
+						xOffset = baseXOffset + (modifier * row);
+						yOffset = baseYOffset + (modifier * column);
+						
+						renderEntityPartBody(screen, xTileID, yTileID, true);
 					}
 				}
 			}
@@ -292,8 +300,8 @@ public class Entity {
 		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 3, yOffset - yValue * shadwowDistance * 3, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, 1.0f, shadowStrength * 0.15f);
 	}
 
-	private void renderEntityPartBody(Screen screen, int xTileID, int yTileID) {
-		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, 1.0f, 1.0f);
+	private void renderEntityPartBody(Screen screen, int xTileID, int yTileID, boolean isInWater) {
+		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, 1.0f, 1.0f, isInWater);
 	}
 
 	public void renderDebug(Screen screen) {

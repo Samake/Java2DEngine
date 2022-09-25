@@ -2,8 +2,11 @@ package engine.pathfinding;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import engine.debug.Debug;
 import engine.debug.Log;
+import engine.debug.Log.OUTPUTTYPE;
 import engine.level.Level;
 import engine.tiles.Tile;
 import engine.utils.Misc;
@@ -25,29 +28,29 @@ public class Pathfinder {
 	}
 
 	public Map<Integer, PathNode> calculatePath(Vector2f startPosition, Vector2f targetPosition, int tileSize, int shiftOperator) {
-		Log.print("Pathfinder >> Calculate route from  " + (int) startPosition.x + ", " + (int) startPosition.y + " to "+ (int) targetPosition.x + ", " + (int) targetPosition.y);
+		Log.print("Pathfinder >> Calculate route from  " + (int) startPosition.x + ", " + (int) startPosition.y + " to "+ (int) targetPosition.x + ", " + (int) targetPosition.y, OUTPUTTYPE.DEBUG);
 		
 		nodeList.clear();
 		nodeListValid = true;
-		
-		level.deMarkTiles();
-		level.deSelectTiles();
-		
+
 		Tile startTile = level.getTile((int) startPosition.x >> shiftOperator, (int) startPosition.y >> shiftOperator);
 		Tile endTile = level.getTile((int) targetPosition.x >> shiftOperator, (int) targetPosition.y >> shiftOperator);
 		
-		if (startTile != null) {
-			startTile.selected = true;
-	
-			if (endTile != null) {
-				if (!endTile.isSolid && !endTile.hasCollission) {
-					findPath(startTile, endTile);
+		if (startTile != null && endTile != null) {
+			if (!endTile.isSolid && !endTile.hasCollission && !endTile.bluePrint.type.equals(TILETYPE.WATER)) {
+				findPath(startTile, endTile);
+				
+				if (nodeListValid && nodeList.size() > 2) {
 					
-					if (nodeListValid) {
-						return nodeList;
+					if (Debug.enabled) {
+						for (Entry<Integer, PathNode> entry : nodeList.entrySet()) {
+							if (entry != null) {
+								entry.getValue().tile.marked = true;
+							}
+						}
 					}
 					
-					return null;
+					return nodeList;
 				}
 			}
 		}
@@ -66,10 +69,9 @@ public class Pathfinder {
 		int yDistance = Math.abs(startY - endY);
 		int heuristic = xDistance + yDistance;
 		
-		Log.print("START >> startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic);
+		Log.print("START >> startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
 		
 		int id = nodeList.size() + 1;
-		startTile.selected = true;
 		nodeList.put(id, new PathNode(id, startX, startY, startTile));
 
 		int tries = 0;
@@ -91,7 +93,7 @@ public class Pathfinder {
 					startY = pathNode.y;
 					currentTile = pathNode.tile;
 					
-					Log.print("nodeID: " + nodeID);
+					Log.print("nodeID: " + nodeID, OUTPUTTYPE.DEBUG);
 				}
 			}
 				
@@ -99,7 +101,7 @@ public class Pathfinder {
 			yDistance = Math.abs(startY - endY);
 			heuristic = xDistance + yDistance;
 			
-			Log.print("startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic);
+			Log.print("startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
 			
 			DIRECTION horizontalDirection = DIRECTION.LEFT;
 			DIRECTION verticalDirection = DIRECTION.DOWN;
@@ -120,7 +122,6 @@ public class Pathfinder {
 		}
 		
 		id = nodeList.size() + 1;
-		endTile.selected = true;
 		nodeList.put(id, new PathNode(id, endX, endY, endTile));
 	}
 
@@ -239,7 +240,7 @@ public class Pathfinder {
 				}
 			}
 			
-			Log.print("Costs >> " + horizontalDirection + ", " + verticalDirection + " << l: " + leftCost + ", r: " + rightCost + ", u: " + upCost + ", d: " + downCost);
+			Log.print("Costs >> " + horizontalDirection + ", " + verticalDirection + " << l: " + leftCost + ", r: " + rightCost + ", u: " + upCost + ", d: " + downCost, OUTPUTTYPE.DEBUG);
 			
 			Tile nextTile = null;
 			int finalCost = 9999;
@@ -269,10 +270,9 @@ public class Pathfinder {
 				direction = DIRECTION.DOWN;
 			}
 			
-			Log.print("Result >> " + direction + " << cost: " + finalCost);
+			Log.print("Result >> " + direction + " << cost: " + finalCost, OUTPUTTYPE.DEBUG);
 			
 			if (nextTile != null) {
-				nextTile.marked = true;
 				int id = nodeList.size() + 1;
 				nodeList.put(id, new PathNode(id, nextTile.x, nextTile.y, nextTile));
 			} else {

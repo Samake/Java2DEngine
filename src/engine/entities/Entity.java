@@ -30,7 +30,7 @@ public class Entity {
 	public float scale = 1;
 	public float xOffset = 0;
 	public float yOffset = 0;
-	public int collissionOffset = 3;
+	public int collissionOffset = 2;
 
 	public Level level;
 	

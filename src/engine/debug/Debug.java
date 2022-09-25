@@ -4,7 +4,7 @@ public class Debug {
 
 	public static boolean enabled = false;
 	public static boolean renderLights = false;
-	public static boolean renderCollission = false;
+	public static boolean renderCollission = true;
 	
 	public static int tiles = 0;
 	public static int tilesRendered = 0;

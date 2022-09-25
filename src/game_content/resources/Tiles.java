@@ -13,17 +13,17 @@ public class Tiles {
 	
 	private static int voidIndex = 0;
 	private static int waterIndex = 1;
-	private static float waterHestitation = 1.0f; // 0.5f
+	private static float waterHestitation = 0.5f; // 0.5f
 	private static int grassIndex = 100;
-	private static float grassHestitation = 1.0f; //0.8f
+	private static float grassHestitation = 0.8f; //0.8f
 	private static int sandIndex = 200;
-	private static float sandHestitation = 1.0f; //0.6f
+	private static float sandHestitation = 0.6f; //0.6f
 	private static int stoneIndex = 300;
 	private static float stoneHestitation = 1.0f; //1.0f
 	private static int streetIndex = 400;
 	private static float streetHestitation = 1.0f; // 1.0f
 	private static int earthIndex = 500;
-	private static float earthHestitation = 1.0f; // 0.7f
+	private static float earthHestitation = 0.7f; // 0.7f
 	private static int woodIndex = 600;
 	private static float woodHestitation = 1.0f; // 1.0f
 	

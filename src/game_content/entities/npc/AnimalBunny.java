@@ -1,20 +1,25 @@
 package game_content.entities.npc;
 
 import engine.entities.EntityBluePrint;
-import engine.entities.npc.NPCAnimalSmall;
+import engine.entities.npc.NPCAnimal;
+import engine.entities.npc.NPCJobs.JOBS;
 import engine.input.InputHandler;
 import engine.level.Level;
 import game_content.entities.player.Player;
 
-public class AnimalBunny extends NPCAnimalSmall {
+public class AnimalBunny extends NPCAnimal {
 
 	public AnimalBunny(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, x, y, speed);
 		
 		animationSpeed = 1;
-		targetRange = 36;
-		jobDelay = 500;
-		jobDelayValue = jobDelay;
+		
+		jobs.targetRange = 256;
+		jobs.jobDelay = 500;
+		jobs.jobDelayValue = jobs.jobDelay;
+		
+		
+		jobs.setJob(JOBS.WALK_AROUND);
 	}
 	
 	@Override

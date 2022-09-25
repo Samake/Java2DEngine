@@ -8,6 +8,7 @@ import engine.entities.Entity;
 import engine.entities.EntityBluePrint;
 import engine.input.InputHandler;
 import engine.level.Level;
+import engine.pathfinding.Pathfinder;
 import engine.tiles.Tile;
 import game_content.resources.Tiles;
 
@@ -39,6 +40,9 @@ public class NPCCore extends Entity {
 	public Animation animation;
 	public int animationSpeed = 2;
 	
+	public Pathfinder pathfinder;
+	public NPCJobs jobs;
+	
 	public NPCCore(EntityBluePrint bluePrint, Level level, String name, float x, float y, float speed) {
 		super(bluePrint, level, x, y);
 		
@@ -47,6 +51,8 @@ public class NPCCore extends Entity {
 		this.maxSpeed = speed;
 		
 		debugColor = Color.BLUE;
+		
+		pathfinder = new Pathfinder(level);
 	}
 
 	public void move() {
@@ -98,65 +104,71 @@ public class NPCCore extends Entity {
 	@Override
 	public void update(InputHandler input) {
 		super.update(input);
-	
-		animValue = (animValue + 1)%100;
 		
-		if (level != null && bluePrint.atlas != null) {
-			Tile tile = level.getTile((int) position.x + bluePrint.atlas.sheet.tileSize/ 2 >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y + bluePrint.atlas.sheet.tileSize/ 2 >> bluePrint.atlas.sheet.getShiftOperator());
+		if (!level.editorMode) {
+			if (jobs != null) {
+				jobs.update();
+			}
+		
+			animValue = (animValue + 1)%100;
 			
-			if (tile != null) {
-				speed = maxSpeed * tile.hesitation;
+			if (level != null && bluePrint.atlas != null) {
+				Tile tile = level.getTile((int) position.x + bluePrint.atlas.sheet.tileSize/ 2 >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y + bluePrint.atlas.sheet.tileSize/ 2 >> bluePrint.atlas.sheet.getShiftOperator());
 				
-				if (tile.bluePrint.equals(Tiles.WATER_CLEAN)) {
-					isSwimming = true;
-					speed = maxSpeed / 2;
+				if (tile != null) {
+					speed = maxSpeed * tile.hesitation;
+					
+					if (tile.bluePrint.equals(Tiles.WATER_CLEAN)) {
+						isSwimming = true;
+						speed = maxSpeed / 2;
+					} else {
+						isSwimming = false;
+					}
 				} else {
-					isSwimming = false;
+					speed = maxSpeed;
 				}
+			}
+			
+			if (velocity.x != 0 || velocity.y != 0) {
+				move();
+				isMoving = true;
 			} else {
+				isMoving = false;
+			}
+			
+			if (isMoving) {
 				speed = maxSpeed;
 			}
-		}
-		
-		if (velocity.x != 0 || velocity.y != 0) {
-			move();
-			isMoving = true;
-		} else {
-			isMoving = false;
-		}
-		
-		if (isMoving) {
-			speed = maxSpeed;
-		}
-		
-		if (isSprinting) {
-			speed = maxSpeed * 1.25f;
-		}
-		
-		if (isSneaking) {
-			speed = maxSpeed * 0.75f;
-		}
-		
-		float animSpeed = 3.0f;
-		float walkingSpeed = animSpeed / ((speed * animSpeed) / (maxSpeed * animSpeed));
-		flipValue = (numSteps >> (int) walkingSpeed) & 1;
-		
-		if (isSwimming) {
-			flipValue = (animValue >> (int) animationSpeed * animationSpeed) & 1;
-			heightOffsetModifier = bluePrint.atlas.sheet.tileSize / 2;
-			inWater = true;
-		} else {
-			heightOffsetModifier = 0;
-			inWater = false;
-		}
 			
-		if (!isMoving && !isSwimming) {
-			flipValue = (animValue >> (int) animationSpeed * 3) & 1;
+			if (isSprinting) {
+				speed = maxSpeed * 1.25f;
+			}
+			
+			if (isSneaking) {
+				speed = maxSpeed * 0.75f;
+			}
+			
+			float animSpeed = 3.0f;
+			float walkingSpeed = animSpeed / ((speed * animSpeed) / (maxSpeed * animSpeed));
+			flipValue = (numSteps >> (int) walkingSpeed) & 1;
+			
+			if (isSwimming) {
+				flipValue = (animValue >> (int) animationSpeed * animationSpeed) & 1;
+				heightOffsetModifier = bluePrint.atlas.sheet.tileSize / 2;
+				inWater = true;
+			} else {
+				heightOffsetModifier = 0;
+				inWater = false;
+			}
+				
+			if (!isMoving && !isSwimming) {
+				flipValue = (animValue >> (int) animationSpeed * 3) & 1;
+			}
+			
+			flipValue *= 2;
+			
+			velocity.set(0, 0);
 		}
-		
-		flipValue *= 2;
-		
-		velocity.set(0, 0);
 	}
 	
 	public boolean hasCollided(float xa, float ya) {

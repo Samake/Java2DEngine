@@ -8,12 +8,7 @@ import engine.level.Level;
 public class NPCHuman extends NPCCore {
 	
 	public NPCHuman(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, "Svenja", x, y, speed);
-		
-		jobs = new NPCJobs(this, pathfinder);
-		jobs.targetRange = 64;
-		jobs.jobDelay = 1500;
-		jobs.jobDelayValue = jobs.jobDelay;
+		super(bluePrint, level, "Svenja", x, y, speed, true);
 	}
 	
 	@Override

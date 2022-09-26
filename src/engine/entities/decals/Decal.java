@@ -8,8 +8,6 @@ import engine.level.Level;
 public class Decal extends Entity {
 	
 	private long duration;
-	private float alpha = 1.0f;
-	
 	private long startTick;
 
 	public Decal(EntityBluePrint bluePrint, Level level, int x, int y, long duration) {

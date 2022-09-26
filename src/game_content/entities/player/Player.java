@@ -12,7 +12,7 @@ import game_content.entities.effects.EffectSmokePuff01;
 public class Player extends NPCCore {
 	
 	public Player(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, "Test", x, y, speed);
+		super(bluePrint, level, "Test", x, y, speed, false);
 
 		if (collissionBox != null) {
 			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;

@@ -11,10 +11,6 @@ public class NPCWoman extends NPCHuman {
 
 	public NPCWoman(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, x, y, speed);
-
-		jobs.targetRange = 256;
-		jobs.jobDelay = 1000;
-		jobs.jobDelayValue = jobs.jobDelay;
 		
 		jobs.setJob(JOBS.WALK_AROUND);
 	}

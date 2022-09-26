@@ -46,7 +46,9 @@ public class NPCCore extends Entity {
 	public Pathfinder pathfinder;
 	public NPCJobs jobs;
 	
-	public NPCCore(EntityBluePrint bluePrint, Level level, String name, float x, float y, float speed) {
+	private int waterDripCount = 0;
+	
+	public NPCCore(EntityBluePrint bluePrint, Level level, String name, float x, float y, float speed, boolean useAI) {
 		super(bluePrint, level, x, y);
 		
 		this.name = name;
@@ -55,7 +57,13 @@ public class NPCCore extends Entity {
 		
 		debugColor = Color.BLUE;
 		
-		pathfinder = new Pathfinder(level);
+		if (useAI) {
+			pathfinder = new Pathfinder(level);
+			jobs = new NPCJobs(this, pathfinder);
+			jobs.targetRange = 64;
+			jobs.jobDelay = 1500;
+			jobs.jobDelayValue = jobs.jobDelay;
+		}
 	}
 
 	public void move() {
@@ -172,11 +180,15 @@ public class NPCCore extends Entity {
 	}
 	
 	private void handleWaterRipples() {
-		if (inWater) {
-			if (flipValue == 0) {
+		if (flipValue == 0) {
+			if (!flipChanged) {
 				flipChanged = true;
 			}
-			
+		}
+		
+		if (inWater) {
+			waterDripCount = 0;
+					
 			if (flipValue == 2) {
 				if (flipChanged) {
 					int randomX = Misc.randomInteger(-(bluePrint.atlas.sheet.tileSize / 4), (bluePrint.atlas.sheet.tileSize / 4));
@@ -184,6 +196,19 @@ public class NPCCore extends Entity {
 					
 					new EffectWaterRipples(level, position.x + randomX, position.y + randomY + heightOffsetModifier);
 					flipChanged = false;
+				}
+			}
+		} else {
+			if (flipValue == 2) {
+				if (flipChanged) {
+					if (waterDripCount < 5) {
+						int randomX = Misc.randomInteger(-(bluePrint.atlas.sheet.tileSize / 4), (bluePrint.atlas.sheet.tileSize / 4));
+						int randomY = Misc.randomInteger(0, (bluePrint.atlas.sheet.tileSize / 2));
+						
+						new EffectWaterRipples(level, position.x + randomX, position.y + randomY + bluePrint.atlas.sheet.tileSize);
+						flipChanged = false;
+						waterDripCount++;
+					}
 				}
 			}
 		}

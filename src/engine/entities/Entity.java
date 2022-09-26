@@ -28,6 +28,7 @@ public class Entity {
 	public Vector2f collidingVelocity = new Vector2f();
 	
 	public float scale = 1;
+	public float alpha = 1.0f;
 	public float xOffset = 0;
 	public float yOffset = 0;
 	public int collissionOffset = 2;
@@ -287,21 +288,13 @@ public class Entity {
 	}
 
 	private void renderShadows(Screen screen, int xValue, int yValue, int shadwowDistance, float shadowStrength, int xTileID, int yTileID) {
-		//screen.renderShadow(bluePrint.atlas, xOffset, yOffset - yValue * shadwowDistance * 1, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, 1.0f, 1.0f, shadowStrength * 0.55f);
-		//screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 1, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, 1.0f, 1.0f, shadowStrength * 0.55f);
-		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 1, yOffset - yValue * shadwowDistance * 1, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, 1.0f, shadowStrength * 0.55f);
-		
-		//screen.renderShadow(bluePrint.atlas, xOffset, yOffset - yValue * shadwowDistance * 2, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, 1.0f, 1.0f, shadowStrength * 0.35f);
-		//screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 2, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, 1.0f, 1.0f, shadowStrength * 0.35f);
-		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 2, yOffset - yValue * shadwowDistance * 2, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, 1.0f, shadowStrength * 0.35f);
-		
-		//screen.renderShadow(bluePrint.atlas, xOffset, yOffset - yValue * shadwowDistance * 3, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, 1.0f, 1.0f, shadowStrength * 0.15f);
-		//screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 3, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, 1.0f, 1.0f, shadowStrength * 0.15f);
-		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 3, yOffset - yValue * shadwowDistance * 3, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, 1.0f, shadowStrength * 0.15f);
+		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 1, yOffset - yValue * shadwowDistance * 1, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.55f);
+		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 2, yOffset - yValue * shadwowDistance * 2, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.35f);
+		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 3, yOffset - yValue * shadwowDistance * 3, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.15f);
 	}
 
 	private void renderEntityPartBody(Screen screen, int xTileID, int yTileID, boolean isInWater) {
-		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, 1.0f, 1.0f, isInWater);
+		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, 1.0f, isInWater);
 	}
 
 	public void renderDebug(Screen screen) {

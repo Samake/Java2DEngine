@@ -8,11 +8,10 @@ import engine.level.Level;
 public class NPCAnimal extends NPCCore {
 	
 	public NPCAnimal(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, "Svenja", x, y, speed);
+		super(bluePrint, level, "Svenja", x, y, speed, true);
 		
-		jobs = new NPCJobs(this, pathfinder);
-		jobs.targetRange = 48;
-		jobs.jobDelay = 1000;
+		jobs.targetRange = 64;
+		jobs.jobDelay = 1500;
 		jobs.jobDelayValue = jobs.jobDelay;
 	}
 	

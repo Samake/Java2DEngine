@@ -11,8 +11,6 @@ import game_content.entities.effects.EffectSmokePuff01;
 
 public class Player extends NPCCore {
 	
-	private int currentFlip = 0;
-
 	public Player(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, "Test", x, y, speed);
 
@@ -31,15 +29,10 @@ public class Player extends NPCCore {
 		super.update(input);
 		
 		handleInputs(input);
-
-		if (flipValue != currentFlip) {
-			//SoundManager.playSound(SoundFiles.EFFECT_FOOTSTEP_GRASS, 90.0f);
-			currentFlip = flipValue;
-		}
 		
 		handleAnimation();
 	}
-	
+
 	public void handleAnimation() {
 		animation = Animations.HUMAN_IDLE;
 		

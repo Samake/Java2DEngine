@@ -10,6 +10,8 @@ import engine.input.InputHandler;
 import engine.level.Level;
 import engine.pathfinding.Pathfinder;
 import engine.tiles.Tile;
+import engine.utils.Misc;
+import game_content.entities.effects.EffectWaterRipples;
 import game_content.resources.Tiles;
 
 public class NPCCore extends Entity {
@@ -36,6 +38,7 @@ public class NPCCore extends Entity {
 	
 	public float modifier = 0;
 	public int flipValue = 0;
+	private boolean flipChanged = false;
 	
 	public Animation animation;
 	public int animationSpeed = 2;
@@ -163,6 +166,26 @@ public class NPCCore extends Entity {
 			flipValue *= 2;
 			
 			velocity.set(0, 0);
+		}
+		
+		handleWaterRipples();
+	}
+	
+	private void handleWaterRipples() {
+		if (inWater) {
+			if (flipValue == 0) {
+				flipChanged = true;
+			}
+			
+			if (flipValue == 2) {
+				if (flipChanged) {
+					int randomX = Misc.randomInteger(-(bluePrint.atlas.sheet.tileSize / 4), (bluePrint.atlas.sheet.tileSize / 4));
+					int randomY = Misc.randomInteger(0, (bluePrint.atlas.sheet.tileSize / 2));
+					
+					new EffectWaterRipples(level, position.x + randomX, position.y + randomY + heightOffsetModifier);
+					flipChanged = false;
+				}
+			}
 		}
 	}
 

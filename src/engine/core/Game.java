@@ -30,7 +30,7 @@ public class Game extends Engine {
 		renderer = new Renderer();
 		//scene = new TestGame("worldgen");
 		//scene = new TestGame("devmap");
-		scene = new TestGame("pathtest");
+		scene = new TestGame("demolevel");
 		
 		Log.print("Game started!");
 	}

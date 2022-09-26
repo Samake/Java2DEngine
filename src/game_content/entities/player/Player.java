@@ -2,17 +2,23 @@ package game_content.entities.player;
 
 import java.awt.Color;
 
-import engine.animation.Animations;
+import engine.animation.Animation;
 import engine.entities.EntityBluePrint;
 import engine.entities.npc.NPCCore;
 import engine.input.InputHandler;
 import engine.level.Level;
-import game_content.entities.effects.EffectSmokePuff01;
+import game_content.entities.effects.EffectSmokePuffGrey;
 
 public class Player extends NPCCore {
 	
 	public Player(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, "Test", x, y, speed, false);
+		
+		ANIMATION_IDLE = new Animation(16, 0, 100, 2);
+		ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
+		ANIMATION_WALK_DOWN = new Animation(4, 0, 100, 2);
+		ANIMATION_WALK_LEFT = new Animation(8, 0, 100, 2);
+		ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
 
 		if (collissionBox != null) {
 			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
@@ -29,39 +35,6 @@ public class Player extends NPCCore {
 		super.update(input);
 		
 		handleInputs(input);
-		
-		handleAnimation();
-	}
-
-	public void handleAnimation() {
-		animation = Animations.HUMAN_IDLE;
-		
-		// idle
-		if (!isMoving) {
-			animation = Animations.HUMAN_IDLE;
-		}
-		
-		if (isMoving) {
-			// walk up
-			if (movingDir == 0) {
-				animation = Animations.HUMAN_WALK_UP;
-			// walk down
-			} else if (movingDir == 1) {
-				animation = Animations.HUMAN_WALK_DOWN;
-			// walk left
-			} else if (movingDir == 2) {
-				animation = Animations.HUMAN_WALK_LEFT;
-			// walk right
-			} else if (movingDir == 3) {
-				animation = Animations.HUMAN_WALK_RIGHT;
-			}
-		}
-		
-		animation.animate(flipValue);
-		
-		
-		xTile = animation.xTile;
-		yTile = animation.yTile;
 	}
 
 	private void handleInputs(InputHandler input) {
@@ -73,7 +46,7 @@ public class Player extends NPCCore {
 		if (input.lshift.isPressed() && isMoving) {
 			if (!isSprinting) {
 				isSprinting = true;
-				new EffectSmokePuff01(level, position.x, position.y + bluePrint.atlas.sheet.tileSize);
+				new EffectSmokePuffGrey(level, position.x, position.y + bluePrint.atlas.sheet.tileSize);
 			}
 		} else {
 			isSprinting = false;

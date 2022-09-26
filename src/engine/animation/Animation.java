@@ -1,19 +1,66 @@
 package engine.animation;
 
+import engine.entities.Entity.RENDERTYPE;
+
 public class Animation {
 
 	private int xTileDefault = 0;
-	private int yTileDefault = 0;
+	
 	public int xTile = 0;
 	public int yTile = 0;
+	public int delay = 0;
+	private int length = 0;
 	
-	public Animation(int xTileValue, int yTileValue) {
-		xTileDefault = xTileValue;
-		yTileDefault = yTileValue;
+	private long lastTick;
+	private long currentTick;
+	
+	public Animation(int xTile, int yTile, int delay, int length) {
+		this.xTileDefault = xTile;
+		this.xTile = xTile;
+		this.yTile = yTile;
+		this.delay = delay;
+		this.length = length;
+		
+		lastTick = System.currentTimeMillis();
 	}
 	
-	public void animate(int value) {
-		xTile = xTileDefault + value;
-		yTile = yTileDefault;
+	public void update(RENDERTYPE renderType) {
+		currentTick = System.currentTimeMillis();
+		
+		int offSet = 1;
+		
+		if (renderType.equals(RENDERTYPE.R2X2)) {
+			offSet = 2;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R2X3)) {
+			offSet = 2;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R3X2)) {
+			offSet = 3;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R4X4)) {
+			offSet = 4;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R4X6)) {
+			offSet = 4;
+		}
+		
+		if (renderType.equals(RENDERTYPE.R6X6)) {
+			offSet = 6;
+		}
+		
+		if (lastTick + delay <= currentTick) {
+			lastTick = currentTick;
+			
+			if (xTile < xTileDefault + (length - 1)) {
+				xTile = xTileDefault + offSet;
+			} else {
+				xTile = xTileDefault;
+			}
+		}
 	}
 }

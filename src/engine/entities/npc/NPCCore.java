@@ -15,13 +15,18 @@ import game_content.entities.effects.EffectWaterRipples;
 import game_content.resources.Tiles;
 
 public class NPCCore extends Entity {
+	
+	public Animation ANIMATION_IDLE = new Animation(16, 0, 100, 2);
+	public Animation ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
+	public Animation ANIMATION_WALK_DOWN = new Animation(4, 0, 100, 2);
+	public Animation ANIMATION_WALK_LEFT = new Animation(8, 0, 100, 2);
+	public Animation ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
 
 	public String name;
 	public float scale = 1.0f;
 	public float maxSpeed = 0;
 	public float speed;
 	
-	public int animValue = 0;
 	public int numSteps = 0;
 	
 	public int movingDir = 1;
@@ -38,15 +43,17 @@ public class NPCCore extends Entity {
 	
 	public float modifier = 0;
 	public int flipValue = 0;
+	public int flipSpeed = 2;
+	public int flipModifier = 0;
 	private boolean flipChanged = false;
 	
 	public Animation animation;
-	public int animationSpeed = 2;
+	public int animSpeed = 1;
 	
 	public Pathfinder pathfinder;
 	public NPCJobs jobs;
 	
-	private int waterDripCount = 0;
+	private int waterDripCount = 5;
 	
 	public NPCCore(EntityBluePrint bluePrint, Level level, String name, float x, float y, float speed, boolean useAI) {
 		super(bluePrint, level, x, y);
@@ -55,13 +62,15 @@ public class NPCCore extends Entity {
 		this.speed = speed;
 		this.maxSpeed = speed;
 		
+		animation = ANIMATION_IDLE;
+		
 		debugColor = Color.BLUE;
 		
 		if (useAI) {
 			pathfinder = new Pathfinder(level);
 			jobs = new NPCJobs(this, pathfinder);
 			jobs.targetRange = 64;
-			jobs.jobDelay = 1500;
+			jobs.jobDelay = 2000;
 			jobs.jobDelayValue = jobs.jobDelay;
 		}
 	}
@@ -121,7 +130,7 @@ public class NPCCore extends Entity {
 				jobs.update();
 			}
 		
-			animValue = (animValue + 1)%100;
+			flipModifier = (flipModifier + 1)%100;
 			
 			if (level != null && bluePrint.atlas != null) {
 				Tile tile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
@@ -142,33 +151,32 @@ public class NPCCore extends Entity {
 				isMoving = false;
 			}
 			
+			animation.delay = 400 / animSpeed;
+			
 			if (isMoving) {
 				speed = maxSpeed;
+				animation.delay = 150 / animSpeed;
 			}
 			
 			if (isSprinting) {
-				speed = maxSpeed * 1.25f;
+				speed = maxSpeed * 1.5f;
+				animation.delay = 100 / animSpeed;
 			}
 			
 			if (isSneaking) {
-				speed = maxSpeed * 0.75f;
+				speed = maxSpeed * 0.25f;
+				animation.delay = 200 / animSpeed;
 			}
 			
-			float animSpeed = 3.0f;
-			float walkingSpeed = animSpeed / ((speed * animSpeed) / (maxSpeed * animSpeed));
-			flipValue = (numSteps >> (int) walkingSpeed) & 1;
-			
+			flipValue = (flipModifier >> (int) flipSpeed * 2) & 1;
+
 			if (isSwimming) {
-				flipValue = (animValue >> (int) animationSpeed * animationSpeed) & 1;
 				heightOffsetModifier = bluePrint.atlas.sheet.tileSize / 2;
 				inWater = true;
+				animation.delay = 400 / animSpeed;
 			} else {
 				heightOffsetModifier = 0;
 				inWater = false;
-			}
-				
-			if (!isMoving && !isSwimming) {
-				flipValue = (animValue >> (int) animationSpeed * 3) & 1;
 			}
 			
 			flipValue *= 2;
@@ -176,7 +184,39 @@ public class NPCCore extends Entity {
 			velocity.set(0, 0);
 		}
 		
+		handleAnimation();
 		handleWaterRipples();
+	}
+	
+	public void handleAnimation() {
+		animation = ANIMATION_IDLE;
+		
+		// idle
+		if (!isMoving) {
+			animation = ANIMATION_IDLE;
+		}
+		
+		if (isMoving) {
+			// walk up
+			if (movingDir == 0) {
+				animation = ANIMATION_WALK_UP;
+			// walk down
+			} else if (movingDir == 1) {
+				animation = ANIMATION_WALK_DOWN;
+			// walk left
+			} else if (movingDir == 2) {
+				animation = ANIMATION_WALK_LEFT;
+			// walk right
+			} else if (movingDir == 3) {
+				animation = ANIMATION_WALK_RIGHT;
+			}
+		}
+		
+		animation.update(bluePrint.renderType);
+		
+		
+		xTile = animation.xTile;
+		yTile = animation.yTile;
 	}
 	
 	private void handleWaterRipples() {

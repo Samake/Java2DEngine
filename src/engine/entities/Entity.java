@@ -28,6 +28,7 @@ public class Entity {
 	public Vector2f collidingVelocity = new Vector2f();
 	
 	public float scale = 1;
+	public float brightness = 1.0f;
 	public float alpha = 1.0f;
 	public float xOffset = 0;
 	public float yOffset = 0;
@@ -294,7 +295,7 @@ public class Entity {
 	}
 
 	private void renderEntityPartBody(Screen screen, int xTileID, int yTileID, boolean isInWater) {
-		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, 1.0f, isInWater);
+		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater);
 	}
 
 	public void renderDebug(Screen screen) {

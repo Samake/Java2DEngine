@@ -7,13 +7,13 @@ import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.utils.Vector2f;
-import game_content.entities.effects.EffectSmokePuff02;
+import game_content.entities.effects.EffectSmokeWhite;
 import game_content.entities.lights.PointLight;
 
 public class CampFire extends Prefab {
 
 	private PointLight light;
-	private EffectSmokePuff02 smoke;
+	private EffectSmokeWhite smoke;
 	
 	private Vector2f lightOffset = new Vector2f();
 	private Vector2f smokeOffset = new Vector2f();
@@ -31,8 +31,9 @@ public class CampFire extends Prefab {
 		smokeOffset.y = -bluePrint.atlas.sheet.tileSize;
 		
 		light = new PointLight(level, x, y, new Color(255, 128, 64, 255), 48, false, true, 200, false);
+		light.enabledAtDay = true;
 		light.saveToMap = false;
-		smoke = new EffectSmokePuff02(level, x, y);
+		smoke = new EffectSmokeWhite(level, x, y);
 		smoke.saveToMap = false;
 		
 		//SoundManager.playSound(SoundFiles.AMBIENT_CAMPFIRE, position.x, position.y, 90.0f, 100, true, false);

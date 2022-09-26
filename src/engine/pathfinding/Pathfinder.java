@@ -161,7 +161,7 @@ public class Pathfinder {
 			}
 			
 			if (leftTile != null) {
-				leftCost = (int) (leftTile.hesitation * 100.0f);
+				leftCost = 100 - ((int) (leftTile.hesitation * 100.0f));
 				rightCost += Misc.randomInteger(0, 5 + yDistance * 2);
 				
 				if (!horizontalDirection.equals(DIRECTION.LEFT)) {
@@ -169,7 +169,7 @@ public class Pathfinder {
 				}
 				
 				if (leftTile.bluePrint.type.equals(TILETYPE.WATER)) {
-					leftCost += 500;
+					leftCost += 100;
 				}
 				
 				leftCost -= xDistance * 5;
@@ -181,7 +181,7 @@ public class Pathfinder {
 			}
 			
 			if (rightTile != null) {
-				rightCost = (int) (rightTile.hesitation * 100.0f);
+				rightCost = 100 - ((int) (rightTile.hesitation * 100.0f));
 				rightCost += Misc.randomInteger(0, 5 + yDistance * 2);
 				
 				if (!horizontalDirection.equals(DIRECTION.RIGHT)) {
@@ -189,7 +189,7 @@ public class Pathfinder {
 				}
 				
 				if (rightTile.bluePrint.type.equals(TILETYPE.WATER)) {
-					rightCost += 500;
+					rightCost += 100;
 				}
 				
 				rightCost -= xDistance * 5;
@@ -201,7 +201,7 @@ public class Pathfinder {
 			}
 			
 			if (upTile != null) {
-				upCost = (int) (upTile.hesitation * 100.0f);
+				upCost = 100 - ((int) (upTile.hesitation * 100.0f));
 				upCost += Misc.randomInteger(0, 5 + xDistance * 2);
 				
 				if (!verticalDirection.equals(DIRECTION.UP)) {
@@ -209,7 +209,7 @@ public class Pathfinder {
 				}
 				
 				if (upTile.bluePrint.type.equals(TILETYPE.WATER)) {
-					upCost += 500;
+					upCost += 100;
 				}
 				
 				upCost -= yDistance * 5;
@@ -221,7 +221,7 @@ public class Pathfinder {
 			}
 			
 			if (downTile != null) {
-				downCost = (int) (downTile.hesitation * 100.0f);
+				downCost = 100 - ((int) (downTile.hesitation * 100.0f));
 				downCost += Misc.randomInteger(0, 5 + xDistance * 2);
 				
 				if (!verticalDirection.equals(DIRECTION.DOWN)) {
@@ -229,7 +229,7 @@ public class Pathfinder {
 				}
 				
 				if (downTile.bluePrint.type.equals(TILETYPE.WATER)) {
-					downCost += 500;
+					downCost += 100;
 				}
 				
 				downCost -= yDistance * 5;

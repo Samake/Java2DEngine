@@ -1,6 +1,8 @@
 package engine.entities.npc;
 
-import engine.animation.Animations;
+import java.awt.Color;
+
+import engine.animation.Animation;
 import engine.entities.EntityBluePrint;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -9,40 +11,36 @@ public class NPCHuman extends NPCCore {
 	
 	public NPCHuman(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, "Svenja", x, y, speed, true);
+		
+		ANIMATION_IDLE = new Animation(16, 0, 100, 2);
+		ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
+		ANIMATION_WALK_DOWN = new Animation(4, 0, 100, 2);
+		ANIMATION_WALK_LEFT = new Animation(8, 0, 100, 2);
+		ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
+		
+//		public final static Animation HUMAN_IDLE = new Animation(16, 0, 100, 2);
+//		public final static Animation HUMAN_WALK_UP = new Animation(0, 0, 100, 2);
+//		public final static Animation HUMAN_WALK_DOWN = new Animation(4, 0, 100, 2);
+//		public final static Animation HUMAN_WALK_LEFT = new Animation(8, 0, 100, 2);
+//		public final static Animation HUMAN_WALK_RIGHT = new Animation(12, 0, 100, 2);
+		
+		if (collissionBox != null) {
+			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
+		}
+		
+		jobs.targetRange = 256;
+		jobs.jobDelay = 1500;
+		jobs.jobDelayValue = jobs.jobDelay;
+		
+		debugColor = Color.WHITE;
 	}
 	
 	@Override
 	public void update(InputHandler input) {
 		super.update(input);
 
-		animation = Animations.HUMAN_IDLE;
-		
-		// idle
-		if (!isMoving) {
-			animation = Animations.HUMAN_IDLE;
-		}
-		
-		if (isMoving) {
-			// walk up
-			if (movingDir == 0) {
-				animation = Animations.HUMAN_WALK_UP;
-			// walk down
-			} else if (movingDir == 1) {
-				animation = Animations.HUMAN_WALK_DOWN;
-			// walk left
-			} else if (movingDir == 2) {
-				animation = Animations.HUMAN_WALK_LEFT;
-			// walk right
-			} else if (movingDir == 3) {
-				animation = Animations.HUMAN_WALK_RIGHT;
-			}
-		}
-		
-		animation.animate(flipValue);
-		
-		
-		xTile = animation.xTile;
-		yTile = animation.yTile;
 	}
-
 }

@@ -5,7 +5,7 @@ import engine.entities.collision.CollissionBox;
 import engine.entities.objects.ObjectPhysical;
 import engine.input.InputHandler;
 import engine.level.Level;
-import game_content.entities.effects.EffectSmokePuff01;
+import game_content.entities.effects.EffectSmokePuffGrey;
 
 public class Ball extends ObjectPhysical {
 	
@@ -78,7 +78,7 @@ public class Ball extends ObjectPhysical {
 			yAxisValue = -shootPower * yPower;
 		}
 		
-		EffectSmokePuff01 effect = new EffectSmokePuff01(level, position.x, position.y);
+		EffectSmokePuffGrey effect = new EffectSmokePuffGrey(level, position.x, position.y);
 		effect.velocity.x = (float) (xAxisValue * 0.35);
 		effect.velocity.y = (float) (yAxisValue * 0.35);
 	}

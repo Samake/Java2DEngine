@@ -12,7 +12,7 @@ public class AnimalBunny extends NPCAnimal {
 	public AnimalBunny(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, x, y, speed);
 		
-		animationSpeed = 1;
+		animSpeed = 2;
 		
 		jobs.targetRange = 64;
 		jobs.jobDelay = 1000;

@@ -1,6 +1,8 @@
 package engine.entities.npc;
 
-import engine.animation.Animations;
+import java.awt.Color;
+
+import engine.animation.Animation;
 import engine.entities.EntityBluePrint;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -10,47 +12,34 @@ public class NPCAnimal extends NPCCore {
 	public NPCAnimal(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, "Svenja", x, y, speed, true);
 		
-		jobs.targetRange = 64;
-		jobs.jobDelay = 1500;
+		ANIMATION_IDLE = new Animation(8, 0, 100, 2);
+		ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
+		ANIMATION_WALK_DOWN = new Animation(2, 0, 100, 2);
+		ANIMATION_WALK_LEFT = new Animation(4, 0, 100, 2);
+		ANIMATION_WALK_RIGHT =  new Animation(6, 0, 100, 2);
+		
+//		public final static Animation ANIMAL_IDLE = new Animation(16, 0, 100, 2);
+//		public final static Animation ANIMAL_WALK_UP = new Animation(0, 0, 100, 2);
+//		public final static Animation ANIMAL_WALK_DOWN = new Animation(4, 0, 100, 2);
+//		public final static Animation ANIMAL_WALK_LEFT = new Animation(8, 0, 100, 2);
+//		public final static Animation ANIMAL_WALK_RIGHT = new Animation(12, 0, 100, 2);
+//		
+//		public final static Animation ANIMAL_SMALL_IDLE = new Animation(8, 0, 100, 2);
+//		public final static Animation ANIMAL_SMALL_WALK_UP = new Animation(0, 0, 100, 2);
+//		public final static Animation ANIMAL_SMALL_WALK_DOWN = new Animation(2, 0, 100, 2);
+//		public final static Animation ANIMAL_SMALL_WALK_LEFT = new Animation(4, 0, 100, 2);
+//		public final static Animation ANIMAL_SMALL_WALK_RIGHT = new Animation(6, 0, 100, 2);
+		
+		jobs.targetRange = 128;
+		jobs.jobDelay = 1000;
 		jobs.jobDelayValue = jobs.jobDelay;
+		
+		debugColor = Color.BLUE;
 	}
 	
 	@Override
 	public void update(InputHandler input) {
 		super.update(input);
 
-		handleAnimation();
-	}
-	
-	public void handleAnimation() {
-		flipValue /= 2;
-		
-		animation = Animations.ANIMAL_SMALL_IDLE;
-		
-		// idle
-		if (!isMoving) {
-			animation = Animations.ANIMAL_SMALL_IDLE;
-		}
-		
-		if (isMoving) {
-			// walk up
-			if (movingDir == 0) {
-				animation = Animations.ANIMAL_SMALL_WALK_UP;
-			// walk down
-			} else if (movingDir == 1) {
-				animation = Animations.ANIMAL_SMALL_WALK_DOWN;
-			// walk left
-			} else if (movingDir == 2) {
-				animation = Animations.ANIMAL_SMALL_WALK_LEFT;
-			// walk right
-			} else if (movingDir == 3) {
-				animation = Animations.ANIMAL_SMALL_WALK_RIGHT;
-			}
-		}
-		
-		animation.animate(flipValue);
-		
-		xTile = animation.xTile;
-		yTile = animation.yTile;
 	}
 }

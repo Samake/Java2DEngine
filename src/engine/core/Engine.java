@@ -12,7 +12,6 @@ import engine.debug.Log;
 import engine.input.InputHandler;
 import engine.rendering.Renderer;
 import engine.scene.Scene;
-import engine.sound.SoundManager;
 
 public class Engine extends Canvas implements Runnable {
 
@@ -38,13 +37,14 @@ public class Engine extends Canvas implements Runnable {
 			Config.WINDOW_HEIGHT = Config.RESOLUTION_HEIGHT / Config.WINDOW_SCALE;
 		}
 		
-		SoundManager.init();
-		
+
 		setMinimumSize(new Dimension(Config.WINDOW_WIDTH * Config.WINDOW_SCALE, Config.WINDOW_HEIGHT * Config.WINDOW_SCALE));
 		setMaximumSize(new Dimension(Config.WINDOW_WIDTH * Config.WINDOW_SCALE, Config.WINDOW_HEIGHT * Config.WINDOW_SCALE));
 		setPreferredSize(new Dimension(Config.WINDOW_WIDTH * Config.WINDOW_SCALE, Config.WINDOW_HEIGHT * Config.WINDOW_SCALE));
 		
 		buildWindowGUI();
+		
+		Log.print(title + " was started!");
 	}
 	
 	public void buildWindowGUI() {
@@ -65,7 +65,7 @@ public class Engine extends Canvas implements Runnable {
 		frame.addWindowListener(new WindowAdapter() {
 			 @Override
 			 public void windowClosing(WindowEvent e) {
-				 Log.print("Game stopping...");
+				 Log.print("Game stopped!");
 				 stop();
 			 }
 		});

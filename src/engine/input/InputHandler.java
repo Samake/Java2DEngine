@@ -55,7 +55,7 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         game.addMouseMotionListener(this);
         game.addMouseListener(this);
         
-        Log.print("Added input methods...");
+        Log.print("InputHandler initialized.");
     }
 
 	public void toggleKeyPressed(int keyCode, boolean isPressed) {

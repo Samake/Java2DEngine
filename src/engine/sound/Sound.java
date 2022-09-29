@@ -11,13 +11,14 @@ import engine.utils.Vector2f;
 public class Sound implements Runnable {
 	
 	private Thread thread;
-	private Clip clip;
+	public Clip clip;
 	private AudioInputStream audioStream;
-	private boolean looped = false;
-	private boolean global = true;
-	private Vector2f position = new Vector2f();
-	private float maxDistance;
-	private float maxVolume = 100.0f;
+	public boolean looped = false;
+	public boolean global = true;
+	public Vector2f position = new Vector2f();
+	public float maxDistance;
+	public float maxVolume = 100.0f;
+	public boolean isStarted = false;
 	
 	public Sound(String path, float x, float y, float volume, float distance, boolean looped, boolean global) {
 		this.looped = looped;
@@ -53,8 +54,6 @@ public class Sound implements Runnable {
 		}
 
 		SoundManager.addSound(this);
-		
-		play();
 	}
 	
 	@Override
@@ -105,10 +104,13 @@ public class Sound implements Runnable {
 		volumeBase.setValue(volumeValue);
 	}
 	
-	public void play() {
-		if (clip != null) {
-			thread.start();
-			clip.start();
+	public void start() {
+		if (!isStarted) {
+			if (clip != null) {
+				thread.start();
+				clip.start();
+				isStarted = true;
+			}
 		}
 	}
 	
@@ -117,6 +119,7 @@ public class Sound implements Runnable {
 		if (clip != null) {
 			 clip.close();
 			 thread.stop();
+			 isStarted = false;
 			 SoundManager.removeSound(this);
 		}
 	}

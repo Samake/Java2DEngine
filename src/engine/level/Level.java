@@ -15,11 +15,13 @@ import engine.input.InputHandler;
 import engine.rendering.Canvas;
 import engine.rendering.Screen;
 import engine.scene.environment.Ambient;
+import engine.sound.SoundManager;
 import engine.sprites.SpriteAtlas;
 import engine.tiles.Tile;
 import game_content.entities.lights.PointLight;
 import game_content.entities.player.Player;
 import game_content.resources.Sheets;
+import game_content.resources.Sounds;
 import game_editor.Editor;
 
 public class Level {
@@ -55,12 +57,14 @@ public class Level {
 	private int xOffset = 0;
 	private int yOffset = 0;
 	
-	public Level(int width, int height, String tileName) {
+	public Level(int width, int height, String tileName, boolean logging) {
 		this.width = width;
 		this.height = height;
 		tiles = new Tile[width][height];
 		
-		generateNewEmptyLevel(tileName);
+		generateNewEmptyLevel(tileName, logging);
+		
+		SoundManager.playSound(Sounds.MUSIC_BG_01, 80.0f);
 	}
 	
 	public void setSize(int width, int height) {
@@ -69,8 +73,8 @@ public class Level {
 		tiles = new Tile[width][height];
 	}
 	
-	private void generateNewEmptyLevel(String tileName) {
-		LevelGenerator.generateEmptyLevel(width, height, tileName, this);
+	private void generateNewEmptyLevel(String tileName, boolean logging) {
+		LevelGenerator.generateEmptyLevel(width, height, tileName, this, logging);
 		
 	}
 	

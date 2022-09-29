@@ -7,6 +7,12 @@ import engine.debug.Log;
 import engine.input.InputHandler;
 import engine.rendering.Renderer;
 import engine.scene.Scene;
+import game_content.resources.NPCs;
+import game_content.resources.Objects;
+import game_content.resources.Prefabs;
+import game_content.resources.Sheets;
+import game_content.resources.Sounds;
+import game_content.resources.Tiles;
 import testgame.TestGame;
 
 public class Game extends Engine {
@@ -21,9 +27,6 @@ public class Game extends Engine {
 	
 	public Game() {
 		super(0, 0, 0);
-		
-		Log.print("Game starting...");
-		
 		title = "Game - " + title;
 		
 		input = new InputHandler(this);
@@ -31,6 +34,13 @@ public class Game extends Engine {
 		//scene = new TestGame("worldgen");
 		//scene = new TestGame("devmap");
 		scene = new TestGame("demolevel");
+		
+		Log.print(Sheets.getSpriteSheetsCount() + " tile sheets were loaded.");
+		Log.print(Tiles.getTilesCount() + " tiles were loaded.");
+		Log.print(Sounds.getSoundsCount() + " sounds were loaded.");
+		Log.print(Objects.getListCount() + " objects were loaded.");
+		Log.print(Prefabs.getListCount() + " prefabs were loaded.");
+		Log.print(NPCs.getListCount() + " npcs were loaded.");
 		
 		Log.print("Game started!");
 	}

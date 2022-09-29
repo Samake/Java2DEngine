@@ -5,15 +5,18 @@ import engine.entities.decals.Decal;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
+import engine.sound.SoundManager;
 import engine.sprites.SpriteAtlas;
 import game_content.entities.effects.EffectSmokePuffGrey;
 import game_content.resources.NPCs;
 import game_content.resources.Sheets;
+import game_content.resources.Sounds;
 import game_editor.Editor;
 
 public class SpawnEgg extends Prefab {
 
-	EntityBluePrint spawnBlueprint;
+	public EntityBluePrint spawnBlueprint;
+	public boolean isCracked = false;
 	
 	public SpawnEgg(EntityBluePrint blueprint, Level level, int x, int y, EntityBluePrint spawnBlueprint) {
 		super(blueprint, level, x, y);
@@ -36,14 +39,19 @@ public class SpawnEgg extends Prefab {
 			if (player != null) {
 				if (player.collissionBox != null) {
 					if (checkCollission(player.collissionBox)) {
-						level.removeEntity(this);
-						
-						//SoundManager.playSound(SoundFiles.EFFECT_EGG_CRACK, 75.0f);
-						new Decal(new EntityBluePrint(null, 0, ENTITYTYPE.DECAL, RENDERTYPE.R1X1, "DECAL", new SpriteAtlas(Sheets.EFFECTS_SHEET, 0, 2, false, 0, 0, false), true, false, true), level, (int) position.x, (int) position.y, 10000);
-						new EffectSmokePuffGrey(level, position.x, position.y);
-						
-						if (spawnBlueprint != null) {
-							NPCs.addInstanceToLevel(spawnBlueprint, level, (int) position.x, (int) position.y);
+						if (!isCracked) {
+							isCracked = true;
+							
+							SoundManager.playSound(Sounds.EFFECT_EGG_CRACK, position.x, position.y, 80.0f, 64.0f, false, false);
+							
+							new Decal(new EntityBluePrint(null, 0, ENTITYTYPE.DECAL, RENDERTYPE.R1X1, "DECAL", new SpriteAtlas(Sheets.EFFECTS_SHEET, 0, 2, false, 0, 0, false), true, false, true), level, (int) position.x, (int) position.y, 10000);
+							new EffectSmokePuffGrey(level, position.x, position.y);
+							
+							if (spawnBlueprint != null) {
+								NPCs.addInstanceToLevel(spawnBlueprint, level, (int) position.x, (int) position.y);
+							}
+							
+							level.removeEntity(this);
 						}
 					};
 				}

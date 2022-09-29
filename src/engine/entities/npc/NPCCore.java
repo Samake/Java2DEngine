@@ -164,13 +164,14 @@ public class NPCCore extends Entity {
 			}
 			
 			if (isSneaking) {
-				speed = maxSpeed * 0.25f;
+				speed = maxSpeed * 0.5f;
 				animation.delay = 200 / animSpeed;
 			}
 			
 			flipValue = (flipModifier >> (int) flipSpeed * 2) & 1;
 
 			if (isSwimming) {
+				speed = maxSpeed * 0.35f;
 				heightOffsetModifier = bluePrint.atlas.sheet.tileSize / 2;
 				inWater = true;
 				animation.delay = 400 / animSpeed;

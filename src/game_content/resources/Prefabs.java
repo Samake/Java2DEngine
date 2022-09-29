@@ -116,4 +116,16 @@ public class Prefabs {
 		
 		return null;
 	}
+	
+	public static int getListCount() {
+		int count = 0;
+		
+		for (EntityBluePrint entity : entityList) {
+			if (entity != null) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
 }

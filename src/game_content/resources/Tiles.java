@@ -483,4 +483,16 @@ public class Tiles {
 		
 		return null;
 	}
+	
+	public static int getTilesCount() {
+		int count = 0;
+		
+		for (TileBluePrint tile : tileTypes) {
+			if (tile != null) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
 }

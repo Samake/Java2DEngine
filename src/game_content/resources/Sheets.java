@@ -6,10 +6,6 @@ public class Sheets {
 	
 	public static final SpriteSheet[] sheetTypes = new SpriteSheet[256];
 	
-	public static SpriteSheet getSpriteSheetByID(int id) {
-		return sheetTypes[id];
-	}
-	
 	public final static SpriteSheet FONT_SHEET = new SpriteSheet(sheetTypes, 0, "/textures/fonts.png", 32);
 	public final static SpriteSheet EDITOR_SHEET = new SpriteSheet(sheetTypes, 1, "/textures/editorSheet.png", 32);
 	public final static SpriteSheet TILES_SHEET = new SpriteSheet(sheetTypes, 2, "/textures/tilesSheet.png", 32);
@@ -24,4 +20,20 @@ public class Sheets {
 	public final static SpriteSheet WOMEN_04_SHEET = new SpriteSheet(sheetTypes, 103, "/textures/women04.png", 32);
 	
 	public final static SpriteSheet ANIMALS_SHEET = new SpriteSheet(sheetTypes, 200, "/textures/animals.png", 32);
+	
+	public static SpriteSheet getSpriteSheetByID(int id) {
+		return sheetTypes[id];
+	}
+	
+	public static int getSpriteSheetsCount() {
+		int count = 0;
+		
+		for (SpriteSheet sheet : sheetTypes) {
+			if (sheet != null) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
 }

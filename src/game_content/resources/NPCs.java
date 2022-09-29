@@ -82,4 +82,16 @@ public class NPCs {
 		
 		return null;
 	}
+	
+	public static int getListCount() {
+		int count = 0;
+		
+		for (EntityBluePrint npc : npcList) {
+			if (npc != null) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
 }

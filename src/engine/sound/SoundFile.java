@@ -1,7 +1,5 @@
 package engine.sound;
 
-import engine.debug.Log;
-
 public class SoundFile {
 	
 	private String path;
@@ -12,8 +10,6 @@ public class SoundFile {
 		this.path = "/sounds/" + path;
 		
 		soundFiles[id] = this;
-		
-		Log.print("SoundFile " + id + ": " + this.path + " were loaded.");
 	}
 
 	public String getPath() {

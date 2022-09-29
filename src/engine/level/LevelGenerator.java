@@ -17,9 +17,11 @@ public class LevelGenerator {
 	private static boolean changeLeft = false;
 	private static boolean changeRight = false;
 
-	public static void generateEmptyLevel(int width, int height, String tileName, Level level) {
+	public static void generateEmptyLevel(int width, int height, String tileName, Level level, boolean logging) {
 		
-		Log.print("Generate new empty level " + width + "x" + height + "!");	
+		if (logging) {
+			Log.print("Generate new empty level " + width + "x" + height + "!");	
+		}
 		
 		Tile[][] tiles = new Tile[width][height];
 		
@@ -43,7 +45,6 @@ public class LevelGenerator {
 	}
 
 	public static void generateRandomLevel(int width, int height, Level level) {
-		
 		Log.print("Generate new random level " + width + "x" + height + "!");
 		
 		Tile[][] tiles = new Tile[width][height];

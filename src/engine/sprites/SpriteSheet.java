@@ -47,7 +47,7 @@ public class SpriteSheet {
 		
 		sheettypes[id] = this;
 		
-		Log.print("Spritesheet " + path + " loaded! - Width: " + width + ", Height: " + height + ", Slots: " + slots + " , TileSize: " + tileSize + ", Pixels: " + pixels.length);
+		//Log.print("Spritesheet " + path + " loaded! - Width: " + width + ", Height: " + height + ", Slots: " + slots + " , TileSize: " + tileSize + ", Pixels: " + pixels.length);
 	}
 	
 	public int getShiftOperator() {

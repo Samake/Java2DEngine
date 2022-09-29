@@ -20,6 +20,11 @@ import engine.level.Level;
 import engine.level.LevelLoader;
 import engine.rendering.Renderer;
 import engine.scene.Scene;
+import game_content.resources.NPCs;
+import game_content.resources.Objects;
+import game_content.resources.Prefabs;
+import game_content.resources.Sheets;
+import game_content.resources.Sounds;
 import game_content.resources.Tiles;
 import game_editor.Editor;
 import game_editor.gui.EditorGUIEntities;
@@ -58,14 +63,19 @@ public class LevelEditor extends Engine {
 	
 	public LevelEditor() {
 		super(1280, 720, 3);
-		
-		Log.print("LevelEditor starting...");
-		
+
 		title = "LevelEditor - " + title;
 		
 		input = new InputHandler(this);
 		renderer = new Renderer();
 		scene = new Editor();
+		
+		Log.print(Sheets.getSpriteSheetsCount() + " tile sheets were loaded.");
+		Log.print(Tiles.getTilesCount() + " tiles were loaded.");
+		Log.print(Sounds.getSoundsCount() + " sounds were loaded.");
+		Log.print(Objects.getListCount() + " objects were loaded.");
+		Log.print(Prefabs.getListCount() + " prefabs were loaded.");
+		Log.print(NPCs.getListCount() + " npcs were loaded.");
 		
 		Log.print("LevelEditor started!");
 	}
@@ -131,7 +141,7 @@ public class LevelEditor extends Engine {
 		frame.addWindowListener(new WindowAdapter() {
 			 @Override
 			 public void windowClosing(WindowEvent e) {
-				 Log.print("Game stopping...");
+				 Log.print("LevelEditor stopped.");
 				 stop();
 			 }
 		});
@@ -164,7 +174,7 @@ public class LevelEditor extends Engine {
 			int height = Integer.valueOf(heightField.getText().trim());
 			String tileName = tileChoose.getSelectedItem().toString().trim();
 			
-			scene.setLevel(new Level(width, height, tileName));
+			scene.setLevel(new Level(width, height, tileName, true));
 			
 			Log.print("New map with size " + width + "x" + height + " were created!");
 		}

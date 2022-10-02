@@ -24,11 +24,11 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import engine.core.LevelEditor;
 import engine.tiles.TileBluePrint;
 import game_content.resources.Sheets;
 import game_content.resources.Tiles;
 import game_editor.Editor;
+import testgame.LevelEditor;
 
 public class EditorGUITiles {
 

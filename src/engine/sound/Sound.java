@@ -61,7 +61,7 @@ public class Sound implements Runnable {
 
 	}
 	
-	public void update() {
+	public void update(int gameSpeed) {
 		float currentVolume = maxVolume;
 		
 		if (clip != null) {

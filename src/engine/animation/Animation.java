@@ -24,8 +24,9 @@ public class Animation {
 		lastTick = System.currentTimeMillis();
 	}
 	
-	public void update(RENDERTYPE renderType) {
+	public void update(RENDERTYPE renderType, int gameSpeed) {
 		currentTick = System.currentTimeMillis();
+		int currentDelay = delay / gameSpeed;
 		
 		int offSet = 1;
 		
@@ -53,7 +54,7 @@ public class Animation {
 			offSet = 6;
 		}
 		
-		if (lastTick + delay <= currentTick) {
+		if (lastTick + currentDelay <= currentTick) {
 			lastTick = currentTick;
 			
 			if (xTile < xTileDefault + (length - 1)) {

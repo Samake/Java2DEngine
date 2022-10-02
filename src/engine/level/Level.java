@@ -12,9 +12,9 @@ import engine.entities.Entity;
 import engine.entities.decals.Decal;
 import engine.entities.lights.Light;
 import engine.input.InputHandler;
+import engine.level.environment.Ambient;
 import engine.rendering.Canvas;
 import engine.rendering.Screen;
-import engine.scene.environment.Ambient;
 import engine.sound.SoundManager;
 import engine.sprites.SpriteAtlas;
 import engine.tiles.Tile;
@@ -25,6 +25,8 @@ import game_content.resources.Sounds;
 import game_editor.Editor;
 
 public class Level {
+	
+	public Ambient ambient = new Ambient(true);
 	
 	public Tile[][] tiles;
 	
@@ -86,8 +88,12 @@ public class Level {
 		LevelGenerator.smoothWorld(tiles, width, height, this);
 	}
 	
-	public void update(InputHandler input, Camera camera, Ambient ambient) {
+	public void update(InputHandler input, Camera camera, int gameSpeed) {
 		this.camera = camera;
+		
+		if (ambient != null) {
+			ambient.update(gameSpeed);
+		}
 		
 		if (camera != null) {
 			xOffset = (int) camera.position.x - (Config.WINDOW_WIDTH / 2);
@@ -104,13 +110,13 @@ public class Level {
 			}
 		}
 		
-		updateTiles();
-		updateDecals(input);
-		updateEntities(input);
-		updateLights(input, ambient);
+		updateTiles(gameSpeed);
+		updateDecals(input, gameSpeed);
+		updateEntities(input, gameSpeed);
+		updateLights(input, ambient, gameSpeed);
 	}
 
-	private void updateTiles() {
+	private void updateTiles(int gameSpeed) {
 		renderListTiles.clear();
 		
 		for (int y = Canvas.minY; y < Canvas.maxY; y++) {
@@ -118,7 +124,7 @@ public class Level {
 				Tile tile = getTile(x, y);
 
 				if (tile != null) {
-					tile.update();
+					tile.update(gameSpeed);
 					renderListTiles.add(tile);
 				}
 			}
@@ -127,7 +133,7 @@ public class Level {
 		Debug.tiles = tiles[0].length * tiles[1].length;
 	}
 	
-	private void updateDecals(InputHandler input) {
+	private void updateDecals(InputHandler input, int gameSpeed) {
 		rawListDecals.clear();
 		updateListDecals.clear();
 		renderListDecals.clear();
@@ -138,7 +144,7 @@ public class Level {
 		
 		for (Decal decal : rawListDecals) {
 			if (Canvas.isOnScreen(decal.position.x, decal.position.y, 16)) {
-				decal.update(input);
+				decal.update(input, gameSpeed);
 				updateListDecals.add(decal);
 			}
 		}
@@ -148,7 +154,7 @@ public class Level {
 		Debug.decalsRendered = renderListDecals.size();
 	}
 
-	private void updateEntities(InputHandler input) {
+	private void updateEntities(InputHandler input, int gameSpeed) {
 		rawListEntities.clear();
 		updateListEntities.clear();
 		renderListEntities.clear();
@@ -160,7 +166,7 @@ public class Level {
 		
 		for (Entity entity : rawListEntities) {
 			if (Canvas.isOnScreen(entity.position.x, entity.position.y, 16)) {
-				entity.update(input);
+				entity.update(input, gameSpeed);
 				updateListEntities.add(entity);
 				
 				if (entity.bluePrint.collission) {
@@ -196,7 +202,7 @@ public class Level {
 		Debug.entitiesRendered = renderListEntities.size();
 	}
 	
-	private void updateLights(InputHandler input, Ambient ambient) {
+	private void updateLights(InputHandler input, Ambient ambient, int gameSpeed) {
 		rawListLights.clear();
 		updateListLights.clear();
 		renderListLights.clear();
@@ -219,7 +225,7 @@ public class Level {
 				}
 				
 				if (light.enabled) {
-					light.update(input);
+					light.update(input, gameSpeed);
 					updateListLights.add(light);
 				}
 			}

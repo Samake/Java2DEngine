@@ -16,8 +16,8 @@ public class NPCWoman extends NPCHuman {
 	}
 	
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 		
 		Player player = level.getPlayer();
 

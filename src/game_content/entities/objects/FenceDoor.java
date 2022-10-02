@@ -11,8 +11,8 @@ public class FenceDoor extends Fence {
 	}
 	
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 
 	}
 }

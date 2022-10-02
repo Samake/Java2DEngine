@@ -120,13 +120,13 @@ public class Entity {
 		}
 	}
 	
-	public void update(InputHandler input) {
+	public void update(InputHandler input, int gameSpeed) {
 		if (collissionBox != null) {
 			collissionBox.update(position.x, position.y + heightOffsetModifier);
 		}
 		
 		if (bluePrint != null) {
-			bluePrint.atlas.update();
+			bluePrint.atlas.update(gameSpeed);
 		}
 	}
 

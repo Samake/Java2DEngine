@@ -31,13 +31,15 @@ public class Player extends NPCCore {
 	}
 	
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 		
-		handleInputs(input);
+		handleInputs(input, gameSpeed);
+		
+		//System.err.println("Player speed: " + speed);
 	}
 
-	private void handleInputs(InputHandler input) {
+	private void handleInputs(InputHandler input, int gameSpeed) {
 		if (input.playerUp.isPressed()) velocity.add(0, -speed);
 		if (input.playerDown.isPressed()) velocity.add(0, speed);
 		if (input.playerLeft.isPressed()) velocity.add(-speed, 0);

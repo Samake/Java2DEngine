@@ -13,8 +13,8 @@ public class Fountain extends Prefab {
 	}
 
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 
 		if (player != null) {
 			if (player.collissionBox != null) {

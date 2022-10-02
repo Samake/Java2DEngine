@@ -65549,7 +65549,7 @@ levelTiles:65536
 {type:Entity,name:GRASS_01,x:1918.0,y:2021.0}
 {type:Entity,name:GRASS_01,x:1907.0,y:2070.0}
 {type:Entity,name:GRASS_01,x:2021.0,y:2052.0}
-{type:Entity,name:GRASS_01,x:2146.0,y:2013.0}
+{type:Entity,name:GRASS_01,x:2131.0,y:2004.0}
 {type:Entity,name:GRASS_01,x:2234.0,y:2041.0}
 {type:Entity,name:GRASS_01,x:2143.0,y:2085.0}
 {type:Entity,name:GRASS_01,x:2219.0,y:2157.0}
@@ -65599,12 +65599,12 @@ levelTiles:65536
 {type:Entity,name:BUSH_SMALL_01,x:1835.0,y:1866.0}
 {type:Entity,name:BUSH_SMALL_02,x:1923.0,y:1878.0}
 {type:Entity,name:BUSH_SMALL_02,x:1954.0,y:2006.0}
-{type:Entity,name:BUSH_SMALL_02,x:2214.0,y:2121.0}
+{type:Entity,name:BUSH_SMALL_02,x:2196.0,y:2132.0}
 {type:Entity,name:MUSHROOM_04,x:1844.0,y:2031.0}
 {type:Entity,name:MUSHROOM_04,x:1881.0,y:2174.0}
 {type:Entity,name:MUSHROOM_04,x:2056.0,y:2032.0}
 {type:Entity,name:MUSHROOM_04,x:2183.0,y:2207.0}
-{type:Entity,name:BUSH_BIG_01,x:2137.0,y:2119.0}
+{type:Entity,name:BUSH_BIG_01,x:2127.0,y:2112.0}
 {type:Entity,name:BUSH_BIG_01,x:1828.0,y:2090.0}
 {type:Entity,name:BUSH_BIG_01,x:2019.0,y:2203.0}
 {type:Entity,name:BUSH_BIG_01,x:1964.0,y:1936.0}
@@ -65616,7 +65616,7 @@ levelTiles:65536
 {type:Entity,name:BUSH_BIG_01,x:2139.0,y:2221.0}
 {type:Entity,name:BUSH_BIG_01,x:2191.0,y:2259.0}
 {type:Entity,name:BUSH_BIG_01,x:2227.0,y:2095.0}
-{type:Entity,name:TREE_BIG_01,x:2189.0,y:2059.0}
+{type:Entity,name:TREE_BIG_01,x:2184.0,y:2065.0}
 {type:Entity,name:TREE_BIG_01,x:1944.0,y:2076.0}
 {type:Entity,name:TREE_BIG_02,x:2091.0,y:2027.0}
 {type:Entity,name:TREE_BIG_02,x:2247.0,y:2168.0}
@@ -65630,7 +65630,7 @@ levelTiles:65536
 {type:Entity,name:TREE_BIG_01,x:2092.0,y:2192.0}
 {type:Entity,name:STONE_03,x:2171.0,y:2169.0}
 {type:Entity,name:STONE_03,x:1897.0,y:2179.0}
-{type:Entity,name:STONE_03,x:1871.0,y:2092.0}
+{type:Entity,name:STONE_03,x:1878.0,y:2090.0}
 {type:Entity,name:STONE_03,x:1918.0,y:1956.0}
 {type:Entity,name:STONE_03,x:1974.0,y:1890.0}
 {type:Entity,name:STONE_04,x:1866.0,y:1999.0}

@@ -10,9 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import engine.core.LevelEditor;
 import engine.sprites.IconLoader;
 import game_content.resources.Sheets;
+import testgame.LevelEditor;
 
 public class EditorGUISlots {
 
@@ -25,7 +25,7 @@ public class EditorGUISlots {
 		
 		JButton editorModeTiles = new JButton();
 		editorModeTiles.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorModeTiles.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 0, 1, 1, 1, iconScale));
+		editorModeTiles.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 0, 0, 1, 1, iconScale));
 		editorModeTiles.setBackground(Color.GRAY);
 		
 		editorModeTiles.addActionListener(new ActionListener() {
@@ -39,7 +39,7 @@ public class EditorGUISlots {
 		
 		JButton editorModeEntities = new JButton();
 		editorModeEntities.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorModeEntities.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 1, 1, 1, 1, iconScale));
+		editorModeEntities.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 1, 0, 1, 1, iconScale));
 		editorModeEntities.setBackground(Color.GRAY);
 		
 		editorModeEntities.addActionListener(new ActionListener() {
@@ -53,7 +53,7 @@ public class EditorGUISlots {
 		
 		JButton editorModeLights = new JButton();
 		editorModeLights.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorModeLights.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 2, 1, 1, 1, iconScale));
+		editorModeLights.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 2, 0, 1, 1, iconScale));
 		editorModeLights.setBackground(Color.GRAY);
 		
 		editorModeLights.addActionListener(new ActionListener() {
@@ -67,7 +67,7 @@ public class EditorGUISlots {
 		
 		JButton editorModeSounds = new JButton();
 		editorModeSounds.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorModeSounds.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 3, 1, 1, 1, iconScale));
+		editorModeSounds.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 3, 0, 1, 1, iconScale));
 		editorModeSounds.setBackground(Color.GRAY);
 		
 		editorModeSounds.addActionListener(new ActionListener() {
@@ -81,7 +81,7 @@ public class EditorGUISlots {
 		
 		JButton editorModePlayer = new JButton();
 		editorModePlayer.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorModePlayer.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 4, 1, 1, 1, iconScale));
+		editorModePlayer.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 4, 0, 1, 1, iconScale));
 		editorModePlayer.setBackground(Color.GRAY);
 		
 		editorModePlayer.addActionListener(new ActionListener() {
@@ -95,7 +95,7 @@ public class EditorGUISlots {
 		
 		JButton editorModePrefabs = new JButton();
 		editorModePrefabs.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorModePrefabs.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 5, 1, 1, 1, iconScale));
+		editorModePrefabs.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 5, 0, 1, 1, iconScale));
 		editorModePrefabs.setBackground(Color.GRAY);
 		
 		editorModePrefabs.addActionListener(new ActionListener() {
@@ -109,7 +109,7 @@ public class EditorGUISlots {
 		
 		JButton editorMode7= new JButton();
 		editorMode7.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorMode7.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 6, 1, 1, 1, iconScale));
+		editorMode7.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 6, 0, 1, 1, iconScale));
 		editorMode7.setBackground(Color.GRAY);
 		
 		editorMode7.addActionListener(new ActionListener() {
@@ -123,7 +123,7 @@ public class EditorGUISlots {
 		
 		JButton editorMode8= new JButton();
 		editorMode8.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorMode8.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 7, 1, 1, 1, iconScale));
+		editorMode8.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 7, 0, 1, 1, iconScale));
 		editorMode8.setBackground(Color.GRAY);
 		
 		editorMode8.addActionListener(new ActionListener() {
@@ -137,7 +137,7 @@ public class EditorGUISlots {
 		
 		JButton editorChangeDayTime= new JButton();
 		editorChangeDayTime.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorChangeDayTime.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 8, 1, 1, 1, iconScale));
+		editorChangeDayTime.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 8, 0, 1, 1, iconScale));
 		editorChangeDayTime.setBackground(Color.GRAY);
 		
 		editorChangeDayTime.addActionListener(new ActionListener(){

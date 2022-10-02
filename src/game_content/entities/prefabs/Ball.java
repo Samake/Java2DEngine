@@ -25,12 +25,12 @@ public class Ball extends ObjectPhysical {
 	}
 
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 
 		if (xAxisValue != 0 || yAxisValue != 0) {
-			velocity.x = xAxisValue;
-			velocity.y = yAxisValue;
+			velocity.x = xAxisValue * gameSpeed;
+			velocity.y = yAxisValue * gameSpeed;
 			
 			position.add(velocity);
 			
@@ -42,8 +42,8 @@ public class Ball extends ObjectPhysical {
 		moveSpeed = Math.abs((xAxisValue + yAxisValue) / 2);
 		scale = (float) (basisScale + (Math.sin(moveSpeed) / 2.0f));
 		
-		xAxisValue /= frictionValue;
-		yAxisValue /= frictionValue;
+		xAxisValue /= frictionValue * gameSpeed;
+		yAxisValue /= frictionValue * gameSpeed;
 		
 		if (Math.abs(xAxisValue) < 0.01) {
 			xAxisValue = 0;

@@ -122,25 +122,29 @@ public class NPCCore extends Entity {
 	};
 	
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 		
 		if (!level.editorMode) {
 			if (jobs != null) {
-				jobs.update();
+				jobs.update(gameSpeed);
 			}
 		
-			flipModifier = (flipModifier + 1)%100;
+			flipModifier = (flipModifier + gameSpeed)%100;
+
+			int currentAnimSpeed = animSpeed * gameSpeed;
+			float currentSpeed = maxSpeed;
+			
+			animation.delay = 400 / currentAnimSpeed;
+			speed = currentSpeed * gameSpeed;
 			
 			if (level != null && bluePrint.atlas != null) {
 				Tile tile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
 				
 				if (tile != null) {
-					speed = maxSpeed * tile.hesitation;
+					//speed = currentSpeed * tile.hesitation;
 					
 					checkIfInWater(tile);
-				} else {
-					speed = maxSpeed;
 				}
 			}
 			
@@ -151,30 +155,27 @@ public class NPCCore extends Entity {
 				isMoving = false;
 			}
 			
-			animation.delay = 400 / animSpeed;
-			
 			if (isMoving) {
-				speed = maxSpeed;
-				animation.delay = 150 / animSpeed;
+				animation.delay = 150 / currentAnimSpeed;
 			}
 			
 			if (isSprinting) {
-				speed = maxSpeed * 1.5f;
-				animation.delay = 100 / animSpeed;
+				//speed = currentSpeed * 1.5f;
+				animation.delay = 100 / currentAnimSpeed;
 			}
 			
 			if (isSneaking) {
-				speed = maxSpeed * 0.5f;
-				animation.delay = 200 / animSpeed;
+				//speed = currentSpeed * 0.5f;
+				animation.delay = 200 / currentAnimSpeed;
 			}
 			
 			flipValue = (flipModifier >> (int) flipSpeed * 2) & 1;
 
 			if (isSwimming) {
-				speed = maxSpeed * 0.35f;
+				//speed = currentSpeed * 0.35f;
 				heightOffsetModifier = bluePrint.atlas.sheet.tileSize / 2;
 				inWater = true;
-				animation.delay = 400 / animSpeed;
+				animation.delay = 400 / currentAnimSpeed;
 			} else {
 				heightOffsetModifier = 0;
 				inWater = false;
@@ -185,11 +186,11 @@ public class NPCCore extends Entity {
 			velocity.set(0, 0);
 		}
 		
-		handleAnimation();
+		handleAnimation(gameSpeed);
 		handleWaterRipples();
 	}
 	
-	public void handleAnimation() {
+	public void handleAnimation(int gameSpeed) {
 		animation = ANIMATION_IDLE;
 		
 		// idle
@@ -213,7 +214,7 @@ public class NPCCore extends Entity {
 			}
 		}
 		
-		animation.update(bluePrint.renderType);
+		animation.update(bluePrint.renderType, gameSpeed);
 		
 		
 		xTile = animation.xTile;
@@ -262,7 +263,6 @@ public class NPCCore extends Entity {
 		if (leftCornerTile!= null && rightCornerTile != null) {
 			if (leftCornerTile.bluePrint.equals(Tiles.WATER_CLEAN) && rightCornerTile.bluePrint.equals(Tiles.WATER_CLEAN)) {
 				isSwimming = true;
-				speed = maxSpeed / 2;
 			} else {
 				isSwimming = false;
 			}

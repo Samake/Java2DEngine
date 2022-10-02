@@ -7,7 +7,7 @@ import engine.debug.Log;
 import engine.entities.Entity;
 import engine.entities.EntityBluePrint;
 import engine.input.InputHandler;
-import engine.scene.Scene;
+import engine.scene.GameScene;
 import engine.tiles.BasicTile;
 import engine.tiles.Tile;
 import engine.utils.Misc;
@@ -21,7 +21,7 @@ import game_content.resources.Tiles;
 import game_editor.gui.DebugGUIEditor;
 import game_editor.input.ClickSystemEditor;
 
-public class Editor extends Scene {
+public class Editor extends GameScene {
 
 	public static int tileSlotIDLeft = 0;
 	public static int tileSlotIDRight = 0;
@@ -37,8 +37,6 @@ public class Editor extends Scene {
 		Log.print("Starting editor...");
 		
 		camera.freecam = true;
-		ambient.dayCycle = false;
-		ambient.dayTime = 3;
 		
 		gui = new DebugGUIEditor();
 		
@@ -48,12 +46,16 @@ public class Editor extends Scene {
 	}
 	
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 		
 		if (level != null) {
 			if (!level.editorMode) {
 				level.editorMode = true;
+			}
+			
+			if (level.ambient.dayTime != dayTimeValue) {
+				level.ambient.dayTime = dayTimeValue;
 			}
 			
 			if (editorSlot == 1) {
@@ -110,10 +112,6 @@ public class Editor extends Scene {
 			
 			if (editorSlot == 9) {
 				
-			}
-			
-			if (ambient.dayTime != dayTimeValue) {
-				ambient.dayTime = dayTimeValue;
 			}
 		}
 	}

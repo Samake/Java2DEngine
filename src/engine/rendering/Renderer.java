@@ -13,7 +13,7 @@ import engine.core.Engine;
 import engine.debug.Debug;
 import engine.debug.Log;
 import engine.input.InputHandler;
-import engine.scene.Scene;
+import engine.scene.GameScene;
 import engine.utils.Vector3f;
 
 public class Renderer {
@@ -33,7 +33,7 @@ public class Renderer {
 		Log.print("Renderer initialized.");
 	}
 
-	public void update(InputHandler input) {
+	public void update(InputHandler input, int gameSpeed) {
 		lightDirection.x = -1.0f;
 		lightDirection.y = 1.0f;
 		lightDirection.z = 0.5f;
@@ -55,7 +55,7 @@ public class Renderer {
 		}
 	}
 	
-	private void preRender(Scene scene) {
+	private void preRender(GameScene scene) {
 		sceneImage.setRGB(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, scene.screen.pixelsScene, 0, Config.WINDOW_WIDTH);
 		guiImage.setRGB(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, scene.screen.pixelsGUI, 0, Config.WINDOW_WIDTH);
 		
@@ -72,7 +72,7 @@ public class Renderer {
 		graphics.fillRect(0, 0, Config.RESOLUTION_WIDTH, Config.RESOLUTION_HEIGHT);
 	}
 
-	public void render(Engine canvas, BufferStrategy bufferStrategy, Graphics graphics, Scene scene) {
+	public void render(Engine canvas, BufferStrategy bufferStrategy, Graphics graphics, GameScene scene) {
 		if (scene != null) {
 			preRender(scene);
 			renderBackGround(graphics);

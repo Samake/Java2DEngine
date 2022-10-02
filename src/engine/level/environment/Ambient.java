@@ -1,4 +1,4 @@
-package engine.scene.environment;
+package engine.level.environment;
 
 import java.awt.Color;
 
@@ -22,9 +22,9 @@ public class Ambient {
 		this.dayCycle = dayCycle;
 	}
 	
-	public void update() {
+	public void update(int gameSpeed) {
 		if (dayCycle) {
-			currentTime = currentTime + timeSpeed;
+			currentTime += timeSpeed * gameSpeed;
 			fadeValue = 1.0f;//(1.0f / ((endOfDay)%(endOfDay / 10))) * (currentTime)%(currentTime / 10);
 			
 			fadeValue = ((1.0f / (endOfDay / 10.0f)) * (currentTime))%1.0f ;

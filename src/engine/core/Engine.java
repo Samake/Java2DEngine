@@ -94,7 +94,7 @@ public class Engine extends Canvas implements Runnable {
 			
 			while(delta >= 1) {
 				ticks++;
-				update();
+				update(Config.GAME_SPEED);
 				delta -= 1;
 				shouldRender = true;
 			}
@@ -121,7 +121,7 @@ public class Engine extends Canvas implements Runnable {
 		}
 	}
 	
-	public void update() {
+	public void update(int gameSpeed) {
 
 	}
 	

@@ -1,4 +1,4 @@
-package engine.core;
+package testgame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,12 +14,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import engine.core.Engine;
 import engine.debug.Log;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.level.LevelLoader;
 import engine.rendering.Renderer;
-import engine.scene.Scene;
+import engine.scene.GameScene;
 import game_content.resources.NPCs;
 import game_content.resources.Objects;
 import game_content.resources.Prefabs;
@@ -48,7 +49,7 @@ public class LevelEditor extends Engine {
 	
 	public InputHandler input;
 	public Renderer renderer;
-	public Scene scene;
+	public GameScene scene;
 	
 	public JPanel propertiesPanel;
 	public JPanel tileSLots;
@@ -395,13 +396,13 @@ public class LevelEditor extends Engine {
 	}
 	
 	@Override
-	public void update() {
+	public void update(int gameSpeed) {
 		if (renderer != null) {
-			renderer.update(input);
+			renderer.update(input, gameSpeed);
 		}
 		
 		if (scene != null) {
-			scene.update(input);
+			scene.update(input, gameSpeed);
 		}
 		
 		if (Editor.editorSlot == 2) {

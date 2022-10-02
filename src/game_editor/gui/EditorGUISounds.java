@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-import engine.core.LevelEditor;
+import testgame.LevelEditor;
 
 public class EditorGUISounds {
 

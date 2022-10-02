@@ -22,13 +22,13 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import engine.core.LevelEditor;
 import engine.entities.Entity;
 import engine.entities.EntityBluePrint;
 import game_content.resources.Prefabs;
 import game_content.resources.Sheets;
 import game_editor.Editor;
 import game_editor.gui.elements.EntityPanel;
+import testgame.LevelEditor;
 
 public class EditorGUIPrefabs {
 	

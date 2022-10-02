@@ -32,8 +32,8 @@ public class SpawnEgg extends Prefab {
 	}
 
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 
 		if (!Editor.isEditor) {
 			if (player != null) {

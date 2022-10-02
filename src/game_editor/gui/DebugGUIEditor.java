@@ -9,7 +9,8 @@ import engine.gui.GUI;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.rendering.Screen;
-import engine.scene.Scene;
+import engine.scene.GameScene;
+import engine.scene.MenuScene;
 
 public class DebugGUIEditor extends GUI {
 
@@ -26,11 +27,17 @@ public class DebugGUIEditor extends GUI {
 		
 	}
 
-	public void update(InputHandler input) {
+	public void update(InputHandler input, int gameSpeed) {
 		
 	}
 	
-	public void render(Graphics graphics, Screen screen, Scene scene) {
+	@Override
+	public void renderMenuGUI(Graphics graphics, Screen screen, MenuScene scene) {
+
+	}
+
+	@Override
+	public void renderGameGUI(Graphics graphics, Screen screen, GameScene scene) {
 		if (scene != null) {
 		Level level = scene.level;
 		Camera camera = scene.camera;

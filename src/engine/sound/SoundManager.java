@@ -14,12 +14,12 @@ public class SoundManager {
 	public static Vector2f listenerPosition = new Vector2f();
 	public static boolean isActive = true;
 	
-	public static void update() {
+	public static void update(int gameSpeed) {
 		List<Sound> updateSounds = new ArrayList<Sound>(sounds);
 		
 		for (Sound sound: updateSounds) {
 			if (sound != null) {
-				sound.update();
+				sound.update(gameSpeed);
 			}
 		}
 	}

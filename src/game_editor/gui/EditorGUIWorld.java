@@ -14,9 +14,9 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import engine.core.LevelEditor;
 import engine.sprites.IconLoader;
 import game_content.resources.Sheets;
+import testgame.LevelEditor;
 
 public class EditorGUIWorld {
 
@@ -50,7 +50,7 @@ public class EditorGUIWorld {
 		captionPanel.setMinimumSize(captionPanelDimension);
 		captionPanel.setPreferredSize(captionPanelDimension);
 		
-		JLabel captionLabel = new JLabel("LIGHT SETTINGS");
+		JLabel captionLabel = new JLabel("WORLD SETTINGS");
 		captionLabel.setForeground(Color.LIGHT_GRAY);
 		captionPanel.add(captionLabel);
 		
@@ -65,7 +65,7 @@ public class EditorGUIWorld {
 		
 		JButton editorChangeDayTime= new JButton();
 		editorChangeDayTime.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorChangeDayTime.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 8, 1, 1, 1, iconScale));
+		editorChangeDayTime.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 9, 0, 1, 1, iconScale));
 		editorChangeDayTime.setBackground(Color.GRAY);
 		
 		editorChangeDayTime.addMouseListener(new MouseAdapter(){

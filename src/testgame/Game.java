@@ -1,19 +1,19 @@
-package engine.core;
+package testgame;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import engine.core.Engine;
 import engine.debug.Log;
 import engine.input.InputHandler;
 import engine.rendering.Renderer;
-import engine.scene.Scene;
+import engine.scene.GameScene;
 import game_content.resources.NPCs;
 import game_content.resources.Objects;
 import game_content.resources.Prefabs;
 import game_content.resources.Sheets;
 import game_content.resources.Sounds;
 import game_content.resources.Tiles;
-import testgame.TestGame;
 
 public class Game extends Engine {
 
@@ -23,7 +23,7 @@ public class Game extends Engine {
 	
 	public InputHandler input;
 	public Renderer renderer;
-	public Scene scene;
+	public GameScene scene;
 	
 	public Game() {
 		super(0, 0, 0);
@@ -46,13 +46,13 @@ public class Game extends Engine {
 	}
 	
 	@Override
-	public void update() {
+	public void update(int gameSpeed) {
 		if (renderer != null) {
-			renderer.update(input);
+			renderer.update(input, gameSpeed);
 		}
 		
 		if (scene != null) {
-			scene.update(input);
+			scene.update(input, gameSpeed);
 		}
 	}
 	

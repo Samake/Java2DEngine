@@ -31,8 +31,9 @@ public class ObjectPhysical extends Prefab {
 	}
 
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
+		int currentDuration = duration / gameSpeed;
 		
 		if (player != null) {
 			if (player.collissionBox != null && player.bluePrint.collission) {
@@ -48,7 +49,7 @@ public class ObjectPhysical extends Prefab {
 		}
 		
 		if (!ready) {
-			if (lastTick + duration < System.currentTimeMillis()) {
+			if (lastTick + currentDuration < System.currentTimeMillis()) {
 				ready = true;
 			}	
 		}

@@ -32,8 +32,8 @@ public class LampPost extends Prefab {
 	}
 
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 		
 		if (light != null) {
 			light.position.x = position.x + lightOffset.x;

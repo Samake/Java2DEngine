@@ -32,11 +32,12 @@ public class SpriteAtlas {
 		lastTick = System.currentTimeMillis();
 	}
 	
-	public void update() {
+	public void update(int gameSpeed) {
 		if (animated) {
 			currentTick = System.currentTimeMillis();
+			int currentDelay = delay /gameSpeed;
 			
-			if (lastTick + delay <= currentTick) {
+			if (lastTick + currentDelay <= currentTick) {
 				lastTick = currentTick;
 				
 				if (currentColumn < column + (length - 1)) {

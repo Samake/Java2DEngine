@@ -37,7 +37,7 @@ public abstract class Tile {
 		this.brightness = brightness;
 	}
 	
-	public abstract void update();
+	public abstract void update(int gameSpeed);
 	public abstract void render(Screen screen, Level level, int x, int y);
 	public abstract void renderDebug(Screen screen, Level level, int x, int y);
 }

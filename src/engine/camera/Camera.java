@@ -23,7 +23,7 @@ public class Camera {
 		Log.print("Camera were initialzed.");	
 	}
 	
-	public void update(InputHandler input) {
+	public void update(InputHandler input, int gameSpeed) {
 		if (input.toggleCamera.isTyped()) {
 			freecam = !freecam;
 		}
@@ -31,10 +31,10 @@ public class Camera {
 		if (freecam) {
 			velocity.set(0, 0);
 			
-			if (input.cameraUp.isPressed()) velocity.add(0, -cameraSpeed);
-			if (input.cameraDown.isPressed()) velocity.add(0, cameraSpeed);
-			if (input.cameraLeft.isPressed()) velocity.add(-cameraSpeed, 0);
-			if (input.cameraRight.isPressed()) velocity.add(cameraSpeed, 0);
+			if (input.cameraUp.isPressed()) velocity.add(0, -cameraSpeed * gameSpeed);
+			if (input.cameraDown.isPressed()) velocity.add(0, cameraSpeed * gameSpeed);
+			if (input.cameraLeft.isPressed()) velocity.add(-cameraSpeed * gameSpeed, 0);
+			if (input.cameraRight.isPressed()) velocity.add(cameraSpeed * gameSpeed, 0);
 			
 			position.add(velocity);
 		} else {

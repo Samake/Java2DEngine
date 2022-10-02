@@ -18,18 +18,20 @@ public class BasicTile extends Tile {
 	}
 	
 
-	public void update() {
+	@Override
+	public void update(int gameSpeed) {
 		if (!isSolid) {
 			hasCollission = false;
 		}
 		
 		if (updated) {
 			if (atlas.animated) {
-				atlas.update();
+				atlas.update(gameSpeed);
 			}
 		}
 	}
 
+	@Override
 	public void render(Screen screen, Level level, int x, int y) {
 		if (hasCollission) {
 			if (!Debug.renderCollission) {

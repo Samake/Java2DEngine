@@ -35,7 +35,9 @@ public class NPCJobs {
 		this.pathfinder = pathfinder;
 	}
 
-	public void update() {
+	public void update(int gameSpeed) {
+		int currentDelay = jobDelayValue / gameSpeed;
+		
 		if (hasJob) {
 			if (npc != null) {
 				if (currentJob.equals(JOBS.WALK_AROUND)) {
@@ -50,7 +52,7 @@ public class NPCJobs {
 				}
 			}
 		} else {
-			if (lastTimeStamp + jobDelayValue < System.currentTimeMillis()) {
+			if (lastTimeStamp + currentDelay < System.currentTimeMillis()) {
 				setJob(JOBS.WALK_AROUND);
 			}
 		}

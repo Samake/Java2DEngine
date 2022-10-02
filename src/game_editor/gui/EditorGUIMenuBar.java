@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import engine.core.LevelEditor;
+import testgame.LevelEditor;
 
 public class EditorGUIMenuBar {
 	

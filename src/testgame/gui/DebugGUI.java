@@ -9,7 +9,8 @@ import engine.gui.GUI;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.rendering.Screen;
-import engine.scene.Scene;
+import engine.scene.GameScene;
+import engine.scene.MenuScene;
 import game_content.entities.player.Player;
 
 public class DebugGUI extends GUI {
@@ -33,7 +34,7 @@ public class DebugGUI extends GUI {
 		
 	}
 
-	public void update(InputHandler input) {
+	public void update(InputHandler input, int gameSpeed) {
 		Runtime runtime = Runtime.getRuntime();
 		
 		totalMemory = runtime.totalMemory() / mb;
@@ -41,8 +42,14 @@ public class DebugGUI extends GUI {
 		usedMenory = totalMemory - freeMemory;
 		percentMemory = (int) ((100.0 / totalMemory) * usedMenory);
 	}
-	
-	public void render(Graphics graphics, Screen screen, Scene scene) {
+
+	@Override
+	public void renderMenuGUI(Graphics graphics, Screen screen, MenuScene scene) {
+
+	}
+
+	@Override
+	public void renderGameGUI(Graphics graphics, Screen screen, GameScene scene) {
 		if (scene != null) {
 			Level level = scene.level;
 			Camera camera = scene.camera;

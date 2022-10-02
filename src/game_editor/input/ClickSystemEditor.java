@@ -28,7 +28,7 @@ public class ClickSystemEditor {
 	public static Vector2f mousePosition = new Vector2f();
 	public static Vector2f worldPosition = new Vector2f();
 	
-	public static void update(InputHandler input) {
+	public static void update(InputHandler input, int gameSpeed) {
 		mousePosition.set(input.mousePosition);
 		
 		int worldX = (int) (offsetPosition.x + (mousePosition.x - ((Config.WINDOW_WIDTH * Config.WINDOW_SCALE) / 2)) / Config.WINDOW_SCALE);

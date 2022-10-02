@@ -38,11 +38,12 @@ public abstract class Light extends Entity {
 		this.enabledAtDay = enabledAtDay;
 	}
 	
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 		
 		if (enabled) {
 			long currentTick = System.currentTimeMillis();
+			int currentDelay = delay / gameSpeed;
 			
 			if (pulsing) {
 				pulseFactor = (pulseFactor + (delay / 1000.0))%360;
@@ -52,7 +53,7 @@ public abstract class Light extends Entity {
 			}
 			
 			if (flickering) {
-				if (lastTick + delay < currentTick) {
+				if (lastTick + currentDelay < currentTick) {
 					alphaModifier =  (float) Misc.randomInteger(700, 1000) / 1000;
 					lastTick = currentTick;
 				}

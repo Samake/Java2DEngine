@@ -23,8 +23,8 @@ public class Decal extends Entity {
 	}
 
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 		
 		if (collissionBox != null) {
 			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
@@ -33,8 +33,10 @@ public class Decal extends Entity {
 			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize / 2) - 2;
 		}
 		
-		float value = (startTick + duration) - System.currentTimeMillis();
-		alpha = (1.0f / duration) * value;
+		long currentDuration = duration / gameSpeed;
+		
+		float value = (startTick + currentDuration) - System.currentTimeMillis();
+		alpha = (1.0f / currentDuration) * value;
 		
 		if (alpha <= 0.0f) {
 			level.removeDecal(this);

@@ -20,8 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import engine.core.LevelEditor;
 import game_content.entities.lights.PointLight;
+import testgame.LevelEditor;
 
 public class EditorGUILights {
 	

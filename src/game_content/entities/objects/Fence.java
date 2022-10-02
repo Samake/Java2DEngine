@@ -29,8 +29,8 @@ public class Fence extends ObjectStatic {
 	}
 	
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 
 		if (ClickSystemEditor.pickedEntity != null && ClickSystemEditor.pickedEntity.equals(this)) {
 			calculatePlacePosition();

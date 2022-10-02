@@ -34,13 +34,14 @@ public class Effect extends Entity {
 		level.addEntity(this);
 	}
 	
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 		
 		if (!endless) {
 			long currentTick = System.currentTimeMillis();
+			int currentDuration = duration / gameSpeed;
 			
-			if (lastTick + duration < currentTick) {
+			if (lastTick + currentDuration < currentTick) {
 				alive = false;
 				level.removeEntity(this);
 			}	

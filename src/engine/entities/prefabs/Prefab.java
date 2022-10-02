@@ -19,8 +19,8 @@ public class Prefab extends Entity {
 	}
 
 	@Override
-	public void update(InputHandler input) {
-		super.update(input);
+	public void update(InputHandler input, int gameSpeed) {
+		super.update(input, gameSpeed);
 
 		player = level.getPlayer();
 	}

@@ -19,12 +19,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import engine.core.Config;
-import engine.sprites.IconLoader;
-import game_content.resources.Sheets;
 import testgame.LevelEditor;
 
 public class EditorGUIWorld {
 
+	public static JLabel timeOfDayLabel;
+	public static JSlider timeOfDaySlider;
+	public static int currentHour = 0;
 
 	public static int width = 280;
 	public static int lineHeight = 22;
@@ -36,6 +37,7 @@ public class EditorGUIWorld {
 
 		addCaption(finalPanel);
 		addGameSpeed(finalPanel);
+		addTimeOfDay(levelEditor, finalPanel);
 		//addTimeChange(levelEditor, finalPanel);
 		//addWorldGenerator(levelEditor, finalPanel);
 		//addWorldSmooth(levelEditor, finalPanel);
@@ -93,7 +95,7 @@ public class EditorGUIWorld {
 		gameSpeedSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				Config.GAME_SPEED = gameSpeedSlider.getValue();
-				gameSpeedLabel.setText("Gamespeed:" + Config.GAME_SPEED);
+				gameSpeedLabel.setText("Gamespeed: " + Config.GAME_SPEED);
 			}
 		});
 
@@ -101,31 +103,45 @@ public class EditorGUIWorld {
 		
 		finalPanel.add(gameSpeedPanel);
 	}
+	
+	private static void addTimeOfDay(LevelEditor levelEditor, JPanel finalPanel) {
+		Dimension timeOfDayPanelDimension = new Dimension(width - 20, (int) (lineHeight * 2));
+		Dimension sliderDimension = new Dimension(width - 20, (int) (lineHeight * 0.5));
+		
+		JPanel timeOfDayPanel = new JPanel();
+		timeOfDayPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		timeOfDayPanel.setBackground(Color.DARK_GRAY);
+		timeOfDayPanel.setSize(timeOfDayPanelDimension);
+		timeOfDayPanel.setMaximumSize(timeOfDayPanelDimension);
+		timeOfDayPanel.setMinimumSize(timeOfDayPanelDimension);
+		timeOfDayPanel.setPreferredSize(timeOfDayPanelDimension);
+		
+		timeOfDayLabel = new JLabel("DayTime: 12:00");
+		timeOfDayLabel.setForeground(Color.LIGHT_GRAY);
+		timeOfDayPanel.add(timeOfDayLabel);
 
-	private static void addTimeChange(LevelEditor levelEditor, JPanel finalPanel) {
-		int iconScale = 3;
-		int iconSize = Sheets.EDITOR_SHEET.tileSize * iconScale;
+		timeOfDaySlider = new JSlider();
+		timeOfDaySlider.setPreferredSize(sliderDimension);
+		timeOfDaySlider.setMaximumSize(sliderDimension);
+		timeOfDaySlider.setMinimumSize(sliderDimension);
+		timeOfDaySlider.setSize(sliderDimension);
+		timeOfDaySlider.setMinimum(0);
+		timeOfDaySlider.setMaximum(23);
+		timeOfDaySlider.setValue(12);
 		
-		JButton editorChangeDayTime= new JButton();
-		editorChangeDayTime.setPreferredSize(new Dimension(iconSize, iconSize));
-		editorChangeDayTime.setIcon(IconLoader.getIconfromSheet(Sheets.EDITOR_SHEET, 9, 0, 1, 1, iconScale));
-		editorChangeDayTime.setBackground(Color.GRAY);
-		
-		editorChangeDayTime.addMouseListener(new MouseAdapter(){
-			@Override
-			public void mouseClicked(MouseEvent e){
-				if (SwingUtilities.isLeftMouseButton(e)) {
-					levelEditor.setEditorModeDayTime(1);
-            	}
-				
-				if (SwingUtilities.isRightMouseButton(e)) {
-					levelEditor.setEditorModeDayTime(-1);
-            	}
+		timeOfDaySlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				levelEditor.setDayTime(timeOfDaySlider.getValue());
+				timeOfDayLabel.setText("DayTime: " + timeOfDaySlider.getValue());
 			}
 		});
+
+		timeOfDayPanel.add(timeOfDaySlider);
 		
-		finalPanel.add(editorChangeDayTime);
+		finalPanel.add(timeOfDayPanel);
+		
 	}
+
 	
 	private static void addWorldGenerator(LevelEditor levelEditor, JPanel finalPanel) {
 		JButton generateLevelButton = new JButton("Generate");
@@ -173,5 +189,11 @@ public class EditorGUIWorld {
 		});
 		
 		finalPanel.add(unlockTilesButton);
+	}
+	
+	public static void updateWorldValues(int hour, int minute) {
+		currentHour = hour;
+		timeOfDayLabel.setText("DayTime: " + String.format("%02d", hour) + ":" + String.format("%02d", minute));
+		timeOfDaySlider.setValue(hour);
 	}
 }

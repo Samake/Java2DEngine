@@ -27,6 +27,7 @@ public class EditorGUIPlayer {
 	public static Player player;
 	public static JTextField xPosTextField;
 	public static JTextField yPosTextField;
+	public static JComboBox<String> skinComboBox;
 	public static String skinName = "";
 
 	public static int width = 280;
@@ -155,7 +156,7 @@ public class EditorGUIPlayer {
 		skinPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		skinPanel.setBackground(Color.DARK_GRAY);
 		
-		JComboBox<String> skinComboBox = new JComboBox<String>();
+		skinComboBox = new JComboBox<String>();
 		
 		for (EntityBluePrint skin : NPCs.npcList) {
 			if (skin != null) {
@@ -183,6 +184,7 @@ public class EditorGUIPlayer {
 		if (player != null) {
 			xPosTextField.setText(String.valueOf((int) player.position.x));
 			yPosTextField.setText(String.valueOf((int) player.position.y));
+			//skinComboBox.setSelectedItem(player.bluePrint.name);
 		}
 	}
 }

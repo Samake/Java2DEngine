@@ -211,7 +211,13 @@ public class LevelEditor extends Engine {
 		}
 		
 		if (Editor.editorSlot == 8) {
-			
+
+		}
+		
+		if (Editor.editorSlot == 9) {
+			if (scene.level != null) {
+				EditorGUIWorld.updateWorldValues(scene.level.ambient.hour, scene.level.ambient.minute);
+			}
 		}
 	}
 	
@@ -454,10 +460,6 @@ public class LevelEditor extends Engine {
 		worldSettings.setVisible(true);
 	}
 	
-	public void setEditorModeDayTime(int value) {
-		Editor.changeDayTime(value);
-	}
-	
 	public void changePlayer(EntityBluePrint skin) {
 		Level level = scene.level;
 		
@@ -470,6 +472,12 @@ public class LevelEditor extends Engine {
 				
 				level.setPlayer(new Player(skin, scene.level, x, y, 1.0f));
 			}
+		}
+	}
+	
+	public void setDayTime(int value) {
+		if (scene.level != null) {
+			scene.level.ambient.hour = value;
 		}
 	}
 	

@@ -55,10 +55,6 @@ public class Editor extends GameScene {
 				level.editorMode = true;
 			}
 			
-			if (level.ambient.dayTime != dayTimeValue) {
-				level.ambient.dayTime = dayTimeValue;
-			}
-			
 			if (editorSlot == 1) {
 				changeTiles(input);
 			} else {
@@ -250,34 +246,6 @@ public class Editor extends GameScene {
 					Prefabs.addInstanceToLevel(entityBluePrint, level, (int) position.x, (int) position.y);
 				}
 			}
-		}
-	}
-	
-	public static void changeDayTime(int amount) {
-		int value = dayTime + amount;
-		
-		if (value < 0) {
-			value = 3;
-		}
-		
-		dayTime = (value)%4;
-		
-		switch(dayTime) {
-			case 0 :
-				dayTimeValue = 9;
-				return;
-			case 1 :
-				dayTimeValue = 1;
-				return;
-			case 2 :
-				dayTimeValue = 3;
-				return;
-			case 3 :
-				dayTimeValue = 6;
-				return;
-			default:
-				dayTimeValue = 3;
-				return;
 		}
 	}
 }

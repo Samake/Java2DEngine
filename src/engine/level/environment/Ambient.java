@@ -4,16 +4,19 @@ import java.awt.Color;
 
 public class Ambient {
 	
-	public int dayTime = 0;
-	private int currentTime = 25000;
-	private int endOfDay = 100000;//100;
+	public int hour = 12;
+	public int minute = 0;
+	
+	private int timeOperator = 3600;
+	private int minuteValue = 0;
+
 	private int timeSpeed = 1;
 	private float fadeValue = 0;
 	
-	private Color morningColor = new Color(120, 120, 150, 255);
-	private Color dayColor = new Color(240, 230, 210, 255);
-	private Color eveningColor = new Color(150, 75, 35, 255);
-	private Color nightColor = new Color(15, 15, 30, 255);
+	private Color morningColor = new Color(120, 150, 180, 255);
+	private Color dayColor = new Color(255, 240, 220, 255);
+	private Color eveningColor = new Color(180, 90, 55, 255);
+	private Color nightColor = new Color(25, 25, 45, 255);
 	
 	public Color ambientColor;
 	public boolean dayCycle = false;
@@ -24,54 +27,58 @@ public class Ambient {
 	
 	public void update(int gameSpeed) {
 		if (dayCycle) {
-			currentTime += timeSpeed * gameSpeed;
-			fadeValue = 1.0f;//(1.0f / ((endOfDay)%(endOfDay / 10))) * (currentTime)%(currentTime / 10);
+			minuteValue += timeSpeed * gameSpeed;
+			minute = minuteValue / 60;
 			
-			fadeValue = ((1.0f / (endOfDay / 10.0f)) * (currentTime))%1.0f ;
-			
-			if (currentTime > endOfDay) {
-				currentTime = 0;
+			if (minuteValue >= timeOperator) {
+				hour += 1;
+				
+				if (hour > 23) {
+					hour = 0;
+				}
+
+				minuteValue = 0;	
 			}
 			
-			dayTime = (int) ((10.0f / endOfDay) * currentTime);
+			fadeValue = ((1.0f / timeOperator) * minuteValue);
 		}
 			
 		float r = 0;
 		float g = 0;
 		float b = 0;
 
-		if (dayTime == 0) { // night to morning
+		if (hour == 5) { // night to morning
 			r = (nightColor.getRed() * (1.0f - fadeValue)) + (morningColor.getRed() * fadeValue);
 			g = (nightColor.getGreen() * (1.0f - fadeValue)) + (morningColor.getGreen() * fadeValue);
 			b = (nightColor.getBlue() * (1.0f - fadeValue)) + (morningColor.getBlue() * fadeValue);
-		} else if (dayTime == 1) { // morning
-			r = (morningColor.getRed() * (1.0f - fadeValue)) + (morningColor.getRed() * fadeValue);
-			g = (morningColor.getGreen() * (1.0f - fadeValue)) + (morningColor.getGreen() * fadeValue);
-			b = (morningColor.getBlue() * (1.0f - fadeValue)) + (morningColor.getBlue() * fadeValue);
-		} else if (dayTime == 2) { // morning to day
+		} else if (hour >= 6 && hour <= 7) { // morning
+			r = morningColor.getRed();
+			g = morningColor.getGreen();
+			b = morningColor.getBlue();
+		} else if (hour == 8) { // morning to day
 			r = (morningColor.getRed() * (1.0f - fadeValue)) + (dayColor.getRed() * fadeValue);
 			g = (morningColor.getGreen() * (1.0f - fadeValue)) + (dayColor.getGreen() * fadeValue);
 			b = (morningColor.getBlue() * (1.0f - fadeValue)) + (dayColor.getBlue() * fadeValue);
-		} else if (dayTime > 2 && dayTime <= 4) { // day
-			r = (dayColor.getRed() * (1.0f - fadeValue)) + (dayColor.getRed() * fadeValue);
-			g = (dayColor.getGreen() * (1.0f - fadeValue)) + (dayColor.getGreen() * fadeValue);
-			b = (dayColor.getBlue() * (1.0f - fadeValue)) + (dayColor.getBlue() * fadeValue);
-		} else if (dayTime == 5) { // day to evening
+		} else if (hour >= 9 && hour <= 18) { // day
+			r = dayColor.getRed();
+			g = dayColor.getGreen();
+			b = dayColor.getBlue();
+		} else if (hour == 19) { // day to evening
 			r = (dayColor.getRed() * (1.0f - fadeValue)) + (eveningColor.getRed() * fadeValue);
 			g = (dayColor.getGreen() * (1.0f - fadeValue)) + (eveningColor.getGreen() * fadeValue);
 			b = (dayColor.getBlue() * (1.0f - fadeValue)) + (eveningColor.getBlue() * fadeValue);
-		} else if (dayTime == 6) { // evening
-			r = (eveningColor.getRed() * (1.0f - fadeValue)) + (eveningColor.getRed() * fadeValue);
-			g = (eveningColor.getGreen() * (1.0f - fadeValue)) + (eveningColor.getGreen() * fadeValue);
-			b = (eveningColor.getBlue() * (1.0f - fadeValue)) + (eveningColor.getBlue() * fadeValue);
-		} else if (dayTime == 7) { // evening to night
+		} else if (hour >= 20 && hour <= 21)  { // evening
+			r = eveningColor.getRed();
+			g = eveningColor.getGreen();
+			b = eveningColor.getBlue();
+		} else if (hour == 22) { // evening to night
 			r = (eveningColor.getRed() * (1.0f - fadeValue)) + (nightColor.getRed() * fadeValue);
 			g = (eveningColor.getGreen() * (1.0f - fadeValue)) + (nightColor.getGreen() * fadeValue);
 			b = (eveningColor.getBlue() * (1.0f - fadeValue)) + (nightColor.getBlue() * fadeValue);
-		} else if (dayTime > 7 && dayTime <= 9) { // night
-			r = (nightColor.getRed() * (1.0f - fadeValue)) + (nightColor.getRed() * fadeValue);
-			g = (nightColor.getGreen() * (1.0f - fadeValue)) + (nightColor.getGreen() * fadeValue);
-			b = (nightColor.getBlue() * (1.0f - fadeValue)) + (nightColor.getBlue() * fadeValue);
+		} else if (hour >= 23 || hour <= 4) { // night
+			r = nightColor.getRed();
+			g = nightColor.getGreen();
+			b = nightColor.getBlue();
 		} else {
 			r = dayColor.getRed();
 			g = dayColor.getGreen();

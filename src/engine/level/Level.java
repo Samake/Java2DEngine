@@ -213,7 +213,7 @@ public class Level {
 		
 		for (PointLight light : rawListLights) {
 			if (Canvas.isOnScreen(light.position.x, light.position.y, 64)) {
-				if (ambient.dayTime <= 2 || ambient.dayTime >= 6) {
+				if (ambient.hour <= 9 || ambient.hour >= 20) {
 					light.enabled = true;
 				} else {
 					if (light.enabledAtDay) {

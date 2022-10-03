@@ -65540,7 +65540,7 @@ levelTiles:65536
 {id:65279,tile:500,x:255,y:254}
 {id:65535,tile:500,x:255,y:255}
 [Player]
-{type:Player,skin:ANIMAL_CHICKEN_BABY_YELLOW,x:2132.0,y:2042.0,speed:1.0}
+{type:Player,skin:ANIMAL_BUNNY_BROWN,x:2140.0,y:2048.0,speed:1.0}
 [ENTITIES]
 {type:Entity,name:GRASS_01,x:1993.0,y:1884.0}
 {type:Entity,name:GRASS_01,x:1902.0,y:1906.0}
@@ -65642,7 +65642,7 @@ levelTiles:65536
 {type:Prefab,name:CAMPFIRE,x:2060.0,y:1974.0}
 {type:Prefab,name:BALL_01,x:2179.0,y:2018.0}
 {type:Prefab,name:FOUNTAIN_01,x:1942.0,y:1988.0}
-{type:Prefab,name:LAMPPOST_08,x:2210.0,y:2004.0}
+{type:Prefab,name:LAMPPOST_08,x:2212.0,y:2000.0}
 {type:Prefab,name:LAMPPOST_08,x:2011.0,y:1832.0}
 {type:Prefab,name:SPAWNEGG_BUNNY_GREY_BABY,x:2169.0,y:2100.0}
 {type:Prefab,name:SPAWNEGG_BUNNY_GREY_BABY,x:2175.0,y:2107.0}

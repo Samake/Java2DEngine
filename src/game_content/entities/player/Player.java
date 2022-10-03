@@ -14,17 +14,28 @@ public class Player extends NPCCore {
 	public Player(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, "Test", x, y, speed, false);
 		
-		ANIMATION_IDLE = new Animation(16, 0, 100, 2);
-		ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
-		ANIMATION_WALK_DOWN = new Animation(4, 0, 100, 2);
-		ANIMATION_WALK_LEFT = new Animation(8, 0, 100, 2);
-		ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
-
-		if (collissionBox != null) {
+		if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
+			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minY = 0;
+			collissionBox.maxY = bluePrint.atlas.sheet.tileSize / 2;
+			
+			ANIMATION_IDLE = new Animation(8, 0, 100, 2);
+			ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
+			ANIMATION_WALK_DOWN = new Animation(2, 0, 100, 2);
+			ANIMATION_WALK_LEFT = new Animation(4, 0, 100, 2);
+			ANIMATION_WALK_RIGHT =  new Animation(6, 0, 100, 2);
+		} else {
 			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
 			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
 			collissionBox.minY = collissionOffset;
 			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
+			
+			ANIMATION_IDLE = new Animation(16, 0, 100, 2);
+			ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
+			ANIMATION_WALK_DOWN = new Animation(4, 0, 100, 2);
+			ANIMATION_WALK_LEFT = new Animation(8, 0, 100, 2);
+			ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
 		}
 
 		debugColor = Color.RED;

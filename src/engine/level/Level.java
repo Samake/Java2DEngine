@@ -516,21 +516,17 @@ public class Level {
 		}
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
 	public Player setPlayer(Player player) {
 		if (this.player == null) {
 			this.player = player;
 			addEntity(player);
 		} else {
-			removeEntity(player);
-			this.player = null;
+			removePlayer();
+			addEntity(player);
 			this.player = player;
 		}
 		
-		return player;
+		return this.player;
 	}
 	
 	public void removePlayer() {

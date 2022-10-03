@@ -19,6 +19,7 @@ import game_content.resources.Objects;
 import game_content.resources.Prefabs;
 import game_content.resources.Tiles;
 import game_editor.gui.DebugGUIEditor;
+import game_editor.gui.EditorGUIPlayer;
 import game_editor.input.ClickSystemEditor;
 
 public class Editor extends GameScene {
@@ -214,7 +215,13 @@ public class Editor extends GameScene {
 			if (input.rmouse.isClicked()) {
 				Vector2f position = ClickSystemEditor.worldPosition;
 				
-				NPCs.addInstanceToLevel(NPCs.PLAYER, level, (int) position.x, (int) position.y);
+				EntityBluePrint skinBluePrint = NPCs.getBluePrintByName(EditorGUIPlayer.skinName);
+				
+				if (skinBluePrint == null) {
+					skinBluePrint = NPCs.HUMAN_WOMAN_01;
+				}
+				
+				NPCs.addPlayerInstanceToLevel(skinBluePrint, level, (int) position.x, (int) position.y);
 			}
 		}
 	}

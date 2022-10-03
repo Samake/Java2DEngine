@@ -145,16 +145,22 @@ public class LevelLoader {
 		
 		String[] playerDataParts = playerData.split(",");
 		
-		if (playerDataParts != null && playerDataParts.length == 4) {
-			String[] posXParts = playerDataParts[1].split(":");
-			String[] posYParts = playerDataParts[2].split(":");
-			//String[] speedParts = playerDataParts[3].split(":");
-			
+		if (playerDataParts != null && playerDataParts.length == 5) {
+			String[] skinParts = playerDataParts[1].split(":");
+			String[] posXParts = playerDataParts[2].split(":");
+			String[] posYParts = playerDataParts[3].split(":");
+			String skin = String.valueOf(skinParts[1]);
 			float x = Float.valueOf(posXParts[1]);
 			float y = Float.valueOf(posYParts[1]);
 			//float speed = Float.valueOf(speedParts[1]);
 			
-			NPCs.addInstanceToLevel(NPCs.PLAYER, level, (int) x, (int) y);
+			EntityBluePrint skinBluePrint = NPCs.getBluePrintByName(skin);
+			
+			if (skinBluePrint == null) {
+				skinBluePrint = NPCs.HUMAN_WOMAN_01;
+			}
+			
+			NPCs.addPlayerInstanceToLevel(skinBluePrint, level, (int) x, (int) y);
 		}
 	}
 	
@@ -345,11 +351,12 @@ public class LevelLoader {
 		bufferedWriter.write("[Player]");
 		bufferedWriter.newLine();
 		
-		Player player = level.getPlayer();
+		Player player = level.player;
 
 		if (player != null) {
 			if (player.saveToMap) {
 				bufferedWriter.write("{type:Player" + 
+						",skin:" + player.bluePrint.name + 
 						",x:" + player.position.x + 
 						",y:" + player.position.y + 
 						",speed:" + player.speed 

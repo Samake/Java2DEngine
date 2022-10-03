@@ -3,6 +3,7 @@ package game_editor.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -11,9 +12,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import engine.core.Config;
 import engine.sprites.IconLoader;
 import game_content.resources.Sheets;
 import testgame.LevelEditor;
@@ -30,10 +35,11 @@ public class EditorGUIWorld {
 		finalPanel.setBackground(Color.DARK_GRAY);
 
 		addCaption(finalPanel);
-		addTimeChange(levelEditor, finalPanel);
-		addWorldGenerator(levelEditor, finalPanel);
-		addWorldSmooth(levelEditor, finalPanel);
-		addUnlock(levelEditor, finalPanel);
+		addGameSpeed(finalPanel);
+		//addTimeChange(levelEditor, finalPanel);
+		//addWorldGenerator(levelEditor, finalPanel);
+		//addWorldSmooth(levelEditor, finalPanel);
+		//addUnlock(levelEditor, finalPanel);
 		
 		return finalPanel;
 	}
@@ -57,6 +63,43 @@ public class EditorGUIWorld {
 		captionPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		
 		finalPanel.add(captionPanel);
+	}
+	
+	private static void addGameSpeed(JPanel finalPanel) {
+		Dimension gameSpeedPanelDimension = new Dimension(width - 20, (int) (lineHeight * 2));
+		Dimension sliderDimension = new Dimension(width - 20, (int) (lineHeight * 0.5));
+		
+		JPanel gameSpeedPanel = new JPanel();
+		gameSpeedPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		gameSpeedPanel.setBackground(Color.DARK_GRAY);
+		gameSpeedPanel.setSize(gameSpeedPanelDimension);
+		gameSpeedPanel.setMaximumSize(gameSpeedPanelDimension);
+		gameSpeedPanel.setMinimumSize(gameSpeedPanelDimension);
+		gameSpeedPanel.setPreferredSize(gameSpeedPanelDimension);
+		
+		JLabel gameSpeedLabel = new JLabel("Gamespeed: " + Config.GAME_SPEED);
+		gameSpeedLabel.setForeground(Color.LIGHT_GRAY);
+		gameSpeedPanel.add(gameSpeedLabel);
+
+		JSlider gameSpeedSlider = new JSlider();
+		gameSpeedSlider.setPreferredSize(sliderDimension);
+		gameSpeedSlider.setMaximumSize(sliderDimension);
+		gameSpeedSlider.setMinimumSize(sliderDimension);
+		gameSpeedSlider.setSize(sliderDimension);
+		gameSpeedSlider.setMinimum(1);
+		gameSpeedSlider.setMaximum(100);
+		gameSpeedSlider.setValue(Config.GAME_SPEED);
+		
+		gameSpeedSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				Config.GAME_SPEED = gameSpeedSlider.getValue();
+				gameSpeedLabel.setText("Gamespeed:" + Config.GAME_SPEED);
+			}
+		});
+
+		gameSpeedPanel.add(gameSpeedSlider);
+		
+		finalPanel.add(gameSpeedPanel);
 	}
 
 	private static void addTimeChange(LevelEditor levelEditor, JPanel finalPanel) {

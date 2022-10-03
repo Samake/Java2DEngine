@@ -19,7 +19,7 @@ public class NPCWoman extends NPCHuman {
 	public void update(InputHandler input, int gameSpeed) {
 		super.update(input, gameSpeed);
 		
-		Player player = level.getPlayer();
+		Player player = level.player;
 
 		if (player != null) {
 			if (player.collissionBox != null && player.bluePrint.collission) {

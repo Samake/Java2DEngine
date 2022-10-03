@@ -16,11 +16,13 @@ import javax.swing.JTextField;
 
 import engine.core.Engine;
 import engine.debug.Log;
+import engine.entities.EntityBluePrint;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.level.LevelLoader;
 import engine.rendering.Renderer;
 import engine.scene.GameScene;
+import game_content.entities.player.Player;
 import game_content.resources.NPCs;
 import game_content.resources.Objects;
 import game_content.resources.Prefabs;
@@ -148,6 +150,85 @@ public class LevelEditor extends Engine {
 		});
 		
 		setEditorModeTiles();
+	}
+	
+	@Override
+	public void update(int gameSpeed) {
+		if (renderer != null) {
+			renderer.update(input, gameSpeed);
+		}
+		
+		if (scene != null) {
+			scene.update(input, gameSpeed);
+		}
+		
+		if (Editor.editorSlot == 2) {
+			if (EditorGUIEntities.selectedEntity != ClickSystemEditor.selectedEntity) {
+				EditorGUIEntities.updateEntityValues(ClickSystemEditor.selectedEntity);
+			}
+			
+			if (ClickSystemEditor.pickedEntity != null) {
+				EditorGUIEntities.updateEntityValues(ClickSystemEditor.pickedEntity);
+			}
+		}
+		
+		if (Editor.editorSlot == 3) {
+			if (EditorGUILights.selectedLight != ClickSystemEditor.selectedLight) {
+				EditorGUILights.updateLightValues(ClickSystemEditor.selectedLight);
+			}
+			
+			if (ClickSystemEditor.pickedLight != null) {
+				EditorGUILights.updateLightValues(ClickSystemEditor.pickedLight);
+			}
+		}
+		
+		if (Editor.editorSlot == 4) {
+			
+		}
+		
+		if (Editor.editorSlot == 5) {
+			if (EditorGUIPlayer.player != ClickSystemEditor.selectedPlayer) {
+				EditorGUIPlayer.updatePlayerValues(ClickSystemEditor.selectedPlayer);
+			}
+			
+			if (ClickSystemEditor.pickedPlayer != null) {
+				EditorGUIPlayer.updatePlayerValues(ClickSystemEditor.pickedPlayer);
+			}
+		}
+		
+		if (Editor.editorSlot == 6) {
+			if (EditorGUIPrefabs.selectedPrefab != ClickSystemEditor.selectedPrefab) {
+				EditorGUIPrefabs.updatePrefabValues(ClickSystemEditor.selectedLight);
+			}
+			
+			if (ClickSystemEditor.pickedPrefab != null) {
+				EditorGUIPrefabs.updatePrefabValues(ClickSystemEditor.pickedPrefab);
+			}
+		}
+		
+		if (Editor.editorSlot == 7) {
+			
+		}
+		
+		if (Editor.editorSlot == 8) {
+			
+		}
+	}
+	
+	@Override
+	public void render() {
+		if (renderer != null) {
+			BufferStrategy bufferStrategy = getBufferStrategy();
+			
+			if (bufferStrategy == null) {
+				createBufferStrategy(3);
+				return;
+			}
+			
+			Graphics graphics = bufferStrategy.getDrawGraphics();
+			
+			renderer.render(this, bufferStrategy, graphics, scene);
+		}
 	}
 	
 	public void newMap() {
@@ -377,6 +458,21 @@ public class LevelEditor extends Engine {
 		Editor.changeDayTime(value);
 	}
 	
+	public void changePlayer(EntityBluePrint skin) {
+		Level level = scene.level;
+		
+		if (level != null && skin != null) {
+			Player oldPlayer = level.player;
+			
+			if (oldPlayer != null) {
+				int x = (int) oldPlayer.position.x;
+				int y = (int) oldPlayer.position.y;
+				
+				level.setPlayer(new Player(skin, scene.level, x, y, 1.0f));
+			}
+		}
+	}
+	
 	public void generateWorld() {
 		if (scene.level != null) {
 			scene.level.generateNewRandomLevel();
@@ -392,54 +488,6 @@ public class LevelEditor extends Engine {
 	public void unlockTiles() {
 		if (scene.level != null) {
 			scene.level.unlockTiles();
-		}
-	}
-	
-	@Override
-	public void update(int gameSpeed) {
-		if (renderer != null) {
-			renderer.update(input, gameSpeed);
-		}
-		
-		if (scene != null) {
-			scene.update(input, gameSpeed);
-		}
-		
-		if (Editor.editorSlot == 2) {
-			if (EditorGUIEntities.selectedEntity != ClickSystemEditor.selectedEntity) {
-				EditorGUIEntities.updateEntityValues(ClickSystemEditor.selectedEntity);
-			}
-			
-			if (ClickSystemEditor.pickedEntity != null) {
-				EditorGUIEntities.updateEntityValues(ClickSystemEditor.pickedEntity);
-			}
-		}
-		
-		if (Editor.editorSlot == 3) {
-			if (EditorGUILights.selectedLight != ClickSystemEditor.selectedLight) {
-				EditorGUILights.updateLightValues(ClickSystemEditor.selectedLight);
-			}
-			
-			if (ClickSystemEditor.pickedLight != null) {
-				EditorGUILights.updateLightValues(ClickSystemEditor.pickedLight);
-			}
-		}
-
-	}
-	
-	@Override
-	public void render() {
-		if (renderer != null) {
-			BufferStrategy bufferStrategy = getBufferStrategy();
-			
-			if (bufferStrategy == null) {
-				createBufferStrategy(3);
-				return;
-			}
-			
-			Graphics graphics = bufferStrategy.getDrawGraphics();
-			
-			renderer.render(this, bufferStrategy, graphics, scene);
 		}
 	}
 	

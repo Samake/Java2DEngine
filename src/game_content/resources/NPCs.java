@@ -15,8 +15,6 @@ public class NPCs {
 
 	public static final EntityBluePrint[] npcList = new EntityBluePrint[2048];
 	
-	public static final EntityBluePrint PLAYER = new EntityBluePrint(null, 0, ENTITYTYPE.PLAYER, RENDERTYPE.R2X2, "PLAYER", new SpriteAtlas(Sheets.WOMEN_02_SHEET, 0, 0, false, 0, 0, false), true, true, true);
-	
 	public static final EntityBluePrint HUMAN_WOMAN_01 = new EntityBluePrint(npcList, 0, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_WOMAN_01", new SpriteAtlas(Sheets.WOMEN_01_SHEET, 0, 0, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint HUMAN_WOMAN_02 = new EntityBluePrint(npcList, 1, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_WOMAN_02", new SpriteAtlas(Sheets.WOMEN_02_SHEET, 0, 0, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint HUMAN_WOMAN_03 = new EntityBluePrint(npcList, 2, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_WOMAN_03", new SpriteAtlas(Sheets.WOMEN_03_SHEET, 0, 0, false, 0, 0, false), true, true, true);
@@ -34,8 +32,6 @@ public class NPCs {
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
 			switch(blueprint.name) {
-				case "PLAYER":
-					return level.setPlayer(new Player(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_01":
 					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_02":
@@ -61,6 +57,17 @@ public class NPCs {
 				case "ANIMAL_CHICKEN_BABY_BROWN":
 					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 			}
+		}
+		
+		return null;
+	}
+	
+	public static Entity addPlayerInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
+		if (blueprint != null) {
+			blueprint.entityType = ENTITYTYPE.PLAYER;
+
+			return level.setPlayer(new Player(blueprint, level, x, y, 1.0f));
+
 		}
 		
 		return null;

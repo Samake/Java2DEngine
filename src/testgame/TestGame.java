@@ -11,7 +11,7 @@ public class TestGame extends GameScene {
 		
 		setLevel(LevelLoader.loadLevel(mapName + ".dat"));
 		
-		camera.setTarget(level.getPlayer());
+		camera.setTarget(level.player);
 		
 		gui = new DebugGUI();
 	}

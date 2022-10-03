@@ -55,7 +55,7 @@ public class DebugGUI extends GUI {
 			Camera camera = scene.camera;
 			
 			if (level != null) {
-				Player player = level.getPlayer();
+				Player player = level.player;
 				
 				if (player != null && camera != null) {
 					int index = 1;

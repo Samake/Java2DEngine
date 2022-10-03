@@ -18,7 +18,7 @@ public class CollectableItem extends ObjectStatic {
 	public void update(InputHandler input, int gameSpeed) {
 		super.update(input, gameSpeed);
 		
-		player = level.getPlayer();
+		player = level.player;
 		
 		if (player != null) {
 			if (player.collissionBox != null) {

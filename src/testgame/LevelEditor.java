@@ -216,7 +216,7 @@ public class LevelEditor extends Engine {
 		
 		if (Editor.editorSlot == 9) {
 			if (scene.level != null) {
-				EditorGUIWorld.updateWorldValues(scene.level.ambient.hour, scene.level.ambient.minute);
+				EditorGUIWorld.updateWorldValues(scene.level.environment.time.hour, scene.level.environment.time.minute);
 			}
 		}
 	}
@@ -477,7 +477,7 @@ public class LevelEditor extends Engine {
 	
 	public void setDayTime(int value) {
 		if (scene.level != null) {
-			scene.level.ambient.hour = value;
+			scene.level.environment.time.hour = value;
 		}
 	}
 	

@@ -12,6 +12,11 @@ import game_content.resources.Sheets;
 
 public abstract class Light extends Entity {
 	
+	public enum LIGHTTYPE {
+		POINTLIGHT, AMBIENTLIGHT
+	}
+	
+	public LIGHTTYPE type = LIGHTTYPE.POINTLIGHT;
 	public Color color;
 	public int radius;
 	public boolean pulsing = false;

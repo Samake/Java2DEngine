@@ -3,12 +3,12 @@ package game_content.entities.prefabs;
 import java.awt.Color;
 
 import engine.entities.EntityBluePrint;
+import engine.entities.lights.PointLight;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.utils.Vector2f;
 import game_content.entities.effects.EffectSmokeWhite;
-import game_content.entities.lights.PointLight;
 
 public class CampFire extends Prefab {
 

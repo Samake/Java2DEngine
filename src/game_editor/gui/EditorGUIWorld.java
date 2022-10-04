@@ -38,7 +38,6 @@ public class EditorGUIWorld {
 		addCaption(finalPanel);
 		addGameSpeed(finalPanel);
 		addTimeOfDay(levelEditor, finalPanel);
-		//addTimeChange(levelEditor, finalPanel);
 		//addWorldGenerator(levelEditor, finalPanel);
 		//addWorldSmooth(levelEditor, finalPanel);
 		//addUnlock(levelEditor, finalPanel);

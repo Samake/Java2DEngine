@@ -3,12 +3,12 @@ package game_editor.input;
 import engine.core.Config;
 import engine.entities.Entity;
 import engine.entities.Entity.ENTITYTYPE;
+import engine.entities.lights.PointLight;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import engine.tiles.Tile;
 import engine.utils.Vector2f;
-import game_content.entities.lights.PointLight;
 import game_content.entities.player.Player;
 
 public class ClickSystemEditor {

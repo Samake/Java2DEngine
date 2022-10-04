@@ -9,10 +9,11 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 import engine.camera.Camera;
+import engine.entities.lights.Light.LIGHTTYPE;
+import engine.entities.lights.PointLight;
 import engine.gui.GUI;
 import engine.input.InputHandler;
 import engine.level.Level;
-import game_content.entities.lights.PointLight;
 
 public class GameScene extends Scene {
 
@@ -70,8 +71,8 @@ public class GameScene extends Scene {
 		if (level != null) {
 			Graphics2D graphic = (Graphics2D) image.getGraphics();
 			
-			if (level.ambient != null) {
-				Color ambientColor = level.ambient.ambientColor;
+			if (level.environment != null) {
+				Color ambientColor = level.environment.ambientLight.ambientColor;
 				
 				if (ambientColor!= null) {
 					graphic.setColor(ambientColor);
@@ -80,10 +81,14 @@ public class GameScene extends Scene {
 				graphic.fillRect(0, 0, image.getWidth(), image.getHeight());
 				
 				for (PointLight light : level.renderListLights) {
-					if (light.enabled) {
-						light.updatePosition(screen);
-						
-						drawLight(graphic, light.screenX, light.screenY, light.color, light.radius, light.alphaModifier, ambientColor);
+					if (light != null) {
+						if (light.enabled) {
+							light.updatePosition(level, screen);
+							
+							if (light.type.equals(LIGHTTYPE.POINTLIGHT)) {
+								drawLight(graphic, light.screenX, light.screenY, light.color, light.radius, light.alphaModifier, ambientColor);
+							}
+						}
 					}
 				}
 			} else {
@@ -123,13 +128,14 @@ public class GameScene extends Scene {
         	if (b > 255) {b = 255;}
         }
         
-        Color[] colors = {new Color(r / 255, g / 255, b / 255, a / 255), new Color(r / 255, g / 255, b / 255, 0)};
-       
-        RadialGradientPaint paint = new RadialGradientPaint(center, radius, fractions, colors, CycleMethod.REFLECT);
-        
-        graphic.setPaint(paint);
-       
-        graphic.fillOval((int) x - (int) radius, (int) y - (int) radius, (int) radius * 2, (int) radius * 2);
+        if (radius > 0) {
+        	Color[] colors = {new Color(r / 255, g / 255, b / 255, a / 255), new Color(r / 255, g / 255, b / 255, 0)};
+
+            RadialGradientPaint paint = new RadialGradientPaint(center, radius, fractions, colors, CycleMethod.REFLECT);
+            
+            graphic.setPaint(paint);
+            graphic.fillOval((int) x - (int) radius, (int) y - (int) radius, (int) radius * 2, (int) radius * 2);
+        }
     }
 
 	public void setLevel(Level level) {

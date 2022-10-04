@@ -11,22 +11,21 @@ import engine.debug.Debug;
 import engine.entities.Entity;
 import engine.entities.decals.Decal;
 import engine.entities.lights.Light;
+import engine.entities.lights.Light.LIGHTTYPE;
+import engine.entities.lights.PointLight;
 import engine.input.InputHandler;
-import engine.level.environment.Ambient;
+import engine.level.environment.Environment;
 import engine.rendering.Canvas;
 import engine.rendering.Screen;
-import engine.sound.SoundManager;
 import engine.sprites.SpriteAtlas;
 import engine.tiles.Tile;
-import game_content.entities.lights.PointLight;
 import game_content.entities.player.Player;
 import game_content.resources.Sheets;
-import game_content.resources.Sounds;
 import game_editor.Editor;
 
 public class Level {
 	
-	public Ambient ambient = new Ambient(true);
+	public Environment environment;
 	
 	public Tile[][] tiles;
 	
@@ -64,9 +63,9 @@ public class Level {
 		this.height = height;
 		tiles = new Tile[width][height];
 		
-		generateNewEmptyLevel(tileName, logging);
+		environment = new Environment(this);
 		
-		SoundManager.playSound(Sounds.MUSIC_BG_01, 80.0f);
+		generateNewEmptyLevel(tileName, logging);	
 	}
 	
 	public void setSize(int width, int height) {
@@ -91,8 +90,8 @@ public class Level {
 	public void update(InputHandler input, Camera camera, int gameSpeed) {
 		this.camera = camera;
 		
-		if (ambient != null) {
-			ambient.update(gameSpeed);
+		if (environment != null) {
+			environment.update(gameSpeed);
 		}
 		
 		if (camera != null) {
@@ -113,7 +112,7 @@ public class Level {
 		updateTiles(gameSpeed);
 		updateDecals(input, gameSpeed);
 		updateEntities(input, gameSpeed);
-		updateLights(input, ambient, gameSpeed);
+		updateLights(input, environment, gameSpeed);
 	}
 
 	private void updateTiles(int gameSpeed) {
@@ -202,7 +201,7 @@ public class Level {
 		Debug.entitiesRendered = renderListEntities.size();
 	}
 	
-	private void updateLights(InputHandler input, Ambient ambient, int gameSpeed) {
+	private void updateLights(InputHandler input, Environment environment, int gameSpeed) {
 		rawListLights.clear();
 		updateListLights.clear();
 		renderListLights.clear();
@@ -212,21 +211,30 @@ public class Level {
 		Debug.lights = rawListLights.size();
 		
 		for (PointLight light : rawListLights) {
-			if (Canvas.isOnScreen(light.position.x, light.position.y, 64)) {
-				if (ambient.hour <= 9 || ambient.hour >= 20) {
-					light.enabled = true;
-				} else {
-					if (light.enabledAtDay) {
+			if (light != null) {
+				if (Canvas.isOnScreen(light.position.x, light.position.y, 64)) {
+					if (environment.time.hour <= 9 || environment.time.hour >= 20) {
 						light.enabled = true;
 					} else {
-						light.enabled = false;
-				
+						if (light.enabledAtDay) {
+							light.enabled = true;
+						} else {
+							light.enabled = false;
+					
+						}
 					}
-				}
-				
-				if (light.enabled) {
-					light.update(input, gameSpeed);
-					updateListLights.add(light);
+					
+					if (light.enabled) {
+						light.update(input, gameSpeed);
+						updateListLights.add(light);
+					}
+				} else {
+					if (light.enabled) {
+						if (light.type.equals(LIGHTTYPE.AMBIENTLIGHT)) {
+							light.update(input, gameSpeed);
+							updateListLights.add(light);
+						}
+					}
 				}
 			}
 		}

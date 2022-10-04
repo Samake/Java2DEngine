@@ -31,8 +31,6 @@ public class Game extends Engine {
 		
 		input = new InputHandler(this);
 		renderer = new Renderer();
-		//scene = new TestGame("worldgen");
-		//scene = new TestGame("devmap");
 		scene = new TestGame("demolevel");
 		
 		Log.print(Sheets.getSpriteSheetsCount() + " tile sheets were loaded.");

@@ -5,11 +5,12 @@ import java.util.List;
 
 import engine.core.Config;
 import engine.entities.collision.CollissionBox;
+import engine.entities.lights.Light.LIGHTTYPE;
+import engine.entities.lights.PointLight;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.rendering.Screen;
 import engine.utils.Vector2f;
-import game_content.entities.lights.PointLight;
 
 public class Entity {
 	
@@ -271,17 +272,30 @@ public class Entity {
 		if (Config.SHADOWS && bluePrint.castShadow) {
 			for (PointLight light : renderListLights) {
 				if (light != null) {
-
-					int distance = (int) light.position.distance(position);
-					
-					if (distance < light.radius) {
-						int xValue = (int) (Math.ceil(Math.atan(light.position.x - position.x)) - 0.5);
-						int yValue = (int) (Math.ceil(Math.atan(light.position.y - position.y)) - 0.5);
-						int shadwowDistance = (int) ((int) (scale * Math.cbrt(distance) / 1.5));
+					if (light.type.equals(LIGHTTYPE.POINTLIGHT)) {
+						int distance = (int) light.position.distance(position);
 						
-						float shadowStrength = (1.0f - ((1.0f / light.radius) * distance)) / 2;
+						if (distance < light.radius) {
+							int xValue = (int) (Math.ceil(Math.atan(light.position.x - position.x)) - 0.5);
+							int yValue = (int) (Math.ceil(Math.atan(light.position.y - position.y)) - 0.5);
+							int shadwowDistance = (int) ((int) (scale * Math.cbrt(distance) / 1.5));
+							float shadowStrength = (1.0f - ((1.0f / light.radius) * distance)) / 2;
 
-						renderShadows(screen, xValue, yValue, shadwowDistance, shadowStrength, xTileID, yTileID);
+							renderShadows(screen, xValue, yValue, shadwowDistance, shadowStrength, xTileID, yTileID);
+						}
+					}
+
+					if (light.type.equals(LIGHTTYPE.AMBIENTLIGHT)) {
+						int distance = (int) light.position.distance(position);
+						
+						if (distance < light.radius) {
+							int xValue = (int) (Math.ceil(Math.atan(light.position.x - position.x)) - 0.5);
+							int yValue = (int) (Math.ceil(Math.atan(light.position.y - position.y)) - 0.5);
+							int shadwowDistance = 1;
+							float shadowStrength = 0.2f;
+	
+							renderShadows(screen, xValue, yValue, shadwowDistance, shadowStrength, xTileID, yTileID);
+						}
 					}
 				}
 			}
@@ -289,9 +303,9 @@ public class Entity {
 	}
 
 	private void renderShadows(Screen screen, int xValue, int yValue, int shadwowDistance, float shadowStrength, int xTileID, int yTileID) {
-		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 1, yOffset - yValue * shadwowDistance * 1, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.55f);
+		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 1, yOffset - yValue * shadwowDistance * 1, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.45f);
 		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 2, yOffset - yValue * shadwowDistance * 2, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.35f);
-		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 3, yOffset - yValue * shadwowDistance * 3, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.15f);
+		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 3, yOffset - yValue * shadwowDistance * 3, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.25f);
 	}
 
 	private void renderEntityPartBody(Screen screen, int xTileID, int yTileID, boolean isInWater) {

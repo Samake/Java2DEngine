@@ -65540,7 +65540,7 @@ levelTiles:65536
 {id:65279,tile:500,x:255,y:254}
 {id:65535,tile:500,x:255,y:255}
 [Player]
-{type:Player,skin:ANIMAL_BUNNY_BROWN,x:2140.0,y:2048.0,speed:1.0}
+{type:Player,skin:HUMAN_WOMAN_04,x:2140.0,y:2048.0,speed:1.0}
 [ENTITIES]
 {type:Entity,name:GRASS_01,x:1993.0,y:1884.0}
 {type:Entity,name:GRASS_01,x:1902.0,y:1906.0}

@@ -223,7 +223,9 @@ public class LevelEditor extends Engine {
 	
 	@Override
 	public void render() {
-		if (renderer != null) {
+		Editor editorScene = (Editor) scene;
+		
+		if (renderer != null && editorScene != null) {
 			BufferStrategy bufferStrategy = getBufferStrategy();
 			
 			if (bufferStrategy == null) {
@@ -233,7 +235,14 @@ public class LevelEditor extends Engine {
 			
 			Graphics graphics = bufferStrategy.getDrawGraphics();
 			
-			renderer.render(this, bufferStrategy, graphics, scene);
+			renderer.preRender(graphics, editorScene);
+			renderer.render(this, bufferStrategy, graphics, editorScene);
+			
+			if (editorScene.brush != null && scene.level != null) {
+				renderer.renderShape(bufferStrategy, editorScene.brush, Color.CYAN, 5);
+			}
+			
+			renderer.postRender(bufferStrategy, graphics);
 		}
 	}
 	
@@ -241,10 +250,7 @@ public class LevelEditor extends Engine {
 		JTextField widthField = new JTextField();
 		JTextField heightField = new JTextField();
 		
-		// Array für unsere JComboBox
         String comboBoxListe[] = {Tiles.VOID.name, Tiles.GRASS_CLEAN.name, Tiles.EARTH_CLEAN.name, Tiles.STONE_CLEAN.name, Tiles.SAND_CLEAN.name, Tiles.WATER_CLEAN.name};
- 
-        //JComboBox mit Bundesländer-Einträgen wird erstellt
         JComboBox<String> tileChoose = new JComboBox<String>(comboBoxListe);
 		
 		Object[] message = {
@@ -305,32 +311,34 @@ public class LevelEditor extends Engine {
 	public void saveMapPopup() {
 		String levelName = JOptionPane.showInputDialog(frame, "Save level as...", "Save Level", JOptionPane.INFORMATION_MESSAGE);
 		
-		if (LevelLoader.checkLevelAlreadyExists(levelName)) {
-			Object[] options = {"Yes",
-			                    "No",
-			                    "Cancel"};
-			int result = JOptionPane.showOptionDialog(frame,
-			    "Level already exists, would you " + 
-			    		"\n overwrite this level?",
-			    "Save Level",
-			    JOptionPane.YES_NO_CANCEL_OPTION,
-			    JOptionPane.QUESTION_MESSAGE,
-			    null,
-			    options,
-			    options[0]);
-			
-			switch (result) {
-	        case 0:
-	        	LevelLoader.saveLevel(scene.level, levelName);
-	            break;
-	        case 1:
-	        	saveMapPopup();
-	            break;
-	        case 2:
-	            break;
+		if (levelName != null && !levelName.isEmpty()) {
+			if (LevelLoader.checkLevelAlreadyExists(levelName)) {
+				Object[] options = {"Yes",
+				                    "No",
+				                    "Cancel"};
+				int result = JOptionPane.showOptionDialog(frame,
+				    "Level already exists, would you " + 
+				    		"\n overwrite this level?",
+				    "Save Level",
+				    JOptionPane.YES_NO_CANCEL_OPTION,
+				    JOptionPane.QUESTION_MESSAGE,
+				    null,
+				    options,
+				    options[0]);
+				
+				switch (result) {
+		        case 0:
+		        	LevelLoader.saveLevel(scene.level, levelName);
+		            break;
+		        case 1:
+		        	saveMapPopup();
+		            break;
+		        case 2:
+		            break;
+				}
+			} else {
+				LevelLoader.saveLevel(scene.level, levelName);
 			}
-		} else {
-			LevelLoader.saveLevel(scene.level, levelName);
 		}
 	}
 	

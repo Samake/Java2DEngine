@@ -28,6 +28,9 @@ public class NPCJobs {
 	public int jobDelayValue = jobDelay;
 	public int targetRange = 64;
 	
+	private int stuckAttempts = 0;
+	private int stuckDistance = 0;
+	
 	public Map<Integer, PathNode> path;
 
 	public NPCJobs(NPCCore npc, Pathfinder pathfinder) {
@@ -40,75 +43,61 @@ public class NPCJobs {
 		
 		if (hasJob) {
 			if (npc != null) {
-				if (currentJob.equals(JOBS.WALK_AROUND)) {
-					if (path != null) {
-						if (path.get(path.size()).resolved) {
-							resetJob();
-							Log.print("NPC >> Job stopped: WALK_AROUND", OUTPUTTYPE.DEBUG);
-						} else {
-							walkPath();
+				if (!currentJob.equals(JOBS.IDLE)) {
+					if (currentJob.equals(JOBS.WALK_AROUND)) {
+						if (path != null) {
+							if (path.get(path.size()).resolved) {
+								resetJob(false);
+								Log.print("NPC >> Job stopped: WALK_AROUND", OUTPUTTYPE.DEBUG);
+							} else {
+								walkPath();
+							}
 						}
+					} else if (currentJob.equals(JOBS.FLEE)) {
+						if (path != null) {
+							walkDestination();
+						} else {
+							resetJob(true);
+							Log.print("NPC >> Job stopped: FLEE", OUTPUTTYPE.DEBUG);
+						}
+					}
+				} else {
+					if (lastTimeStamp + currentDelay < System.currentTimeMillis()) {
+						Log.print("NPC >> Job stopped: IDLE", OUTPUTTYPE.DEBUG);
+						
+						getRandomJob();
 					}
 				}
 			}
 		} else {
 			if (lastTimeStamp + currentDelay < System.currentTimeMillis()) {
-				setJob(JOBS.WALK_AROUND);
+				getRandomJob();
 			}
 		}
 	}
 
-	private void resetJob() {
+	private void getRandomJob() {
+		int randomizer = Misc.randomInteger(0, 100);
+		
+		if (randomizer > 25) {
+			setJob(JOBS.WALK_AROUND, null);
+		} else {
+			setJob(JOBS.IDLE, null);
+		}
+	}
+
+	private void resetJob(boolean skipDelay) {
 		hasJob = false;
 		lastTimeStamp = System.currentTimeMillis();
-		jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
-	}
-	
-	private void walkPath() {
-		if (npc != null && path != null) {
-			int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
-			int tileSize = npc.bluePrint.atlas.sheet.tileSize;
-			
-			for (int id = 0; id < path.size() + 1; id++) {
-				PathNode node = path.get(id);
-				
-				if (node != null) {
-					if (!node.resolved) {
-						int nodeX = (node.x << shiftOperator) + tileSize / 2;
-						int nodeY = (node.y << shiftOperator) + tileSize / 2;
-						
-						int xDistance = (int) Math.abs(npc.position.x - nodeX);
-						int yDistance = (int) Math.abs(npc.position.y - nodeY);
-						int distance = xDistance + yDistance;
-						
-						if (distance > 0) {
-							if ((int) npc.position.x > (int) nodeX) {
-								npc.velocity.add(-npc.speed, 0);
-							}
-							
-							if ((int) npc.position.x < (int) nodeX) {
-								npc.velocity.add(npc.speed, 0);
-							}
-							
-							if ((int) npc.position.y > (int) nodeY) {
-								npc.velocity.add(0, -npc.speed);
-							}
-							
-							if ((int) npc.position.y < (int) nodeY) {
-								npc.velocity.add(0, npc.speed);
-							}
-						} else {
-							node.resolved = true;
-							node.tile.marked = false;
-						}
-						return;
-					}
-				}
-			}
+		jobDelayValue = 0;
+		path = null;
+		
+		if (!skipDelay) {
+			jobDelayValue = Misc.randomInteger(jobDelay / 2, jobDelay * 2);
 		}
 	}
 	
-	public void setJob(JOBS job) {
+	public void setJob(JOBS job, Vector2f fleePosition) {
 		switch(job) {
 			case IDLE:
 				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
@@ -123,26 +112,7 @@ public class NPCJobs {
 				currentJob = job;
 				hasJob = true;
 				
-				path = null;
-				
-				if (npc != null) {
-					int tileSize = npc.bluePrint.atlas.sheet.tileSize;
-					int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
-					startPosition.x = npc.position.x;
-					startPosition.y = npc.position.y;
-					
-					targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(-targetRange, targetRange));
-					targetPosition.y = (int) (startPosition.y + Misc.randomInteger(-targetRange, targetRange));
-					
-					path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
-					
-					while (path == null) {
-						targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(-targetRange, targetRange));
-						targetPosition.y = (int) (startPosition.y + Misc.randomInteger(-targetRange, targetRange));
-						
-						path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
-					};
-				}
+				createWalkJob();
 
 				break;
 			case WALK_PATH:
@@ -161,9 +131,12 @@ public class NPCJobs {
 				break;
 			case FLEE:
 				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-				
+
 				currentJob = job;
 				hasJob = true;
+				
+				createFleeJob(fleePosition);
+
 				break;
 			case FIGHT:
 				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
@@ -187,5 +160,215 @@ public class NPCJobs {
 				
 				break;
 		}
+	}
+
+	private void createWalkJob() {
+		path = null;
+		stuckDistance = 0;
+		stuckAttempts = 0;
+		
+		if (npc != null) {
+			int tileSize = npc.bluePrint.atlas.sheet.tileSize;
+			int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
+			startPosition.x = npc.position.x;
+			startPosition.y = npc.position.y;
+			
+			targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(-targetRange, targetRange));
+			targetPosition.y = (int) (startPosition.y + Misc.randomInteger(-targetRange, targetRange));
+			
+			path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
+			
+			int attempts = 0;
+			
+			while (path == null) {
+				attempts++;
+				
+				targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(-targetRange, targetRange));
+				targetPosition.y = (int) (startPosition.y + Misc.randomInteger(-targetRange, targetRange));
+				
+				path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
+				
+				if (attempts >= 16) {
+					resetJob(true);
+				}
+			};
+		}
+	}
+	
+	private void createFleeJob(Vector2f fleePosition) {
+		stuckDistance = 0;
+		stuckAttempts = 0;
+		
+		if (npc != null) {
+			int tileSize = npc.bluePrint.atlas.sheet.tileSize;
+			int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
+			startPosition.x = npc.position.x;
+			startPosition.y = npc.position.y;
+			
+			int targetMinRangeX = -targetRange / 2;
+			int targetMaxRangeX = targetRange / 2;
+			
+			int targetMinRangeY = -targetRange / 2;
+			int targetMaxRangeY = targetRange / 2;
+			
+			if (fleePosition != null) {
+				if (fleePosition.x < startPosition.x) {
+					targetMinRangeX += targetRange;
+					targetMaxRangeX += targetRange;
+				} else {
+					targetMinRangeX -= targetRange;
+					targetMaxRangeX -= targetRange;
+				}
+				
+				if (fleePosition.y < startPosition.y) {
+					targetMinRangeY += targetRange;
+					targetMaxRangeY += targetRange;
+				} else {
+					targetMinRangeY -= targetRange;
+					targetMaxRangeY -= targetRange;
+				}
+			}
+			
+			targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(targetMinRangeX, targetMaxRangeX));
+			targetPosition.y = (int) (startPosition.y + Misc.randomInteger(targetMinRangeY, targetMaxRangeY));
+			
+			path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
+			
+			int attempts = 0;
+			
+			while (path == null) {
+				attempts++;
+				
+				targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(targetMinRangeX, targetMaxRangeX));
+				targetPosition.y = (int) (startPosition.y + Misc.randomInteger(targetMinRangeY, targetMaxRangeY));
+				
+				path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
+				
+				if (attempts >= 16) {
+					targetMinRangeX = -100;
+					targetMaxRangeX = 100;
+					targetMinRangeY = -100;
+					targetMaxRangeY = 100;
+					
+					targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(targetMinRangeX, targetMaxRangeX));
+					targetPosition.y = (int) (startPosition.y + Misc.randomInteger(targetMinRangeY, targetMaxRangeY));
+					
+					path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
+				}
+			};
+		}
+	}
+	
+	private void walkPath() {
+		if (npc != null && path != null) {
+			int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
+			int tileSize = npc.bluePrint.atlas.sheet.tileSize;
+			
+			for (int id = 0; id < path.size() + 1; id++) {
+				PathNode node = path.get(id);
+				
+				if (node != null) {
+					if (!node.resolved) {
+						int nodeX = (node.x << shiftOperator) + tileSize / 2;
+						int nodeY = (node.y << shiftOperator) + tileSize / 2;
+						
+						int xDistance = (int) Math.abs(npc.position.x - nodeX);
+						int yDistance = (int) Math.abs(npc.position.y - nodeY);
+						int distance = xDistance + yDistance;
+						
+						if (distance > 0) {
+							
+							float veloX = 0;
+							float veloY = 0;
+							
+							if ((int) npc.position.x > (int) nodeX) {
+								veloX = -npc.speed;
+							}
+							
+							if ((int) npc.position.x < (int) nodeX) {
+								veloX = npc.speed;
+							}
+							
+							if ((int) npc.position.y > (int) nodeY) {
+								veloY = -npc.speed;
+							}
+							
+							if ((int) npc.position.y < (int) nodeY) {
+								veloY = npc.speed;
+							}
+							
+							if (!isStuck()) {
+								npc.velocity.set(veloX, veloY);
+							} else {
+								npc.velocity.set(0, 0);
+							}
+						} else {
+							node.resolved = true;
+							node.tile.marked = false;
+							node.tile.selected = false;
+						}
+						
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	private void walkDestination() {
+		float distance = targetPosition.distance(npc.position);
+		
+		if (distance > 16) {
+			float veloX = 0;
+			float veloY = 0;
+			
+			if (npc.position.x <= targetPosition.x) {
+				veloX = npc.speed;
+			} else {
+				veloX = -npc.speed;
+			}
+			
+			if (npc.position.y <= targetPosition.y) {
+				veloY = npc.speed;
+			} else {
+				veloY = -npc.speed;
+			}
+			
+			if (!isStuck()) {
+				npc.velocity.set(veloX, veloY);
+			} else {
+				npc.velocity.set(0, 0);
+			}
+		} else {
+			path = null;
+		}
+	}
+	
+	private boolean isStuck() {
+		int distance = (int) npc.position.distance(targetPosition);
+		
+		if (stuckDistance == distance) {
+			stuckAttempts++;
+			
+			Log.print("Check if stuck! " + stuckAttempts + " attempts.", OUTPUTTYPE.DEBUG);
+		} else {
+			stuckAttempts = 0;
+		}
+		
+		if (stuckAttempts >= 32) {
+			Log.print("Free stuck entity!", OUTPUTTYPE.DEBUG);
+			
+			setJob(JOBS.FLEE, null);
+			stuckDistance = 0;
+			stuckAttempts = 0;
+			
+			npc.position.y -= 5;
+			
+			return true;
+		}
+		
+		stuckDistance = distance;
+		
+		return false;
 	}
 }

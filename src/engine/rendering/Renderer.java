@@ -1,7 +1,10 @@
 package engine.rendering;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
@@ -18,10 +21,10 @@ import engine.utils.Vector3f;
 
 public class Renderer {
 
-	private BufferedImage sceneImage = new BufferedImage(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage guiImage = new BufferedImage(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage sceneLightMap = new BufferedImage(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage greyScale = new BufferedImage(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB); 
+	public BufferedImage sceneImage = new BufferedImage(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+	public BufferedImage guiImage = new BufferedImage(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+	public BufferedImage sceneLightMap = new BufferedImage(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+	public BufferedImage greyScale = new BufferedImage(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, BufferedImage.TYPE_INT_ARGB); 
 	
 	public Vector3f lightDirection;
 	public Vector3f normal;
@@ -55,37 +58,42 @@ public class Renderer {
 		}
 	}
 	
-	private void preRender(GameScene scene) {
-		sceneImage.setRGB(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, scene.screen.pixelsScene, 0, Config.WINDOW_WIDTH);
-		guiImage.setRGB(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, scene.screen.pixelsGUI, 0, Config.WINDOW_WIDTH);
-		
-		scene.screen.reset();
-		
-		scene.renderLights(sceneLightMap);
-		scene.render();
-		
-		multiplyLightMap();
+	public void preRender(Graphics graphics, GameScene scene) {
+		if (scene != null) {
+			sceneImage.setRGB(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, scene.screen.pixelsScene, 0, Config.WINDOW_WIDTH);
+			guiImage.setRGB(0, 0, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT, scene.screen.pixelsGUI, 0, Config.WINDOW_WIDTH);
+			
+			scene.screen.reset();
+			
+			scene.renderLights(sceneLightMap);
+			scene.render();
+			
+			multiplyLightMap();
+			
+			graphics.setColor(Color.black);
+			graphics.fillRect(0, 0, Config.RESOLUTION_WIDTH, Config.RESOLUTION_HEIGHT);
+		}
 	}
 	
-	private void renderBackGround(Graphics graphics) {
-		graphics.setColor(Color.black);
-		graphics.fillRect(0, 0, Config.RESOLUTION_WIDTH, Config.RESOLUTION_HEIGHT);
-	}
-
 	public void render(Engine canvas, BufferStrategy bufferStrategy, Graphics graphics, GameScene scene) {
 		if (scene != null) {
-			preRender(scene);
-			renderBackGround(graphics);
+
 			
 			graphics.drawImage(sceneImage, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 			graphics.drawImage(guiImage, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-			scene.renderGUI(graphics);
 			
-			postRender(bufferStrategy, graphics);
+			scene.renderGUI(graphics);
 		}
 	}
 
-	private void postRender(BufferStrategy bufferStrategy, Graphics graphics) {
+	public void renderShape(BufferStrategy bufferStrategy, Shape shape, Color color, int thickness) {
+		Graphics2D graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
+		graphics.setColor(color);
+		graphics.setStroke(new BasicStroke(thickness));
+		graphics.draw(shape);
+	}
+
+	public void postRender(BufferStrategy bufferStrategy, Graphics graphics) {
 		graphics.dispose();
 		bufferStrategy.show();
 	}

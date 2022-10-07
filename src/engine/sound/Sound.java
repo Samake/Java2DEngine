@@ -19,6 +19,7 @@ public class Sound implements Runnable {
 	public float maxDistance;
 	public float maxVolume = 100.0f;
 	public boolean isStarted = false;
+	public boolean saveToMap = true;
 	
 	public Sound(String path, float x, float y, float volume, float distance, boolean looped, boolean global) {
 		this.looped = looped;
@@ -35,16 +36,16 @@ public class Sound implements Runnable {
 			clip = AudioSystem.getClip();
 			
 			clip.addLineListener(event -> {
-		      if (event.getType() == LineEvent.Type.STOP) {
-		        stop();
-		      }
+				if (!looped) {
+			      if (event.getType() == LineEvent.Type.STOP) {
+			        stop();
+			      }
+				} else {
+					clip.loop(Clip.LOOP_CONTINUOUSLY);
+				}
 		    });
 			
 			audioStream = AudioSystem.getAudioInputStream(SoundManager.class.getResourceAsStream(path));
-			
-			if (looped) {
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			}
 			
 			clip.open(audioStream);
 			

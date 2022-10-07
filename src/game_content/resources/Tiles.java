@@ -11,21 +11,21 @@ public class Tiles {
 	
 	public static final TileBluePrint[] tileTypes = new TileBluePrint[2048];
 	
-	private static int voidIndex = 0;
-	private static int waterIndex = 1;
-	private static float waterHestitation = 0.5f; // 0.5f
-	private static int grassIndex = 100;
-	private static float grassHestitation = 0.8f; //0.8f
-	private static int sandIndex = 200;
-	private static float sandHestitation = 0.6f; //0.6f
-	private static int stoneIndex = 300;
-	private static float stoneHestitation = 1.0f; //1.0f
-	private static int streetIndex = 400;
-	private static float streetHestitation = 1.0f; // 1.0f
-	private static int earthIndex = 500;
-	private static float earthHestitation = 0.7f; // 0.7f
-	private static int woodIndex = 600;
-	private static float woodHestitation = 1.0f; // 1.0f
+	public static int voidIndex = 0;
+	public static int waterIndex = 1;
+	public static float waterHestitation = 0.5f; // 0.5f
+	public static int grassIndex = 100;
+	public static float grassHestitation = 0.8f; //0.8f
+	public static int sandIndex = 200;
+	public static float sandHestitation = 0.6f; //0.6f
+	public static int stoneIndex = 300;
+	public static float stoneHestitation = 1.0f; //1.0f
+	public static int streetIndex = 400;
+	public static float streetHestitation = 1.0f; // 1.0f
+	public static int earthIndex = 500;
+	public static float earthHestitation = 0.7f; // 0.7f
+	public static int woodIndex = 600;
+	public static float woodHestitation = 1.0f; // 1.0f
 	
 	/** VOID **/
 	public static final TileBluePrint VOID = new TileBluePrint(tileTypes, voidIndex, TILETYPE.VOID, "VOID", new SpriteAtlas(Sheets.TILES_SHEET, 0, 0, false, 0, 0, false), 0.1f, true);

@@ -14,12 +14,11 @@ public class AnimalBunny extends NPCAnimal {
 		
 		animSpeed = 2;
 		
-		jobs.targetRange = 64;
-		jobs.jobDelay = 1000;
+		jobs.targetRange = 32;
+		jobs.jobDelay = 2500;
 		jobs.jobDelayValue = jobs.jobDelay;
 		
-		
-		jobs.setJob(JOBS.WALK_AROUND);
+		jobs.setJob(JOBS.WALK_AROUND, null);
 	}
 	
 	@Override
@@ -29,6 +28,17 @@ public class AnimalBunny extends NPCAnimal {
 		Player player = level.player;
 
 		if (player != null) {
+			float distance = position.distance(player.position);
+			
+			if (distance <= 32) {
+				animSpeed = 4;
+				if (!jobs.currentJob.equals(JOBS.FLEE)) {
+					jobs.setJob(JOBS.FLEE, player.position);
+				}
+			} else {
+				animSpeed = 2;
+			}
+			
 			if (player.collissionBox != null && player.bluePrint.collission) {
 				if (checkCollission(player.collissionBox)) {
 					

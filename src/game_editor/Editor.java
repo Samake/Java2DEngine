@@ -1,6 +1,9 @@
 package game_editor;
 
 import java.awt.Color;
+import java.awt.Point;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 
 import engine.debug.Debug;
 import engine.debug.Log;
@@ -24,14 +27,18 @@ import game_editor.input.ClickSystemEditor;
 
 public class Editor extends GameScene {
 
-	public static int tileSlotIDLeft = 0;
-	public static int tileSlotIDRight = 0;
+	public static int tileSlotIDLeft = Tiles.waterIndex;
+	public static int tileSlotIDRight = Tiles.grassIndex;
 	public static String entitySlot = "";
 	public static String prefabSlot = "";
 	public static int editorSlot = 1;
 	public static int dayTime = 0;
 	public static int dayTimeValue = 3;
 	public static boolean smoothTiles = false;
+	
+	public double brushSize = 50;
+	public Point brushPosition = new Point(0, 0);
+	public Shape brush;
 	
 	public Editor() {
 		super();
@@ -40,6 +47,7 @@ public class Editor extends GameScene {
 		camera.freecam = true;
 		
 		gui = new DebugGUIEditor();
+		brush = new Ellipse2D.Double(brushPosition.x - brushSize / 2, brushPosition.y - brushSize / 2, brushSize * 2, brushSize * 2);
 		
 		isEditor = true;
 		
@@ -56,7 +64,15 @@ public class Editor extends GameScene {
 			}
 			
 			if (editorSlot == 1) {
-				changeTiles(input);
+				if (brush != null) {
+					brushPosition.x = (int) ClickSystemEditor.mousePosition.x;
+					brushPosition.y = (int) ClickSystemEditor.mousePosition.y;
+					brush = new Ellipse2D.Double(brushPosition.x - brushSize, brushPosition.y - brushSize, brushSize * 2, brushSize * 2);
+
+					changeTiles(input);
+				} else {
+					changeTile(input);
+				}
 			} else {
 				ClickSystemEditor.deselectTile();
 			}
@@ -113,6 +129,24 @@ public class Editor extends GameScene {
 		}
 	}
 
+	private void changeTile(InputHandler input) {
+		Tile tile = ClickSystemEditor.selectTile(input, level);
+		
+		if (tile != null) {
+			if (input.lmouse.isClicked()) {
+				int id = tile.x + tile.y * level.width;
+				
+				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDLeft), tile.brightness));
+			}
+			
+			if (input.rmouse.isClicked()) {
+				int id = tile.x + tile.y * level.width;
+				
+				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDRight), tile.brightness));
+			}
+		}
+	}
+	
 	private void changeTiles(InputHandler input) {
 		Tile tile = ClickSystemEditor.selectTile(input, level);
 		

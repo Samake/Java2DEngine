@@ -108,7 +108,7 @@ public class EditorGUITiles {
 		slotsPanel.add(leftSlotLabel);
 		slotsPanel.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		leftSlotImage = new JLabel(Tiles.getBluePrintByID(0).icon);
+		leftSlotImage = new JLabel(Tiles.getBluePrintByID(Editor.tileSlotIDLeft).icon);
 		slotsPanel.add(leftSlotImage);
 		slotsPanel.add(Box.createRigidArea(new Dimension(10, 10)));
 		
@@ -117,7 +117,7 @@ public class EditorGUITiles {
 		slotsPanel.add(rightSlotLabel);
 		slotsPanel.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		rightSlotImage = new JLabel(Tiles.getBluePrintByID(0).icon);
+		rightSlotImage = new JLabel(Tiles.getBluePrintByID(Editor.tileSlotIDRight).icon);
 		slotsPanel.add(rightSlotImage);
 		
 		slotsFinalPanel.add(slotsPanel);

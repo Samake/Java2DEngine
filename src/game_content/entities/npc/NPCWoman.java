@@ -12,7 +12,7 @@ public class NPCWoman extends NPCHuman {
 	public NPCWoman(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, x, y, speed);
 		
-		jobs.setJob(JOBS.WALK_AROUND);
+		jobs.setJob(JOBS.WALK_AROUND, null);
 	}
 	
 	@Override

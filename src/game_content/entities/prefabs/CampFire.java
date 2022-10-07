@@ -7,13 +7,17 @@ import engine.entities.lights.PointLight;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
+import engine.sound.Sound;
+import engine.sound.SoundManager;
 import engine.utils.Vector2f;
 import game_content.entities.effects.EffectSmokeWhite;
+import game_content.resources.Sounds;
 
 public class CampFire extends Prefab {
 
 	private PointLight light;
 	private EffectSmokeWhite smoke;
+	private Sound sound;
 	
 	private Vector2f lightOffset = new Vector2f();
 	private Vector2f smokeOffset = new Vector2f();
@@ -33,10 +37,12 @@ public class CampFire extends Prefab {
 		light = new PointLight(level, x, y, new Color(255, 128, 64, 255), 48, false, true, 200, false);
 		light.enabledAtDay = true;
 		light.saveToMap = false;
+		
 		smoke = new EffectSmokeWhite(level, x, y);
 		smoke.saveToMap = false;
 		
-		//SoundManager.playSound(SoundFiles.AMBIENT_CAMPFIRE, position.x, position.y, 90.0f, 100, true, false);
+		sound = SoundManager.playSound(Sounds.AMBIENT_CAMPFIRE, position.x, position.y, 90.0f, 100, true, false);
+		sound.saveToMap = false;
 	}
 
 	@Override
@@ -53,6 +59,11 @@ public class CampFire extends Prefab {
 			smoke.position.y = position.y + smokeOffset.y;
 			smoke.collissionBox.position.x = collissionBox.position.x;
 			smoke.collissionBox.position.y = collissionBox.position.y + collissionOffset;
+		}
+		
+		if (sound != null) {
+			sound.position.x = position.x;
+			sound.position.y = position.y;
 		}
 		
 		if (player != null) {
@@ -76,6 +87,11 @@ public class CampFire extends Prefab {
 		if (smoke != null) {
 			level.removeEntity(smoke);
 			smoke = null;
+		}
+		
+		if (sound != null) {
+			sound.stop();
+			sound = null;
 		}
 	}
 }

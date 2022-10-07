@@ -228,7 +228,7 @@ public class Entity {
 							xOffset = baseXOffset + (modifier * row);
 							yOffset = baseYOffset + (modifier * column);
 							
-							renderEntityPartBody(screen, xTileID, yTileID, inWater);
+							renderEntityPartShadow(screen, renderListLights, xTileID, yTileID);
 						}
 					}
 				}

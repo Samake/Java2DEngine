@@ -31,7 +31,9 @@ public class Game extends Engine {
 		
 		input = new InputHandler(this);
 		renderer = new Renderer();
-		scene = new TestGame("demolevel");
+		//scene = new TestGame("demolevel");
+		scene = new TestGame("animaltest");
+		
 		
 		Log.print(Sheets.getSpriteSheetsCount() + " tile sheets were loaded.");
 		Log.print(Tiles.getTilesCount() + " tiles were loaded.");
@@ -66,7 +68,9 @@ public class Game extends Engine {
 			
 			Graphics graphics = bufferStrategy.getDrawGraphics();
 			
+			renderer.preRender(graphics, scene);
 			renderer.render(this, bufferStrategy, graphics, scene);
+			renderer.postRender(bufferStrategy, graphics);
 		}
 	}
 	

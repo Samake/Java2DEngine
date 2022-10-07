@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import engine.debug.Debug;
-import engine.debug.Log;
-import engine.debug.Log.OUTPUTTYPE;
 import engine.level.Level;
 import engine.tiles.Tile;
 import engine.utils.Misc;
@@ -28,10 +26,13 @@ public class Pathfinder {
 	}
 
 	public Map<Integer, PathNode> calculatePath(Vector2f startPosition, Vector2f targetPosition, int tileSize, int shiftOperator) {
-		Log.print("Pathfinder >> Calculate route from  " + (int) startPosition.x + ", " + (int) startPosition.y + " to "+ (int) targetPosition.x + ", " + (int) targetPosition.y, OUTPUTTYPE.DEBUG);
+		//Log.print("Pathfinder >> Calculate route from  " + (int) startPosition.x + ", " + (int) startPosition.y + " to "+ (int) targetPosition.x + ", " + (int) targetPosition.y, OUTPUTTYPE.DEBUG);
 		
 		nodeList.clear();
 		nodeListValid = true;
+		
+		level.deSelectTiles();
+		level.deMarkTiles();
 
 		Tile startTile = level.getTile((int) startPosition.x >> shiftOperator, (int) startPosition.y >> shiftOperator);
 		Tile endTile = level.getTile((int) targetPosition.x >> shiftOperator, (int) targetPosition.y >> shiftOperator);
@@ -43,9 +44,16 @@ public class Pathfinder {
 				if (nodeListValid && nodeList.size() > 2) {
 					
 					if (Debug.enabled) {
+						startTile.selected = true;
+						endTile.selected = true;
+						
 						for (Entry<Integer, PathNode> entry : nodeList.entrySet()) {
 							if (entry != null) {
-								entry.getValue().tile.marked = true;
+								Tile tile = entry.getValue().tile;
+								
+								if (tile != null && !tile.equals(startTile) && !tile.equals(endTile)) {
+									entry.getValue().tile.marked = true;
+								}
 							}
 						}
 					}
@@ -69,7 +77,7 @@ public class Pathfinder {
 		int yDistance = Math.abs(startY - endY);
 		int heuristic = xDistance + yDistance;
 		
-		Log.print("START >> startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
+		//Log.print("START >> startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
 		
 		int id = nodeList.size() + 1;
 		nodeList.put(id, new PathNode(id, startX, startY, startTile));
@@ -93,7 +101,7 @@ public class Pathfinder {
 					startY = pathNode.y;
 					currentTile = pathNode.tile;
 					
-					Log.print("nodeID: " + nodeID, OUTPUTTYPE.DEBUG);
+					//Log.print("nodeID: " + nodeID, OUTPUTTYPE.DEBUG);
 				}
 			}
 				
@@ -101,7 +109,7 @@ public class Pathfinder {
 			yDistance = Math.abs(startY - endY);
 			heuristic = xDistance + yDistance;
 			
-			Log.print("startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
+			//Log.print("startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
 			
 			DIRECTION horizontalDirection = DIRECTION.LEFT;
 			DIRECTION verticalDirection = DIRECTION.DOWN;
@@ -240,7 +248,7 @@ public class Pathfinder {
 				}
 			}
 			
-			Log.print("Costs >> " + horizontalDirection + ", " + verticalDirection + " << l: " + leftCost + ", r: " + rightCost + ", u: " + upCost + ", d: " + downCost, OUTPUTTYPE.DEBUG);
+			//Log.print("Costs >> " + horizontalDirection + ", " + verticalDirection + " << l: " + leftCost + ", r: " + rightCost + ", u: " + upCost + ", d: " + downCost, OUTPUTTYPE.DEBUG);
 			
 			Tile nextTile = null;
 			int finalCost = 9999;
@@ -270,7 +278,7 @@ public class Pathfinder {
 				direction = DIRECTION.DOWN;
 			}
 			
-			Log.print("Result >> " + direction + " << cost: " + finalCost, OUTPUTTYPE.DEBUG);
+			//Log.print("Result >> " + direction + " << cost: " + finalCost, OUTPUTTYPE.DEBUG);
 			
 			if (nextTile != null) {
 				int id = nodeList.size() + 1;

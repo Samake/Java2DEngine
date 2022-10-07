@@ -5,7 +5,7 @@ import engine.sound.SoundFile;
 public class Sounds {
 	public static final SoundFile[] soundFiles = new SoundFile[256];
 	
-	public static SoundFile MUSIC_BG_01 = new SoundFile(soundFiles, 0, "bg_music_01.wav");
+	public static SoundFile MUSIC_BG_01 = new SoundFile(soundFiles, 0, "music_cinematic_piano_01.wav");
 	
 	public static SoundFile AMBIENT_LAKE_01 = new SoundFile(soundFiles, 50, "ambient_lake.wav");
 	public static SoundFile AMBIENT_CAMPFIRE = new SoundFile(soundFiles, 51, "ambient_campfire.wav");

@@ -49,6 +49,18 @@ public class SpriteAtlas {
 		}
 	}
 	
+	public void changeTileID(int value) {
+		currentColumn = currentColumn + value;
+		
+		if (currentColumn < column) {
+			currentColumn = column;
+		}
+		
+		if (currentColumn > column + length) {
+			currentColumn = column + length;
+		}
+	}
+	
 	public int getCurrentSprite() {
 		return getCurrentSprite(0, 0);
 	}

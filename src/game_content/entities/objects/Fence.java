@@ -61,10 +61,9 @@ public class Fence extends ObjectStatic {
 						position.x = placePosition.x;
 						position.y = placePosition.y;
 
+						level.markTile(currentTile);
 					}
 				}
-				
-				level.markTile(currentTile);
 			}
 		}
 	}

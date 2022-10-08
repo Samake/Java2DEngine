@@ -12,6 +12,8 @@ import game_content.entities.prefabs.Fountain;
 import game_content.entities.prefabs.LampPost;
 import game_content.entities.prefabs.SpawnEgg;
 import game_content.entities.prefabs.farming.SeedCarrot;
+import game_content.entities.prefabs.farming.SeedCorn;
+import game_content.entities.prefabs.farming.SeedPumpkin;
 import game_content.entities.prefabs.farming.SeedStrawberry;
 import game_content.entities.prefabs.farming.SeedTomato;
 
@@ -50,7 +52,8 @@ public class Prefabs {
 	public static final EntityBluePrint SEED_CARROT = new EntityBluePrint(entityList, 1000, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_CARROT", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 0, false, 0, 6, false), false, true, true);
 	public static final EntityBluePrint SEED_TOMATO = new EntityBluePrint(entityList, 1001, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_TOMATO", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 1, false, 0, 6, false), false, true, true);
 	public static final EntityBluePrint SEED_STRAWBERRY = new EntityBluePrint(entityList, 1002, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_STRAWBERRY", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 2, false, 0, 6, false), false, true, true);
-
+	public static final EntityBluePrint SEED_PUMPKIN = new EntityBluePrint(entityList, 1003, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_PUMPKIN", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 3, false, 0, 6, false), false, true, true);
+	public static final EntityBluePrint SEED_CORN = new EntityBluePrint(entityList, 1004, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_CORN", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 4, false, 0, 6, false), false, true, true);
 	
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
@@ -108,6 +111,10 @@ public class Prefabs {
 					return level.addEntity(new SeedTomato(blueprint, level, x, y));
 				case "SEED_STRAWBERRY" :
 					return level.addEntity(new SeedStrawberry(blueprint, level, x, y));
+				case "SEED_PUMPKIN" :
+					return level.addEntity(new SeedPumpkin(blueprint, level, x, y));
+				case "SEED_CORN" :
+					return level.addEntity(new SeedCorn(blueprint, level, x, y));
 			}
 		}
 		

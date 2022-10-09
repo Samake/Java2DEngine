@@ -18,6 +18,7 @@ public class NPCJobs {
 	private NPCCore npc;
 	private Pathfinder pathfinder;
 	private long lastTimeStamp = System.currentTimeMillis();
+	private long lastStuckTimeStamp = System.currentTimeMillis();
 	
 	public boolean hasJob = false;
 	public JOBS currentJob = null;
@@ -29,7 +30,8 @@ public class NPCJobs {
 	public int targetRange = 64;
 	
 	private int stuckAttempts = 0;
-	private int stuckDistance = 0;
+	private double stuckDistance = 0;
+	private Vector2f stuckPosition = new Vector2f();
 	
 	public Map<Integer, PathNode> path;
 
@@ -54,9 +56,7 @@ public class NPCJobs {
 							}
 						}
 					} else if (currentJob.equals(JOBS.FLEE)) {
-						if (path != null) {
-							walkDestination();
-						} else {
+						if (walkDestination()) {
 							resetJob(true);
 							Log.print("NPC >> Job stopped: FLEE", OUTPUTTYPE.DEBUG);
 						}
@@ -87,9 +87,10 @@ public class NPCJobs {
 	}
 
 	private void resetJob(boolean skipDelay) {
+		currentJob = null;
 		hasJob = false;
 		lastTimeStamp = System.currentTimeMillis();
-		jobDelayValue = 0;
+		jobDelayValue = 100;
 		path = null;
 		
 		if (!skipDelay) {
@@ -98,73 +99,75 @@ public class NPCJobs {
 	}
 	
 	public void setJob(JOBS job, Vector2f fleePosition) {
-		switch(job) {
-			case IDLE:
-				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-				
-				currentJob = job;
-				hasJob = true;
-				
-				break;
-			case WALK_AROUND:
-				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-				
-				currentJob = job;
-				hasJob = true;
-				
-				createWalkJob();
-
-				break;
-			case WALK_PATH:
-				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-				
-				currentJob = job;
-				hasJob = true;
-				
-				break;
-			case FOLLOW:
-				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-				
-				currentJob = job;
-				hasJob = true;
-
-				break;
-			case FLEE:
-				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-
-				currentJob = job;
-				hasJob = true;
-				
-				createFleeJob(fleePosition);
-
-				break;
-			case FIGHT:
-				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-				
-				currentJob = job;
-				hasJob = true;
-				
-				break;
-			case FOOD:
-				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-				
-				currentJob = job;
-				hasJob = true;
-				
-				break;
-			case SLEEP:
-				Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
-				
-				currentJob = job;
-				hasJob = true;
-				
-				break;
+		if (currentJob == null || !currentJob.equals(job)) {
+			
+			switch(job) {
+				case IDLE:
+					Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+					
+					currentJob = job;
+					hasJob = true;
+					
+					break;
+				case WALK_AROUND:
+					Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+					
+					currentJob = job;
+					hasJob = true;
+					
+					createWalkJob();
+	
+					break;
+				case WALK_PATH:
+					Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+					
+					currentJob = job;
+					hasJob = true;
+					
+					break;
+				case FOLLOW:
+					Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+					
+					currentJob = job;
+					hasJob = true;
+	
+					break;
+				case FLEE:
+					Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+	
+					currentJob = job;
+					hasJob = true;
+					
+					createFleeJob(fleePosition);
+	
+					break;
+				case FIGHT:
+					Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+					
+					currentJob = job;
+					hasJob = true;
+					
+					break;
+				case FOOD:
+					Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+					
+					currentJob = job;
+					hasJob = true;
+					
+					break;
+				case SLEEP:
+					Log.print("NPC >> Job started: " + job.toString(), OUTPUTTYPE.DEBUG);
+					
+					currentJob = job;
+					hasJob = true;
+					
+					break;
+			}
 		}
 	}
 
 	private void createWalkJob() {
 		path = null;
-		stuckDistance = 0;
 		stuckAttempts = 0;
 		
 		if (npc != null) {
@@ -178,30 +181,19 @@ public class NPCJobs {
 			
 			path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
 			
-			int attempts = 0;
-			
 			while (path == null) {
-				attempts++;
-				
 				targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(-targetRange, targetRange));
 				targetPosition.y = (int) (startPosition.y + Misc.randomInteger(-targetRange, targetRange));
 				
 				path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
-				
-				if (attempts >= 16) {
-					resetJob(true);
-				}
 			};
 		}
 	}
 	
 	private void createFleeJob(Vector2f fleePosition) {
-		stuckDistance = 0;
 		stuckAttempts = 0;
 		
 		if (npc != null) {
-			int tileSize = npc.bluePrint.atlas.sheet.tileSize;
-			int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
 			startPosition.x = npc.position.x;
 			startPosition.y = npc.position.y;
 			
@@ -231,31 +223,6 @@ public class NPCJobs {
 			
 			targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(targetMinRangeX, targetMaxRangeX));
 			targetPosition.y = (int) (startPosition.y + Misc.randomInteger(targetMinRangeY, targetMaxRangeY));
-			
-			path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
-			
-			int attempts = 0;
-			
-			while (path == null) {
-				attempts++;
-				
-				targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(targetMinRangeX, targetMaxRangeX));
-				targetPosition.y = (int) (startPosition.y + Misc.randomInteger(targetMinRangeY, targetMaxRangeY));
-				
-				path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
-				
-				if (attempts >= 16) {
-					targetMinRangeX = -100;
-					targetMaxRangeX = 100;
-					targetMinRangeY = -100;
-					targetMaxRangeY = 100;
-					
-					targetPosition.x = (int) (startPosition.x  +  Misc.randomInteger(targetMinRangeX, targetMaxRangeX));
-					targetPosition.y = (int) (startPosition.y + Misc.randomInteger(targetMinRangeY, targetMaxRangeY));
-					
-					path = pathfinder.calculatePath(startPosition, targetPosition, tileSize, shiftOperator);
-				}
-			};
 		}
 	}
 	
@@ -315,8 +282,8 @@ public class NPCJobs {
 		}
 	}
 	
-	private void walkDestination() {
-		float distance = targetPosition.distance(npc.position);
+	private boolean walkDestination() {
+		double distance = Misc.getDistance(npc.position, targetPosition);
 		
 		if (distance > 16) {
 			float veloX = 0;
@@ -339,15 +306,20 @@ public class NPCJobs {
 			} else {
 				npc.velocity.set(0, 0);
 			}
-		} else {
-			path = null;
+			
+			return false;
 		}
+		
+		return true;
 	}
 	
 	private boolean isStuck() {
-		int distance = (int) npc.position.distance(targetPosition);
+		double currentDistance = Misc.getDistance(npc.position, targetPosition);
+		double lastDistance = Misc.getDistance(stuckPosition, targetPosition);
 		
-		if (stuckDistance == distance) {
+		double result = Math.abs(currentDistance - lastDistance);
+
+		if (result == stuckDistance) {
 			stuckAttempts++;
 			
 			Log.print("Check if stuck! " + stuckAttempts + " attempts.", OUTPUTTYPE.DEBUG);
@@ -355,19 +327,25 @@ public class NPCJobs {
 			stuckAttempts = 0;
 		}
 		
-		if (stuckAttempts >= 32) {
+		if (stuckAttempts >= 16) {
 			Log.print("Free stuck entity!", OUTPUTTYPE.DEBUG);
 			
-			setJob(JOBS.FLEE, null);
 			stuckDistance = 0;
 			stuckAttempts = 0;
+			stuckPosition.x = 0;
+			stuckPosition.y = 0;
+			npc.velocity.x = 0;
+			npc.velocity.y = 0;
 			
-			npc.position.y -= 5;
+			resetJob(true);
+			setJob(JOBS.WALK_AROUND, null);
 			
 			return true;
 		}
-		
-		stuckDistance = distance;
+			
+		stuckPosition.x = npc.position.x;
+		stuckPosition.y = npc.position.y;
+		stuckDistance = result;
 		
 		return false;
 	}

@@ -23,25 +23,41 @@ public class LevelGenerator {
 			Log.print("Generate new empty level " + width + "x" + height + "!");	
 		}
 		
-		Tile[][] tiles = new Tile[width][height];
-		
-		TileBluePrint tileBluePrint = addGrassVariations();
-		
 		if (tileName != null && !tileName.isEmpty()) {
-			if (!tileName.contains("GRASS")) {
-				tileBluePrint = Tiles.getBluePrintByName(tileName);
+			Tile[][] tiles = new Tile[width][height];
+			TileBluePrint tileBluePrint = Tiles.getBluePrintByName(tileName);
+			
+			if (tileBluePrint == null) {
+				tileBluePrint = Tiles.GRASS_CLEAN;
 			}
-		}
-		
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				int id = x + y * width;
+			
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+					int id = x + y * width;
 
-				tiles[x][y] = new BasicTile(id, x, y, tileBluePrint, 1.0f);
+					tiles[x][y] = new BasicTile(id, x, y, tileBluePrint, 1.0f);
+				}
 			}
+			
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+
+					Tile tile = tiles[x][y];
+					
+					if (tile != null) {
+						if (tile.bluePrint.name.equals("GRASS_CLEAN")) {
+							int id = x + y * width;
+
+							tiles[x][y] = new BasicTile(id, x, y, addGrassVariations(), 1.0f);
+						}
+					}
+				}
+			}
+			
+			level.tiles = tiles;
+		} else {
+			Log.print("Could not generate level!");
 		}
-		
-		level.tiles = tiles;
 	}
 
 	public static void generateRandomLevel(int width, int height, Level level) {
@@ -388,15 +404,15 @@ public class LevelGenerator {
 		
 		int randomValue = Misc.randomInteger(0, 100);
 		
-		if (randomValue > 0 && randomValue <= 60) {
+		if (randomValue > 0 && randomValue <= 50) {
 			result = Tiles.GRASS_CLEAN;
-		} else if (randomValue > 0 && randomValue <= 60) {
+		} else if (randomValue > 50 && randomValue < 60) {
 			result = Tiles.GRASS_LUSH_01;
-		} else if (randomValue > 60 && randomValue <= 70) {
+		} else if (randomValue > 60 && randomValue < 70) {
 			result = Tiles.GRASS_LUSH_02;
-		} else if (randomValue > 70 && randomValue <= 80) {
+		} else if (randomValue > 70 && randomValue < 80) {
 			result = Tiles.GRASS_LUSH_03;
-		} else if (randomValue > 80 && randomValue <= 85) {
+		} else if (randomValue > 80 && randomValue < 85) {
 			result = Tiles.GRASS_FLOWER_01;
 		}
 		

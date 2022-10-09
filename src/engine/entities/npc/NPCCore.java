@@ -326,7 +326,7 @@ public class NPCCore extends Entity {
 			Tile newTile = level.getTile(((int) position.x + (int) x + xa) >> bluePrint.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y + ya) >> bluePrint.atlas.sheet.getShiftOperator());
 			
 			if (lastTile != null && newTile != null) {
-				if (!lastTile.equals(newTile) && newTile.isSolid) {
+				if (!lastTile.equals(newTile) && newTile.isSolid || newTile.hasCollission) {
 					return true;
 				}
 				

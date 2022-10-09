@@ -5,6 +5,7 @@ import engine.entities.npc.NPCAnimal;
 import engine.entities.npc.NPCJobs.JOBS;
 import engine.input.InputHandler;
 import engine.level.Level;
+import engine.utils.Misc;
 import game_content.entities.player.Player;
 
 public class AnimalBunny extends NPCAnimal {
@@ -15,7 +16,7 @@ public class AnimalBunny extends NPCAnimal {
 		animSpeed = 2;
 		
 		jobs.targetRange = 32;
-		jobs.jobDelay = 2500;
+		jobs.jobDelay = 1500;
 		jobs.jobDelayValue = jobs.jobDelay;
 		
 		jobs.setJob(JOBS.WALK_AROUND, null);
@@ -25,18 +26,19 @@ public class AnimalBunny extends NPCAnimal {
 	public void update(InputHandler input, int gameSpeed) {
 		super.update(input, gameSpeed);
 		
+		animSpeed = 2;
+		
 		Player player = level.player;
 
 		if (player != null) {
-			float distance = position.distance(player.position);
-			
-			if (distance <= 32) {
-				animSpeed = 4;
-				if (!jobs.currentJob.equals(JOBS.FLEE)) {
+			if (jobs.currentJob == null || !jobs.currentJob.equals(JOBS.FLEE)) {
+				double distance = Misc.getDistance(position, player.position);
+				
+				if (distance <= 32) {
+					animSpeed = 4;
+
 					jobs.setJob(JOBS.FLEE, player.position);
 				}
-			} else {
-				animSpeed = 2;
 			}
 			
 			if (player.collissionBox != null && player.bluePrint.collission) {

@@ -48,12 +48,14 @@ public class Entity {
 	
 	public Color debugColor = Color.YELLOW;
 	public boolean saveToMap = true;
+	public boolean castShadow = true;
 	
 	public Entity(EntityBluePrint bluePrint, Level level, float x, float y) {
 		this.bluePrint = bluePrint;
 		this.level = level;
 		this.position.x = x;
 		this.position.y = y;
+		this.castShadow = bluePrint.castShadow;
 		
 		if (collissionBox != null) {
 			if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
@@ -209,7 +211,7 @@ public class Entity {
 		int xTileID = bluePrint.atlas.column;
 		int yTileID = bluePrint.atlas.row;
 		
-		if (bluePrint.castShadow) {
+		if (castShadow) {
 			for (int row = 0; row < rows; row++) {
 				for (int column = 0; column < columns; column++) {
 					if (!inWater) {
@@ -269,7 +271,7 @@ public class Entity {
 	}
 
 	private void renderEntityPartShadow(Screen screen, List<PointLight> renderListLights, int xTileID, int yTileID) {
-		if (Config.SHADOWS && bluePrint.castShadow) {
+		if (Config.SHADOWS && castShadow) {
 			for (PointLight light : renderListLights) {
 				if (light != null) {
 					if (light.type.equals(LIGHTTYPE.POINTLIGHT)) {

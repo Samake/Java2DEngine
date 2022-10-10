@@ -5,9 +5,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import engine.debug.Debug;
+import engine.debug.Log;
+import engine.debug.Log.OUTPUTTYPE;
 import engine.level.Level;
 import engine.tiles.Tile;
-import engine.utils.Misc;
 import engine.utils.Vector2f;
 import game_content.resources.Tiles.TILETYPE;
 
@@ -26,7 +27,7 @@ public class Pathfinder {
 	}
 
 	public Map<Integer, PathNode> calculatePath(Vector2f startPosition, Vector2f targetPosition, int tileSize, int shiftOperator) {
-		//Log.print("Pathfinder >> Calculate route from  " + (int) startPosition.x + ", " + (int) startPosition.y + " to "+ (int) targetPosition.x + ", " + (int) targetPosition.y, OUTPUTTYPE.DEBUG);
+		Log.print("Pathfinder >> Calculate route from  " + (int) startPosition.x + ", " + (int) startPosition.y + " to "+ (int) targetPosition.x + ", " + (int) targetPosition.y, OUTPUTTYPE.DEBUG);
 		
 		nodeList.clear();
 		nodeListValid = true;
@@ -77,12 +78,14 @@ public class Pathfinder {
 		int yDistance = Math.abs(startY - endY);
 		int heuristic = xDistance + yDistance;
 		
-		//Log.print("START >> startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
+		Log.print("START >> startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
 		
 		int id = nodeList.size() + 1;
 		nodeList.put(id, new PathNode(id, startX, startY, startTile));
 
 		int tries = 0;
+		
+		DIRECTION lastDirection = null;
 		
 		while (heuristic > 2) {
 			tries++;
@@ -101,7 +104,7 @@ public class Pathfinder {
 					startY = pathNode.y;
 					currentTile = pathNode.tile;
 					
-					//Log.print("nodeID: " + nodeID, OUTPUTTYPE.DEBUG);
+					Log.print("nodeID: " + nodeID, OUTPUTTYPE.DEBUG);
 				}
 			}
 				
@@ -109,7 +112,7 @@ public class Pathfinder {
 			yDistance = Math.abs(startY - endY);
 			heuristic = xDistance + yDistance;
 			
-			//Log.print("startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
+			Log.print("startX: " + startX + ", startY: " + startY + ", xDistance: " + xDistance + ", yDistance: " + yDistance + ", heuristic: " + heuristic, OUTPUTTYPE.DEBUG);
 			
 			DIRECTION horizontalDirection = DIRECTION.LEFT;
 			DIRECTION verticalDirection = DIRECTION.DOWN;
@@ -126,14 +129,14 @@ public class Pathfinder {
 				verticalDirection = DIRECTION.DOWN;
 			}
 			
-			addNextNode(currentTile, horizontalDirection, verticalDirection, xDistance, yDistance);
+			lastDirection = addNextNode(currentTile, horizontalDirection, verticalDirection, xDistance, yDistance, lastDirection);
 		}
 		
 		id = nodeList.size() + 1;
 		nodeList.put(id, new PathNode(id, endX, endY, endTile));
 	}
 
-	private void addNextNode(Tile currentTile, DIRECTION horizontalDirection, DIRECTION verticalDirection, int xDistance, int yDistance) {
+	private DIRECTION addNextNode(Tile currentTile, DIRECTION horizontalDirection, DIRECTION verticalDirection, int xDistance, int yDistance, DIRECTION lastDirection) {
 		if (currentTile != null) {
 			int cx = currentTile.x;
 			int cy = currentTile.y;
@@ -170,7 +173,6 @@ public class Pathfinder {
 			
 			if (leftTile != null) {
 				leftCost = 100 - ((int) (leftTile.hesitation * 100.0f));
-				rightCost += Misc.randomInteger(0, 5 + yDistance * 2);
 				
 				if (!horizontalDirection.equals(DIRECTION.LEFT)) {
 					leftCost += 1000;
@@ -180,8 +182,13 @@ public class Pathfinder {
 					leftCost += 15;
 				}
 				
-				leftCost -= xDistance * 5;
-				leftCost += yDistance * 10;
+				if (xDistance < yDistance) {
+					leftCost += 15;
+				}
+				
+				if (lastDirection != null && !lastDirection.equals(DIRECTION.LEFT)) {
+					leftCost += 15;
+				}
 				
 				if (leftTile.isSolid || leftTile.hasCollission) {
 					leftTile = null;
@@ -190,7 +197,6 @@ public class Pathfinder {
 			
 			if (rightTile != null) {
 				rightCost = 100 - ((int) (rightTile.hesitation * 100.0f));
-				rightCost += Misc.randomInteger(0, 5 + yDistance * 2);
 				
 				if (!horizontalDirection.equals(DIRECTION.RIGHT)) {
 					rightCost += 1000;
@@ -200,8 +206,13 @@ public class Pathfinder {
 					rightCost += 15;
 				}
 				
-				rightCost -= xDistance * 5;
-				rightCost += yDistance * 10;
+				if (xDistance < yDistance) {
+					rightCost += 15;
+				}
+				
+				if (lastDirection != null && !lastDirection.equals(DIRECTION.RIGHT)) {
+					rightCost += 15;
+				}
 				
 				if (rightTile.isSolid || rightTile.hasCollission) {
 					rightTile = null;
@@ -210,7 +221,6 @@ public class Pathfinder {
 			
 			if (upTile != null) {
 				upCost = 100 - ((int) (upTile.hesitation * 100.0f));
-				upCost += Misc.randomInteger(0, 5 + xDistance * 2);
 				
 				if (!verticalDirection.equals(DIRECTION.UP)) {
 					upCost += 1000;
@@ -220,8 +230,13 @@ public class Pathfinder {
 					upCost += 15;
 				}
 				
-				upCost -= yDistance * 5;
-				upCost += xDistance * 10;
+				if (yDistance < xDistance) {
+					upCost += 15;
+				}
+				
+				if (lastDirection != null && !lastDirection.equals(DIRECTION.UP)) {
+					upCost += 15;
+				}
 				
 				if (upTile.isSolid || upTile.hasCollission) {
 					upTile = null;
@@ -230,7 +245,6 @@ public class Pathfinder {
 			
 			if (downTile != null) {
 				downCost = 100 - ((int) (downTile.hesitation * 100.0f));
-				downCost += Misc.randomInteger(0, 5 + xDistance * 2);
 				
 				if (!verticalDirection.equals(DIRECTION.DOWN)) {
 					downCost += 1000;
@@ -240,15 +254,20 @@ public class Pathfinder {
 					downCost += 15;
 				}
 				
-				downCost -= yDistance * 5;
-				downCost += xDistance * 10;
+				if (yDistance < xDistance) {
+					downCost += 15;
+				}
+				
+				if (lastDirection != null && !lastDirection.equals(DIRECTION.DOWN)) {
+					downCost += 15;
+				}
 				
 				if (downTile.isSolid || downTile.hasCollission) {
 					downTile = null;
 				}
 			}
 			
-			//Log.print("Costs >> " + horizontalDirection + ", " + verticalDirection + " << l: " + leftCost + ", r: " + rightCost + ", u: " + upCost + ", d: " + downCost, OUTPUTTYPE.DEBUG);
+			Log.print("Costs >> " + horizontalDirection + ", " + verticalDirection + " << l: " + leftCost + ", r: " + rightCost + ", u: " + upCost + ", d: " + downCost, OUTPUTTYPE.DEBUG);
 			
 			Tile nextTile = null;
 			int finalCost = 9999;
@@ -278,14 +297,18 @@ public class Pathfinder {
 				direction = DIRECTION.DOWN;
 			}
 			
-			//Log.print("Result >> " + direction + " << cost: " + finalCost, OUTPUTTYPE.DEBUG);
+			Log.print("Result >> " + direction + " << cost: " + finalCost, OUTPUTTYPE.DEBUG);
 			
 			if (nextTile != null) {
 				int id = nodeList.size() + 1;
 				nodeList.put(id, new PathNode(id, nextTile.x, nextTile.y, nextTile));
+				
+				return direction;
 			} else {
 				nodeListValid = false;
 			}
 		}
+		
+		return null;
 	}
 }

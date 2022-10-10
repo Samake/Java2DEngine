@@ -22,8 +22,8 @@ public class Seed extends Prefab {
 	private int currentGrowDelay = 99999999;
 	public int growState = 0;
 
-	public Seed(EntityBluePrint blueprint, Level level, int x, int y, int baseGrowSpeed) {
-		super(blueprint, level, x, y);
+	public Seed(EntityBluePrint bluePrint, Level level, int x, int y, int baseGrowSpeed) {
+		super(bluePrint, level, x, y);
 		
 		if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
 			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 5;
@@ -42,6 +42,12 @@ public class Seed extends Prefab {
 	@Override
 	public void update(InputHandler input, int gameSpeed) {
 		super.update(input, gameSpeed);
+		
+		if (growState == 0) {
+			castShadow = false;
+		} else {
+			castShadow = bluePrint.castShadow;
+		}
 		
 		if (Editor.isEditor) {
 			if (ClickSystemEditor.pickedPrefab != null && ClickSystemEditor.pickedPrefab.equals(this)) {

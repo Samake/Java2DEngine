@@ -10,7 +10,7 @@ import engine.level.Level;
 public class NPCHuman extends NPCCore {
 	
 	public NPCHuman(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, "Svenja", x, y, speed, true);
+		super(bluePrint, level, "NPCHuman", x, y, speed, true);
 		
 		ANIMATION_IDLE = new Animation(16, 0, 100, 2);
 		ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);

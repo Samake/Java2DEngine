@@ -120,11 +120,13 @@ public class Level {
 		
 		for (int y = Canvas.minY; y < Canvas.maxY; y++) {
 			for (int x = Canvas.minX; x < Canvas.maxX; x++) {
-				Tile tile = getTile(x, y);
+				if (x > 0 || x <= width - 1 || y > 0 || y <= height - 1) {
+					Tile tile = getTile(x, y);
 
-				if (tile != null) {
-					tile.update(gameSpeed);
-					renderListTiles.add(tile);
+					if (tile != null) {
+						tile.update(gameSpeed);
+						renderListTiles.add(tile);
+					}
 				}
 			}
 		}

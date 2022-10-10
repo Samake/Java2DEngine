@@ -10,7 +10,7 @@ import engine.level.Level;
 public class NPCAnimal extends NPCCore {
 	
 	public NPCAnimal(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, "Svenja", x, y, speed, true);
+		super(bluePrint, level, "NPCAnimal", x, y, speed, true);
 		
 		ANIMATION_IDLE = new Animation(8, 0, 100, 2);
 		ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);

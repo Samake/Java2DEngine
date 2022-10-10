@@ -32,7 +32,7 @@ public class Game extends Engine {
 		input = new InputHandler(this);
 		renderer = new Renderer();
 		//scene = new TestGame("demolevel");
-		scene = new TestGame("animaltest");
+		scene = new TestGame("farmland");
 		
 		
 		Log.print(Sheets.getSpriteSheetsCount() + " tile sheets were loaded.");

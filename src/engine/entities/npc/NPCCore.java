@@ -6,11 +6,13 @@ import java.util.List;
 import engine.animation.Animation;
 import engine.entities.Entity;
 import engine.entities.EntityBluePrint;
+import engine.entities.npc.NPCJobs.JOBS;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.pathfinding.Pathfinder;
 import engine.tiles.Tile;
 import engine.utils.Misc;
+import engine.utils.Vector2f;
 import game_content.entities.effects.EffectWaterRipples;
 import game_content.resources.Tiles;
 
@@ -50,6 +52,7 @@ public class NPCCore extends Entity {
 	public Animation animation;
 	public int animSpeed = 1;
 	
+	private Vector2f spawnPosition = new Vector2f();
 	public Pathfinder pathfinder;
 	public NPCJobs jobs;
 	
@@ -73,6 +76,9 @@ public class NPCCore extends Entity {
 			jobs.jobDelay = 2000;
 			jobs.jobDelayValue = jobs.jobDelay;
 		}
+		
+		spawnPosition.x = x;
+		spawnPosition.y = y;
 	}
 
 	public void move() {
@@ -128,6 +134,14 @@ public class NPCCore extends Entity {
 		if (!level.editorMode) {
 			if (jobs != null) {
 				jobs.update(gameSpeed);
+				
+				if (jobs.currentJob != null && jobs.currentJob.equals(JOBS.RESPAWN)) {
+					position.x = spawnPosition.x;
+					position.y= spawnPosition.y;
+					
+					jobs.reset(false);
+					jobs.setJob(JOBS.IDLE, null);
+				}
 			}
 		
 			flipModifier = (flipModifier + gameSpeed)%100;
@@ -328,9 +342,9 @@ public class NPCCore extends Entity {
 			if (lastTile != null && newTile != null) {
 				if (!lastTile.equals(newTile) && newTile.isSolid || newTile.hasCollission) {
 					return true;
+				} else {
+					return false;
 				}
-				
-				return false;
 			}
 		}
 

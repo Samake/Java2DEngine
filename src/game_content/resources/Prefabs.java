@@ -11,9 +11,14 @@ import game_content.entities.prefabs.CampFire;
 import game_content.entities.prefabs.Fountain;
 import game_content.entities.prefabs.LampPost;
 import game_content.entities.prefabs.SpawnEgg;
+import game_content.entities.prefabs.farming.SeedAubergine;
 import game_content.entities.prefabs.farming.SeedCarrot;
 import game_content.entities.prefabs.farming.SeedCorn;
+import game_content.entities.prefabs.farming.SeedMelon;
+import game_content.entities.prefabs.farming.SeedPotato;
 import game_content.entities.prefabs.farming.SeedPumpkin;
+import game_content.entities.prefabs.farming.SeedRadish;
+import game_content.entities.prefabs.farming.SeedSalad;
 import game_content.entities.prefabs.farming.SeedStrawberry;
 import game_content.entities.prefabs.farming.SeedTomato;
 
@@ -54,7 +59,11 @@ public class Prefabs {
 	public static final EntityBluePrint SEED_STRAWBERRY = new EntityBluePrint(entityList, 1002, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_STRAWBERRY", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 2, false, 0, 6, false), false, true, true);
 	public static final EntityBluePrint SEED_PUMPKIN = new EntityBluePrint(entityList, 1003, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_PUMPKIN", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 3, false, 0, 6, false), false, true, true);
 	public static final EntityBluePrint SEED_CORN = new EntityBluePrint(entityList, 1004, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_CORN", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 4, false, 0, 6, false), false, true, true);
-	
+	public static final EntityBluePrint SEED_POTATO = new EntityBluePrint(entityList, 1005, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_POTATO", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 5, false, 0, 6, false), false, true, true);
+	public static final EntityBluePrint SEED_MELON = new EntityBluePrint(entityList, 1006, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_MELON", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 6, false, 0, 6, false), false, true, true);
+	public static final EntityBluePrint SEED_RADISH = new EntityBluePrint(entityList, 1007, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_RADISH", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 7, false, 0, 6, false), false, true, true);
+	public static final EntityBluePrint SEED_SALAD = new EntityBluePrint(entityList, 1008, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_SALAD", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 8, false, 0, 6, false), false, true, true);
+	public static final EntityBluePrint SEED_AUBERGINE = new EntityBluePrint(entityList, 1009, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_AUBERGINE", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 10, false, 0, 6, false), false, true, true);
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -115,6 +124,16 @@ public class Prefabs {
 					return level.addEntity(new SeedPumpkin(blueprint, level, x, y));
 				case "SEED_CORN" :
 					return level.addEntity(new SeedCorn(blueprint, level, x, y));
+				case "SEED_POTATO" :
+					return level.addEntity(new SeedPotato(blueprint, level, x, y));
+				case "SEED_MELON" :
+					return level.addEntity(new SeedMelon(blueprint, level, x, y));	
+				case "SEED_RADISH" :
+					return level.addEntity(new SeedRadish(blueprint, level, x, y));	
+				case "SEED_SALAD" :
+					return level.addEntity(new SeedSalad(blueprint, level, x, y));
+				case "SEED_AUBERGINE" :
+					return level.addEntity(new SeedAubergine(blueprint, level, x, y));	
 			}
 		}
 		

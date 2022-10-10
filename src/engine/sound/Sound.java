@@ -6,11 +6,11 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineEvent;
 
+import engine.utils.Misc;
 import engine.utils.Vector2f;
 
 public class Sound implements Runnable {
 	
-	private Thread thread;
 	public Clip clip;
 	private AudioInputStream audioStream;
 	public boolean looped = false;
@@ -30,8 +30,6 @@ public class Sound implements Runnable {
 		position.x = x;
 		position.y = y;
 		
-		thread = new Thread(this);
-		
 		try {
 			clip = AudioSystem.getClip();
 			
@@ -49,7 +47,11 @@ public class Sound implements Runnable {
 			
 			clip.open(audioStream);
 			
-			setVolume(maxVolume);
+			if (!global) {
+				setVolume(-100.0f);
+			} else {
+				setVolume(maxVolume);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,43 +65,34 @@ public class Sound implements Runnable {
 	}
 	
 	public void update(int gameSpeed) {
-		float currentVolume = maxVolume;
-		
 		if (clip != null) {
-			if (!global) {
+			if (!global && isStarted) {
 				if (SoundManager.listenerPosition != null) {
-					float distance = SoundManager.listenerPosition.distance(position);
+					double distance = Misc.getDistance(SoundManager.listenerPosition, position);
 					
-					if (distance >= maxDistance) {
-						currentVolume = (maxVolume - ((maxVolume / maxDistance) * distance));
-						
-						if (currentVolume >= maxVolume) {
-							currentVolume = maxVolume;
-						}
-						
-						if (currentVolume <= 0.0f) {
-							currentVolume = 0.0f;
-						}
+					if (distance <= maxDistance) {
+						float volume = (float) (maxVolume - ((maxVolume / maxDistance) * distance));
+						setVolume(volume);
+					} else {
+						//setVolume(-80.0f);
 					}
-				} else {
-					currentVolume = 0.0f;
 				}
 			}
 		}
-		
-		setVolume(currentVolume);
 	}
 	
 	private void setVolume(float volume) {
 		FloatControl volumeBase = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		float volumeValue = -1 * (100.0f - volume);
+		volume = 100.0f - volume;
+		float volumeRange = Math.abs(volumeBase.getMinimum() - volumeBase.getMaximum());
+		float volumeValue = volumeBase.getMaximum() - ((volumeRange / 100.0f) * volume);
 		
-		if (volumeValue >= volumeBase.getMaximum()) {
-			volumeValue = volumeBase.getMaximum();
+		if (volumeValue < volumeBase.getMinimum()) {
+			volumeValue = volumeBase.getMinimum();
 		}
 		
-		if (volumeValue <= volumeBase.getMinimum()) {
-			volumeValue = volumeBase.getMinimum();
+		if (volumeValue > volumeBase.getMaximum()) {
+			volumeValue = volumeBase.getMaximum();
 		}
 		
 		volumeBase.setValue(volumeValue);
@@ -108,18 +101,15 @@ public class Sound implements Runnable {
 	public void start() {
 		if (!isStarted) {
 			if (clip != null) {
-				thread.start();
 				clip.start();
 				isStarted = true;
 			}
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void stop() {
 		if (clip != null) {
 			 clip.close();
-			 thread.stop();
 			 isStarted = false;
 			 SoundManager.removeSound(this);
 		}

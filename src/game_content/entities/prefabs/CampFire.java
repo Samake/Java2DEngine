@@ -41,7 +41,7 @@ public class CampFire extends Prefab {
 		smoke = new EffectSmokeWhite(level, x, y);
 		smoke.saveToMap = false;
 		
-		sound = SoundManager.playSound(Sounds.AMBIENT_CAMPFIRE, position.x, position.y, 90.0f, 100, true, false);
+		sound = SoundManager.playSound(Sounds.AMBIENT_CAMPFIRE, position.x, position.y, 65.0f, 128.0f, true, false);
 		sound.saveToMap = false;
 	}
 

@@ -154,6 +154,8 @@ public class LevelEditor extends Engine {
 	
 	@Override
 	public void update(int gameSpeed) {
+		ClickSystemEditor.update(input, gameSpeed);
+		
 		if (renderer != null) {
 			renderer.update(input, gameSpeed);
 		}

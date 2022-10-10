@@ -46,8 +46,8 @@ public class SunLight extends PointLight {
 
 	public void updateLightValues(Time time, Color ambientColor) {
 		if (enabled) {
-			float xOffsetRange = Config.WINDOW_WIDTH / 24;
-			xOffset = xOffsetRange * time.hour;
+			//float xOffsetRange = Config.WINDOW_WIDTH / 24;
+			//xOffset = xOffsetRange * time.hour;
 			color = ambientColor;
 		}
 	}

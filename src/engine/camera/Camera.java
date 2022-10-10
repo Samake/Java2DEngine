@@ -6,6 +6,7 @@ import engine.input.InputHandler;
 import engine.sound.SoundManager;
 import engine.utils.Vector2f;
 import game_editor.input.ClickSystemEditor;
+import testgame.input.ClickSystem;
 
 public class Camera {
 
@@ -49,6 +50,7 @@ public class Camera {
 		
 		SoundManager.listenerPosition.set(position.x, position.y);
 		ClickSystemEditor.offsetPosition.set(position.x, position.y);
+		ClickSystem.offsetPosition.set(position.x, position.y);
 	}
 	
 	public void setPosition(int x, int y) {

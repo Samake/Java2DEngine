@@ -76,6 +76,16 @@ public class Objects {
 	public static final EntityBluePrint FENCE_DOOR_H_L = new EntityBluePrint(entityList, 416, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_DOOR_H_L", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 3, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint FENCE_DOOR_H_R = new EntityBluePrint(entityList, 417, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_DOOR_H_R", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 4, false, 0, 0, false), true, true, true);
 
+	public static final EntityBluePrint ITEM_CARROT = new EntityBluePrint(entityList, 500, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_CARROT", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 0, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_TOMATO = new EntityBluePrint(entityList, 501, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_TOMATO", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 1, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_STRAWBERRY = new EntityBluePrint(entityList, 502, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_STRAWBERRY", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 2, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_PUMPKIN = new EntityBluePrint(entityList, 503, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_PUMPKIN", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 3, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_CORN = new EntityBluePrint(entityList, 504, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_CORN", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 4, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_POTATO = new EntityBluePrint(entityList, 505, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_POTATO", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 5, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_MELON = new EntityBluePrint(entityList, 506, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_MELON", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 6, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_RADISH = new EntityBluePrint(entityList, 507, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_RADISH", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 7, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_SALAD = new EntityBluePrint(entityList, 508, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_SALAD", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 8, false, 0, 0, false), false, true, true);
+	public static final EntityBluePrint ITEM_AUBERGINE = new EntityBluePrint(entityList, 509, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_AUBERGINE", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 10, false, 0, 0, false), false, true, true);
 	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
@@ -116,14 +126,10 @@ public class Objects {
 					return level.addEntity(new Fence(blueprint, level, x, y));	
 				case "FENCE_D_C_L_C_R_C" :
 					return level.addEntity(new Fence(blueprint, level, x, y));	
-				
-				
 				case "FENCE_DOOR_H_L" :
 					return level.addEntity(new FenceDoor(blueprint, level, x, y));
 				case "FENCE_DOOR_H_R" :
 					return level.addEntity(new FenceDoor(blueprint, level, x, y));
-					
-					
 				case "IRON_ORE" :
 					return level.addEntity(new CollectableItem(blueprint, level, x, y));
 				case "STONE" :
@@ -137,6 +143,26 @@ public class Objects {
 				case "SIVLER_ORE" :
 					return level.addEntity(new CollectableItem(blueprint, level, x, y));
 				case "KEY_01" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_CARROT" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_TOMATO" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_STRAWBERRY" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));	
+				case "ITEM_PUMPKIN" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_CORN" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_POTATO" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_MELON" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_RADISH" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_SALAD" :
+					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+				case "ITEM_AUBERGINE" :
 					return level.addEntity(new CollectableItem(blueprint, level, x, y));
 				default:
 					return level.addEntity(new ObjectStatic(blueprint, level, x, y)); 

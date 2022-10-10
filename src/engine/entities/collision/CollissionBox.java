@@ -1,5 +1,6 @@
 package engine.entities.collision;
 
+import engine.utils.Misc;
 import engine.utils.Vector2f;
 
 public class CollissionBox {
@@ -44,7 +45,7 @@ public class CollissionBox {
 			size = getMaxSize();
 		}
 		
-		if (box.position.distance(this.position) < size) {
+		if (Misc.getDistance(box.position, this.position) < size * 2) {
 			return true;
 		}
 		

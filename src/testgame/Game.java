@@ -14,6 +14,7 @@ import game_content.resources.Prefabs;
 import game_content.resources.Sheets;
 import game_content.resources.Sounds;
 import game_content.resources.Tiles;
+import testgame.input.ClickSystem;
 
 public class Game extends Engine {
 
@@ -47,6 +48,8 @@ public class Game extends Engine {
 	
 	@Override
 	public void update(int gameSpeed) {
+		ClickSystem.update(input, gameSpeed);
+		
 		if (renderer != null) {
 			renderer.update(input, gameSpeed);
 		}

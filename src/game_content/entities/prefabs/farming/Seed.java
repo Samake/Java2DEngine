@@ -84,6 +84,10 @@ public class Seed extends Prefab {
 			if (placingTile != null) {	
 				currentGrowDelay = growDelay;
 				
+				if (!placingTile.hasCollission) {
+					placingTile.hasCollission = true;
+				}
+				
 				if (!placingTile.bluePrint.equals(Tiles.EARTH_CLEAN)) {
 					currentGrowDelay = growDelay * 9999999;
 					

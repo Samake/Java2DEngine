@@ -123,6 +123,8 @@ public class NPCCore extends Entity {
 				position.add(velocity);
 				numSteps++;
 				return;
+			} else {
+				return;
 			}
 		}
 	};
@@ -205,14 +207,19 @@ public class NPCCore extends Entity {
 	}
 	
 	public void handleAnimation(int gameSpeed) {
-		animation = ANIMATION_IDLE;
-		
-		// idle
 		if (!isMoving) {
-			animation = ANIMATION_IDLE;
-		}
-		
-		if (isMoving) {
+			if (jobs != null) {
+				if (jobs.currentJob != null) {
+					if (jobs.currentJob.equals(JOBS.IDLE)) {
+						animation = ANIMATION_IDLE;
+					}
+				} else {
+					animation = ANIMATION_IDLE;
+				}
+			} else {
+				animation = ANIMATION_IDLE;
+			}
+		} else {
 			// walk up
 			if (movingDir == 0) {
 				animation = ANIMATION_WALK_UP;
@@ -337,7 +344,7 @@ public class NPCCore extends Entity {
 	protected boolean isSolidTile(int xa, int ya, int x, int y) {
 		if (level != null && bluePrint.atlas != null) {
 			Tile lastTile = level.getTile(((int) position.x + (int) x) >> bluePrint.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y) >> bluePrint.atlas.sheet.getShiftOperator());
-			Tile newTile = level.getTile(((int) position.x + (int) x + xa) >> bluePrint.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y + ya) >> bluePrint.atlas.sheet.getShiftOperator());
+			Tile newTile = level.getTile(((int) position.x + (int) x + xa) >> bluePrint.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y + ya * 2) >> bluePrint.atlas.sheet.getShiftOperator());
 			
 			if (lastTile != null && newTile != null) {
 				if (!lastTile.equals(newTile) && newTile.isSolid || newTile.hasCollission) {

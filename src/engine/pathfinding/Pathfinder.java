@@ -179,7 +179,7 @@ public class Pathfinder {
 				}
 				
 				if (leftTile.bluePrint.type.equals(TILETYPE.WATER)) {
-					leftCost += 15;
+					leftCost += 5;
 				}
 				
 				if (xDistance < yDistance) {
@@ -203,7 +203,7 @@ public class Pathfinder {
 				}
 				
 				if (rightTile.bluePrint.type.equals(TILETYPE.WATER)) {
-					rightCost += 15;
+					rightCost += 5;
 				}
 				
 				if (xDistance < yDistance) {
@@ -227,7 +227,7 @@ public class Pathfinder {
 				}
 				
 				if (upTile.bluePrint.type.equals(TILETYPE.WATER)) {
-					upCost += 15;
+					upCost += 5;
 				}
 				
 				if (yDistance < xDistance) {
@@ -251,7 +251,7 @@ public class Pathfinder {
 				}
 				
 				if (downTile.bluePrint.type.equals(TILETYPE.WATER)) {
-					downCost += 15;
+					downCost += 5;
 				}
 				
 				if (yDistance < xDistance) {

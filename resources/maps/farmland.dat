@@ -16536,4 +16536,5 @@ levelTiles:16384
 {type:Prefab,name:SEED_AUBERGINE,x:1192.0,y:1240.0}
 {type:Prefab,name:SEED_AUBERGINE,x:1208.0,y:1240.0}
 {type:Prefab,name:SEED_AUBERGINE,x:1224.0,y:1240.0}
+{type:Prefab,name:SPAWNEGG_WOMAN_04,x:1044.0,y:1019.0}
 [LIGHTS]

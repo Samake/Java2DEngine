@@ -3,12 +3,12 @@ package engine.core;
 public class Config {
 
 	public static String APPLICATION_NAME = "Java 2D Game Engine";
-	public static String APPLICATION_VERSION = "v0.73.080";
+	public static String APPLICATION_VERSION = "v0.73.081";
 	
 	/** VISUAL SETTINGS */
-	public static int RESOLUTION_WIDTH = 1366;
-	public static int RESOLUTION_HEIGHT = 768;
-	public static int WINDOW_SCALE = 4;
+	public static int RESOLUTION_WIDTH = 1920;
+	public static int RESOLUTION_HEIGHT = 1080;
+	public static int WINDOW_SCALE = 6;
 	public static int WINDOW_WIDTH = RESOLUTION_WIDTH / WINDOW_SCALE;
 	public static int WINDOW_HEIGHT = RESOLUTION_HEIGHT / WINDOW_SCALE;
 	

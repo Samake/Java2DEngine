@@ -8,6 +8,7 @@ import engine.input.InputHandler;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import engine.utils.Misc;
+import engine.utils.Vector2f;
 import game_content.resources.Sheets;
 
 public abstract class Light extends Entity {
@@ -21,6 +22,7 @@ public abstract class Light extends Entity {
 	public int radius;
 	public boolean pulsing = false;
 	public boolean flickering = false;
+	public int flickeringOffset = 0;
 	public int delay = 0;
 	public boolean enabledAtDay = true;
 	public boolean enabled = true;
@@ -29,8 +31,9 @@ public abstract class Light extends Entity {
 	private double pulseFactor = 0.0;
 	
 	private long lastTick = System.currentTimeMillis();
+	private Vector2f basePosition = new Vector2f();
 
-	public Light(Level level, float x, float y, Color color, int radius, boolean pulsing, boolean flickering, int delay, boolean enabledAtDay) {
+	public Light(Level level, float x, float y, Color color, int radius, boolean pulsing, boolean flickering, int flickeringOffset, int delay, boolean enabledAtDay) {
 		super(new EntityBluePrint(null, 0, ENTITYTYPE.LIGHT, RENDERTYPE.R1X1, "LIGHT", new SpriteAtlas(Sheets.EDITOR_SHEET, 2, 1, false, 0, 0, false), false, false, false), level, x, y);
 		
 		this.position.x = x;
@@ -39,8 +42,12 @@ public abstract class Light extends Entity {
 		this.radius = radius;
 		this.pulsing = pulsing;
 		this.flickering = flickering;
+		this.flickeringOffset = flickeringOffset;
 		this.delay = delay;
 		this.enabledAtDay = enabledAtDay;
+		
+		basePosition.x = x;
+		basePosition.y = y;
 	}
 	
 	public void update(InputHandler input, int gameSpeed) {
@@ -61,6 +68,8 @@ public abstract class Light extends Entity {
 				if (lastTick + currentDelay < currentTick) {
 					alphaModifier =  (float) Misc.randomInteger(700, 1000) / 1000;
 					lastTick = currentTick;
+					position.x = basePosition.x + Misc.randomInteger(-flickeringOffset, flickeringOffset);
+					position.y = basePosition.y + Misc.randomInteger(-flickeringOffset, flickeringOffset);
 				}
 			}
 		}

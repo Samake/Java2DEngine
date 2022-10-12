@@ -217,7 +217,7 @@ public class Editor extends GameScene {
 				
 				int radius = Misc.randomInteger(25, 150);
 
-				new PointLight(level, (int) position.x, (int) position.y, new Color(r, g, b, 255), radius, false, false, 200, false);
+				new PointLight(level, (int) position.x, (int) position.y, new Color(r, g, b, 255), radius, false, false, 0, 200, false);
 			}
 		}
 	}

@@ -11,8 +11,8 @@ public class PointLight extends Light {
 	public int screenX = 0;
 	public int screenY = 0;
 	
-	public PointLight(Level level, float x, float y, Color color, int radius, boolean pulsing, boolean flickering, int delay, boolean enabledAtDay) {
-		super(level, x, y, color, radius, pulsing, flickering, delay, enabledAtDay);
+	public PointLight(Level level, float x, float y, Color color, int radius, boolean pulsing, boolean flickering, int flickeringOffset, int delay, boolean enabledAtDay) {
+		super(level, x, y, color, radius, pulsing, flickering, flickeringOffset,delay, enabledAtDay);
 		
 		type = LIGHTTYPE.POINTLIGHT;
 		

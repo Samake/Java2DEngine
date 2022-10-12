@@ -31,7 +31,7 @@ public class Tiles {
 	public static final TileBluePrint VOID = new TileBluePrint(tileTypes, voidIndex, TILETYPE.VOID, "VOID", new SpriteAtlas(Sheets.TILES_SHEET, 0, 0, false, 0, 0, false), 0.1f, true);
 	
 	/** WATER **/
-	public static final TileBluePrint WATER_CLEAN = new TileBluePrint(tileTypes, waterIndex + 0, TILETYPE.WATER, "WATER_CLEAN",  new SpriteAtlas(Sheets.TILES_SHEET, 15, 0, true, 250, 3, true), waterHestitation, false);	
+	public static final TileBluePrint WATER_CLEAN = new TileBluePrint(tileTypes, waterIndex + 0, TILETYPE.WATER, "WATER_CLEAN",  new SpriteAtlas(Sheets.TILES_SHEET, 15, 0, true, 300, 7, true), waterHestitation, false);	
 	
 	/** GRASS **/
 	public static final TileBluePrint GRASS_CLEAN = new TileBluePrint(tileTypes, grassIndex + 0, TILETYPE.GRASS, "GRASS_CLEAN",  new SpriteAtlas(Sheets.TILES_SHEET, 1, 2, false, 0, 0, false), grassHestitation, false);

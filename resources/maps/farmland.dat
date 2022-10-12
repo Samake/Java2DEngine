@@ -1,7 +1,9 @@
 [HEADER]
-levelFileName:farmland.dat
-levelSize:128x128
-levelTiles:16384
+name:farmland.dat
+size:128x128
+tiles:16384
+daytime:2
+daycycle:true
 [TILES]
 {id:0,tile:104,x:0,y:0}
 {id:128,tile:100,x:0,y:1}
@@ -16449,7 +16451,6 @@ levelTiles:16384
 {type:Entity,name:BARREL_01,x:1387.0,y:1109.0}
 {type:Entity,name:BARREL_01,x:1388.0,y:1120.0}
 {type:Entity,name:SCARECROW_01,x:1233.0,y:1069.0}
-{type:Entity,name:SCARECROW_03,x:1003.0,y:1120.0}
 {type:Entity,name:MUSHROOM_04,x:1272.0,y:945.0}
 {type:Entity,name:MUSHROOM_04,x:1169.0,y:896.0}
 {type:Entity,name:MUSHROOM_04,x:1046.0,y:899.0}
@@ -16504,7 +16505,7 @@ levelTiles:16384
 {type:Prefab,name:BALL_01,x:942.0,y:998.0}
 {type:Prefab,name:CAMPFIRE,x:1203.0,y:980.0}
 {type:Prefab,name:LAMPPOST_08,x:1393.0,y:1234.0}
-{type:Prefab,name:FOUNTAIN_01,x:1274.0,y:1087.0}
+{type:Prefab,name:FOUNTAIN_01,x:1283.0,y:1069.0}
 {type:Prefab,name:SPAWNEGG_BUNNY_BROWN,x:1350.0,y:1121.0}
 {type:Prefab,name:SPAWNEGG_BUNNY_BROWN,x:1370.0,y:1131.0}
 {type:Prefab,name:SPAWNEGG_BUNNY_BROWN,x:1357.0,y:1140.0}
@@ -16537,4 +16538,5 @@ levelTiles:16384
 {type:Prefab,name:SEED_AUBERGINE,x:1208.0,y:1240.0}
 {type:Prefab,name:SEED_AUBERGINE,x:1224.0,y:1240.0}
 {type:Prefab,name:SPAWNEGG_WOMAN_04,x:1044.0,y:1019.0}
+{type:Prefab,name:SCARECROW_PUMKIN,x:1004.0,y:1122.0}
 [LIGHTS]

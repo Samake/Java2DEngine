@@ -10,6 +10,13 @@ public class Fountain extends Prefab {
 
 	public Fountain(EntityBluePrint blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
+		
+		collissionOffset = 8;
+		
+		collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 1.5f) + collissionOffset;
+		collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+		collissionBox.minY = collissionOffset;
+		collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
 	}
 
 	@Override

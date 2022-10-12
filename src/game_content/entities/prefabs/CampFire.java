@@ -34,7 +34,7 @@ public class CampFire extends Prefab {
 		
 		smokeOffset.y = -bluePrint.atlas.sheet.tileSize;
 		
-		light = new PointLight(level, x, y, new Color(255, 128, 64, 255), 48, false, true, 200, false);
+		light = new PointLight(level, x, y, new Color(220, 75, 15, 255), 96, false, true, 5, 200, false);
 		light.enabledAtDay = true;
 		light.saveToMap = false;
 		

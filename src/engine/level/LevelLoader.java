@@ -15,8 +15,8 @@ import engine.debug.Log;
 import engine.debug.Log.OUTPUTTYPE;
 import engine.entities.Entity;
 import engine.entities.Entity.ENTITYTYPE;
-import engine.entities.lights.PointLight;
 import engine.entities.EntityBluePrint;
+import engine.entities.lights.PointLight;
 import engine.tiles.BasicTile;
 import engine.tiles.Tile;
 import game_content.entities.player.Player;
@@ -57,13 +57,27 @@ public class LevelLoader {
 					    while ((line = bufferedReader.readLine()) != null) {
 					    	line = line.trim();
 
-					    	if (line.contains("levelSize")) {
+					    	if (line.contains("size")) {
 					    		String[] levelSizeLine = line.split(":");
 					    		String[] levelSize = levelSizeLine[1].split("x");
 						    		
 						    	width = Integer.valueOf(levelSize[0]);
 						    	height = Integer.valueOf(levelSize[1]);
 						    }
+					    	
+					    	if (line.contains("daytime")) {
+					    		String[] dayTimeLine = line.split(":");
+					    		int dayTime = Integer.valueOf(dayTimeLine[1]);
+					    		
+					    		level.environment.time.hour = dayTime;
+					    	}
+					    	
+					    	if (line.contains("daycycle")) {
+					    		String[] dayCycleLine = line.split(":");
+					    		boolean dayCycle = Boolean.valueOf(dayCycleLine[1]);
+					    		
+					    		level.environment.time.dayCycle = dayCycle;
+					    	}
 					    	
 					    	if (line.contains("tile:")) {
 					    		line = line.replace("{", "");
@@ -230,7 +244,7 @@ public class LevelLoader {
 			int delay = Integer.valueOf(delayParts[1]);
 			boolean enabledAtDay = Boolean.valueOf(enabledAtDayParts[1]);
 			
-			new PointLight(level, (int) x, (int) y, new Color(red, green, blue, 255), radius, pulsing, flickering, delay, enabledAtDay);
+			new PointLight(level, (int) x, (int) y, new Color(red, green, blue, 255), radius, pulsing, flickering, 2, delay, enabledAtDay);
 		}
 	}
 	
@@ -319,11 +333,15 @@ public class LevelLoader {
 	private static void writeHeader(BufferedWriter bufferedWriter, Level level, String levelFileName) throws Exception {
 		bufferedWriter.write("[HEADER]");
 		bufferedWriter.newLine();
-		bufferedWriter.write("levelFileName:" + levelFileName);
+		bufferedWriter.write("name:" + levelFileName);
 		bufferedWriter.newLine();
-		bufferedWriter.write("levelSize:" + level.width + "x" + level.height);
+		bufferedWriter.write("size:" + level.width + "x" + level.height);
 		bufferedWriter.newLine();
-		bufferedWriter.write("levelTiles:" + level.width * level.height);
+		bufferedWriter.write("tiles:" + level.width * level.height);
+		bufferedWriter.newLine();
+		bufferedWriter.write("daytime:" + level.environment.time.hour);
+		bufferedWriter.newLine();
+		bufferedWriter.write("daycycle:" + level.environment.time.dayCycle);
 		bufferedWriter.newLine();
 	}
 	

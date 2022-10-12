@@ -16,7 +16,7 @@ public class SunLight extends PointLight {
 	private float xOffset = 0;
 	
 	public SunLight(Level level, float x, float y, Color color) {
-		super(level, x, y, color, Config.WINDOW_WIDTH * 2, false, false, 9999, true);
+		super(level, x, y, color, Config.WINDOW_WIDTH * 2, false, false, 0, 9999, true);
 
 		type = LIGHTTYPE.AMBIENTLIGHT;
 		

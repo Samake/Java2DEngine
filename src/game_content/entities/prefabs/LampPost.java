@@ -26,7 +26,7 @@ public class LampPost extends Prefab {
 		yTileEnabled = yTile;
 		yTileDisabled = yTile + 3;
 		
-		light = new PointLight(level, x, y, new Color(255, 200, 90, 255), 96, false, false, 200, false);
+		light = new PointLight(level, x, y, new Color(220, 180, 70, 255), 160, false, false, 0, 200, false);
 		light.enabledAtDay = false;
 		light.saveToMap = false;
 	}

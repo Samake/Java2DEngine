@@ -13,6 +13,7 @@ public class Sheets {
 	public final static SpriteSheet PLANTS_SHEET = new SpriteSheet(sheetTypes, 4, "/textures/plantsSheet.png", 32);
 	public final static SpriteSheet EFFECTS_SHEET = new SpriteSheet(sheetTypes, 5, "/textures/effectsSheet.png", 32);
 	public final static SpriteSheet FARMING_SHEET = new SpriteSheet(sheetTypes, 6, "/textures/farmingSheet.png", 32);
+	public final static SpriteSheet BUILDINGS_SHEET = new SpriteSheet(sheetTypes, 7, "/textures/buildingsSheet.png", 32);
 	
 	public final static SpriteSheet WOMEN_01_SHEET = new SpriteSheet(sheetTypes, 100, "/textures/women01.png", 32);
 	public final static SpriteSheet WOMEN_02_SHEET = new SpriteSheet(sheetTypes, 101, "/textures/women02.png", 32);

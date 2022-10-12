@@ -138,7 +138,7 @@ public class LevelEditor extends Engine {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
-		frame.setTitle("NEW");
+		frame.setTitle("LevelEditor");
 		frame.requestFocusInWindow();
 		
 		frame.addWindowListener(new WindowAdapter() {

@@ -9,6 +9,7 @@ import engine.sprites.SpriteAtlas;
 import game_content.entities.prefabs.Ball;
 import game_content.entities.prefabs.CampFire;
 import game_content.entities.prefabs.Fountain;
+import game_content.entities.prefabs.GlowWorm;
 import game_content.entities.prefabs.LampPost;
 import game_content.entities.prefabs.ScareCrowPumpkin;
 import game_content.entities.prefabs.SpawnEgg;
@@ -53,6 +54,8 @@ public class Prefabs {
 	public static final EntityBluePrint LAMPPOST_07 = new EntityBluePrint(entityList, 306, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_07", new SpriteAtlas(Sheets.OBJECTS_SHEET, 11, 5, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint LAMPPOST_08 = new EntityBluePrint(entityList, 307, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_08", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 5, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint SCARECROW_PUMKIN = new EntityBluePrint(entityList, 308, ENTITYTYPE.PREFAB, RENDERTYPE.R1X2, "SCARECROW_PUMKIN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 20, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint GLOWWORM = new EntityBluePrint(entityList, 309, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "GLOWWORM", new SpriteAtlas(Sheets.OBJECTS_SHEET, 18, 0, false, 0, 0, false), false, false, true);
+	
 	public static final EntityBluePrint FOUNTAIN_01 = new EntityBluePrint(entityList, 350, ENTITYTYPE.PREFAB, RENDERTYPE.R3X3, "FOUNTAIN_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 6, false, 0, 0, false), true, true, true);
 	
 	public static final EntityBluePrint SEED_CARROT = new EntityBluePrint(entityList, 1000, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_CARROT", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 0, false, 0, 6, false), false, true, true);
@@ -117,6 +120,8 @@ public class Prefabs {
 					return level.addEntity(new Fountain(blueprint, level, x, y));
 				case "SCARECROW_PUMKIN" :
 					return level.addEntity(new ScareCrowPumpkin(blueprint, level, x, y));	
+				case "GLOWWORM" :
+					return level.addEntity(new GlowWorm(blueprint, level, x, y));
 				case "SEED_CARROT" :
 					return level.addEntity(new SeedCarrot(blueprint, level, x, y));
 				case "SEED_TOMATO" :

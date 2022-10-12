@@ -35,7 +35,6 @@ public class Game extends Engine {
 		//scene = new TestGame("demolevel");
 		scene = new TestGame("farmland");
 		
-		
 		Log.print(Sheets.getSpriteSheetsCount() + " tile sheets were loaded.");
 		Log.print(Tiles.getTilesCount() + " tiles were loaded.");
 		Log.print(Sounds.getSoundsCount() + " sounds were loaded.");

@@ -79,6 +79,11 @@ public class EntityBluePrint {
 			height = 3;
 		}
 		
+		if (renderType.equals(RENDERTYPE.R3X5)) {
+			width = 3;
+			height = 5;
+		}
+		
 		if (renderType.equals(RENDERTYPE.R4X4)) {
 			width = 4;
 			height = 4;

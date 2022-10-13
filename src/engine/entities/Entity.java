@@ -19,7 +19,7 @@ public class Entity {
 	}
 	
 	public enum RENDERTYPE {
-		R1X1, R1X2, R1X3, R2X1, R2X2, R2X3, R3X2, R3X3, R4X4, R4X6, R5X5, R6X6
+		R1X1, R1X2, R1X3, R2X1, R2X2, R2X3, R3X2, R3X3, R3X5, R4X4, R4X6, R5X5, R6X6
 	}
 	
 	public EntityBluePrint bluePrint;
@@ -105,6 +105,13 @@ public class Entity {
 				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
 				collissionBox.minY = collissionOffset;
 				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+			}
+			
+			if (bluePrint.renderType.equals(RENDERTYPE.R3X5)) {
+				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 1.5f) + collissionOffset;
+				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+				collissionBox.minY = collissionOffset;
+				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 2.5f) - collissionOffset;
 			}
 			
 			if (bluePrint.renderType.equals(RENDERTYPE.R4X4)) {
@@ -210,9 +217,9 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R3X2)) {
+		if (bluePrint.renderType.equals(RENDERTYPE.R3X5)) {
 			float rows = 3;
-			float columns = 2;
+			float columns = 5;
 			
 			float baseXOffset = position.x - (modifier * (rows / 2.0f));
 			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));

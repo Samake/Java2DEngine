@@ -55,6 +55,7 @@ public class Objects {
 	public static final EntityBluePrint BARREL_02 = new EntityBluePrint(entityList, 301, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "BARREL_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 1, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint CRATE_01 = new EntityBluePrint(entityList, 302, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "CRATE_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 1, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint SCARECROW_01 = new EntityBluePrint(entityList, 303, ENTITYTYPE.OBJECT, RENDERTYPE.R1X2, "SCARECROW_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 19, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint CRATE_02 = new EntityBluePrint(entityList, 304, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "CRATE_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 16, 1, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint FENCE_D_C = new EntityBluePrint(entityList, 400, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_D_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 2, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint FENCE_U_C = new EntityBluePrint(entityList, 401, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 2, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint FENCE_L_C = new EntityBluePrint(entityList, 402, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_L_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 4, false, 0, 0, false), true, true, true);

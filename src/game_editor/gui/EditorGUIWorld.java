@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -25,6 +28,7 @@ public class EditorGUIWorld {
 
 	public static JLabel timeOfDayLabel;
 	public static JSlider timeOfDaySlider;
+	public static JCheckBox dayCycleCheckBox;
 	public static int currentHour = 0;
 
 	public static int width = 280;
@@ -38,6 +42,7 @@ public class EditorGUIWorld {
 		addCaption(finalPanel);
 		addGameSpeed(finalPanel);
 		addTimeOfDay(levelEditor, finalPanel);
+		addDayCycle(levelEditor, finalPanel);
 		//addWorldGenerator(levelEditor, finalPanel);
 		//addWorldSmooth(levelEditor, finalPanel);
 		//addUnlock(levelEditor, finalPanel);
@@ -190,9 +195,51 @@ public class EditorGUIWorld {
 		finalPanel.add(unlockTilesButton);
 	}
 	
-	public static void updateWorldValues(int hour, int minute) {
+	private static void addDayCycle(LevelEditor levelEditor, JPanel finalPanel) {
+		Dimension labelPanelDimension = new Dimension(width / 2, (int) (lineHeight * 1.5));
+		
+		JPanel dayCyclePanel = new JPanel();
+		dayCyclePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		dayCyclePanel.setBackground(Color.DARK_GRAY);
+		
+		Dimension dayCyclePanelDimension = new Dimension(width - 20, (int) (lineHeight * 1.5));
+		
+		dayCyclePanel.setSize(dayCyclePanelDimension);
+		dayCyclePanel.setMaximumSize(dayCyclePanelDimension);
+		dayCyclePanel.setMinimumSize(dayCyclePanelDimension);
+		dayCyclePanel.setPreferredSize(dayCyclePanelDimension);
+		
+		JCheckBox dayCycleCheckBox = new JCheckBox("DayCycle");
+		dayCycleCheckBox.setBackground(Color.DARK_GRAY);
+		dayCycleCheckBox.setForeground(Color.WHITE);
+		dayCycleCheckBox.setSize(labelPanelDimension);
+		dayCycleCheckBox.setMaximumSize(labelPanelDimension);
+		dayCycleCheckBox.setMinimumSize(labelPanelDimension);
+		dayCycleCheckBox.setPreferredSize(labelPanelDimension);
+		
+		dayCycleCheckBox.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		    	JCheckBox cb = (JCheckBox) event.getSource();
+		    	
+		    	levelEditor.setDaycycle(cb.isSelected());
+		    }
+		});
+		
+		dayCyclePanel.add(dayCycleCheckBox);
+		
+		finalPanel.add(dayCyclePanel);
+	}
+	
+	public static void updateWorldValues(int hour, int minute, boolean dayCycle) {
 		currentHour = hour;
 		timeOfDayLabel.setText("DayTime: " + String.format("%02d", hour) + ":" + String.format("%02d", minute));
 		timeOfDaySlider.setValue(hour);
+		
+		if (dayCycleCheckBox != null) {
+			if (dayCycleCheckBox.isSelected() != dayCycle) {
+				dayCycleCheckBox.setSelected(dayCycle);
+			}
+		}
 	}
 }

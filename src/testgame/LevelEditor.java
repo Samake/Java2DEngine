@@ -152,6 +152,10 @@ public class LevelEditor extends Engine {
 		setEditorModeTiles();
 	}
 	
+	public static void main(String[] args) {
+		new LevelEditor().start();
+	}
+	
 	@Override
 	public void update(int gameSpeed) {
 		ClickSystemEditor.update(input, gameSpeed);
@@ -218,7 +222,7 @@ public class LevelEditor extends Engine {
 		
 		if (Editor.editorSlot == 9) {
 			if (scene.level != null) {
-				EditorGUIWorld.updateWorldValues(scene.level.environment.time.hour, scene.level.environment.time.minute);
+				EditorGUIWorld.updateWorldValues(scene.level.environment.time.hour, scene.level.environment.time.minute, scene.level.environment.time.dayCycle);
 			}
 		}
 	}
@@ -491,6 +495,12 @@ public class LevelEditor extends Engine {
 		}
 	}
 	
+	public void setDaycycle(boolean dayCycle) {
+		if (scene.level != null) {
+			scene.level.environment.time.dayCycle = dayCycle;
+		}
+	}
+	
 	public void generateWorld() {
 		if (scene.level != null) {
 			scene.level.generateNewRandomLevel();
@@ -507,9 +517,5 @@ public class LevelEditor extends Engine {
 		if (scene.level != null) {
 			scene.level.unlockTiles();
 		}
-	}
-	
-	public static void main(String[] args) {
-		new LevelEditor().start();
 	}
 }

@@ -13,6 +13,7 @@ import game_content.entities.prefabs.GlowWorm;
 import game_content.entities.prefabs.House;
 import game_content.entities.prefabs.LampPost;
 import game_content.entities.prefabs.ScareCrowPumpkin;
+import game_content.entities.prefabs.Silo;
 import game_content.entities.prefabs.SpawnEgg;
 import game_content.entities.prefabs.farming.SeedAubergine;
 import game_content.entities.prefabs.farming.SeedCarrot;
@@ -60,6 +61,9 @@ public class Prefabs {
 	public static final EntityBluePrint FOUNTAIN_01 = new EntityBluePrint(entityList, 350, ENTITYTYPE.PREFAB, RENDERTYPE.R3X3, "FOUNTAIN_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 6, false, 0, 0, false), true, true, true);
 	
 	public static final EntityBluePrint HOUSE_01 = new EntityBluePrint(entityList, 500, ENTITYTYPE.PREFAB, RENDERTYPE.R5X5, "HOUSE_01", new SpriteAtlas(Sheets.BUILDINGS_SHEET, 0, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint BARN_01 = new EntityBluePrint(entityList, 510, ENTITYTYPE.PREFAB, RENDERTYPE.R5X5, "BARN_01", new SpriteAtlas(Sheets.BUILDINGS_SHEET, 5, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint SILO_01 = new EntityBluePrint(entityList, 520, ENTITYTYPE.PREFAB, RENDERTYPE.R3X5, "SILO_01", new SpriteAtlas(Sheets.BUILDINGS_SHEET, 0, 5, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint SILO_02 = new EntityBluePrint(entityList, 521, ENTITYTYPE.PREFAB, RENDERTYPE.R3X5, "SILO_02", new SpriteAtlas(Sheets.BUILDINGS_SHEET, 3, 5, false, 0, 0, false), true, true, true);
 	
 	public static final EntityBluePrint SEED_CARROT = new EntityBluePrint(entityList, 1000, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_CARROT", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 0, false, 0, 6, false), false, true, true);
 	public static final EntityBluePrint SEED_TOMATO = new EntityBluePrint(entityList, 1001, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_TOMATO", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 1, false, 0, 6, false), false, true, true);
@@ -127,6 +131,15 @@ public class Prefabs {
 					return level.addEntity(new GlowWorm(blueprint, level, x, y));
 				case "HOUSE_01" :
 					return level.addEntity(new House(blueprint, level, x, y));
+				case "BARN_01" :
+					return level.addEntity(new House(blueprint, level, x, y));
+				case "SILO_01" :
+					return level.addEntity(new Silo(blueprint, level, x, y));
+				case "SILO_03" :
+					return level.addEntity(new Silo(blueprint, level, x, y));
+					
+					
+					
 				case "SEED_CARROT" :
 					return level.addEntity(new SeedCarrot(blueprint, level, x, y));
 				case "SEED_TOMATO" :

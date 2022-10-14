@@ -25,10 +25,15 @@ import game_editor.Editor;
 
 public class Level {
 	
+	public enum LEVELTYPE {
+		OUTDOOR, INDOOR, DUNGEON
+	}
+	
 	public Environment environment;
 	
 	public Tile[][] tiles;
 	
+	public LEVELTYPE type = LEVELTYPE.OUTDOOR;
 	public int width;
 	public int height;
 	

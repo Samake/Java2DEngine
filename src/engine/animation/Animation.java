@@ -27,41 +27,23 @@ public class Animation {
 	public void update(RENDERTYPE renderType, int gameSpeed) {
 		currentTick = System.currentTimeMillis();
 		int currentDelay = delay / gameSpeed;
-		
-		int offSet = 1;
+	
+		int currentOffset = 1;
+		int currentLength = length;
 		
 		if (renderType.equals(RENDERTYPE.R2X2)) {
-			offSet = 2;
+			currentOffset *= 2;
+			currentLength *= 2;
 		}
 		
-		if (renderType.equals(RENDERTYPE.R2X3)) {
-			offSet = 2;
-		}
-		
-		if (renderType.equals(RENDERTYPE.R3X2)) {
-			offSet = 3;
-		}
-		
-		if (renderType.equals(RENDERTYPE.R4X4)) {
-			offSet = 4;
-		}
-		
-		if (renderType.equals(RENDERTYPE.R4X6)) {
-			offSet = 4;
-		}
-		
-		if (renderType.equals(RENDERTYPE.R6X6)) {
-			offSet = 6;
-		}
-		
-		if (lastTick + currentDelay <= currentTick) {
-			lastTick = currentTick;
-			
-			if (xTile < xTileDefault + (length - 1)) {
-				xTile = xTileDefault + offSet;
+		if (lastTick + currentDelay < currentTick) {
+			if (xTile < currentLength - currentOffset) {
+				xTile += currentOffset;
 			} else {
 				xTile = xTileDefault;
 			}
+			
+			lastTick = currentTick;
 		}
 	}
 }

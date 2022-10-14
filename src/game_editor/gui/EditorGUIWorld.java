@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -22,10 +23,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import engine.core.Config;
+import engine.level.Level;
+import engine.level.Level.LEVELTYPE;
 import testgame.LevelEditor;
 
 public class EditorGUIWorld {
 
+	public static JComboBox<String> levelTypeComboBox;
 	public static JLabel timeOfDayLabel;
 	public static JSlider timeOfDaySlider;
 	public static JCheckBox dayCycleCheckBox;
@@ -40,6 +44,7 @@ public class EditorGUIWorld {
 		finalPanel.setBackground(Color.DARK_GRAY);
 
 		addCaption(finalPanel);
+		addLevelTypeSelector(levelEditor, finalPanel);
 		addGameSpeed(finalPanel);
 		addTimeOfDay(levelEditor, finalPanel);
 		addDayCycle(levelEditor, finalPanel);
@@ -69,6 +74,30 @@ public class EditorGUIWorld {
 		captionPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		
 		finalPanel.add(captionPanel);
+	}
+	
+	private static void addLevelTypeSelector(LevelEditor levelEditor, JPanel finalPanel) {
+		
+		JPanel levelTypePanel = new JPanel();
+		levelTypePanel.setLayout(new BoxLayout(levelTypePanel, BoxLayout.PAGE_AXIS));
+		levelTypePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		levelTypePanel.setBackground(Color.DARK_GRAY);
+		
+		levelTypeComboBox = new JComboBox<String>();
+		
+		levelTypeComboBox.addItem(LEVELTYPE.OUTDOOR.name());
+		levelTypeComboBox.addItem(LEVELTYPE.INDOOR.name());
+		levelTypeComboBox.addItem(LEVELTYPE.DUNGEON.name());
+		
+		levelTypeComboBox.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent ae) {
+            	 String levelTypeName = (String) levelTypeComboBox.getSelectedItem();
+            	 levelEditor.changeLevelType(LEVELTYPE.valueOf(levelTypeName));
+             }
+         });
+		
+		levelTypePanel.add(levelTypeComboBox);
+		finalPanel.add(levelTypePanel);
 	}
 	
 	private static void addGameSpeed(JPanel finalPanel) {
@@ -231,15 +260,22 @@ public class EditorGUIWorld {
 		finalPanel.add(dayCyclePanel);
 	}
 	
-	public static void updateWorldValues(int hour, int minute, boolean dayCycle) {
-		currentHour = hour;
-		timeOfDayLabel.setText("DayTime: " + String.format("%02d", hour) + ":" + String.format("%02d", minute));
-		timeOfDaySlider.setValue(hour);
-		
-		if (dayCycleCheckBox != null) {
-			if (dayCycleCheckBox.isSelected() != dayCycle) {
-				dayCycleCheckBox.setSelected(dayCycle);
+	public static void updateWorldValues(Level level) {
+		if (level != null) {
+			currentHour = level.environment.time.hour;
+			timeOfDayLabel.setText("DayTime: " + String.format("%02d", level.environment.time.hour) + ":" + String.format("%02d", level.environment.time.minute));
+			timeOfDaySlider.setValue(currentHour);
+			
+			if (dayCycleCheckBox != null) {
+				if (dayCycleCheckBox.isSelected() != level.environment.time.dayCycle) {
+					dayCycleCheckBox.setSelected(level.environment.time.dayCycle);
+				}
+			}
+			
+			if (!levelTypeComboBox.getSelectedItem().equals(level.type.name())) {
+				levelTypeComboBox.setSelectedItem(level.type.name());
 			}
 		}
+
 	}
 }

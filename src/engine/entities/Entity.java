@@ -10,6 +10,7 @@ import engine.entities.lights.PointLight;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.rendering.Screen;
+import engine.sprites.SpriteAtlas;
 import engine.utils.Vector2f;
 
 public class Entity {
@@ -297,7 +298,7 @@ public class Entity {
 					xOffset = baseXOffset + (modifier * row);
 					yOffset = baseYOffset + (modifier * column);
 					
-					renderEntityPartBody(screen, xTileID, yTileID, false);
+					renderPart(screen, xTileID, yTileID, false);
 				} else {
 					if (column < (columns / 2)) {
 						xTileID = xTile + row;
@@ -306,7 +307,7 @@ public class Entity {
 						xOffset = baseXOffset + (modifier * row);
 						yOffset = baseYOffset + (modifier * column);
 						
-						renderEntityPartBody(screen, xTileID, yTileID, false);
+						renderPart(screen, xTileID, yTileID, false);
 					} else {
 						xTileID = xTile + row;
 						yTileID = yTile + column;
@@ -314,7 +315,7 @@ public class Entity {
 						xOffset = baseXOffset + (modifier * row);
 						yOffset = baseYOffset + (modifier * column);
 						
-						renderEntityPartBody(screen, xTileID, yTileID, true);
+						renderPart(screen, xTileID, yTileID, true);
 					}
 				}
 			}
@@ -354,6 +355,148 @@ public class Entity {
 			}
 		}
 	}
+	
+	public void renderAtlas(Screen screen, SpriteAtlas atlas) {
+		modifier = atlas.sheet.tileSize * scale;
+
+		if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
+			float rows = 1;
+			float columns = 1;
+			
+			float baseXOffset = position.x - modifier / 2;
+			float baseYOffset = position.y - modifier / 2 + heightOffsetModifier;
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R1X2)) {
+			float rows = 1;
+			float columns = 2;
+			
+			float baseXOffset = position.x - modifier / 2;
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R1X3)) {
+			float rows = 1;
+			float columns = 3;
+			
+			float baseXOffset = position.x - modifier / 2;
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R2X2)) {
+			float rows = 2;
+			float columns = 2;
+			
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R2X3)) {
+			float rows = 2;
+			float columns = 3;
+			
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R3X3)) {
+			float rows = 3;
+			float columns = 3;
+			
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R3X5)) {
+			float rows = 3;
+			float columns = 5;
+			
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R4X6)) {
+			float rows = 4;
+			float columns = 6;
+			
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R5X5)) {
+			float rows = 5;
+			float columns = 5;
+			
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+		
+		if (bluePrint.renderType.equals(RENDERTYPE.R6X6)) {
+			float rows = 6;
+			float columns = 6;
+			
+			float baseXOffset = position.x - (modifier * (rows / 2.0f));
+			float baseYOffset = heightOffsetModifier + position.y - (modifier * (columns / 2.0f));
+			
+			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
+		}
+	}
+	
+	
+	private void renderAtlasPart(Screen screen, SpriteAtlas atlas, int rows, int columns, float baseXOffset, float baseYOffset) {
+		int xTileID = atlas.column;
+		int yTileID = atlas.row;
+		
+		for (int row = 0; row < rows; row++) {
+			for (int column = 0; column < columns; column++) {
+				if (!inWater) {
+					xTileID = xTile + row;
+					yTileID = yTile + column;
+					
+					xOffset = baseXOffset + (modifier * row);
+					yOffset = baseYOffset + (modifier * column);
+					
+					renderPartbyAtlas(screen, atlas, xTileID, yTileID, false);
+				} else {
+					if (column < (columns / 2)) {
+						xTileID = xTile + row;
+						yTileID = yTile + column;
+						
+						xOffset = baseXOffset + (modifier * row);
+						yOffset = baseYOffset + (modifier * column);
+						
+						renderPartbyAtlas(screen, atlas, xTileID, yTileID, false);
+					} else {
+						xTileID = xTile + row;
+						yTileID = yTile + column;
+						
+						xOffset = baseXOffset + (modifier * row);
+						yOffset = baseYOffset + (modifier * column);
+						
+						renderPartbyAtlas(screen, atlas, xTileID, yTileID, true);
+					}
+				}
+			}
+		}
+	}
 
 	private void renderShadows(Screen screen, int xValue, int yValue, int shadwowDistance, float shadowStrength, int xTileID, int yTileID) {
 		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 1, yOffset - yValue * shadwowDistance * 1, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.45f);
@@ -361,8 +504,12 @@ public class Entity {
 		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 3, yOffset - yValue * shadwowDistance * 3, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.25f);
 	}
 
-	private void renderEntityPartBody(Screen screen, int xTileID, int yTileID, boolean isInWater) {
+	private void renderPart(Screen screen, int xTileID, int yTileID, boolean isInWater) {
 		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater);
+	}
+	
+	private void renderPartbyAtlas(Screen screen, SpriteAtlas atlas, int xTileID, int yTileID, boolean isInWater) {
+		screen.render(atlas, xOffset, yOffset, atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater);
 	}
 
 	public void renderDebug(Screen screen) {

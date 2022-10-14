@@ -4,41 +4,33 @@ import java.awt.Color;
 
 import engine.animation.Animation;
 import engine.entities.EntityBluePrint;
-import engine.entities.npc.NPCCore;
+import engine.entities.npc.NPCHuman;
 import engine.input.InputHandler;
 import engine.level.Level;
 import game_content.entities.effects.EffectSmokePuffGrey;
+import game_content.resources.Clothes;
 
-public class Player extends NPCCore {
+public class Player extends NPCHuman {
 	
 	public Player(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, "Test", x, y, speed, false);
+		super(bluePrint, level, x, y, speed);
+
+		ANIMATION_IDLE = new Animation(0, 86, 1000, 5);
+		ANIMATION_WALK_UP = new Animation(0, 2, 100, 8);
+		ANIMATION_WALK_DOWN = new Animation(0, 0, 100, 8);
+		ANIMATION_WALK_LEFT = new Animation(0, 6, 100, 8);
+		ANIMATION_WALK_RIGHT =  new Animation(0, 4, 100, 8);
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
-			collissionBox.minY = 0;
-			collissionBox.maxY = bluePrint.atlas.sheet.tileSize / 2;
-			
-			ANIMATION_IDLE = new Animation(8, 0, 100, 2);
-			ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
-			ANIMATION_WALK_DOWN = new Animation(2, 0, 100, 2);
-			ANIMATION_WALK_LEFT = new Animation(4, 0, 100, 2);
-			ANIMATION_WALK_RIGHT =  new Animation(6, 0, 100, 2);
-		} else {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
-			
-			ANIMATION_IDLE = new Animation(16, 0, 100, 2);
-			ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
-			ANIMATION_WALK_DOWN = new Animation(4, 0, 100, 2);
-			ANIMATION_WALK_LEFT = new Animation(8, 0, 100, 2);
-			ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
-		}
+		
+		//ANIMATION_DEAD = new Animation(0, 56, 100, 2);
 
 		debugColor = Color.RED;
+		animSpeed = 2;
+		
+		hairSlot.set(Clothes.HAIR_BOB_LIGHT_BLUE);
+		bodySlot.set(Clothes.PULLOVER_RED);
+		legSlot.set(Clothes.PANT_BLUE);
+		feetSlot.set(Clothes.SHOES_BLACK);
 	}
 	
 	@Override

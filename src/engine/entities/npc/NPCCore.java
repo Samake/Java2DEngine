@@ -18,6 +18,10 @@ import game_content.resources.Tiles;
 
 public class NPCCore extends Entity {
 	
+	public enum NPCTYPE {
+		ANIMAL, HUMAN
+	}
+	
 	public Animation ANIMATION_IDLE = new Animation(16, 0, 100, 2);
 	public Animation ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
 	public Animation ANIMATION_WALK_DOWN = new Animation(4, 0, 100, 2);
@@ -25,6 +29,7 @@ public class NPCCore extends Entity {
 	public Animation ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
 
 	public String name;
+	public NPCTYPE type;
 	public float scale = 1.0f;
 	public float maxSpeed = 0;
 	public float speed;
@@ -58,7 +63,7 @@ public class NPCCore extends Entity {
 	
 	private int waterDripCount = 5;
 	
-	public NPCCore(EntityBluePrint bluePrint, Level level, String name, float x, float y, float speed, boolean useAI) {
+	public NPCCore(EntityBluePrint bluePrint, Level level, String name, NPCTYPE type, float x, float y, float speed, boolean useAI) {
 		super(bluePrint, level, x, y);
 		
 		this.name = name;
@@ -236,8 +241,7 @@ public class NPCCore extends Entity {
 		}
 		
 		animation.update(bluePrint.renderType, gameSpeed);
-		
-		
+
 		xTile = animation.xTile;
 		yTile = animation.yTile;
 	}

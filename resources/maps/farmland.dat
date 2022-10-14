@@ -1,8 +1,9 @@
 [HEADER]
 name:farmland.dat
+leveltype:OUTDOOR
 size:128x128
 tiles:16384
-daytime:3
+daytime:11
 daycycle:true
 [TILES]
 {id:0,tile:104,x:0,y:0}
@@ -16390,7 +16391,7 @@ daycycle:true
 {id:16255,tile:100,x:127,y:126}
 {id:16383,tile:100,x:127,y:127}
 [Player]
-{type:Player,skin:HUMAN_WOMAN_01,x:1120.0,y:1110.0,speed:1.0}
+{type:Player,skin:HUMAN_CHAR_3,x:1120.0,y:1110.0,speed:1.0}
 [ENTITIES]
 {type:Entity,name:GRASS_01,x:1228.0,y:1020.0}
 {type:Entity,name:GRASS_01,x:1089.0,y:978.0}

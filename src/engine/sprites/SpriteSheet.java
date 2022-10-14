@@ -1,7 +1,6 @@
 package engine.sprites;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -27,7 +26,7 @@ public class SpriteSheet {
 		
 		try {
 			image = ImageIO.read(SpriteSheet.class.getResourceAsStream(path));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

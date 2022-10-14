@@ -17,6 +17,7 @@ import engine.entities.Entity;
 import engine.entities.Entity.ENTITYTYPE;
 import engine.entities.EntityBluePrint;
 import engine.entities.lights.PointLight;
+import engine.level.Level.LEVELTYPE;
 import engine.tiles.BasicTile;
 import engine.tiles.Tile;
 import game_content.entities.player.Player;
@@ -56,6 +57,13 @@ public class LevelLoader {
 
 					    while ((line = bufferedReader.readLine()) != null) {
 					    	line = line.trim();
+					    	
+					    	if (line.contains("leveltype")) {
+					    		String[] levelTypeLine = line.split(":");
+					    		String levelType = levelTypeLine[1];
+					    		
+					    		level.type = LEVELTYPE.valueOf(levelType);
+					    	}
 
 					    	if (line.contains("size")) {
 					    		String[] levelSizeLine = line.split(":");
@@ -334,6 +342,8 @@ public class LevelLoader {
 		bufferedWriter.write("[HEADER]");
 		bufferedWriter.newLine();
 		bufferedWriter.write("name:" + levelFileName);
+		bufferedWriter.newLine();
+		bufferedWriter.write("leveltype:" + level.type.name());
 		bufferedWriter.newLine();
 		bufferedWriter.write("size:" + level.width + "x" + level.height);
 		bufferedWriter.newLine();

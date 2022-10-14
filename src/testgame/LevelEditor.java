@@ -19,6 +19,7 @@ import engine.debug.Log;
 import engine.entities.EntityBluePrint;
 import engine.input.InputHandler;
 import engine.level.Level;
+import engine.level.Level.LEVELTYPE;
 import engine.level.LevelLoader;
 import engine.rendering.Renderer;
 import engine.scene.GameScene;
@@ -222,7 +223,7 @@ public class LevelEditor extends Engine {
 		
 		if (Editor.editorSlot == 9) {
 			if (scene.level != null) {
-				EditorGUIWorld.updateWorldValues(scene.level.environment.time.hour, scene.level.environment.time.minute, scene.level.environment.time.dayCycle);
+				EditorGUIWorld.updateWorldValues(scene.level);
 			}
 		}
 	}
@@ -486,6 +487,12 @@ public class LevelEditor extends Engine {
 				
 				level.setPlayer(new Player(skin, scene.level, x, y, 1.0f));
 			}
+		}
+	}
+	
+	public void changeLevelType(LEVELTYPE type) {
+		if (scene.level != null) {
+			scene.level.type = type;
 		}
 	}
 	

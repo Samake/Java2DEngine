@@ -29,6 +29,16 @@ public class NPCs {
 	public static final EntityBluePrint ANIMAL_CHICKEN_BABY_YELLOW = new EntityBluePrint(npcList, 106, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_CHICKEN_BABY_YELLOW", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 6, false, 0, 0, false), true, true, true);
 	public static final EntityBluePrint ANIMAL_CHICKEN_BABY_BROWN = new EntityBluePrint(npcList, 107, ENTITYTYPE.NPC, RENDERTYPE.R1X1, "ANIMAL_CHICKEN_BABY_BROWN", new SpriteAtlas(Sheets.ANIMALS_SHEET, 0, 7, false, 0, 0, false), true, true, true);
 	
+	public static final EntityBluePrint HUMAN_CHAR_1 = new EntityBluePrint(npcList, 200, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_CHAR_1", new SpriteAtlas(Sheets.CHARACTER_SHEET, 0, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint HUMAN_CHAR_2 = new EntityBluePrint(npcList, 201, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_CHAR_2", new SpriteAtlas(Sheets.CHARACTER_SHEET, 8, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint HUMAN_CHAR_3 = new EntityBluePrint(npcList, 202, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_CHAR_3", new SpriteAtlas(Sheets.CHARACTER_SHEET, 16, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint HUMAN_CHAR_4 = new EntityBluePrint(npcList, 203, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_CHAR_4", new SpriteAtlas(Sheets.CHARACTER_SHEET, 32, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint HUMAN_CHAR_5 = new EntityBluePrint(npcList, 204, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_CHAR_5", new SpriteAtlas(Sheets.CHARACTER_SHEET, 48, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint HUMAN_CHAR_6 = new EntityBluePrint(npcList, 205, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_CHAR_6", new SpriteAtlas(Sheets.CHARACTER_SHEET, 64, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint HUMAN_CHAR_7 = new EntityBluePrint(npcList, 206, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_CHAR_7", new SpriteAtlas(Sheets.CHARACTER_SHEET, 80, 0, false, 0, 0, false), true, true, true);
+	public static final EntityBluePrint HUMAN_CHAR_8 = new EntityBluePrint(npcList, 207, ENTITYTYPE.NPC, RENDERTYPE.R2X2, "HUMAN_CHAR_8", new SpriteAtlas(Sheets.CHARACTER_SHEET, 96, 0, false, 0, 0, false), true, true, true);
+	
+	
 	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
 			switch(blueprint.name) {
@@ -56,6 +66,8 @@ public class NPCs {
 					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_CHICKEN_BABY_BROWN":
 					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
+				case "HUMAN_CHAR_1":
+					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
 			}
 		}
 		

@@ -27,9 +27,15 @@ public class Sheets {
 	
 	// Clothes
 	public final static SpriteSheet CLOTHES_PULLOVER_SHEET = new SpriteSheet(list, 400, "/textures/characters/clothes/pullovers.png", 160);
-	public final static SpriteSheet CLOTHES_PANT_SHEET = new SpriteSheet(list, 401, "/textures/characters/clothes/pants.png", 160);
+	public final static SpriteSheet CLOTHES_PANTS_SHEET = new SpriteSheet(list, 401, "/textures/characters/clothes/pants.png", 160);
 	public final static SpriteSheet CLOTHES_SHOES_SHEET = new SpriteSheet(list, 402, "/textures/characters/clothes/shoes.png", 160);
-	
+	public final static SpriteSheet CLOTHES_CLOWN_SHEET = new SpriteSheet(list, 403, "/textures/characters/clothes/clown.png", 32);
+	public final static SpriteSheet CLOTHES_DRESS_SHEET = new SpriteSheet(list, 404, "/textures/characters/clothes/dress.png", 160);
+	public final static SpriteSheet CLOTHES_FLORAL_SHEET = new SpriteSheet(list, 405, "/textures/characters/clothes/floral.png", 160);
+	public final static SpriteSheet CLOTHES_OVERALLS_SHEET = new SpriteSheet(list, 406, "/textures/characters/clothes/overalls.png", 160);
+	public final static SpriteSheet CLOTHES_PANTS_SUIT_SHEET = new SpriteSheet(list, 407, "/textures/characters/clothes/pants_suit.png", 160);
+	public final static SpriteSheet CLOTHES_PUMPKIN_SHEET = new SpriteSheet(list, 408, "/textures/characters/clothes/pumpkin.png", 32);
+
 	// Hairs
 	public final static SpriteSheet HAIR_BOB_SHEET = new SpriteSheet(list, 500, "/textures/characters/hairs/bob.png", 224);
 	public final static SpriteSheet HAIR_BRAID_SHEET = new SpriteSheet(list, 501, "/textures/characters/hairs/braids.png", 224);
@@ -38,7 +44,11 @@ public class Sheets {
 	public final static SpriteSheet HAIR_EMO_SHEET = new SpriteSheet(list, 504, "/textures/characters/hairs/emo.png", 224);
 	public final static SpriteSheet HAIR_EXTRA_LONG_SHEET = new SpriteSheet(list, 505, "/textures/characters/hairs/extra_long.png", 224);
 	public final static SpriteSheet HAIR_FRENCH_CURL_SHEET = new SpriteSheet(list, 506, "/textures/characters/hairs/french_curl.png", 224);
-	
+	public final static SpriteSheet HAIR_GENTLEMAN_SHEET = new SpriteSheet(list, 507, "/textures/characters/hairs/gentleman.png", 224);
+	public final static SpriteSheet HAIR_PONYTAIL_SHEET = new SpriteSheet(list, 508, "/textures/characters/hairs/ponytail.png", 224);
+	public final static SpriteSheet HAIR_SPACEBUNS_SHEET = new SpriteSheet(list, 509, "/textures/characters/hairs/spacebuns.png", 224);
+	public final static SpriteSheet HAIR_STRAIGHT_SHEET = new SpriteSheet(list, 510, "/textures/characters/hairs/straight.png", 224);
+	public final static SpriteSheet HAIR_WAVY_SHEET = new SpriteSheet(list, 511, "/textures/characters/hairs/wavy.png", 224);
 	
 	// Eyes
 	public final static SpriteSheet EYES_SHEET = new SpriteSheet(list, 550, "/textures/characters/face/eyes.png", 224);

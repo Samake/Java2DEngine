@@ -65,24 +65,6 @@ public class NPCHuman extends NPCCore {
 	public void render(Screen screen, List<PointLight> renderListLights) {
 		super.render(screen, renderListLights);
 		
-		if (bodySlot != null) {
-			if (bodySlot.cloth != null) {
-				renderAtlas(screen, bodySlot.cloth.atlas);
-			}
-		}
-		
-		if (legSlot != null) {
-			if (legSlot.cloth != null) {
-				renderAtlas(screen, legSlot.cloth.atlas);
-			}
-		}
-		
-		if (feetSlot != null) {
-			if (feetSlot.cloth != null) {
-				renderAtlas(screen, feetSlot.cloth.atlas);
-			}
-		}
-		
 		if (eyeSlot != null) {
 			if (eyeSlot.cloth != null) {
 				renderAtlas(screen, eyeSlot.cloth.atlas);
@@ -94,6 +76,25 @@ public class NPCHuman extends NPCCore {
 				renderAtlas(screen, mouthSlot.cloth.atlas);
 			}
 		}
+		
+		if (feetSlot != null) {
+			if (feetSlot.cloth != null) {
+				renderAtlas(screen, feetSlot.cloth.atlas);
+			}
+		}
+		
+		if (legSlot != null) {
+			if (legSlot.cloth != null) {
+				renderAtlas(screen, legSlot.cloth.atlas);
+			}
+		}
+		
+		if (bodySlot != null) {
+			if (bodySlot.cloth != null) {
+				renderAtlas(screen, bodySlot.cloth.atlas);
+			}
+		}
+		
 		
 		if (hairSlot != null) {
 			if (hairSlot.cloth != null) {

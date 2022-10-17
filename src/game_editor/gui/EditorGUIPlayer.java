@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import engine.entities.EntityBluePrint;
 import engine.entities.npc.clothes.ClothesNPC;
 import engine.entities.npc.clothes.ClothesNPC.CLOTHTYPE;
+import engine.utils.Misc;
 import game_content.entities.player.Player;
 import game_content.resources.Clothes;
 import game_content.resources.NPCs;
@@ -76,6 +77,7 @@ public class EditorGUIPlayer {
 		addBodySelector(levelEditor, finalPanel);
 		addLegSelector(levelEditor, finalPanel);
 		addFeetSelector(levelEditor, finalPanel);
+		addRandomizer(levelEditor, finalPanel);
 		
 		return finalPanel;
 	}
@@ -717,6 +719,51 @@ public class EditorGUIPlayer {
 		finalPanel.add(feetsPanel);
 	}
 	
+	private static void addRandomizer(LevelEditor levelEditor, JPanel finalPanel) {
+		Dimension randomizerPanelDimension = new Dimension(width - 20, (int) (lineHeight * 1.5));
+		
+		JPanel randomizerPanel = new JPanel();
+		randomizerPanel.setLayout(new BoxLayout(randomizerPanel, BoxLayout.PAGE_AXIS));
+		randomizerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		randomizerPanel.setBackground(Color.DARK_GRAY);
+		randomizerPanel.setSize(randomizerPanelDimension);
+		randomizerPanel.setMaximumSize(randomizerPanelDimension);
+		randomizerPanel.setMinimumSize(randomizerPanelDimension);
+		randomizerPanel.setPreferredSize(randomizerPanelDimension);
+		
+		JButton randomButton = new JButton("Random Character");
+		randomButton.setBackground(Color.DARK_GRAY);
+		randomButton.setForeground(Color.LIGHT_GRAY);
+		
+		randomButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	randomizeCharacter(levelEditor);
+            }
+		});
+		
+		randomizerPanel.add(randomButton);
+		
+		finalPanel.add(randomizerPanel);
+	}
+	
+	private static void randomizeCharacter(LevelEditor levelEditor) {
+		int hatRandomValue = Misc.randomInteger(0, 100);
+		
+		if (hatRandomValue > 70) {
+			levelEditor.changePlayerHat(hatTypes.get(Misc.randomInteger(0, hatTypes.size() - 1)));
+		} else {
+			levelEditor.changePlayerHat(null);
+		}
+		
+		levelEditor.changePlayerHair(hairTypes.get(Misc.randomInteger(0, hairTypes.size() - 1)));
+		levelEditor.changePlayerEyes(eyeTypes.get(Misc.randomInteger(0, eyeTypes.size() - 1)));
+		levelEditor.changePlayerMouth(mouthTypes.get(Misc.randomInteger(0, mouthTypes.size() - 1)));
+		levelEditor.changePlayerBody(bodyTypes.get(Misc.randomInteger(0, bodyTypes.size() - 1)));
+		levelEditor.changePlayerLegs(legTypes.get(Misc.randomInteger(0, legTypes.size() - 1)));
+		levelEditor.changePlayerFeets(feetTypes.get(Misc.randomInteger(0, feetTypes.size() - 1)));
+		
+	}
+
 	private static void changeHatID(LevelEditor levelEditor, int value) {
 		int currentHatID = getCurrentHatID();
 		int newHatID = currentHatID + value;

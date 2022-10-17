@@ -8,7 +8,7 @@ import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import game_content.entities.npc.AnimalBunny;
 import game_content.entities.npc.AnimalChicken;
-import game_content.entities.npc.NPCWoman;
+import game_content.entities.npc.NPCOccupant;
 import game_content.entities.player.Player;
 
 public class NPCs {
@@ -43,13 +43,13 @@ public class NPCs {
 		if (blueprint != null) {
 			switch(blueprint.name) {
 				case "HUMAN_WOMAN_01":
-					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_02":
-					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_03":
-					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
 				case "HUMAN_WOMAN_04":
-					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_CHICKEN":
 					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 				case "ANIMAL_BUNNY_BROWN":
@@ -67,7 +67,21 @@ public class NPCs {
 				case "ANIMAL_CHICKEN_BABY_BROWN":
 					return level.addEntity(new AnimalChicken(blueprint, level, x, y, 1.0f));
 				case "HUMAN_CHAR_1":
-					return level.addEntity(new NPCWoman(blueprint, level, x, y, 1.0f));
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
+				case "HUMAN_CHAR_2":
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
+				case "HUMAN_CHAR_3":
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
+				case "HUMAN_CHAR_4":
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
+				case "HUMAN_CHAR_5":
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
+				case "HUMAN_CHAR_6":
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
+				case "HUMAN_CHAR_7":
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
+				case "HUMAN_CHAR_8":
+					return level.addEntity(new NPCOccupant(blueprint, level, x, y, 1.0f));
 			}
 		}
 		

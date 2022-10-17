@@ -33,6 +33,20 @@ public class Sheets {
 	// Hairs
 	public final static SpriteSheet HAIR_BOB_SHEET = new SpriteSheet(list, 500, "/textures/characters/hairs/bob.png", 224);
 	
+	// Eyes
+	public final static SpriteSheet EYES_SHEET = new SpriteSheet(list, 550, "/textures/characters/face/eyes.png", 224);
+	
+	// Mouth
+	public final static SpriteSheet MOUTH_SHEET = new SpriteSheet(list, 600, "/textures/characters/face/mouth.png", 80);
+		
+	// HAT
+	public final static SpriteSheet HAT_COWBOY_SHEET = new SpriteSheet(list, 700, "/textures/characters/hats/hat_cowboy.png", 16);
+	public final static SpriteSheet HAT_LUCKY_SHEET = new SpriteSheet(list, 701, "/textures/characters/hats/hat_lucky.png", 16);
+	public final static SpriteSheet HAT_PUMPKIN_SHEET = new SpriteSheet(list, 702, "/textures/characters/hats/hat_pumpkin.png", 16);
+	public final static SpriteSheet HAT_PUMPKIN_PURPLE_SHEET = new SpriteSheet(list, 703, "/textures/characters/hats/hat_pumpkin_purple.png", 16);
+	public final static SpriteSheet HAT_WITCH_SHEET = new SpriteSheet(list, 704, "/textures/characters/hats/hat_witch.png", 16);
+	
+		
 	public static SpriteSheet getSpriteSheetByID(int id) {
 		return list[id];
 	}

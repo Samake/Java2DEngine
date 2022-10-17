@@ -15,7 +15,7 @@ public class Player extends NPCHuman {
 	public Player(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, x, y, speed);
 
-		ANIMATION_IDLE = new Animation(0, 86, 1000, 5);
+		ANIMATION_IDLE = new Animation(0, 8, 1000, 2);
 		ANIMATION_WALK_UP = new Animation(0, 2, 100, 8);
 		ANIMATION_WALK_DOWN = new Animation(0, 0, 100, 8);
 		ANIMATION_WALK_LEFT = new Animation(0, 6, 100, 8);
@@ -27,10 +27,13 @@ public class Player extends NPCHuman {
 		debugColor = Color.RED;
 		animSpeed = 2;
 		
-		hairSlot.set(Clothes.HAIR_BOB_LIGHT_BLUE);
-		bodySlot.set(Clothes.PULLOVER_RED);
-		legSlot.set(Clothes.PANT_BLUE);
-		feetSlot.set(Clothes.SHOES_BLACK);
+		//hatSlot.set(Clothes.HAT_COWBOY);
+		hairSlot.set(Clothes.HAIR_BOB_PINK);
+		eyeSlot.set(Clothes.EYES_08);
+		mouthSlot.set(Clothes.MOUTH_01);
+		bodySlot.set(Clothes.PULLOVER_PINK);
+		legSlot.set(Clothes.PANT_LILA);
+		feetSlot.set(Clothes.SHOES_RED);
 	}
 	
 	@Override

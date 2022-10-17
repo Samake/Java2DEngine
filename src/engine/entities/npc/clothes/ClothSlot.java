@@ -11,12 +11,14 @@ public class ClothSlot {
 		this.type = type;
 	}
 	
-	public ClothesNPC set(ClothesNPC cloth) {
-		if (cloth.type.equals(type)) {
-			this.cloth = cloth;
-			return cloth;
+	public void set(ClothesNPC cloth) {
+		if (cloth != null) {
+			if (cloth.type.equals(type)) {
+				this.cloth = cloth;
+				return;
+			}
 		}
 		
-		return null;
+		this.cloth = null;
 	}
 }

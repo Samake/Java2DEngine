@@ -17,7 +17,10 @@ public class NPCHuman extends NPCCore {
 	public ClothSlot bodySlot;
 	public ClothSlot legSlot;
 	public ClothSlot feetSlot;
+	public ClothSlot eyeSlot;
+	public ClothSlot mouthSlot;
 	public ClothSlot hairSlot;
+	public ClothSlot hatSlot;
 	
 	public NPCHuman(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
 		super(bluePrint, level, "NPCHuman", NPCTYPE.HUMAN, x, y, speed, !bluePrint.entityType.equals(ENTITYTYPE.PLAYER));
@@ -46,7 +49,10 @@ public class NPCHuman extends NPCCore {
 		bodySlot = new ClothSlot(CLOTHTYPE.BODY);
 		legSlot = new ClothSlot(CLOTHTYPE.LEGS);
 		feetSlot = new ClothSlot(CLOTHTYPE.FEET);
+		eyeSlot = new ClothSlot(CLOTHTYPE.EYES);
+		mouthSlot = new ClothSlot(CLOTHTYPE.MOUTH);
 		hairSlot = new ClothSlot(CLOTHTYPE.HAIR);
+		hatSlot = new ClothSlot(CLOTHTYPE.HAT);
 	}
 	
 	@Override
@@ -77,9 +83,27 @@ public class NPCHuman extends NPCCore {
 			}
 		}
 		
+		if (eyeSlot != null) {
+			if (eyeSlot.cloth != null) {
+				renderAtlas(screen, eyeSlot.cloth.atlas);
+			}
+		}
+		
+		if (mouthSlot != null) {
+			if (mouthSlot.cloth != null) {
+				renderAtlas(screen, mouthSlot.cloth.atlas);
+			}
+		}
+		
 		if (hairSlot != null) {
 			if (hairSlot.cloth != null) {
 				renderAtlas(screen, hairSlot.cloth.atlas);
+			}
+		}
+		
+		if (hatSlot != null) {
+			if (hatSlot.cloth != null) {
+				renderAtlas(screen, hatSlot.cloth.atlas);
 			}
 		}
 	}

@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import engine.core.Engine;
 import engine.debug.Log;
 import engine.entities.EntityBluePrint;
+import engine.entities.npc.clothes.ClothesNPC;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.level.Level.LEVELTYPE;
@@ -66,7 +67,7 @@ public class LevelEditor extends Engine {
 	public JPanel worldSettings;
 	
 	public LevelEditor() {
-		super(1280, 720, 3);
+		super(1280, 720, 5);
 
 		title = "LevelEditor - " + title;
 		
@@ -167,63 +168,73 @@ public class LevelEditor extends Engine {
 		
 		if (scene != null) {
 			scene.update(input, gameSpeed);
-		}
-		
-		if (Editor.editorSlot == 2) {
-			if (EditorGUIEntities.selectedEntity != ClickSystemEditor.selectedEntity) {
-				EditorGUIEntities.updateEntityValues(ClickSystemEditor.selectedEntity);
-			}
 			
-			if (ClickSystemEditor.pickedEntity != null) {
-				EditorGUIEntities.updateEntityValues(ClickSystemEditor.pickedEntity);
+			if (Editor.editorSlot == 1) {
+				
 			}
-		}
-		
-		if (Editor.editorSlot == 3) {
-			if (EditorGUILights.selectedLight != ClickSystemEditor.selectedLight) {
-				EditorGUILights.updateLightValues(ClickSystemEditor.selectedLight);
-			}
-			
-			if (ClickSystemEditor.pickedLight != null) {
-				EditorGUILights.updateLightValues(ClickSystemEditor.pickedLight);
-			}
-		}
-		
-		if (Editor.editorSlot == 4) {
-			
-		}
-		
-		if (Editor.editorSlot == 5) {
-			if (EditorGUIPlayer.player != ClickSystemEditor.selectedPlayer) {
-				EditorGUIPlayer.updatePlayerValues(ClickSystemEditor.selectedPlayer);
-			}
-			
-			if (ClickSystemEditor.pickedPlayer != null) {
-				EditorGUIPlayer.updatePlayerValues(ClickSystemEditor.pickedPlayer);
-			}
-		}
-		
-		if (Editor.editorSlot == 6) {
-			if (EditorGUIPrefabs.selectedPrefab != ClickSystemEditor.selectedPrefab) {
-				EditorGUIPrefabs.updatePrefabValues(ClickSystemEditor.selectedLight);
-			}
-			
-			if (ClickSystemEditor.pickedPrefab != null) {
-				EditorGUIPrefabs.updatePrefabValues(ClickSystemEditor.pickedPrefab);
-			}
-		}
-		
-		if (Editor.editorSlot == 7) {
-			
-		}
-		
-		if (Editor.editorSlot == 8) {
 
-		}
-		
-		if (Editor.editorSlot == 9) {
-			if (scene.level != null) {
-				EditorGUIWorld.updateWorldValues(scene.level);
+			if (Editor.editorSlot == 2) {
+				if (EditorGUIEntities.selectedEntity != ClickSystemEditor.selectedEntity) {
+					EditorGUIEntities.updateEntityValues(ClickSystemEditor.selectedEntity);
+				}
+				
+				if (ClickSystemEditor.pickedEntity != null) {
+					EditorGUIEntities.updateEntityValues(ClickSystemEditor.pickedEntity);
+				}
+			}
+			
+			if (Editor.editorSlot == 3) {
+				if (EditorGUILights.selectedLight != ClickSystemEditor.selectedLight) {
+					EditorGUILights.updateLightValues(ClickSystemEditor.selectedLight);
+				}
+				
+				if (ClickSystemEditor.pickedLight != null) {
+					EditorGUILights.updateLightValues(ClickSystemEditor.pickedLight);
+				}
+			}
+			
+			if (Editor.editorSlot == 4) {
+				
+			}
+			
+			if (Editor.editorSlot == 5) {
+				if (scene.level != null) {
+					if (scene.level.player != null) {
+						EditorGUIPlayer.updatePlayerValues(scene.level.player);
+					} else {
+						if (EditorGUIPlayer.player != ClickSystemEditor.selectedPlayer) {
+							EditorGUIPlayer.updatePlayerValues(ClickSystemEditor.selectedPlayer);
+						}
+						
+						if (ClickSystemEditor.pickedPlayer != null) {
+							EditorGUIPlayer.updatePlayerValues(ClickSystemEditor.pickedPlayer);
+						}
+					}
+				}
+			}
+			
+			if (Editor.editorSlot == 6) {
+				if (EditorGUIPrefabs.selectedPrefab != ClickSystemEditor.selectedPrefab) {
+					EditorGUIPrefabs.updatePrefabValues(ClickSystemEditor.selectedLight);
+				}
+				
+				if (ClickSystemEditor.pickedPrefab != null) {
+					EditorGUIPrefabs.updatePrefabValues(ClickSystemEditor.pickedPrefab);
+				}
+			}
+			
+			if (Editor.editorSlot == 7) {
+				
+			}
+			
+			if (Editor.editorSlot == 8) {
+
+			}
+			
+			if (Editor.editorSlot == 9) {
+				if (scene.level != null) {
+					EditorGUIWorld.updateWorldValues(scene.level);
+				}
 			}
 		}
 	}
@@ -486,6 +497,90 @@ public class LevelEditor extends Engine {
 				int y = (int) oldPlayer.position.y;
 				
 				level.setPlayer(new Player(skin, scene.level, x, y, 1.0f));
+			}
+		}
+	}
+	
+	public void changePlayerHat(ClothesNPC hat) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.hatSlot.set(hat);
+			}
+		}
+	}
+	
+	public void changePlayerHair(ClothesNPC hair) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.hairSlot.set(hair);
+			}
+		}
+	}
+	
+	public void changePlayerEyes(ClothesNPC eye) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.eyeSlot.set(eye);
+			}
+		}
+	}
+	
+	public void changePlayerMouth(ClothesNPC mouth) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.mouthSlot.set(mouth);
+			}
+		}
+	}
+	
+	public void changePlayerBody(ClothesNPC body) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.bodySlot.set(body);
+			}
+		}
+	}
+	
+	public void changePlayerLegs(ClothesNPC legs) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.legSlot.set(legs);
+			}
+		}
+	}
+	
+	public void changePlayerFeets(ClothesNPC feets) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.feetSlot.set(feets);
 			}
 		}
 	}

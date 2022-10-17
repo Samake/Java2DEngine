@@ -32,6 +32,13 @@ public class Sheets {
 	
 	// Hairs
 	public final static SpriteSheet HAIR_BOB_SHEET = new SpriteSheet(list, 500, "/textures/characters/hairs/bob.png", 224);
+	public final static SpriteSheet HAIR_BRAID_SHEET = new SpriteSheet(list, 501, "/textures/characters/hairs/braids.png", 224);
+	public final static SpriteSheet HAIR_BUZZCUT_SHEET = new SpriteSheet(list, 502, "/textures/characters/hairs/buzzcut.png", 224);
+	public final static SpriteSheet HAIR_CURLY_SHEET = new SpriteSheet(list, 503, "/textures/characters/hairs/curly.png", 224);
+	public final static SpriteSheet HAIR_EMO_SHEET = new SpriteSheet(list, 504, "/textures/characters/hairs/emo.png", 224);
+	public final static SpriteSheet HAIR_EXTRA_LONG_SHEET = new SpriteSheet(list, 505, "/textures/characters/hairs/extra_long.png", 224);
+	public final static SpriteSheet HAIR_FRENCH_CURL_SHEET = new SpriteSheet(list, 506, "/textures/characters/hairs/french_curl.png", 224);
+	
 	
 	// Eyes
 	public final static SpriteSheet EYES_SHEET = new SpriteSheet(list, 550, "/textures/characters/face/eyes.png", 224);

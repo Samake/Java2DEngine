@@ -233,6 +233,7 @@ public class EditorGUIPlayer {
 		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
 		
 		hatTypes = Clothes.getClothesByType(CLOTHTYPE.HAT);
+		hatTypes.add(null);
 		
 		JPanel hatPanel = new JPanel();
 		hatPanel.setLayout(new BoxLayout(hatPanel, BoxLayout.PAGE_AXIS));
@@ -302,6 +303,7 @@ public class EditorGUIPlayer {
 		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
 		
 		hairTypes = Clothes.getClothesByType(CLOTHTYPE.HAIR);
+		hairTypes.add(null);
 		
 		JPanel hairPanel = new JPanel();
 		hairPanel.setLayout(new BoxLayout(hairPanel, BoxLayout.PAGE_AXIS));
@@ -371,6 +373,7 @@ public class EditorGUIPlayer {
 		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
 		
 		eyeTypes = Clothes.getClothesByType(CLOTHTYPE.EYES);
+		eyeTypes.add(null);
 		
 		JPanel eyePanel = new JPanel();
 		eyePanel.setLayout(new BoxLayout(eyePanel, BoxLayout.PAGE_AXIS));
@@ -440,6 +443,7 @@ public class EditorGUIPlayer {
 		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
 		
 		mouthTypes = Clothes.getClothesByType(CLOTHTYPE.MOUTH);
+		mouthTypes.add(null);
 		
 		JPanel mouthPanel = new JPanel();
 		mouthPanel.setLayout(new BoxLayout(mouthPanel, BoxLayout.PAGE_AXIS));
@@ -509,6 +513,7 @@ public class EditorGUIPlayer {
 		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
 		
 		bodyTypes = Clothes.getClothesByType(CLOTHTYPE.BODY);
+		bodyTypes.add(null);
 		
 		JPanel bodyPanel = new JPanel();
 		bodyPanel.setLayout(new BoxLayout(bodyPanel, BoxLayout.PAGE_AXIS));
@@ -578,6 +583,7 @@ public class EditorGUIPlayer {
 		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
 		
 		legTypes = Clothes.getClothesByType(CLOTHTYPE.LEGS);
+		legTypes.add(null);
 		
 		JPanel legsPanel = new JPanel();
 		legsPanel.setLayout(new BoxLayout(legsPanel, BoxLayout.PAGE_AXIS));
@@ -647,6 +653,7 @@ public class EditorGUIPlayer {
 		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
 		
 		feetTypes = Clothes.getClothesByType(CLOTHTYPE.FEET);
+		feetTypes.add(null);
 		
 		JPanel feetsPanel = new JPanel();
 		feetsPanel.setLayout(new BoxLayout(feetsPanel, BoxLayout.PAGE_AXIS));
@@ -711,12 +718,29 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeHatID(LevelEditor levelEditor, int value) {
-		int newhatID = getCurrentHatID() + value;
-		
-		if (newhatID >= 0 && newhatID <= hatTypes.size() - 1) {
-			levelEditor.changePlayerHat(hatTypes.get(newhatID));
+		int currentHatID = getCurrentHatID();
+		int newHatID = currentHatID + value;
+
+		if (newHatID >= 0 && newHatID <= hatTypes.size() - 1) {
+			levelEditor.changePlayerHat(hatTypes.get(newHatID));
+			return;
 		} else {
-			levelEditor.changePlayerHat(null);
+			if (newHatID >= hatTypes.size()) {
+				levelEditor.changePlayerHat(hatTypes.get(0));
+				return;
+			} 
+			
+			if (newHatID == -1) {
+				int id = hatTypes.size() - 1;
+				levelEditor.changePlayerHat(hatTypes.get(id));
+				return;
+			}
+			
+			if (newHatID <= -2) {
+				int id = hatTypes.size() - 2;
+				levelEditor.changePlayerHat(hatTypes.get(id));
+				return;
+			}
 		}
 	}
 	
@@ -733,12 +757,29 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeHairID(LevelEditor levelEditor, int value) {
-		int newhairID = getCurrentHairID() + value;
-		
+		int currentHairID = getCurrentHairID();
+		int newhairID = currentHairID + value;
+
 		if (newhairID >= 0 && newhairID <= hairTypes.size() - 1) {
 			levelEditor.changePlayerHair(hairTypes.get(newhairID));
+			return;
 		} else {
-			levelEditor.changePlayerHair(null);
+			if (newhairID >= hairTypes.size()) {
+				levelEditor.changePlayerHair(hairTypes.get(0));
+				return;
+			} 
+			
+			if (newhairID == -1) {
+				int id = hairTypes.size() - 1;
+				levelEditor.changePlayerHair(hairTypes.get(id));
+				return;
+			}
+			
+			if (newhairID <= -2) {
+				int id = hairTypes.size() - 2;
+				levelEditor.changePlayerHair(hairTypes.get(id));
+				return;
+			}
 		}
 	}
 	
@@ -755,12 +796,29 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeEyeID(LevelEditor levelEditor, int value) {
-		int newEyeID = getCurrentEyeID() + value;
-		
+		int currentEyeID = getCurrentEyeID();
+		int newEyeID = currentEyeID + value;
+
 		if (newEyeID >= 0 && newEyeID <= eyeTypes.size() - 1) {
 			levelEditor.changePlayerEyes(eyeTypes.get(newEyeID));
+			return;
 		} else {
-			levelEditor.changePlayerEyes(null);
+			if (newEyeID >= eyeTypes.size()) {
+				levelEditor.changePlayerEyes(eyeTypes.get(0));
+				return;
+			} 
+			
+			if (newEyeID == -1) {
+				int id = eyeTypes.size() - 1;
+				levelEditor.changePlayerEyes(eyeTypes.get(id));
+				return;
+			}
+			
+			if (newEyeID <= -2) {
+				int id = eyeTypes.size() - 2;
+				levelEditor.changePlayerEyes(eyeTypes.get(id));
+				return;
+			}
 		}
 	}
 	
@@ -777,12 +835,29 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeMouthID(LevelEditor levelEditor, int value) {
-		int newMouthID = getCurrentMouthID() + value;
-		
+		int currentMouthID = getCurrentMouthID();
+		int newMouthID = currentMouthID + value;
+
 		if (newMouthID >= 0 && newMouthID <= mouthTypes.size() - 1) {
 			levelEditor.changePlayerMouth(mouthTypes.get(newMouthID));
+			return;
 		} else {
-			levelEditor.changePlayerMouth(null);
+			if (newMouthID >= mouthTypes.size()) {
+				levelEditor.changePlayerMouth(mouthTypes.get(0));
+				return;
+			} 
+			
+			if (newMouthID == -1) {
+				int id = mouthTypes.size() - 1;
+				levelEditor.changePlayerMouth(mouthTypes.get(id));
+				return;
+			}
+			
+			if (newMouthID <= -2) {
+				int id = mouthTypes.size() - 2;
+				levelEditor.changePlayerMouth(mouthTypes.get(id));
+				return;
+			}
 		}
 	}
 	
@@ -799,12 +874,29 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeBodyID(LevelEditor levelEditor, int value) {
-		int newBodyID = getCurrentBodyID() + value;
-		
+		int currentBodyID = getCurrentBodyID();
+		int newBodyID = currentBodyID + value;
+
 		if (newBodyID >= 0 && newBodyID <= bodyTypes.size() - 1) {
 			levelEditor.changePlayerBody(bodyTypes.get(newBodyID));
+			return;
 		} else {
-			levelEditor.changePlayerBody(null);
+			if (newBodyID >= bodyTypes.size()) {
+				levelEditor.changePlayerBody(bodyTypes.get(0));
+				return;
+			} 
+			
+			if (newBodyID == -1) {
+				int id = bodyTypes.size() - 1;
+				levelEditor.changePlayerBody(bodyTypes.get(id));
+				return;
+			}
+			
+			if (newBodyID <= -2) {
+				int id = bodyTypes.size() - 2;
+				levelEditor.changePlayerBody(bodyTypes.get(id));
+				return;
+			}
 		}
 	}
 	
@@ -821,12 +913,29 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeLegsID(LevelEditor levelEditor, int value) {
-		int newLegsID = getCurrentLegsID() + value;
-		
+		int currentLegsID = getCurrentLegsID();
+		int newLegsID = currentLegsID + value;
+
 		if (newLegsID >= 0 && newLegsID <= legTypes.size() - 1) {
 			levelEditor.changePlayerLegs(legTypes.get(newLegsID));
+			return;
 		} else {
-			levelEditor.changePlayerLegs(null);
+			if (newLegsID >= legTypes.size()) {
+				levelEditor.changePlayerLegs(legTypes.get(0));
+				return;
+			} 
+			
+			if (newLegsID == -1) {
+				int id = legTypes.size() - 1;
+				levelEditor.changePlayerLegs(legTypes.get(id));
+				return;
+			}
+			
+			if (newLegsID <= -2) {
+				int id = legTypes.size() - 2;
+				levelEditor.changePlayerLegs(legTypes.get(id));
+				return;
+			}
 		}
 	}
 	
@@ -843,12 +952,29 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeFeetsID(LevelEditor levelEditor, int value) {
-		int newFeetsID = getCurrentFeetsID() + value;
-		
+		int currentFeetsID = getCurrentFeetsID();
+		int newFeetsID = currentFeetsID + value;
+
 		if (newFeetsID >= 0 && newFeetsID <= feetTypes.size() - 1) {
 			levelEditor.changePlayerFeets(feetTypes.get(newFeetsID));
+			return;
 		} else {
-			levelEditor.changePlayerFeets(null);
+			if (newFeetsID >= feetTypes.size()) {
+				levelEditor.changePlayerFeets(feetTypes.get(0));
+				return;
+			} 
+			
+			if (newFeetsID == -1) {
+				int id = feetTypes.size() - 1;
+				levelEditor.changePlayerFeets(feetTypes.get(id));
+				return;
+			}
+			
+			if (newFeetsID <= -2) {
+				int id = feetTypes.size() - 2;
+				levelEditor.changePlayerFeets(feetTypes.get(id));
+				return;
+			}
 		}
 	}
 	

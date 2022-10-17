@@ -28,7 +28,7 @@ public class Player extends NPCHuman {
 		animSpeed = 2;
 		
 		//hatSlot.set(Clothes.HAT_COWBOY);
-		hairSlot.set(Clothes.HAIR_BOB_PINK);
+		hairSlot.set(Clothes.HAIR_BOB_BRUNETTE);
 		eyeSlot.set(Clothes.EYES_08);
 		mouthSlot.set(Clothes.MOUTH_01);
 		bodySlot.set(Clothes.PULLOVER_PINK);

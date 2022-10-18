@@ -5,7 +5,7 @@ import engine.sprites.SpriteAtlas;
 public class ClothesNPC {
 
 	public enum CLOTHTYPE {
-		HAT, HAIR, EYES, BODY, LEGS, FEET, GLASSES, MOUTH, MASK, EAR
+		HAT, HAIR, EYES, BODY, BEARD, LEGS, FEET, ACCESSOIRES, MOUTH, MASK, EAR
 	}
 	
 	public String name;

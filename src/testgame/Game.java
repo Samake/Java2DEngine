@@ -8,6 +8,7 @@ import engine.debug.Log;
 import engine.input.InputHandler;
 import engine.rendering.Renderer;
 import engine.scene.GameScene;
+import game_content.resources.Clothes;
 import game_content.resources.NPCs;
 import game_content.resources.Objects;
 import game_content.resources.Prefabs;
@@ -40,6 +41,7 @@ public class Game extends Engine {
 		Log.print(Objects.getListCount() + " objects were loaded.");
 		Log.print(Prefabs.getListCount() + " prefabs were loaded.");
 		Log.print(NPCs.getListCount() + " npcs were loaded.");
+		Log.print(Clothes.getListCount() + " clothes were loaded.");
 		
 		Log.print("Game started!");
 	}

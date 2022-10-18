@@ -49,6 +49,15 @@ public class EditorGUIPlayer {
 	public static JTextField mouthTypeTextField;
 	public static ArrayList<ClothesNPC> mouthTypes;
 	
+	public static JTextField beardTypeTextField;
+	public static ArrayList<ClothesNPC> beardTypes;
+	
+	public static JTextField accessoiresTypeTextField;
+	public static ArrayList<ClothesNPC> accessoiresTypes;
+	
+	public static JTextField earTypeTextField;
+	public static ArrayList<ClothesNPC> earTypes;
+	
 	public static JTextField bodyTypeTextField;
 	public static ArrayList<ClothesNPC> bodyTypes;
 	
@@ -74,6 +83,9 @@ public class EditorGUIPlayer {
 		addHairSelector(levelEditor, finalPanel);
 		addEyeSelector(levelEditor, finalPanel);
 		addMouthSelector(levelEditor, finalPanel);
+		addEarSelector(levelEditor, finalPanel);
+		addBeardSelector(levelEditor, finalPanel);
+		addAccessoiresSelector(levelEditor, finalPanel);
 		addBodySelector(levelEditor, finalPanel);
 		addLegSelector(levelEditor, finalPanel);
 		addFeetSelector(levelEditor, finalPanel);
@@ -509,6 +521,216 @@ public class EditorGUIPlayer {
 		finalPanel.add(mouthPanel);
 	}
 	
+	private static void addEarSelector(LevelEditor levelEditor, JPanel finalPanel) {
+		Dimension lineDimension = new Dimension(width - 20, lineHeight);
+		Dimension buttonDimension = new Dimension(42, lineHeight);
+		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
+		
+		earTypes = Clothes.getClothesByType(CLOTHTYPE.EAR);
+		earTypes.add(null);
+		
+		JPanel earPanel = new JPanel();
+		earPanel.setLayout(new BoxLayout(earPanel, BoxLayout.PAGE_AXIS));
+		earPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		earPanel.setBackground(Color.DARK_GRAY);
+		
+		JLabel earLabel = new JLabel("Ear Type");
+		earLabel.setForeground(Color.LIGHT_GRAY);
+		earLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		earLabel.setSize(lineDimension);
+		earLabel.setMaximumSize(lineDimension);
+		earLabel.setMinimumSize(lineDimension);
+		earLabel.setPreferredSize(lineDimension);
+		
+		earPanel.add(earLabel);
+		
+		JPanel earSelectorPanel = new JPanel();
+		earSelectorPanel.setBackground(Color.DARK_GRAY);
+		
+		JButton buttonLeft = new JButton("<");
+		buttonLeft.setBackground(Color.DARK_GRAY);
+		buttonLeft.setForeground(Color.LIGHT_GRAY);
+		buttonLeft.setSize(buttonDimension);
+		buttonLeft.setMaximumSize(buttonDimension);
+		buttonLeft.setMinimumSize(buttonDimension);
+		buttonLeft.setPreferredSize(buttonDimension);
+		
+		buttonLeft.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	changeEarID(levelEditor, -1);
+            }
+		});
+		
+		earSelectorPanel.add(buttonLeft);
+		
+		earTypeTextField = new JTextField("EMPTY");
+		earTypeTextField.setSize(selektorDimension);
+		earTypeTextField.setMaximumSize(selektorDimension);
+		earTypeTextField.setMinimumSize(selektorDimension);
+		earTypeTextField.setPreferredSize(selektorDimension);
+
+		earSelectorPanel.add(earTypeTextField);
+		
+		JButton buttonRight = new JButton(">");
+		buttonRight.setBackground(Color.DARK_GRAY);
+		buttonRight.setForeground(Color.LIGHT_GRAY);
+		buttonRight.setSize(buttonDimension);
+		buttonRight.setMaximumSize(buttonDimension);
+		buttonRight.setMinimumSize(buttonDimension);
+		buttonRight.setPreferredSize(buttonDimension);
+		
+		buttonRight.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	changeEarID(levelEditor, 1);
+            }
+		});
+		
+		earSelectorPanel.add(buttonRight);
+		
+		earPanel.add(earSelectorPanel);
+		finalPanel.add(earPanel);
+	}
+	
+	private static void addBeardSelector(LevelEditor levelEditor, JPanel finalPanel) {
+		Dimension lineDimension = new Dimension(width - 20, lineHeight);
+		Dimension buttonDimension = new Dimension(42, lineHeight);
+		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
+		
+		beardTypes = Clothes.getClothesByType(CLOTHTYPE.BEARD);
+		beardTypes.add(null);
+		
+		JPanel beardPanel = new JPanel();
+		beardPanel.setLayout(new BoxLayout(beardPanel, BoxLayout.PAGE_AXIS));
+		beardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		beardPanel.setBackground(Color.DARK_GRAY);
+		
+		JLabel beardLabel = new JLabel("Beard Type");
+		beardLabel.setForeground(Color.LIGHT_GRAY);
+		beardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		beardLabel.setSize(lineDimension);
+		beardLabel.setMaximumSize(lineDimension);
+		beardLabel.setMinimumSize(lineDimension);
+		beardLabel.setPreferredSize(lineDimension);
+		
+		beardPanel.add(beardLabel);
+		
+		JPanel mouthSelectorPanel = new JPanel();
+		mouthSelectorPanel.setBackground(Color.DARK_GRAY);
+		
+		JButton buttonLeft = new JButton("<");
+		buttonLeft.setBackground(Color.DARK_GRAY);
+		buttonLeft.setForeground(Color.LIGHT_GRAY);
+		buttonLeft.setSize(buttonDimension);
+		buttonLeft.setMaximumSize(buttonDimension);
+		buttonLeft.setMinimumSize(buttonDimension);
+		buttonLeft.setPreferredSize(buttonDimension);
+		
+		buttonLeft.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	changeBeardID(levelEditor, -1);
+            }
+		});
+		
+		mouthSelectorPanel.add(buttonLeft);
+		
+		beardTypeTextField = new JTextField("EMPTY");
+		beardTypeTextField.setSize(selektorDimension);
+		beardTypeTextField.setMaximumSize(selektorDimension);
+		beardTypeTextField.setMinimumSize(selektorDimension);
+		beardTypeTextField.setPreferredSize(selektorDimension);
+
+		mouthSelectorPanel.add(beardTypeTextField);
+		
+		JButton buttonRight = new JButton(">");
+		buttonRight.setBackground(Color.DARK_GRAY);
+		buttonRight.setForeground(Color.LIGHT_GRAY);
+		buttonRight.setSize(buttonDimension);
+		buttonRight.setMaximumSize(buttonDimension);
+		buttonRight.setMinimumSize(buttonDimension);
+		buttonRight.setPreferredSize(buttonDimension);
+		
+		buttonRight.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	changeBeardID(levelEditor, 1);
+            }
+		});
+		
+		mouthSelectorPanel.add(buttonRight);
+		
+		beardPanel.add(mouthSelectorPanel);
+		finalPanel.add(beardPanel);
+	}
+	
+	private static void addAccessoiresSelector(LevelEditor levelEditor, JPanel finalPanel) {
+		Dimension lineDimension = new Dimension(width - 20, lineHeight);
+		Dimension buttonDimension = new Dimension(42, lineHeight);
+		Dimension selektorDimension = new Dimension(width - 115, lineHeight);
+		
+		accessoiresTypes = Clothes.getClothesByType(CLOTHTYPE.ACCESSOIRES);
+		accessoiresTypes.add(null);
+		
+		JPanel accessoiresPanel = new JPanel();
+		accessoiresPanel.setLayout(new BoxLayout(accessoiresPanel, BoxLayout.PAGE_AXIS));
+		accessoiresPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		accessoiresPanel.setBackground(Color.DARK_GRAY);
+		
+		JLabel beardLabel = new JLabel("Accessoires Type");
+		beardLabel.setForeground(Color.LIGHT_GRAY);
+		beardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		beardLabel.setSize(lineDimension);
+		beardLabel.setMaximumSize(lineDimension);
+		beardLabel.setMinimumSize(lineDimension);
+		beardLabel.setPreferredSize(lineDimension);
+		
+		accessoiresPanel.add(beardLabel);
+		
+		JPanel accessoiresSelectorPanel = new JPanel();
+		accessoiresSelectorPanel.setBackground(Color.DARK_GRAY);
+		
+		JButton buttonLeft = new JButton("<");
+		buttonLeft.setBackground(Color.DARK_GRAY);
+		buttonLeft.setForeground(Color.LIGHT_GRAY);
+		buttonLeft.setSize(buttonDimension);
+		buttonLeft.setMaximumSize(buttonDimension);
+		buttonLeft.setMinimumSize(buttonDimension);
+		buttonLeft.setPreferredSize(buttonDimension);
+		
+		buttonLeft.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	changeAccessoiresID(levelEditor, -1);
+            }
+		});
+		
+		accessoiresSelectorPanel.add(buttonLeft);
+		
+		accessoiresTypeTextField = new JTextField("EMPTY");
+		accessoiresTypeTextField.setSize(selektorDimension);
+		accessoiresTypeTextField.setMaximumSize(selektorDimension);
+		accessoiresTypeTextField.setMinimumSize(selektorDimension);
+		accessoiresTypeTextField.setPreferredSize(selektorDimension);
+
+		accessoiresSelectorPanel.add(accessoiresTypeTextField);
+		
+		JButton buttonRight = new JButton(">");
+		buttonRight.setBackground(Color.DARK_GRAY);
+		buttonRight.setForeground(Color.LIGHT_GRAY);
+		buttonRight.setSize(buttonDimension);
+		buttonRight.setMaximumSize(buttonDimension);
+		buttonRight.setMinimumSize(buttonDimension);
+		buttonRight.setPreferredSize(buttonDimension);
+		
+		buttonRight.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	changeAccessoiresID(levelEditor, 1);
+            }
+		});
+		
+		accessoiresSelectorPanel.add(buttonRight);
+		
+		accessoiresPanel.add(accessoiresSelectorPanel);
+		finalPanel.add(accessoiresPanel);
+	}
+	
 	private static void addBodySelector(LevelEditor levelEditor, JPanel finalPanel) {
 		Dimension lineDimension = new Dimension(width - 20, lineHeight);
 		Dimension buttonDimension = new Dimension(42, lineHeight);
@@ -748,11 +970,32 @@ public class EditorGUIPlayer {
 	
 	private static void randomizeCharacter(LevelEditor levelEditor) {
 		int hatRandomValue = Misc.randomInteger(0, 100);
+		int earRandomValue = Misc.randomInteger(0, 100);
+		int beardRandomValue = Misc.randomInteger(0, 100);
+		int accessoireRandomValue = Misc.randomInteger(0, 100);
 		
-		if (hatRandomValue > 70) {
+		if (hatRandomValue > 65) {
 			levelEditor.changePlayerHat(hatTypes.get(Misc.randomInteger(0, hatTypes.size() - 1)));
 		} else {
 			levelEditor.changePlayerHat(null);
+		}
+		
+		if (earRandomValue > 80) {
+			levelEditor.changePlayerEar(earTypes.get(Misc.randomInteger(0, earTypes.size() - 1)));
+		} else {
+			levelEditor.changePlayerEar(null);
+		}
+		
+		if (beardRandomValue > 95) {
+			levelEditor.changePlayerBeard(beardTypes.get(Misc.randomInteger(0, beardTypes.size() - 1)));
+		} else {
+			levelEditor.changePlayerBeard(null);
+		}
+		
+		if (accessoireRandomValue > 85) {
+			levelEditor.changePlayerAccessoire(accessoiresTypes.get(Misc.randomInteger(0, accessoiresTypes.size() - 1)));
+		} else {
+			levelEditor.changePlayerAccessoire(null);
 		}
 		
 		levelEditor.changePlayerHair(hairTypes.get(Misc.randomInteger(0, hairTypes.size() - 1)));
@@ -765,28 +1008,30 @@ public class EditorGUIPlayer {
 	}
 
 	private static void changeHatID(LevelEditor levelEditor, int value) {
-		int currentHatID = getCurrentHatID();
-		int newHatID = currentHatID + value;
-
-		if (newHatID >= 0 && newHatID <= hatTypes.size() - 1) {
-			levelEditor.changePlayerHat(hatTypes.get(newHatID));
-			return;
-		} else {
-			if (newHatID >= hatTypes.size()) {
-				levelEditor.changePlayerHat(hatTypes.get(0));
+		if (hatTypes.size() > 1) {
+			int currentHatID = getCurrentHatID();
+			int newHatID = currentHatID + value;
+	
+			if (newHatID >= 0 && newHatID <= hatTypes.size() - 1) {
+				levelEditor.changePlayerHat(hatTypes.get(newHatID));
 				return;
-			} 
-			
-			if (newHatID == -1) {
-				int id = hatTypes.size() - 1;
-				levelEditor.changePlayerHat(hatTypes.get(id));
-				return;
-			}
-			
-			if (newHatID <= -2) {
-				int id = hatTypes.size() - 2;
-				levelEditor.changePlayerHat(hatTypes.get(id));
-				return;
+			} else {
+				if (newHatID >= hatTypes.size()) {
+					levelEditor.changePlayerHat(hatTypes.get(0));
+					return;
+				} 
+				
+				if (newHatID == -1) {
+					int id = hatTypes.size() - 1;
+					levelEditor.changePlayerHat(hatTypes.get(id));
+					return;
+				}
+				
+				if (newHatID <= -2) {
+					int id = hatTypes.size() - 2;
+					levelEditor.changePlayerHat(hatTypes.get(id));
+					return;
+				}
 			}
 		}
 	}
@@ -804,28 +1049,30 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeHairID(LevelEditor levelEditor, int value) {
-		int currentHairID = getCurrentHairID();
-		int newhairID = currentHairID + value;
-
-		if (newhairID >= 0 && newhairID <= hairTypes.size() - 1) {
-			levelEditor.changePlayerHair(hairTypes.get(newhairID));
-			return;
-		} else {
-			if (newhairID >= hairTypes.size()) {
-				levelEditor.changePlayerHair(hairTypes.get(0));
+		if (hairTypes.size() > 1) {
+			int currentHairID = getCurrentHairID();
+			int newhairID = currentHairID + value;
+	
+			if (newhairID >= 0 && newhairID <= hairTypes.size() - 1) {
+				levelEditor.changePlayerHair(hairTypes.get(newhairID));
 				return;
-			} 
-			
-			if (newhairID == -1) {
-				int id = hairTypes.size() - 1;
-				levelEditor.changePlayerHair(hairTypes.get(id));
-				return;
-			}
-			
-			if (newhairID <= -2) {
-				int id = hairTypes.size() - 2;
-				levelEditor.changePlayerHair(hairTypes.get(id));
-				return;
+			} else {
+				if (newhairID >= hairTypes.size()) {
+					levelEditor.changePlayerHair(hairTypes.get(0));
+					return;
+				} 
+				
+				if (newhairID == -1) {
+					int id = hairTypes.size() - 1;
+					levelEditor.changePlayerHair(hairTypes.get(id));
+					return;
+				}
+				
+				if (newhairID <= -2) {
+					int id = hairTypes.size() - 2;
+					levelEditor.changePlayerHair(hairTypes.get(id));
+					return;
+				}
 			}
 		}
 	}
@@ -843,28 +1090,30 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeEyeID(LevelEditor levelEditor, int value) {
-		int currentEyeID = getCurrentEyeID();
-		int newEyeID = currentEyeID + value;
-
-		if (newEyeID >= 0 && newEyeID <= eyeTypes.size() - 1) {
-			levelEditor.changePlayerEyes(eyeTypes.get(newEyeID));
-			return;
-		} else {
-			if (newEyeID >= eyeTypes.size()) {
-				levelEditor.changePlayerEyes(eyeTypes.get(0));
+		if (eyeTypes.size() > 1) {
+			int currentEyeID = getCurrentEyeID();
+			int newEyeID = currentEyeID + value;
+	
+			if (newEyeID >= 0 && newEyeID <= eyeTypes.size() - 1) {
+				levelEditor.changePlayerEyes(eyeTypes.get(newEyeID));
 				return;
-			} 
-			
-			if (newEyeID == -1) {
-				int id = eyeTypes.size() - 1;
-				levelEditor.changePlayerEyes(eyeTypes.get(id));
-				return;
-			}
-			
-			if (newEyeID <= -2) {
-				int id = eyeTypes.size() - 2;
-				levelEditor.changePlayerEyes(eyeTypes.get(id));
-				return;
+			} else {
+				if (newEyeID >= eyeTypes.size()) {
+					levelEditor.changePlayerEyes(eyeTypes.get(0));
+					return;
+				} 
+				
+				if (newEyeID == -1) {
+					int id = eyeTypes.size() - 1;
+					levelEditor.changePlayerEyes(eyeTypes.get(id));
+					return;
+				}
+				
+				if (newEyeID <= -2) {
+					int id = eyeTypes.size() - 2;
+					levelEditor.changePlayerEyes(eyeTypes.get(id));
+					return;
+				}
 			}
 		}
 	}
@@ -882,28 +1131,30 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeMouthID(LevelEditor levelEditor, int value) {
-		int currentMouthID = getCurrentMouthID();
-		int newMouthID = currentMouthID + value;
-
-		if (newMouthID >= 0 && newMouthID <= mouthTypes.size() - 1) {
-			levelEditor.changePlayerMouth(mouthTypes.get(newMouthID));
-			return;
-		} else {
-			if (newMouthID >= mouthTypes.size()) {
-				levelEditor.changePlayerMouth(mouthTypes.get(0));
+		if (mouthTypes.size() > 1) {
+			int currentMouthID = getCurrentMouthID();
+			int newMouthID = currentMouthID + value;
+	
+			if (newMouthID >= 0 && newMouthID <= mouthTypes.size() - 1) {
+				levelEditor.changePlayerMouth(mouthTypes.get(newMouthID));
 				return;
-			} 
-			
-			if (newMouthID == -1) {
-				int id = mouthTypes.size() - 1;
-				levelEditor.changePlayerMouth(mouthTypes.get(id));
-				return;
-			}
-			
-			if (newMouthID <= -2) {
-				int id = mouthTypes.size() - 2;
-				levelEditor.changePlayerMouth(mouthTypes.get(id));
-				return;
+			} else {
+				if (newMouthID >= mouthTypes.size()) {
+					levelEditor.changePlayerMouth(mouthTypes.get(0));
+					return;
+				} 
+				
+				if (newMouthID == -1) {
+					int id = mouthTypes.size() - 1;
+					levelEditor.changePlayerMouth(mouthTypes.get(id));
+					return;
+				}
+				
+				if (newMouthID <= -2) {
+					int id = mouthTypes.size() - 2;
+					levelEditor.changePlayerMouth(mouthTypes.get(id));
+					return;
+				}
 			}
 		}
 	}
@@ -920,29 +1171,154 @@ public class EditorGUIPlayer {
 		return -1;
 	}
 	
-	private static void changeBodyID(LevelEditor levelEditor, int value) {
-		int currentBodyID = getCurrentBodyID();
-		int newBodyID = currentBodyID + value;
+	private static void changeEarID(LevelEditor levelEditor, int value) {
+		if (earTypes.size() > 1) {
+			int currentEarID = getCurrentEarID();
+			int newEarID = currentEarID + value;
 
-		if (newBodyID >= 0 && newBodyID <= bodyTypes.size() - 1) {
-			levelEditor.changePlayerBody(bodyTypes.get(newBodyID));
-			return;
-		} else {
-			if (newBodyID >= bodyTypes.size()) {
-				levelEditor.changePlayerBody(bodyTypes.get(0));
+			if (newEarID >= 0 && newEarID <= earTypes.size() - 1) {
+				levelEditor.changePlayerEar(earTypes.get(newEarID));
 				return;
-			} 
-			
-			if (newBodyID == -1) {
-				int id = bodyTypes.size() - 1;
-				levelEditor.changePlayerBody(bodyTypes.get(id));
-				return;
+			} else {
+				if (newEarID >= earTypes.size()) {
+					levelEditor.changePlayerEar(earTypes.get(0));
+					return;
+				} 
+				
+				if (newEarID == -1) {
+					int id = earTypes.size() - 1;
+					levelEditor.changePlayerEar(earTypes.get(id));
+					return;
+				}
+				
+				if (newEarID <= -2) {
+					int id = earTypes.size() - 2;
+					levelEditor.changePlayerEar(earTypes.get(id));
+					return;
+				}
 			}
-			
-			if (newBodyID <= -2) {
-				int id = bodyTypes.size() - 2;
-				levelEditor.changePlayerBody(bodyTypes.get(id));
+		}
+	}
+	
+	private static int getCurrentEarID() {
+		for (ClothesNPC ear : earTypes) {
+			if (ear != null) {
+				if (ear.name.equals(earTypeTextField.getText())) {
+					return earTypes.indexOf(ear);
+				}
+			}
+		}
+		
+		return -1;
+	}
+	
+	private static void changeBeardID(LevelEditor levelEditor, int value) {
+		if (beardTypes.size() > 1) {
+			int currentBeardID = getCurrentBeardID();
+			int newBeardID = currentBeardID + value;
+
+			if (newBeardID >= 0 && newBeardID <= beardTypes.size() - 1) {
+				levelEditor.changePlayerBeard(beardTypes.get(newBeardID));
 				return;
+			} else {
+				if (newBeardID >= beardTypes.size()) {
+					levelEditor.changePlayerBeard(beardTypes.get(0));
+					return;
+				} 
+				
+				if (newBeardID == -1) {
+					int id = beardTypes.size() - 1;
+					levelEditor.changePlayerBeard(beardTypes.get(id));
+					return;
+				}
+				
+				if (newBeardID <= -2) {
+					int id = beardTypes.size() - 2;
+					levelEditor.changePlayerBeard(beardTypes.get(id));
+					return;
+				}
+			}
+		}
+	}
+	
+	private static int getCurrentBeardID() {
+		for (ClothesNPC beard : beardTypes) {
+			if (beard != null) {
+				if (beard.name.equals(beardTypeTextField.getText())) {
+					return beardTypes.indexOf(beard);
+				}
+			}
+		}
+		
+		return -1;
+	}
+	
+	private static void changeAccessoiresID(LevelEditor levelEditor, int value) {
+		if (accessoiresTypes.size() > 1) {
+			int currentAccessoireID = getCurrentAccessoiresID();
+			int newAccessoireID = currentAccessoireID + value;
+
+			if (newAccessoireID >= 0 && newAccessoireID <= accessoiresTypes.size() - 1) {
+				levelEditor.changePlayerAccessoire(accessoiresTypes.get(newAccessoireID));
+				return;
+			} else {
+				if (newAccessoireID >= accessoiresTypes.size()) {
+					levelEditor.changePlayerAccessoire(accessoiresTypes.get(0));
+					return;
+				} 
+				
+				if (newAccessoireID == -1) {
+					int id = accessoiresTypes.size() - 1;
+					levelEditor.changePlayerAccessoire(accessoiresTypes.get(id));
+					return;
+				}
+				
+				if (newAccessoireID <= -2) {
+					int id = accessoiresTypes.size() - 2;
+					levelEditor.changePlayerAccessoire(accessoiresTypes.get(id));
+					return;
+				}
+			}
+		}
+	}
+	
+	private static int getCurrentAccessoiresID() {
+		for (ClothesNPC accessoire : accessoiresTypes) {
+			if (accessoire != null) {
+				if (accessoire.name.equals(accessoiresTypeTextField.getText())) {
+					return accessoiresTypes.indexOf(accessoire);
+				}
+			}
+		}
+		
+		return -1;
+	}
+	
+	private static void changeBodyID(LevelEditor levelEditor, int value) {
+		if (bodyTypes.size() > 1) {
+			int currentBodyID = getCurrentBodyID();
+			int newBodyID = currentBodyID + value;
+	
+			if (newBodyID >= 0 && newBodyID <= bodyTypes.size() - 1) {
+				levelEditor.changePlayerBody(bodyTypes.get(newBodyID));
+				return;
+			} else {
+				if (newBodyID >= bodyTypes.size()) {
+					levelEditor.changePlayerBody(bodyTypes.get(0));
+					return;
+				} 
+				
+				if (newBodyID == -1) {
+					int id = bodyTypes.size() - 1;
+					levelEditor.changePlayerBody(bodyTypes.get(id));
+					return;
+				}
+				
+				if (newBodyID <= -2) {
+					int id = bodyTypes.size() - 2;
+					levelEditor.changePlayerBody(bodyTypes.get(id));
+					return;
+				}
 			}
 		}
 	}
@@ -960,28 +1336,30 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeLegsID(LevelEditor levelEditor, int value) {
-		int currentLegsID = getCurrentLegsID();
-		int newLegsID = currentLegsID + value;
-
-		if (newLegsID >= 0 && newLegsID <= legTypes.size() - 1) {
-			levelEditor.changePlayerLegs(legTypes.get(newLegsID));
-			return;
-		} else {
-			if (newLegsID >= legTypes.size()) {
-				levelEditor.changePlayerLegs(legTypes.get(0));
+		if (legTypes.size() > 1) {
+			int currentLegsID = getCurrentLegsID();
+			int newLegsID = currentLegsID + value;
+	
+			if (newLegsID >= 0 && newLegsID <= legTypes.size() - 1) {
+				levelEditor.changePlayerLegs(legTypes.get(newLegsID));
 				return;
-			} 
-			
-			if (newLegsID == -1) {
-				int id = legTypes.size() - 1;
-				levelEditor.changePlayerLegs(legTypes.get(id));
-				return;
-			}
-			
-			if (newLegsID <= -2) {
-				int id = legTypes.size() - 2;
-				levelEditor.changePlayerLegs(legTypes.get(id));
-				return;
+			} else {
+				if (newLegsID >= legTypes.size()) {
+					levelEditor.changePlayerLegs(legTypes.get(0));
+					return;
+				} 
+				
+				if (newLegsID == -1) {
+					int id = legTypes.size() - 1;
+					levelEditor.changePlayerLegs(legTypes.get(id));
+					return;
+				}
+				
+				if (newLegsID <= -2) {
+					int id = legTypes.size() - 2;
+					levelEditor.changePlayerLegs(legTypes.get(id));
+					return;
+				}
 			}
 		}
 	}
@@ -999,28 +1377,30 @@ public class EditorGUIPlayer {
 	}
 	
 	private static void changeFeetsID(LevelEditor levelEditor, int value) {
-		int currentFeetsID = getCurrentFeetsID();
-		int newFeetsID = currentFeetsID + value;
-
-		if (newFeetsID >= 0 && newFeetsID <= feetTypes.size() - 1) {
-			levelEditor.changePlayerFeets(feetTypes.get(newFeetsID));
-			return;
-		} else {
-			if (newFeetsID >= feetTypes.size()) {
-				levelEditor.changePlayerFeets(feetTypes.get(0));
+		if (feetTypes.size() > 1) {
+			int currentFeetsID = getCurrentFeetsID();
+			int newFeetsID = currentFeetsID + value;
+	
+			if (newFeetsID >= 0 && newFeetsID <= feetTypes.size() - 1) {
+				levelEditor.changePlayerFeets(feetTypes.get(newFeetsID));
 				return;
-			} 
-			
-			if (newFeetsID == -1) {
-				int id = feetTypes.size() - 1;
-				levelEditor.changePlayerFeets(feetTypes.get(id));
-				return;
-			}
-			
-			if (newFeetsID <= -2) {
-				int id = feetTypes.size() - 2;
-				levelEditor.changePlayerFeets(feetTypes.get(id));
-				return;
+			} else {
+				if (newFeetsID >= feetTypes.size()) {
+					levelEditor.changePlayerFeets(feetTypes.get(0));
+					return;
+				} 
+				
+				if (newFeetsID == -1) {
+					int id = feetTypes.size() - 1;
+					levelEditor.changePlayerFeets(feetTypes.get(id));
+					return;
+				}
+				
+				if (newFeetsID <= -2) {
+					int id = feetTypes.size() - 2;
+					levelEditor.changePlayerFeets(feetTypes.get(id));
+					return;
+				}
 			}
 		}
 	}
@@ -1070,6 +1450,24 @@ public class EditorGUIPlayer {
 				mouthTypeTextField.setText(player.mouthSlot.cloth.name);
 			} else {
 				mouthTypeTextField.setText("EMPTY");
+			}
+			
+			if (player.earSlot.cloth != null) {
+				earTypeTextField.setText(player.earSlot.cloth.name);
+			} else {
+				earTypeTextField.setText("EMPTY");
+			}
+			
+			if (player.beardSlot.cloth != null) {
+				beardTypeTextField.setText(player.beardSlot.cloth.name);
+			} else {
+				beardTypeTextField.setText("EMPTY");
+			}
+			
+			if (player.accessoiresSlot.cloth != null) {
+				accessoiresTypeTextField.setText(player.accessoiresSlot.cloth.name);
+			} else {
+				accessoiresTypeTextField.setText("EMPTY");
 			}
 			
 			if (player.bodySlot.cloth != null) {

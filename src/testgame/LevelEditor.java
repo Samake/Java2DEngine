@@ -25,6 +25,7 @@ import engine.level.LevelLoader;
 import engine.rendering.Renderer;
 import engine.scene.GameScene;
 import game_content.entities.player.Player;
+import game_content.resources.Clothes;
 import game_content.resources.NPCs;
 import game_content.resources.Objects;
 import game_content.resources.Prefabs;
@@ -81,6 +82,7 @@ public class LevelEditor extends Engine {
 		Log.print(Objects.getListCount() + " objects were loaded.");
 		Log.print(Prefabs.getListCount() + " prefabs were loaded.");
 		Log.print(NPCs.getListCount() + " npcs were loaded.");
+		Log.print(Clothes.getListCount() + " clothes were loaded.");
 		
 		Log.print("LevelEditor started!");
 	}
@@ -545,6 +547,42 @@ public class LevelEditor extends Engine {
 			
 			if (player != null) {
 				player.mouthSlot.set(mouth);
+			}
+		}
+	}
+	
+	public void changePlayerEar(ClothesNPC ear) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.earSlot.set(ear);
+			}
+		}
+	}
+	
+	public void changePlayerBeard(ClothesNPC beard) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.beardSlot.set(beard);
+			}
+		}
+	}
+	
+	public void changePlayerAccessoire(ClothesNPC accessoire) {
+		Level level = scene.level;
+		
+		if (level != null) {
+			Player player = level.player;
+			
+			if (player != null) {
+				player.accessoiresSlot.set(accessoire);
 			}
 		}
 	}

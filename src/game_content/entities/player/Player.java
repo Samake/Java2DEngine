@@ -27,13 +27,16 @@ public class Player extends NPCHuman {
 		debugColor = Color.RED;
 		animSpeed = 2;
 		
-		//hatSlot.set(Clothes.HAT_COWBOY);
+		hatSlot.set(null);
 		hairSlot.set(Clothes.HAIR_BOB_BRUNETTE);
-		eyeSlot.set(Clothes.EYES_08);
+		eyeSlot.set(Clothes.EYES_01);
 		mouthSlot.set(Clothes.MOUTH_01);
-		bodySlot.set(Clothes.PULLOVER_PINK);
-		legSlot.set(Clothes.PANT_LILA);
-		feetSlot.set(Clothes.SHOES_RED);
+		earSlot.set(null);
+		beardSlot.set(null);
+		accessoiresSlot.set(null);
+		bodySlot.set(Clothes.PULLOVER_BLACK);
+		legSlot.set(Clothes.PANT_BLACK);
+		feetSlot.set(Clothes.SHOES_BLACK);
 	}
 	
 	@Override

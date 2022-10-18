@@ -19,6 +19,9 @@ public class NPCHuman extends NPCCore {
 	public ClothSlot feetSlot;
 	public ClothSlot eyeSlot;
 	public ClothSlot mouthSlot;
+	public ClothSlot beardSlot;
+	public ClothSlot accessoiresSlot;
+	public ClothSlot earSlot;
 	public ClothSlot hairSlot;
 	public ClothSlot hatSlot;
 	
@@ -53,6 +56,9 @@ public class NPCHuman extends NPCCore {
 		mouthSlot = new ClothSlot(CLOTHTYPE.MOUTH);
 		hairSlot = new ClothSlot(CLOTHTYPE.HAIR);
 		hatSlot = new ClothSlot(CLOTHTYPE.HAT);
+		beardSlot = new ClothSlot(CLOTHTYPE.BEARD);
+		accessoiresSlot = new ClothSlot(CLOTHTYPE.ACCESSOIRES);
+		earSlot = new ClothSlot(CLOTHTYPE.EAR);
 	}
 	
 	@Override
@@ -74,6 +80,24 @@ public class NPCHuman extends NPCCore {
 		if (mouthSlot != null) {
 			if (mouthSlot.cloth != null) {
 				renderAtlas(screen, mouthSlot.cloth.atlas);
+			}
+		}
+
+		if (earSlot != null) {
+			if (earSlot.cloth != null) {
+				renderAtlas(screen, earSlot.cloth.atlas);
+			}
+		}
+		
+		if (beardSlot != null) {
+			if (beardSlot.cloth != null) {
+				renderAtlas(screen, beardSlot.cloth.atlas);
+			}
+		}
+		
+		if (accessoiresSlot != null) {
+			if (accessoiresSlot.cloth != null) {
+				renderAtlas(screen, accessoiresSlot.cloth.atlas);
 			}
 		}
 		

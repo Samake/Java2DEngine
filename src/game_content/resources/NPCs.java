@@ -88,7 +88,7 @@ public class NPCs {
 		return null;
 	}
 	
-	public static Entity addPlayerInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
+	public static Player addPlayerInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
 		if (blueprint != null) {
 			blueprint.entityType = ENTITYTYPE.PLAYER;
 

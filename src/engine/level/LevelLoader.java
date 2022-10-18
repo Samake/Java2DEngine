@@ -21,6 +21,7 @@ import engine.level.Level.LEVELTYPE;
 import engine.tiles.BasicTile;
 import engine.tiles.Tile;
 import game_content.entities.player.Player;
+import game_content.resources.Clothes;
 import game_content.resources.NPCs;
 import game_content.resources.Objects;
 import game_content.resources.Prefabs;
@@ -163,14 +164,23 @@ public class LevelLoader {
 	}
 	
 	private static void parsePlayerFromMap(Level level, String playerData) {
-		//{type:Player,x:194.0,y:85.0,speed:1.0}
-		
 		String[] playerDataParts = playerData.split(",");
 		
-		if (playerDataParts != null && playerDataParts.length == 5) {
+		if (playerDataParts != null && playerDataParts.length == 15) {
 			String[] skinParts = playerDataParts[1].split(":");
 			String[] posXParts = playerDataParts[2].split(":");
 			String[] posYParts = playerDataParts[3].split(":");
+			String[] bodySlotParts = playerDataParts[5].split(":");
+			String[] legSlotParts = playerDataParts[6].split(":");
+			String[] feetSlotParts = playerDataParts[7].split(":");
+			String[] eyeSlotParts = playerDataParts[8].split(":");
+			String[] mouthSlotParts = playerDataParts[9].split(":");
+			String[] hairSlotParts = playerDataParts[10].split(":");
+			String[] hatSlotParts = playerDataParts[11].split(":");
+			String[] beardSlotParts = playerDataParts[12].split(":");
+			String[] accessoiresSlotParts = playerDataParts[13].split(":");
+			String[] earSlotParts = playerDataParts[14].split(":");
+			
 			String skin = String.valueOf(skinParts[1]);
 			float x = Float.valueOf(posXParts[1]);
 			float y = Float.valueOf(posYParts[1]);
@@ -178,11 +188,22 @@ public class LevelLoader {
 			
 			EntityBluePrint skinBluePrint = NPCs.getBluePrintByName(skin);
 			
-			if (skinBluePrint == null) {
-				skinBluePrint = NPCs.HUMAN_WOMAN_01;
+			if (skinBluePrint != null) {
+				Player player = NPCs.addPlayerInstanceToLevel(skinBluePrint, level, (int) x, (int) y);
+				
+				if (player != null) {
+					player.bodySlot.set(Clothes.getClothesByName(String.valueOf(bodySlotParts[1])));
+					player.legSlot.set(Clothes.getClothesByName(String.valueOf(legSlotParts[1])));
+					player.feetSlot.set(Clothes.getClothesByName(String.valueOf(feetSlotParts[1])));
+					player.eyeSlot.set(Clothes.getClothesByName(String.valueOf(eyeSlotParts[1])));
+					player.mouthSlot.set(Clothes.getClothesByName(String.valueOf(mouthSlotParts[1])));
+					player.hairSlot.set(Clothes.getClothesByName(String.valueOf(hairSlotParts[1])));
+					player.hatSlot.set(Clothes.getClothesByName(String.valueOf(hatSlotParts[1])));
+					player.beardSlot.set(Clothes.getClothesByName(String.valueOf(beardSlotParts[1])));
+					player.accessoiresSlot.set(Clothes.getClothesByName(String.valueOf(accessoiresSlotParts[1])));
+					player.earSlot.set(Clothes.getClothesByName(String.valueOf(earSlotParts[1])));
+				}
 			}
-			
-			NPCs.addPlayerInstanceToLevel(skinBluePrint, level, (int) x, (int) y);
 		}
 	}
 	
@@ -383,13 +404,75 @@ public class LevelLoader {
 
 		if (player != null) {
 			if (player.saveToMap) {
-				bufferedWriter.write("{type:Player" + 
-						",skin:" + player.bluePrint.name + 
-						",x:" + player.position.x + 
-						",y:" + player.position.y + 
-						",speed:" + player.speed 
-						+ "}");
+				StringBuilder builder = new StringBuilder();
+				builder.append("{type:Player");
+				builder.append(",skin:" + player.bluePrint.name);
+				builder.append(",x:" + player.position.x);
+				builder.append(",y:" + player.position.y);
+				builder.append(",speed:" + player.speed);
 				
+				if (player.bodySlot.cloth != null) {
+					builder.append(",bodySlot:" + player.bodySlot.cloth.name);
+				} else {
+					builder.append(",bodySlot:NULL");
+				}
+				
+				if (player.legSlot.cloth != null) {
+					builder.append(",legSlot:" + player.legSlot.cloth.name);
+				} else {
+					builder.append(",legSlot:NULL");
+				}
+				
+				if (player.feetSlot.cloth != null) {
+					builder.append(",feetSlot:" + player.feetSlot.cloth.name);
+				} else {
+					builder.append(",feetSlot:NULL");
+				}
+				
+				if (player.eyeSlot.cloth != null) {
+					builder.append(",eyeSlot:" + player.eyeSlot.cloth.name);
+				} else {
+					builder.append(",eyeSlot:NULL");
+				}
+				
+				if (player.mouthSlot.cloth != null) {
+					builder.append(",mouthSlot:" + player.mouthSlot.cloth.name);
+				} else {
+					builder.append(",mouthSlot:NULL");
+				}
+				
+				if (player.hairSlot.cloth != null) {
+					builder.append(",hairSlot:" + player.hairSlot.cloth.name);
+				} else {
+					builder.append(",hairSlot:NULL");
+				}
+				
+				if (player.hatSlot.cloth != null) {
+					builder.append(",hatSlot:" + player.hatSlot.cloth.name);
+				} else {
+					builder.append(",hatSlot:NULL");
+				}
+				
+				if (player.beardSlot.cloth != null) {
+					builder.append(",beardSlot:" + player.beardSlot.cloth.name);
+				} else {
+					builder.append(",beardSlot:NULL");
+				}
+				
+				if (player.accessoiresSlot.cloth != null) {
+					builder.append(",accessoiresSlot:" + player.accessoiresSlot.cloth.name);
+				} else {
+					builder.append(",accessoiresSlot:NULL");
+				}
+				
+				if (player.earSlot.cloth != null) {
+					builder.append(",earSlot:" + player.earSlot.cloth.name);
+				} else {
+					builder.append(",earSlot:NULL");
+				}
+				
+				builder.append("}");
+				bufferedWriter.write(builder.toString());
 				bufferedWriter.newLine();
 			}
 		} else {

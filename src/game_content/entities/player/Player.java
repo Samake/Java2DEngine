@@ -8,7 +8,6 @@ import engine.entities.npc.NPCHuman;
 import engine.input.InputHandler;
 import engine.level.Level;
 import game_content.entities.effects.EffectSmokePuffGrey;
-import game_content.resources.Clothes;
 
 public class Player extends NPCHuman {
 	
@@ -27,16 +26,16 @@ public class Player extends NPCHuman {
 		debugColor = Color.RED;
 		animSpeed = 2;
 		
-		hatSlot.set(null);
-		hairSlot.set(Clothes.HAIR_BOB_BRUNETTE);
-		eyeSlot.set(Clothes.EYES_01);
-		mouthSlot.set(Clothes.MOUTH_01);
-		earSlot.set(null);
-		beardSlot.set(null);
-		accessoiresSlot.set(null);
-		bodySlot.set(Clothes.PULLOVER_BLACK);
-		legSlot.set(Clothes.PANT_BLACK);
-		feetSlot.set(Clothes.SHOES_BLACK);
+//		hatSlot.set(null);
+//		hairSlot.set(Clothes.HAIR_BOB_BRUNETTE);
+//		eyeSlot.set(Clothes.EYES_01);
+//		mouthSlot.set(Clothes.MOUTH_01);
+//		earSlot.set(null);
+//		beardSlot.set(null);
+//		accessoiresSlot.set(null);
+//		bodySlot.set(Clothes.PULLOVER_BLACK);
+//		legSlot.set(Clothes.PANT_BLACK);
+//		feetSlot.set(Clothes.SHOES_BLACK);
 	}
 	
 	@Override

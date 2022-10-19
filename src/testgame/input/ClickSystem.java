@@ -30,7 +30,7 @@ public class ClickSystem {
 			Entity entity = level.getEntity((int) worldPosition.x, (int) worldPosition.y);
 			
 			if (entity != null) {
-				if (entity.bluePrint.entityType.equals(ENTITYTYPE.OBJECT)) {
+				if (entity.config.entityType.equals(ENTITYTYPE.OBJECT)) {
 					selectedEntity = entity;
 					return entity;
 				}
@@ -45,7 +45,7 @@ public class ClickSystem {
 			Entity entity = level.getEntity((int) worldPosition.x, (int) worldPosition.y);
 			
 			if (entity != null) {
-				if (entity.bluePrint.entityType.equals(ENTITYTYPE.PREFAB)) {
+				if (entity.config.entityType.equals(ENTITYTYPE.PREFAB)) {
 					selectedPrefab = entity;
 					return entity;
 				}

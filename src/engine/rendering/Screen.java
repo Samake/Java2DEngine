@@ -143,10 +143,6 @@ public class Screen {
 							float greenValue = (float) (drawBaseColor.getGreen() * brightness);
 							float blueValue = (float) (drawBaseColor.getBlue() * brightness);
 							
-//							float redValue = 255 * brightness;
-//							float greenValue = 255 * brightness;
-//							float blueValue = 255 * brightness;
-							
 							drawColor = new Color((int) redValue, (int) greenValue, (int) blueValue, drawBaseColor.getAlpha());
 						} else {
 							drawColor = new Color(col, true);
@@ -158,7 +154,7 @@ public class Screen {
 								
 								for (int xScale = 0; xScale < scale; xScale++) {
 									if (xPixel + xScale < 0 || xPixel + xScale >= Config.WINDOW_WIDTH) continue;
-									
+
 									int currentColor = pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH];
 									
 									pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH] = mergeIntColors(currentColor, drawColor, alpha, isInWater, sheet.tileSize, y);

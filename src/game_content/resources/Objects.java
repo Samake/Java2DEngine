@@ -2,8 +2,9 @@ package game_content.resources;
 
 import engine.entities.Entity;
 import engine.entities.Entity.ENTITYTYPE;
-import engine.entities.Entity.RENDERTYPE;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
+import engine.entities.EntityRenderData;
+import engine.entities.EntityRenderData.RENDERTYPE;
 import engine.entities.objects.ObjectStatic;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
@@ -14,173 +15,171 @@ import game_content.entities.objects.Tree;
 
 public class Objects {
 	
-	public static final EntityBluePrint[] entityList = new EntityBluePrint[2048];
+	public static final EntityConfig[] entityList = new EntityConfig[2048];
 	
-	public static final EntityBluePrint GRASS_01 = new EntityBluePrint(entityList, 0, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "GRASS_01", new SpriteAtlas(Sheets.PLANTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint BUSH_SMALL_01 = new EntityBluePrint(entityList, 1, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "BUSH_SMALL_01", new SpriteAtlas(Sheets.PLANTS_SHEET, 1, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint BUSH_SMALL_02 = new EntityBluePrint(entityList, 2, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "BUSH_SMALL_02", new SpriteAtlas(Sheets.PLANTS_SHEET, 2, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint MUSHROOM_01 = new EntityBluePrint(entityList, 3, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "MUSHROOM_01", new SpriteAtlas(Sheets.PLANTS_SHEET, 3, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint MUSHROOM_02 = new EntityBluePrint(entityList, 4, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "MUSHROOM_02", new SpriteAtlas(Sheets.PLANTS_SHEET, 4, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint MUSHROOM_03 = new EntityBluePrint(entityList, 5, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "MUSHROOM_03", new SpriteAtlas(Sheets.PLANTS_SHEET, 5, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint MUSHROOM_04 = new EntityBluePrint(entityList, 6, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "MUSHROOM_04", new SpriteAtlas(Sheets.PLANTS_SHEET, 6, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint BUSH_SMALL_03 = new EntityBluePrint(entityList, 7, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "BUSH_SMALL_03", new SpriteAtlas(Sheets.PLANTS_SHEET, 7, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint BUSH_SMALL_04 = new EntityBluePrint(entityList, 8, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "BUSH_SMALL_04", new SpriteAtlas(Sheets.PLANTS_SHEET, 8, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint BUSH_BIG_01 = new EntityBluePrint(entityList, 9, ENTITYTYPE.OBJECT, RENDERTYPE.R2X2, "BUSH_BIG_01", new SpriteAtlas(Sheets.PLANTS_SHEET, 0, 1, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint BUSH_BIG_02 = new EntityBluePrint(entityList, 10, ENTITYTYPE.OBJECT, RENDERTYPE.R2X2, "BUSH_BIG_02", new SpriteAtlas(Sheets.PLANTS_SHEET, 2, 1, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint TREE_BIG_01 = new EntityBluePrint(entityList, 11, ENTITYTYPE.OBJECT, RENDERTYPE.R4X6, "TREE_BIG_01", new SpriteAtlas(Sheets.PLANTS_SHEET, 0, 3, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint TREE_BIG_02 = new EntityBluePrint(entityList, 12, ENTITYTYPE.OBJECT, RENDERTYPE.R4X6, "TREE_BIG_02", new SpriteAtlas(Sheets.PLANTS_SHEET, 4, 3, false, 0, 0, false), true, true, true);
+	public static final EntityConfig GRASS_01 = new EntityConfig(entityList, 0, ENTITYTYPE.OBJECT, "GRASS_01", false, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig BUSH_SMALL_01 = new EntityConfig(entityList, 1, ENTITYTYPE.OBJECT, "BUSH_SMALL_01", true, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 1, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig BUSH_SMALL_02 = new EntityConfig(entityList, 2, ENTITYTYPE.OBJECT, "BUSH_SMALL_02", true, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 2, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig MUSHROOM_01 = new EntityConfig(entityList, 3, ENTITYTYPE.OBJECT, "MUSHROOM_01", false, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 3, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig MUSHROOM_02 = new EntityConfig(entityList, 4, ENTITYTYPE.OBJECT, "MUSHROOM_02", false, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 4, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig MUSHROOM_03 = new EntityConfig(entityList, 5, ENTITYTYPE.OBJECT, "MUSHROOM_03", false, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 5, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig MUSHROOM_04 = new EntityConfig(entityList, 6, ENTITYTYPE.OBJECT, "MUSHROOM_04", false, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 6, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig BUSH_BIG_01 = new EntityConfig(entityList, 9, ENTITYTYPE.OBJECT, "BUSH_BIG_01", true, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 0, 1, false, 0, 0, false), true, true, RENDERTYPE.R2X2));
+	public static final EntityConfig BUSH_BIG_02 = new EntityConfig(entityList, 10, ENTITYTYPE.OBJECT, "BUSH_BIG_02", true, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 2, 1, false, 0, 0, false), true, true, RENDERTYPE.R2X2));
+	public static final EntityConfig TREE_BIG_01 = new EntityConfig(entityList, 11, ENTITYTYPE.OBJECT, "TREE_BIG_01", true, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 0, 3, false, 0, 0, false), true, true, RENDERTYPE.R4X6));
+	public static final EntityConfig TREE_BIG_02 = new EntityConfig(entityList, 12, ENTITYTYPE.OBJECT, "TREE_BIG_02", true, new EntityRenderData(new SpriteAtlas(Sheets.PLANTS_SHEET, 4, 3, false, 0, 0, false), true, true, RENDERTYPE.R4X6));
 	
-	public static final EntityBluePrint STONE_01 = new EntityBluePrint(entityList, 101, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_02 = new EntityBluePrint(entityList, 102, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 2, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_03 = new EntityBluePrint(entityList, 103, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_03", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_04 = new EntityBluePrint(entityList, 104, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_04", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 1, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_05 = new EntityBluePrint(entityList, 105, ENTITYTYPE.OBJECT, RENDERTYPE.R2X2, "STONE_05", new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_06 = new EntityBluePrint(entityList, 106, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_06", new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_07 = new EntityBluePrint(entityList, 107, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_07", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_08 = new EntityBluePrint(entityList, 108, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_08", new SpriteAtlas(Sheets.OBJECTS_SHEET, 8, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_09 = new EntityBluePrint(entityList, 109, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_09", new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 1, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint STONE_10 = new EntityBluePrint(entityList, 110, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE_10", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 1, false, 0, 0, false), true, true, true);
+	public static final EntityConfig STONE_01 = new EntityConfig(entityList, 101, ENTITYTYPE.OBJECT, "STONE_01", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE_02 = new EntityConfig(entityList, 102, ENTITYTYPE.OBJECT, "STONE_02", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 2, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE_03 = new EntityConfig(entityList, 103, ENTITYTYPE.OBJECT, "STONE_03", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE_04 = new EntityConfig(entityList, 104, ENTITYTYPE.OBJECT, "STONE_04", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE_05 = new EntityConfig(entityList, 105, ENTITYTYPE.OBJECT, "STONE_05", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 0, false, 0, 0, false), true, true, RENDERTYPE.R2X2));
+	public static final EntityConfig STONE_06 = new EntityConfig(entityList, 106, ENTITYTYPE.OBJECT, "STONE_06", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE_07 = new EntityConfig(entityList, 107, ENTITYTYPE.OBJECT, "STONE_07", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE_08 = new EntityConfig(entityList, 108, ENTITYTYPE.OBJECT, "STONE_08", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 8, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE_09 = new EntityConfig(entityList, 109, ENTITYTYPE.OBJECT, "STONE_09", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE_10 = new EntityConfig(entityList, 110, ENTITYTYPE.OBJECT, "STONE_10", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
 
-	public static final EntityBluePrint IRON_ORE = new EntityBluePrint(entityList, 150, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "IRON_ORE", new SpriteAtlas(Sheets.OBJECTS_SHEET, 12, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint STONE = new EntityBluePrint(entityList, 151, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "STONE", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SAND = new EntityBluePrint(entityList, 152, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "SAND", new SpriteAtlas(Sheets.OBJECTS_SHEET, 14, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint GOLD_ORE = new EntityBluePrint(entityList, 153, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "GOLD_ORE", new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint COAL = new EntityBluePrint(entityList, 154, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "COAL", new SpriteAtlas(Sheets.OBJECTS_SHEET, 16, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SIVLER_ORE = new EntityBluePrint(entityList, 155, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "SIVLER_ORE", new SpriteAtlas(Sheets.OBJECTS_SHEET, 17, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint KEY_01 = new EntityBluePrint(entityList, 156, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "KEY_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 14, 1, false, 0, 0, false), false, true, true);
+	public static final EntityConfig IRON_ORE = new EntityConfig(entityList, 150, ENTITYTYPE.OBJECT, "IRON_ORE", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 12, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig STONE = new EntityConfig(entityList, 151, ENTITYTYPE.OBJECT, "STONE", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SAND = new EntityConfig(entityList, 152, ENTITYTYPE.OBJECT, "SAND", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 14, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig GOLD_ORE = new EntityConfig(entityList, 153, ENTITYTYPE.OBJECT, "GOLD_ORE", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig COAL = new EntityConfig(entityList, 154, ENTITYTYPE.OBJECT, "COAL", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 16, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SIVLER_ORE = new EntityConfig(entityList, 155, ENTITYTYPE.OBJECT, "SIVLER_ORE", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 17, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig KEY_01 = new EntityConfig(entityList, 156, ENTITYTYPE.OBJECT, "KEY_01", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 14, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
 	
-	public static final EntityBluePrint BRIDGE_01 = new EntityBluePrint(entityList, 200, ENTITYTYPE.OBJECT, RENDERTYPE.R3X2, "BRIDGE_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 9, 0, false, 0, 0, false), true, true, true);
+	public static final EntityConfig BRIDGE_01 = new EntityConfig(entityList, 200, ENTITYTYPE.OBJECT, "BRIDGE_01", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 9, 0, false, 0, 0, false), true, true, RENDERTYPE.R3X2));
 
-	public static final EntityBluePrint BARREL_01 = new EntityBluePrint(entityList, 300, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "BARREL_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 12, 1, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint BARREL_02 = new EntityBluePrint(entityList, 301, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "BARREL_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 1, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint CRATE_01 = new EntityBluePrint(entityList, 302, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "CRATE_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 1, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint SCARECROW_01 = new EntityBluePrint(entityList, 303, ENTITYTYPE.OBJECT, RENDERTYPE.R1X2, "SCARECROW_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 19, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint CRATE_02 = new EntityBluePrint(entityList, 304, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "CRATE_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 16, 1, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_D_C = new EntityBluePrint(entityList, 400, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_D_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 2, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C = new EntityBluePrint(entityList, 401, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 2, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_L_C = new EntityBluePrint(entityList, 402, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_L_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 4, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_R_C = new EntityBluePrint(entityList, 403, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 3, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_N_C = new EntityBluePrint(entityList, 404, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_N_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 2, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_D_C_R_C = new EntityBluePrint(entityList, 405, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_D_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 2, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_L_C_R_C = new EntityBluePrint(entityList, 406, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_L_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 2, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_L_C_D_C = new EntityBluePrint(entityList, 407, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_L_C_D_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 2, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C_D_C = new EntityBluePrint(entityList, 408, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_D_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 3, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C_R_C = new EntityBluePrint(entityList, 409, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 4, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C_L_C = new EntityBluePrint(entityList, 410, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_L_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 4, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C_D_C_R_C = new EntityBluePrint(entityList, 411, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_D_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 3, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C_D_C_L_C = new EntityBluePrint(entityList, 412, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_D_C_L_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 4, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C_D_C_L_C_R_C = new EntityBluePrint(entityList, 413, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_D_C_L_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 2, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_U_C_L_C_R_C = new EntityBluePrint(entityList, 414, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_U_C_L_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 3, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_D_C_L_C_R_C = new EntityBluePrint(entityList, 415, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_D_C_L_C_R_C", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 4, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_DOOR_H_L = new EntityBluePrint(entityList, 416, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_DOOR_H_L", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 3, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint FENCE_DOOR_H_R = new EntityBluePrint(entityList, 417, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "FENCE_DOOR_H_R", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 4, false, 0, 0, false), true, true, true);
+	public static final EntityConfig BARREL_01 = new EntityConfig(entityList, 300, ENTITYTYPE.OBJECT, "BARREL_01", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 12, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig BARREL_02 = new EntityConfig(entityList, 301, ENTITYTYPE.OBJECT, "BARREL_02", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig CRATE_01 = new EntityConfig(entityList, 302, ENTITYTYPE.OBJECT, "CRATE_01", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SCARECROW_01 = new EntityConfig(entityList, 303, ENTITYTYPE.OBJECT, "SCARECROW_01", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 19, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X2));
+	public static final EntityConfig CRATE_02 = new EntityConfig(entityList, 304, ENTITYTYPE.OBJECT, "CRATE_02", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 16, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_D_C = new EntityConfig(entityList, 400, ENTITYTYPE.OBJECT, "FENCE_D_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 2, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_U_C = new EntityConfig(entityList, 401, ENTITYTYPE.OBJECT, "FENCE_U_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 2, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_L_C = new EntityConfig(entityList, 402, ENTITYTYPE.OBJECT, "FENCE_L_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 4, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_R_C = new EntityConfig(entityList, 403, ENTITYTYPE.OBJECT, "FENCE_R_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 3, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_N_C = new EntityConfig(entityList, 404, ENTITYTYPE.OBJECT, "FENCE_N_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 2, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_D_C_R_C = new EntityConfig(entityList, 405, ENTITYTYPE.OBJECT, "FENCE_D_C_R_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 2, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_L_C_R_C = new EntityConfig(entityList, 406, ENTITYTYPE.OBJECT, "FENCE_L_C_R_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 2, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_L_C_D_C = new EntityConfig(entityList, 407, ENTITYTYPE.OBJECT, "FENCE_L_C_D_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 2, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_U_C_D_C = new EntityConfig(entityList, 408, ENTITYTYPE.OBJECT, "FENCE_U_C_D_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 3, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_U_C_R_C = new EntityConfig(entityList, 409, ENTITYTYPE.OBJECT, "FENCE_U_C_R_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 4, 4, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_U_C_L_C = new EntityConfig(entityList, 410, ENTITYTYPE.OBJECT, "FENCE_U_C_L_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 4, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_U_C_D_C_R_C = new EntityConfig(entityList, 411, ENTITYTYPE.OBJECT, "FENCE_U_C_D_C_R_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 3, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_U_C_D_C_L_C = new EntityConfig(entityList, 412, ENTITYTYPE.OBJECT, "FENCE_U_C_D_C_L_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 6, 4, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_U_C_D_C_L_C_R_C = new EntityConfig(entityList, 413, ENTITYTYPE.OBJECT, "FENCE_U_C_D_C_L_C_R_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 2, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_U_C_L_C_R_C = new EntityConfig(entityList, 414, ENTITYTYPE.OBJECT, "FENCE_U_C_L_C_R_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 3, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_D_C_L_C_R_C = new EntityConfig(entityList, 415, ENTITYTYPE.OBJECT, "FENCE_D_C_L_C_R_C", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 4, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_DOOR_H_L = new EntityConfig(entityList, 416, ENTITYTYPE.OBJECT, "FENCE_DOOR_H_L", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 3, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig FENCE_DOOR_H_R = new EntityConfig(entityList, 417, ENTITYTYPE.OBJECT, "FENCE_DOOR_H_R", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 4, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
 
-	public static final EntityBluePrint ITEM_CARROT = new EntityBluePrint(entityList, 500, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_CARROT", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_TOMATO = new EntityBluePrint(entityList, 501, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_TOMATO", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 1, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_STRAWBERRY = new EntityBluePrint(entityList, 502, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_STRAWBERRY", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 2, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_PUMPKIN = new EntityBluePrint(entityList, 503, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_PUMPKIN", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 3, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_CORN = new EntityBluePrint(entityList, 504, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_CORN", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 4, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_POTATO = new EntityBluePrint(entityList, 505, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_POTATO", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 5, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_MELON = new EntityBluePrint(entityList, 506, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_MELON", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 6, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_RADISH = new EntityBluePrint(entityList, 507, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_RADISH", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 7, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_SALAD = new EntityBluePrint(entityList, 508, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_SALAD", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 8, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint ITEM_AUBERGINE = new EntityBluePrint(entityList, 509, ENTITYTYPE.OBJECT, RENDERTYPE.R1X1, "ITEM_AUBERGINE", new SpriteAtlas(Sheets.FARMING_SHEET, 8, 10, false, 0, 0, false), false, true, true);
+	public static final EntityConfig ITEM_CARROT = new EntityConfig(entityList, 500, ENTITYTYPE.OBJECT, "ITEM_CARROT", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_TOMATO = new EntityConfig(entityList, 501, ENTITYTYPE.OBJECT, "ITEM_TOMATO", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_STRAWBERRY = new EntityConfig(entityList, 502, ENTITYTYPE.OBJECT, "ITEM_STRAWBERRY", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 2, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_PUMPKIN = new EntityConfig(entityList, 503, ENTITYTYPE.OBJECT, "ITEM_PUMPKIN", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 3, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_CORN = new EntityConfig(entityList, 504, ENTITYTYPE.OBJECT, "ITEM_CORN", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 4, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_POTATO = new EntityConfig(entityList, 505, ENTITYTYPE.OBJECT, "ITEM_POTATO", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 5, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_MELON = new EntityConfig(entityList, 506, ENTITYTYPE.OBJECT, "ITEM_MELON", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 6, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_RADISH = new EntityConfig(entityList, 507, ENTITYTYPE.OBJECT, "ITEM_RADISH", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 7, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_SALAD = new EntityConfig(entityList, 508, ENTITYTYPE.OBJECT, "ITEM_SALAD", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 8, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig ITEM_AUBERGINE = new EntityConfig(entityList, 509, ENTITYTYPE.OBJECT, "ITEM_AUBERGINE", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 8, 10, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
 	
-	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
-		if (blueprint != null) {
-			switch(blueprint.name) {
+	public static Entity addInstanceToLevel(EntityConfig config, Level level, int x, int y) {
+		if (config != null) {
+			switch(config.name) {
 				case "TREE_BIG_01" :
-					return level.addEntity(new Tree(blueprint, level, x, y));
+					return level.addEntity(new Tree(config, level, x, y));
 				case "TREE_BIG_02" :
-					return level.addEntity(new Tree(blueprint, level, x, y));
+					return level.addEntity(new Tree(config, level, x, y));
 				case "FENCE_D_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));
+					return level.addEntity(new Fence(config, level, x, y));
 				case "FENCE_U_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));
+					return level.addEntity(new Fence(config, level, x, y));
 				case "FENCE_L_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));
+					return level.addEntity(new Fence(config, level, x, y));
 				case "FENCE_R_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));
+					return level.addEntity(new Fence(config, level, x, y));
 				case "FENCE_N_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));
+					return level.addEntity(new Fence(config, level, x, y));
 				case "FENCE_D_C_R_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_L_C_R_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_L_C_D_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_U_C_D_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_U_C_R_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_U_C_L_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_U_C_D_C_R_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_U_C_D_C_L_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_U_C_D_C_L_C_R_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_U_C_L_C_R_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_D_C_L_C_R_C" :
-					return level.addEntity(new Fence(blueprint, level, x, y));	
+					return level.addEntity(new Fence(config, level, x, y));	
 				case "FENCE_DOOR_H_L" :
-					return level.addEntity(new FenceDoor(blueprint, level, x, y));
+					return level.addEntity(new FenceDoor(config, level, x, y));
 				case "FENCE_DOOR_H_R" :
-					return level.addEntity(new FenceDoor(blueprint, level, x, y));
+					return level.addEntity(new FenceDoor(config, level, x, y));
 				case "IRON_ORE" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "STONE" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "SAND" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "GOLD_ORE" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "COAL" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "SIVLER_ORE" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "KEY_01" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_CARROT" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_TOMATO" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_STRAWBERRY" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));	
+					return level.addEntity(new CollectableItem(config, level, x, y));	
 				case "ITEM_PUMPKIN" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_CORN" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_POTATO" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_MELON" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_RADISH" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_SALAD" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				case "ITEM_AUBERGINE" :
-					return level.addEntity(new CollectableItem(blueprint, level, x, y));
+					return level.addEntity(new CollectableItem(config, level, x, y));
 				default:
-					return level.addEntity(new ObjectStatic(blueprint, level, x, y)); 
+					return level.addEntity(new ObjectStatic(config, level, x, y)); 
 			}
 		}
 		
 		return null;
 	}
 
-	public static EntityBluePrint getBluePrintByID(int id) {
+	public static EntityConfig getBluePrintByID(int id) {
 		return entityList[id];
 	}
 	
 	
-	public static EntityBluePrint getBluePrintByName(String name) {
-		for (EntityBluePrint bluePrint : entityList) {
-			if (bluePrint != null) {
-				if (bluePrint.name.equals(name)) {
-					return bluePrint;
+	public static EntityConfig getBluePrintByName(String name) {
+		for (EntityConfig config : entityList) {
+			if (config != null) {
+				if (config.name.equals(name)) {
+					return config;
 				}
 			}
 		}
@@ -191,7 +190,7 @@ public class Objects {
 	public static int getListCount() {
 		int count = 0;
 		
-		for (EntityBluePrint entity : entityList) {
+		for (EntityConfig entity : entityList) {
 			if (entity != null) {
 				count++;
 			}

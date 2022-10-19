@@ -1,13 +1,13 @@
 package game_content.entities.prefabs;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
 
 public class House extends Prefab {
 
-	public House(EntityBluePrint blueprint, Level level, int x, int y) {
+	public House(EntityConfig blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
 		
 	}

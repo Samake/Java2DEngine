@@ -8,7 +8,7 @@ import java.awt.geom.Ellipse2D;
 import engine.debug.Debug;
 import engine.debug.Log;
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.lights.PointLight;
 import engine.input.InputHandler;
 import engine.scene.GameScene;
@@ -182,7 +182,7 @@ public class Editor extends GameScene {
 			}
 		} else {
 			if (input.rmouse.isClicked()) {
-				EntityBluePrint entityBluePrint = Objects.getBluePrintByName(entitySlot);
+				EntityConfig entityBluePrint = Objects.getBluePrintByName(entitySlot);
 				
 				if (entityBluePrint != null) {
 					Vector2f position = ClickSystemEditor.worldPosition;
@@ -245,7 +245,7 @@ public class Editor extends GameScene {
 			if (input.rmouse.isClicked()) {
 				Vector2f position = ClickSystemEditor.worldPosition;
 				
-				EntityBluePrint skinBluePrint = NPCs.getBluePrintByName(EditorGUIPlayer.skinName);
+				EntityConfig skinBluePrint = NPCs.getBluePrintByName(EditorGUIPlayer.skinName);
 				
 				if (skinBluePrint == null) {
 					skinBluePrint = NPCs.HUMAN_WOMAN_01;
@@ -273,7 +273,7 @@ public class Editor extends GameScene {
 			}
 		} else {
 			if (input.rmouse.isClicked()) {
-				EntityBluePrint entityBluePrint = Prefabs.getBluePrintByName(prefabSlot);
+				EntityConfig entityBluePrint = Prefabs.getBluePrintByName(prefabSlot);
 				
 				if (entityBluePrint != null) {
 					Vector2f position = ClickSystemEditor.worldPosition;

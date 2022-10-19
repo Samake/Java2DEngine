@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.List;
 
 import engine.core.Config;
+import engine.entities.EntityRenderData.RENDERTYPE;
 import engine.entities.collision.CollissionBox;
 import engine.entities.lights.Light.LIGHTTYPE;
 import engine.entities.lights.PointLight;
@@ -19,15 +20,13 @@ public class Entity {
 		OBJECT, PREFAB, LIGHT, DECAL, EFFECT, NPC, PLAYER
 	}
 	
-	public enum RENDERTYPE {
-		R1X1, R1X2, R1X3, R2X1, R2X2, R2X3, R3X2, R3X3, R3X5, R4X4, R4X6, R5X5, R6X6
-	}
-	
-	public EntityBluePrint bluePrint;
 	public CollissionBox collissionBox = new CollissionBox();
 	public Vector2f position = new Vector2f();
 	public Vector2f velocity = new Vector2f();
 	public Vector2f collidingVelocity = new Vector2f();
+	
+	public EntityConfig config;
+	public Level level;
 	
 	public float scale = 1;
 	public float brightness = 1.0f;
@@ -36,8 +35,6 @@ public class Entity {
 	public float yOffset = 0;
 	public int collissionOffset = 2;
 
-	public Level level;
-	
 	public boolean selected = false;
 	
 	protected int xTile = 0;
@@ -49,99 +46,99 @@ public class Entity {
 	
 	public Color debugColor = Color.YELLOW;
 	public boolean saveToMap = true;
-	public boolean castShadow = true;
 	
-	public Entity(EntityBluePrint bluePrint, Level level, float x, float y) {
-		this.bluePrint = bluePrint;
+	public Entity(EntityConfig config, Level level, float x, float y) {
+		this.config = config;
 		this.level = level;
 		this.position.x = x;
 		this.position.y = y;
-		this.castShadow = bluePrint.castShadow;
 		
-		if (collissionBox != null) {
-			if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
-				collissionBox.minY = 0;
-				collissionBox.maxY = bluePrint.atlas.sheet.tileSize / 2;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R1X2)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R1X3)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
-				collissionBox.minY = (bluePrint.atlas.sheet.tileSize / 2) + collissionOffset ;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R2X2)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R2X3)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R3X2)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 1.5f) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R3X3)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 1.5f) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R3X5)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 1.5f) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 2.5f) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R4X4)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 2) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 2) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 2) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R4X6)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 2) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 2) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 3) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R5X5)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 2.5f) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 2.5f) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 2.5f) - collissionOffset;
-			}
-			
-			if (bluePrint.renderType.equals(RENDERTYPE.R6X6)) {
-				collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 3) + collissionOffset;
-				collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 3) - collissionOffset;
-				collissionBox.minY = collissionOffset;
-				collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 3) - collissionOffset;
-			}
+		defineDefaultCollissionBoxes();
+	}
+
+	private void defineDefaultCollissionBoxes() {
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X1)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minY = 0;
+			collissionBox.maxY = config.renderData.atlas.sheet.tileSize / 2;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X2)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X3)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minY = (config.renderData.atlas.sheet.tileSize / 2) + collissionOffset ;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R2X2)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R2X3)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R3X2)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R3X3)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R3X5)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R4X4)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 2) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 2) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 2) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R4X6)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 2) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 2) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 3) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R5X5)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 2.5f) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset;
+		}
+		
+		if (config.renderData.renderType.equals(RENDERTYPE.R6X6)) {
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 3) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 3) - collissionOffset;
+			collissionBox.minY = collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 3) - collissionOffset;
 		}
 	}
 	
@@ -150,15 +147,15 @@ public class Entity {
 			collissionBox.update(position.x, position.y + heightOffsetModifier);
 		}
 		
-		if (bluePrint != null) {
-			bluePrint.atlas.update(gameSpeed);
+		if (config != null) {
+			config.renderData.atlas.update(gameSpeed);
 		}
 	}
 
 	public void render(Screen screen, List<PointLight> renderListLights) {
-		modifier = bluePrint.atlas.sheet.tileSize * scale;
+		modifier = config.renderData.atlas.sheet.tileSize * scale;
 
-		if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X1)) {
 			float rows = 1;
 			float columns = 1;
 			
@@ -168,7 +165,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R1X2)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X2)) {
 			float rows = 1;
 			float columns = 2;
 			
@@ -178,7 +175,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R1X3)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X3)) {
 			float rows = 1;
 			float columns = 3;
 			
@@ -188,7 +185,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R2X2)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R2X2)) {
 			float rows = 2;
 			float columns = 2;
 			
@@ -198,7 +195,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R2X3)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R2X3)) {
 			float rows = 2;
 			float columns = 3;
 			
@@ -208,7 +205,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R3X3)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R3X3)) {
 			float rows = 3;
 			float columns = 3;
 			
@@ -218,7 +215,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R3X5)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R3X5)) {
 			float rows = 3;
 			float columns = 5;
 			
@@ -228,7 +225,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R4X6)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R4X6)) {
 			float rows = 4;
 			float columns = 6;
 			
@@ -238,7 +235,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R5X5)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R5X5)) {
 			float rows = 5;
 			float columns = 5;
 			
@@ -248,7 +245,7 @@ public class Entity {
 			renderEntityPart(screen, renderListLights, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R6X6)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R6X6)) {
 			float rows = 6;
 			float columns = 6;
 			
@@ -260,10 +257,10 @@ public class Entity {
 	}
 
 	private void renderEntityPart(Screen screen, List<PointLight> renderListLights, int rows, int columns, float baseXOffset, float baseYOffset) {
-		int xTileID = bluePrint.atlas.column;
-		int yTileID = bluePrint.atlas.row;
+		int xTileID = config.renderData.atlas.column;
+		int yTileID = config.renderData.atlas.row;
 		
-		if (castShadow) {
+		if (config.renderData.castShadow) {
 			for (int row = 0; row < rows; row++) {
 				for (int column = 0; column < columns; column++) {
 					if (!inWater) {
@@ -323,7 +320,7 @@ public class Entity {
 	}
 
 	private void renderEntityPartShadow(Screen screen, List<PointLight> renderListLights, int xTileID, int yTileID) {
-		if (Config.SHADOWS && castShadow) {
+		if (Config.SHADOWS && config.renderData.castShadow) {
 			for (PointLight light : renderListLights) {
 				if (light != null) {
 					if (light.type.equals(LIGHTTYPE.POINTLIGHT)) {
@@ -359,7 +356,7 @@ public class Entity {
 	public void renderAtlas(Screen screen, SpriteAtlas atlas) {
 		modifier = atlas.sheet.tileSize * scale;
 
-		if (bluePrint.renderType.equals(RENDERTYPE.R1X1)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X1)) {
 			float rows = 1;
 			float columns = 1;
 			
@@ -369,7 +366,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R1X2)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X2)) {
 			float rows = 1;
 			float columns = 2;
 			
@@ -379,7 +376,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R1X3)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R1X3)) {
 			float rows = 1;
 			float columns = 3;
 			
@@ -389,7 +386,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R2X2)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R2X2)) {
 			float rows = 2;
 			float columns = 2;
 			
@@ -399,7 +396,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R2X3)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R2X3)) {
 			float rows = 2;
 			float columns = 3;
 			
@@ -409,7 +406,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R3X3)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R3X3)) {
 			float rows = 3;
 			float columns = 3;
 			
@@ -419,7 +416,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R3X5)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R3X5)) {
 			float rows = 3;
 			float columns = 5;
 			
@@ -429,7 +426,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R4X6)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R4X6)) {
 			float rows = 4;
 			float columns = 6;
 			
@@ -439,7 +436,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R5X5)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R5X5)) {
 			float rows = 5;
 			float columns = 5;
 			
@@ -449,7 +446,7 @@ public class Entity {
 			renderAtlasPart(screen, atlas, (int) rows, (int) columns, baseXOffset, baseYOffset);
 		}
 		
-		if (bluePrint.renderType.equals(RENDERTYPE.R6X6)) {
+		if (config.renderData.renderType.equals(RENDERTYPE.R6X6)) {
 			float rows = 6;
 			float columns = 6;
 			
@@ -499,13 +496,13 @@ public class Entity {
 	}
 
 	private void renderShadows(Screen screen, int xValue, int yValue, int shadwowDistance, float shadowStrength, int xTileID, int yTileID) {
-		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 1, yOffset - yValue * shadwowDistance * 1, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.45f);
-		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 2, yOffset - yValue * shadwowDistance * 2, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.35f);
-		screen.renderShadow(bluePrint.atlas, xOffset - xValue * shadwowDistance * 3, yOffset - yValue * shadwowDistance * 3, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.25f);
+		screen.renderShadow(config.renderData.atlas, xOffset - xValue * shadwowDistance * 1, yOffset - yValue * shadwowDistance * 1, config.renderData.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.45f);
+		screen.renderShadow(config.renderData.atlas, xOffset - xValue * shadwowDistance * 2, yOffset - yValue * shadwowDistance * 2, config.renderData.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.35f);
+		screen.renderShadow(config.renderData.atlas, xOffset - xValue * shadwowDistance * 3, yOffset - yValue * shadwowDistance * 3, config.renderData.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, shadowStrength * 0.25f);
 	}
 
 	private void renderPart(Screen screen, int xTileID, int yTileID, boolean isInWater) {
-		screen.render(bluePrint.atlas, xOffset, yOffset, bluePrint.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater);
+		screen.render(config.renderData.atlas, xOffset, yOffset, config.renderData.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater);
 	}
 	
 	private void renderPartbyAtlas(Screen screen, SpriteAtlas atlas, int xTileID, int yTileID, boolean isInWater) {

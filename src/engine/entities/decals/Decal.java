@@ -1,7 +1,7 @@
 package engine.entities.decals;
 
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.input.InputHandler;
 import engine.level.Level;
 
@@ -10,8 +10,13 @@ public class Decal extends Entity {
 	private long duration;
 	private long startTick;
 
-	public Decal(EntityBluePrint bluePrint, Level level, int x, int y, long duration) {
-		super(bluePrint, level, x, y);
+	public Decal(EntityConfig config, Level level, int x, int y, long duration) {
+		super(config, level, x, y);
+		
+		collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + 2;
+		collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - 2;
+		collissionBox.minY = (-config.renderData.atlas.sheet.tileSize / 2) + 2;
+		collissionBox.maxY = (config.renderData.atlas.sheet.tileSize / 2) - 2;
 		
 		saveToMap = false;
 		
@@ -25,13 +30,6 @@ public class Decal extends Entity {
 	@Override
 	public void update(InputHandler input, int gameSpeed) {
 		super.update(input, gameSpeed);
-		
-		if (collissionBox != null) {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-			collissionBox.minY = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-		}
 		
 		long currentDuration = duration / gameSpeed;
 		

@@ -23,7 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import game_content.resources.Objects;
 import game_content.resources.Sheets;
 import game_editor.Editor;
@@ -288,7 +288,7 @@ public class EditorGUIEntities {
 		int emptyButtonSpace = 0;
 		entitiesCount = emptyButtonSpace;
 		
-		for (EntityBluePrint entityBlueprint : Objects.entityList) {
+		for (EntityConfig entityBlueprint : Objects.entityList) {
 			if (entityBlueprint != null) {
 				entitiesCount++;
 			}
@@ -337,7 +337,7 @@ public class EditorGUIEntities {
 		int index = 0;
 		
 		for (int i = 0; i < Objects.entityList.length; i++) {
-			EntityBluePrint entityBlueprint = Objects.entityList[i];
+			EntityConfig entityBlueprint = Objects.entityList[i];
 			
 			if (entityBlueprint != null) {
 				EntityPanel buttonPanel = generateEntityCard(entityBlueprint);
@@ -347,7 +347,7 @@ public class EditorGUIEntities {
 		}
 	}
 
-	private static EntityPanel generateEntityCard(EntityBluePrint entityBlueprint) {
+	private static EntityPanel generateEntityCard(EntityConfig entityBlueprint) {
 		int lineSize = buttonDimension.height;
 		Dimension buttonPanelDimension = new Dimension(width - 50, lineSize);
 		
@@ -393,7 +393,7 @@ public class EditorGUIEntities {
 		return buttonPanel;
 	}
 	
-	private static EntityPanel generateSelektorCard(EntityBluePrint entityBlueprint) {
+	private static EntityPanel generateSelektorCard(EntityConfig entityBlueprint) {
 		int lineSize = buttonDimension.height;
 		Dimension buttonPanelDimension = new Dimension(width - 50, lineSize);
 		
@@ -426,7 +426,7 @@ public class EditorGUIEntities {
 		
 		if (selectedEntity != null) {
 			entityID.setText(String.valueOf(selectedEntity.hashCode()));
-			entityName.setText(selectedEntity.bluePrint.name);
+			entityName.setText(selectedEntity.config.name);
 			xPosTextField.setText(String.valueOf((int) selectedEntity.position.x));
 			yPosTextField.setText(String.valueOf((int) selectedEntity.position.y));
 		}

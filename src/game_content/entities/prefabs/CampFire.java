@@ -2,7 +2,7 @@ package game_content.entities.prefabs;
 
 import java.awt.Color;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.lights.PointLight;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
@@ -22,17 +22,17 @@ public class CampFire extends Prefab {
 	private Vector2f lightOffset = new Vector2f();
 	private Vector2f smokeOffset = new Vector2f();
 	
-	public CampFire(EntityBluePrint blueprint, Level level, int x, int y) {
-		super(blueprint, level, x, y);
+	public CampFire(EntityConfig config, Level level, int x, int y) {
+		super(config, level, x, y);
 		
 		if (collissionBox != null) {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-			collissionBox.minY = bluePrint.atlas.sheet.tileSize / 8;
-			collissionBox.maxY = bluePrint.atlas.sheet.tileSize / 2;
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + 2;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - 2;
+			collissionBox.minY = config.renderData.atlas.sheet.tileSize / 8;
+			collissionBox.maxY = config.renderData.atlas.sheet.tileSize / 2;
 		}
 		
-		smokeOffset.y = -bluePrint.atlas.sheet.tileSize;
+		smokeOffset.y = -config.renderData.atlas.sheet.tileSize;
 		
 		light = new PointLight(level, x, y, new Color(220, 75, 15, 255), 96, false, true, 5, 200, false);
 		light.enabledAtDay = true;

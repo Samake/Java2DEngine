@@ -5,7 +5,7 @@ import java.util.List;
 
 import engine.animation.Animation;
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.npc.NPCJobs.JOBS;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -63,8 +63,8 @@ public class NPCCore extends Entity {
 	
 	private int waterDripCount = 5;
 	
-	public NPCCore(EntityBluePrint bluePrint, Level level, String name, NPCTYPE type, float x, float y, float speed, boolean useAI) {
-		super(bluePrint, level, x, y);
+	public NPCCore(EntityConfig config, Level level, String name, NPCTYPE type, float x, float y, float speed, boolean useAI) {
+		super(config, level, x, y);
 		
 		this.name = name;
 		this.speed = speed;
@@ -159,8 +159,8 @@ public class NPCCore extends Entity {
 			animation.delay = 400 / currentAnimSpeed;
 			speed = currentSpeed * gameSpeed;
 			
-			if (level != null && bluePrint.atlas != null) {
-				Tile tile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
+			if (level != null && config.renderData.atlas != null) {
+				Tile tile = level.getTile((int) position.x >> config.renderData.atlas.sheet.getShiftOperator(), (int) position.y >> config.renderData.atlas.sheet.getShiftOperator());
 				
 				if (tile != null) {
 					//speed = currentSpeed * tile.hesitation;
@@ -194,7 +194,7 @@ public class NPCCore extends Entity {
 
 			if (isSwimming) {
 				//speed = currentSpeed * 0.35f;
-				heightOffsetModifier = bluePrint.atlas.sheet.tileSize / 2;
+				heightOffsetModifier = config.renderData.atlas.sheet.tileSize / 2;
 				inWater = true;
 				animation.delay = 400 / currentAnimSpeed;
 			} else {
@@ -240,7 +240,7 @@ public class NPCCore extends Entity {
 			}
 		}
 		
-		animation.update(bluePrint.renderType, gameSpeed);
+		animation.update(config.renderData.renderType, gameSpeed);
 
 		xTile = animation.xTile;
 		yTile = animation.yTile;
@@ -258,8 +258,8 @@ public class NPCCore extends Entity {
 					
 			if (flipValue == 2) {
 				if (flipChanged) {
-					int randomX = Misc.randomInteger(-(bluePrint.atlas.sheet.tileSize / 4), (bluePrint.atlas.sheet.tileSize / 4));
-					int randomY = Misc.randomInteger(0, (bluePrint.atlas.sheet.tileSize / 2));
+					int randomX = Misc.randomInteger(-(config.renderData.atlas.sheet.tileSize / 4), (config.renderData.atlas.sheet.tileSize / 4));
+					int randomY = Misc.randomInteger(0, (config.renderData.atlas.sheet.tileSize / 2));
 					
 					new EffectWaterRipples(level, position.x + randomX, position.y + randomY + heightOffsetModifier);
 					flipChanged = false;
@@ -269,10 +269,10 @@ public class NPCCore extends Entity {
 			if (flipValue == 2) {
 				if (flipChanged) {
 					if (waterDripCount < 5) {
-						int randomX = Misc.randomInteger(-(bluePrint.atlas.sheet.tileSize / 4), (bluePrint.atlas.sheet.tileSize / 4));
-						int randomY = Misc.randomInteger(0, (bluePrint.atlas.sheet.tileSize / 2));
+						int randomX = Misc.randomInteger(-(config.renderData.atlas.sheet.tileSize / 4), (config.renderData.atlas.sheet.tileSize / 4));
+						int randomY = Misc.randomInteger(0, (config.renderData.atlas.sheet.tileSize / 2));
 						
-						new EffectWaterRipples(level, position.x + randomX, position.y + randomY + bluePrint.atlas.sheet.tileSize);
+						new EffectWaterRipples(level, position.x + randomX, position.y + randomY + config.renderData.atlas.sheet.tileSize);
 						flipChanged = false;
 						waterDripCount++;
 					}
@@ -282,11 +282,11 @@ public class NPCCore extends Entity {
 	}
 
 	private void checkIfInWater(Tile tile) {
-		Tile leftCornerTile = level.getTile((int) (collissionBox.minX + position.x) >> bluePrint.atlas.sheet.getShiftOperator(), (int) (collissionBox.maxY + position.y) >> bluePrint.atlas.sheet.getShiftOperator());
-		Tile rightCornerTile = level.getTile((int) (collissionBox.maxX + position.x)>> bluePrint.atlas.sheet.getShiftOperator(), (int) (collissionBox.maxY + position.y) >> bluePrint.atlas.sheet.getShiftOperator());
+		Tile leftCornerTile = level.getTile((int) (collissionBox.minX + position.x) >> config.renderData.atlas.sheet.getShiftOperator(), (int) (collissionBox.maxY + position.y) >> config.renderData.atlas.sheet.getShiftOperator());
+		Tile rightCornerTile = level.getTile((int) (collissionBox.maxX + position.x)>> config.renderData.atlas.sheet.getShiftOperator(), (int) (collissionBox.maxY + position.y) >> config.renderData.atlas.sheet.getShiftOperator());
 		
 		if (leftCornerTile!= null && rightCornerTile != null) {
-			if (leftCornerTile.bluePrint.equals(Tiles.WATER_CLEAN) && rightCornerTile.bluePrint.equals(Tiles.WATER_CLEAN)) {
+			if (leftCornerTile.config.equals(Tiles.WATER_CLEAN) && rightCornerTile.config.equals(Tiles.WATER_CLEAN)) {
 				isSwimming = true;
 			} else {
 				isSwimming = false;
@@ -329,7 +329,7 @@ public class NPCCore extends Entity {
 		isCollidingDown = false;
 		
 		for (Entity entity : entityList) {
-			if (entity.bluePrint.entityType.equals(ENTITYTYPE.OBJECT) || entity.bluePrint.entityType.equals(ENTITYTYPE.PREFAB)) {
+			if (entity.config.entityType.equals(ENTITYTYPE.OBJECT) || entity.config.entityType.equals(ENTITYTYPE.PREFAB)) {
 				if (entity.checkCollission(collissionBox)) {
 					isCollidingLeft = entity.collissionBox.isCollidingLeft(collissionBox);
 					isCollidingRight = entity.collissionBox.isCollidingRight(collissionBox);
@@ -346,9 +346,9 @@ public class NPCCore extends Entity {
 	}
 
 	protected boolean isSolidTile(int xa, int ya, int x, int y) {
-		if (level != null && bluePrint.atlas != null) {
-			Tile lastTile = level.getTile(((int) position.x + (int) x) >> bluePrint.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y) >> bluePrint.atlas.sheet.getShiftOperator());
-			Tile newTile = level.getTile(((int) position.x + (int) x + xa) >> bluePrint.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y + ya * 2) >> bluePrint.atlas.sheet.getShiftOperator());
+		if (level != null && config.renderData.atlas != null) {
+			Tile lastTile = level.getTile(((int) position.x + (int) x) >> config.renderData.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y) >> config.renderData.atlas.sheet.getShiftOperator());
+			Tile newTile = level.getTile(((int) position.x + (int) x + xa) >> config.renderData.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y + ya * 2) >> config.renderData.atlas.sheet.getShiftOperator());
 			
 			if (lastTile != null && newTile != null) {
 				if (!lastTile.equals(newTile) && newTile.isSolid || newTile.hasCollission) {
@@ -363,7 +363,7 @@ public class NPCCore extends Entity {
 	}
 	
 	protected Tile getTile(int x, int y) {
-		return level.getTile(((int) position.x + (int) x) >> bluePrint.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y) >> bluePrint.atlas.sheet.getShiftOperator());
+		return level.getTile(((int) position.x + (int) x) >> config.renderData.atlas.sheet.getShiftOperator(), ((int) position.y + (int) y) >> config.renderData.atlas.sheet.getShiftOperator());
 	}
 	
 	protected Entity getEntity(int x, int y) {

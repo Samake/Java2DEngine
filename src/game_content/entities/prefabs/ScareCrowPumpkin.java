@@ -3,7 +3,7 @@ package game_content.entities.prefabs;
 import java.awt.Color;
 
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.lights.PointLight;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
@@ -21,10 +21,10 @@ public class ScareCrowPumpkin extends Prefab {
 	
 	public boolean enabled = false;
 	
-	public ScareCrowPumpkin(EntityBluePrint blueprint, Level level, int x, int y) {
-		super(blueprint, level, x, y);
+	public ScareCrowPumpkin(EntityConfig config, Level level, int x, int y) {
+		super(config, level, x, y);
 		
-		lightOffset.y = -bluePrint.atlas.sheet.tileSize / 2;
+		lightOffset.y = -config.renderData.atlas.sheet.tileSize / 2;
 	}
 
 	@Override

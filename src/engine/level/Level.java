@@ -175,7 +175,7 @@ public class Level {
 				entity.update(input, gameSpeed);
 				updateListEntities.add(entity);
 				
-				if (entity.bluePrint.collission) {
+				if (entity.config.collission) {
 					collidingListEntities.add(entity);
 				}
 			}
@@ -290,7 +290,7 @@ public class Level {
 	public void renderDecals(Screen screen) {
 		if (renderListDecals != null) {
 			for (Decal decal : renderListDecals) {
-				if (decal.bluePrint.rendered) {
+				if (decal.config.renderData.rendered) {
 					decal.render(screen, renderListLights);
 				}
 			}
@@ -300,7 +300,7 @@ public class Level {
 	public void renderEntities(Screen screen) {
 		if (renderListEntities.size() > 0) {
 			for (Entity entity : renderListEntities) {
-				if (entity.bluePrint.rendered) {
+				if (entity.config.renderData.rendered) {
 					entity.render(screen, renderListLights);
 					
 					if (Debug.enabled|| entity.selected) {
@@ -369,7 +369,7 @@ public class Level {
 		deMarkTiles();
 		
 		if (Editor.smoothTiles) {
-			LevelGenerator.smoothBorders(this, x, y, tile, tile.bluePrint.type, true, false);
+			LevelGenerator.smoothBorders(this, x, y, tile, tile.config.type, true, false);
 		}
 	}
 	

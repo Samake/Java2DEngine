@@ -1,13 +1,13 @@
 package game_content.entities.objects;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.input.InputHandler;
 import engine.level.Level;
 
 public class FenceDoor extends Fence {
 
-	public FenceDoor(EntityBluePrint bluePrint, Level level, float x, float y) {
-		super(bluePrint, level, x, y);
+	public FenceDoor(EntityConfig config, Level level, float x, float y) {
+		super(config, level, x, y);
 	}
 	
 	@Override

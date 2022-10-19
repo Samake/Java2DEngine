@@ -2,7 +2,7 @@ package game_content.entities.prefabs;
 
 import java.awt.Color;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.lights.PointLight;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
@@ -27,8 +27,8 @@ public class GlowWorm extends Prefab {
 	private double animValue = 0;
 	private float animSpeed = 0.01f;
 	
-	public GlowWorm(EntityBluePrint blueprint, Level level, int x, int y) {
-		super(blueprint, level, x, y);
+	public GlowWorm(EntityConfig config, Level level, int x, int y) {
+		super(config, level, x, y);
 		
 		basePosition.x = x;
 		basePosition.y = y;
@@ -49,7 +49,7 @@ public class GlowWorm extends Prefab {
 		
 		if (light != null) {
 			
-			bluePrint.rendered = light.enabled;
+			config.renderData.rendered = light.enabled;
 			light.position.x = position.x + lightOffset.x;
 			light.position.y = position.y + lightOffset.y;
 			

@@ -15,7 +15,7 @@ import engine.debug.Log;
 import engine.debug.Log.OUTPUTTYPE;
 import engine.entities.Entity;
 import engine.entities.Entity.ENTITYTYPE;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.lights.PointLight;
 import engine.level.Level.LEVELTYPE;
 import engine.tiles.BasicTile;
@@ -186,7 +186,7 @@ public class LevelLoader {
 			float y = Float.valueOf(posYParts[1]);
 			//float speed = Float.valueOf(speedParts[1]);
 			
-			EntityBluePrint skinBluePrint = NPCs.getBluePrintByName(skin);
+			EntityConfig skinBluePrint = NPCs.getBluePrintByName(skin);
 			
 			if (skinBluePrint != null) {
 				Player player = NPCs.addPlayerInstanceToLevel(skinBluePrint, level, (int) x, (int) y);
@@ -219,7 +219,7 @@ public class LevelLoader {
 			float x = Float.valueOf(posXParts[1]);
 			float y = Float.valueOf(posYParts[1]);
 			
-			EntityBluePrint entityBluePrint = Objects.getBluePrintByName(name);
+			EntityConfig entityBluePrint = Objects.getBluePrintByName(name);
 			
 			if (entityBluePrint != null) {
 				Objects.addInstanceToLevel(entityBluePrint, level, (int) x, (int) y);
@@ -239,7 +239,7 @@ public class LevelLoader {
 			float x = Float.valueOf(posXParts[1]);
 			float y = Float.valueOf(posYParts[1]);
 			
-			EntityBluePrint entityBluePrint = Prefabs.getBluePrintByName(name);
+			EntityConfig entityBluePrint = Prefabs.getBluePrintByName(name);
 			
 			if (entityBluePrint != null) {
 				Prefabs.addInstanceToLevel(entityBluePrint, level, (int) x, (int) y);
@@ -386,7 +386,7 @@ public class LevelLoader {
 				Tile tile = level.getTile(x, y);
 				
 				if (tile != null) {
-					bufferedWriter.write("{id:" + tile.id + ",tile:" + tile.bluePrint.id + ",x:" + x + ",y:" + y + "}");
+					bufferedWriter.write("{id:" + tile.id + ",tile:" + tile.config.id + ",x:" + x + ",y:" + y + "}");
 					bufferedWriter.newLine();
 				} else {
 					bufferedWriter.write("{NULL"+ ",x:" + x + ",y:" + y + "}");
@@ -406,7 +406,7 @@ public class LevelLoader {
 			if (player.saveToMap) {
 				StringBuilder builder = new StringBuilder();
 				builder.append("{type:Player");
-				builder.append(",skin:" + player.bluePrint.name);
+				builder.append(",skin:" + player.config.name);
 				builder.append(",x:" + player.position.x);
 				builder.append(",y:" + player.position.y);
 				builder.append(",speed:" + player.speed);
@@ -487,10 +487,10 @@ public class LevelLoader {
 		
 		for (Entity entity : level.entities) {
 			if (entity != null) {
-				if (entity.bluePrint.entityType.equals(ENTITYTYPE.OBJECT)) {
+				if (entity.config.entityType.equals(ENTITYTYPE.OBJECT)) {
 					if (entity.saveToMap) {
 						bufferedWriter.write("{type:Entity"
-								+ ",name:"+ entity.bluePrint.name
+								+ ",name:"+ entity.config.name
 								+ ",x:"+ entity.position.x 
 								+ ",y:" + entity.position.y
 						+ "}");
@@ -508,10 +508,10 @@ public class LevelLoader {
 		
 		for (Entity entity : level.entities) {
 			if (entity != null) {
-				if (entity.bluePrint.entityType.equals(ENTITYTYPE.PREFAB)) {
+				if (entity.config.entityType.equals(ENTITYTYPE.PREFAB)) {
 					if (entity.saveToMap) {
 						bufferedWriter.write("{type:Prefab"
-								+ ",name:"+ entity.bluePrint.name
+								+ ",name:"+ entity.config.name
 								+ ",x:"+ entity.position.x 
 								+ ",y:" + entity.position.y
 						+ "}");

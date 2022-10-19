@@ -24,7 +24,7 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import engine.tiles.TileBluePrint;
+import engine.tiles.TileConfig;
 import game_content.resources.Sheets;
 import game_content.resources.Tiles;
 import game_editor.Editor;
@@ -203,7 +203,7 @@ public class EditorGUITiles {
 		int emptyButtonSpace = 5;
 		tilesCount = emptyButtonSpace;
 		
-		for (TileBluePrint tileBlueprint : Tiles.tileTypes) {
+		for (TileConfig tileBlueprint : Tiles.tileTypes) {
 			if (tileBlueprint != null) {
 				tilesCount++;
 			}
@@ -224,7 +224,7 @@ public class EditorGUITiles {
 		
 		int index = 0;
 		
-		for (TileBluePrint tileBlueprint : Tiles.tileTypes) {
+		for (TileConfig tileBlueprint : Tiles.tileTypes) {
 			if (tileBlueprint != null) {
 				JButton button = new JButton();
 				

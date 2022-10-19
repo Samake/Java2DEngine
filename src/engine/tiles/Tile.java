@@ -9,7 +9,7 @@ import engine.sprites.SpriteAtlas;
 public abstract class Tile {
 
 	public SpriteAtlas atlas;
-	public TileBluePrint bluePrint;
+	public TileConfig config;
 	public int id;
 	public int x;
 	public int y;
@@ -25,15 +25,15 @@ public abstract class Tile {
 	public Color selectedColor = Color.GREEN;
 	public Color markedColor = Color.LIGHT_GRAY;
 	
-	public Tile(int id, int x, int y, TileBluePrint blueprint, float brightness) {
+	public Tile(int id, int x, int y, TileConfig config, float brightness) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
-		this.bluePrint = blueprint;
-		this.atlas = blueprint.atlas;
-		this.isSolid = blueprint.isSolid;
-		this.hasCollission = blueprint.isSolid;
-		this.hesitation = blueprint.hestitation;
+		this.config = config;
+		this.atlas = config.atlas;
+		this.isSolid = config.isSolid;
+		this.hasCollission = config.isSolid;
+		this.hesitation = config.hestitation;
 		this.brightness = brightness;
 	}
 	

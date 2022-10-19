@@ -10,7 +10,7 @@ public class BasicTile extends Tile {
 
 	public int tileID;
 	
-	public BasicTile(int id, int x, int y, TileBluePrint blueprint, float brightness) {
+	public BasicTile(int id, int x, int y, TileConfig blueprint, float brightness) {
 		super(id, x ,y, blueprint, brightness);
 		
 		setTileID(blueprint.atlas.column + blueprint.atlas.row * blueprint.atlas.sheet.slots);

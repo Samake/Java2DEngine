@@ -1,6 +1,6 @@
 package game_content.entities.prefabs;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.collision.CollissionBox;
 import engine.entities.objects.ObjectPhysical;
 import engine.input.InputHandler;
@@ -20,7 +20,7 @@ public class Ball extends ObjectPhysical {
 //	private float basisScale = 1.0f;
 //	private float moveSpeed = 0.0f;
 
-	public Ball(EntityBluePrint blueprint, Level level, int x, int y) {
+	public Ball(EntityConfig blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
 	}
 

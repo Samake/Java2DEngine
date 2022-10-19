@@ -1,6 +1,6 @@
 package engine.animation;
 
-import engine.entities.Entity.RENDERTYPE;
+import engine.entities.EntityRenderData.RENDERTYPE;
 
 public class Animation {
 

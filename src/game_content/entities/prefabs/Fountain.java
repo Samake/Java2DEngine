@@ -1,6 +1,6 @@
 package game_content.entities.prefabs;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -8,15 +8,15 @@ import engine.level.Level;
 public class Fountain extends Prefab {
 
 
-	public Fountain(EntityBluePrint blueprint, Level level, int x, int y) {
+	public Fountain(EntityConfig blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
 		
 		collissionOffset = 8;
 		
-		collissionBox.minX = (-bluePrint.atlas.sheet.tileSize * 1.5f) + collissionOffset;
-		collissionBox.maxX = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+		collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset;
+		collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
 		collissionBox.minY = collissionOffset;
-		collissionBox.maxY = (bluePrint.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+		collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
 	}
 
 	@Override

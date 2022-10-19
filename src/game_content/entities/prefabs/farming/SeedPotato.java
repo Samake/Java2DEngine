@@ -1,7 +1,7 @@
 package game_content.entities.prefabs.farming;
 
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.rendering.Canvas;
@@ -13,7 +13,7 @@ import testgame.input.ClickSystem;
 public class SeedPotato extends Seed {
 
 
-	public SeedPotato(EntityBluePrint blueprint, Level level, int x, int y) {
+	public SeedPotato(EntityConfig blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y, 4500);
 
 	}

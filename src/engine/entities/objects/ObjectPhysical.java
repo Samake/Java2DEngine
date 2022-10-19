@@ -2,7 +2,7 @@ package engine.entities.objects;
 
 import java.awt.Color;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.collision.CollissionBox;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
@@ -22,8 +22,8 @@ public class ObjectPhysical extends Prefab {
 	protected float xPower = 0.0f;
 	protected float yPower = 0.0f;
 	
-	public ObjectPhysical(EntityBluePrint bluePrint, Level level, float x, float y) {
-		super(bluePrint, level, x, y);
+	public ObjectPhysical(EntityConfig config, Level level, float x, float y) {
+		super(config, level, x, y);
 		
 		lastTick = System.currentTimeMillis();
 		
@@ -36,7 +36,7 @@ public class ObjectPhysical extends Prefab {
 		int currentDuration = duration / gameSpeed;
 		
 		if (player != null) {
-			if (player.collissionBox != null && player.bluePrint.collission) {
+			if (player.collissionBox != null && player.config.collission) {
 				if (checkCollission(player.collissionBox)) {
 					if (ready) {
 						doAction(player.collissionBox);

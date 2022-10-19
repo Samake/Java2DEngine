@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import engine.core.Engine;
 import engine.debug.Log;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.npc.clothes.ClothesNPC;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -68,7 +68,7 @@ public class LevelEditor extends Engine {
 	public JPanel worldSettings;
 	
 	public LevelEditor() {
-		super(1280, 720, 8);
+		super(1280, 720, 5);
 
 		title = "LevelEditor - " + title;
 		
@@ -488,7 +488,7 @@ public class LevelEditor extends Engine {
 		worldSettings.setVisible(true);
 	}
 	
-	public void changePlayer(EntityBluePrint skin) {
+	public void changePlayer(EntityConfig skin) {
 		Level level = scene.level;
 		
 		if (level != null && skin != null) {

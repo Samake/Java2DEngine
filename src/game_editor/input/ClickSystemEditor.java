@@ -83,7 +83,7 @@ public class ClickSystemEditor {
 			Entity entity = level.getEntity((int) worldPosition.x, (int) worldPosition.y);
 			
 			if (entity != null) {
-				if (entity.bluePrint.entityType.equals(ENTITYTYPE.OBJECT)) {
+				if (entity.config.entityType.equals(ENTITYTYPE.OBJECT)) {
 					level.deselectEntities();
 					level.selectEntity(entity);
 					selectedEntity = entity;
@@ -125,7 +125,7 @@ public class ClickSystemEditor {
 			Entity entity = level.getEntity((int) worldPosition.x, (int) worldPosition.y);
 			
 			if (entity != null) {
-				if (entity.bluePrint.entityType.equals(ENTITYTYPE.PREFAB)) {
+				if (entity.config.entityType.equals(ENTITYTYPE.PREFAB)) {
 					level.deselectEntities();
 					level.selectEntity(entity);
 					selectedPrefab = entity;
@@ -167,7 +167,7 @@ public class ClickSystemEditor {
 			Entity entity = level.getEntity((int) worldPosition.x, (int) worldPosition.y);
 			
 			if (entity != null) {
-				if (entity.bluePrint.entityType.equals(ENTITYTYPE.PLAYER)) {
+				if (entity.config.entityType.equals(ENTITYTYPE.PLAYER)) {
 					level.deselectEntities();
 					level.selectEntity(entity);
 					selectedPlayer = (Player) entity;
@@ -209,7 +209,7 @@ public class ClickSystemEditor {
 			PointLight light = (PointLight) level.getLight((int) worldPosition.x, (int) worldPosition.y);
 			
 			if (light != null) {
-				if (light.bluePrint.entityType.equals(ENTITYTYPE.LIGHT)) {
+				if (light.config.entityType.equals(ENTITYTYPE.LIGHT)) {
 					level.deselectLights();
 					level.selectLight(light);
 					selectedLight = light;

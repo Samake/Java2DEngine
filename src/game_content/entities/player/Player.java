@@ -3,7 +3,7 @@ package game_content.entities.player;
 import java.awt.Color;
 
 import engine.animation.Animation;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.npc.NPCHuman;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -11,8 +11,8 @@ import game_content.entities.effects.EffectSmokePuffGrey;
 
 public class Player extends NPCHuman {
 	
-	public Player(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, x, y, speed);
+	public Player(EntityConfig config, Level level, float x, float y, float speed) {
+		super(config, level, x, y, speed);
 
 		ANIMATION_IDLE = new Animation(0, 8, 1000, 2);
 		ANIMATION_WALK_UP = new Animation(0, 2, 100, 8);
@@ -56,7 +56,7 @@ public class Player extends NPCHuman {
 		if (input.lshift.isPressed() && isMoving) {
 			if (!isSprinting) {
 				isSprinting = true;
-				new EffectSmokePuffGrey(level, position.x, position.y + bluePrint.atlas.sheet.tileSize);
+				new EffectSmokePuffGrey(level, position.x, position.y + config.renderData.atlas.sheet.tileSize);
 			}
 		} else {
 			isSprinting = false;

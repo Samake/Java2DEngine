@@ -6,7 +6,7 @@ import engine.sprites.IconLoader;
 import engine.sprites.SpriteAtlas;
 import game_content.resources.Tiles.TILETYPE;
 
-public class TileBluePrint {
+public class TileConfig {
 	public int id;
 	public TILETYPE type;
 	public String name;
@@ -15,8 +15,10 @@ public class TileBluePrint {
 	public float hestitation;
 	public boolean isSolid;
 	
-	public TileBluePrint(TileBluePrint[] tileTypes, int id, TILETYPE type, String name, SpriteAtlas atlas, float hestitation, boolean solid) {
-		if (tileTypes[id] != null) throw new RuntimeException("Duplicate tileType id on " + id);
+	public TileConfig(TileConfig[] list, int id, TILETYPE type, String name, SpriteAtlas atlas, float hestitation, boolean solid) {
+		if (list != null) {
+			if (list[id] != null) throw new RuntimeException("Duplicate tileType id on " + id);
+		}
 		
 		this.id = id;
 		this.type = type;
@@ -29,6 +31,6 @@ public class TileBluePrint {
 		
 		icon = IconLoader.getIconfromSheet(atlas.sheet, atlas.column, atlas.row, 1, 1, iconScale);
 		
-		tileTypes[id] = this;
+		list[id] = this;
 	}
 }

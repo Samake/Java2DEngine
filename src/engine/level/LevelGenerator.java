@@ -4,7 +4,7 @@ import engine.core.Config;
 import engine.debug.Log;
 import engine.tiles.BasicTile;
 import engine.tiles.Tile;
-import engine.tiles.TileBluePrint;
+import engine.tiles.TileConfig;
 import engine.utils.Misc;
 import engine.utils.OpenSimplexNoise;
 import game_content.resources.Tiles;
@@ -25,7 +25,7 @@ public class LevelGenerator {
 		
 		if (tileName != null && !tileName.isEmpty()) {
 			Tile[][] tiles = new Tile[width][height];
-			TileBluePrint tileBluePrint = Tiles.getBluePrintByName(tileName);
+			TileConfig tileBluePrint = Tiles.getBluePrintByName(tileName);
 			
 			if (tileBluePrint == null) {
 				tileBluePrint = Tiles.GRASS_CLEAN;
@@ -45,7 +45,7 @@ public class LevelGenerator {
 					Tile tile = tiles[x][y];
 					
 					if (tile != null) {
-						if (tile.bluePrint.name.equals("GRASS_CLEAN")) {
+						if (tile.config.name.equals("GRASS_CLEAN")) {
 							int id = x + y * width;
 
 							tiles[x][y] = new BasicTile(id, x, y, addGrassVariations(), 1.0f);
@@ -175,8 +175,8 @@ public class LevelGenerator {
 			Tile leftTile = null;
 			Tile rightTile = null;
 			
-			TILETYPE currentTileType = currentTile.bluePrint.type;
-			String currentTileName = currentTile.bluePrint.name;
+			TILETYPE currentTileType = currentTile.config.type;
+			String currentTileName = currentTile.config.name;
 			
 			TILETYPE upTileType = null;
 			String upTileName = null;
@@ -195,8 +195,8 @@ public class LevelGenerator {
 					leftTile = level.tiles[xL][y];
 
 					if (leftTile != null) {
-						leftTileName = leftTile.bluePrint.name;
-						leftTileType = leftTile.bluePrint.type;
+						leftTileName = leftTile.config.name;
+						leftTileType = leftTile.config.type;
 						
 						if (!leftTileType.equals(currentTileType)) {
 							if (!leftTileName.equals(currentTileName)) {
@@ -210,8 +210,8 @@ public class LevelGenerator {
 					rightTile = level.tiles[xR][y];
 					
 					if (rightTile != null) {
-						rightTileName = rightTile.bluePrint.name;
-						rightTileType = rightTile.bluePrint.type;
+						rightTileName = rightTile.config.name;
+						rightTileType = rightTile.config.type;
 						
 						if (!rightTileType.equals(currentTileType)) {
 							if (!rightTileName.equals(currentTileName)) {
@@ -225,8 +225,8 @@ public class LevelGenerator {
 					upTile = level.tiles[x][yU];
 					
 					if (upTile != null) {
-						upTileName = upTile.bluePrint.name;
-						upTileType = upTile.bluePrint.type;
+						upTileName = upTile.config.name;
+						upTileType = upTile.config.type;
 						
 						if (!upTileType.equals(currentTileType)) {
 							if (!upTileName.equals(currentTileName)) {
@@ -240,8 +240,8 @@ public class LevelGenerator {
 					downTile = level.tiles[x][yD];
 					
 					if (downTile != null) {
-						downTileName = downTile.bluePrint.name;
-						downTileType = downTile.bluePrint.type;
+						downTileName = downTile.config.name;
+						downTileType = downTile.config.type;
 						
 						if (!downTileType.equals(currentTileType)) {
 							if (!downTileName.equals(currentTileName)) {
@@ -337,17 +337,17 @@ public class LevelGenerator {
 	}
 
 	private static void findTileAndReplace(Level level, int x, int y, StringBuilder fileName, Tile currentTile, Tile newtile, String alternativeTilePart, boolean findAlternativeTile, boolean lockTiles) {
-		TileBluePrint blueluePrint = Tiles.getBluePrintByName(fileName.toString());
+		TileConfig blueluePrint = Tiles.getBluePrintByName(fileName.toString());
 		
 		if (blueluePrint != null) {
 			replaceTile(level, x, y, blueluePrint, lockTiles);
 		} else {
 			if (findAlternativeTile) {
-				String alternativeTile = newtile.bluePrint.name.replace(currentTile.bluePrint.type.toString() + "_", "");
+				String alternativeTile = newtile.config.name.replace(currentTile.config.type.toString() + "_", "");
 				String [] alternativeTileParts = alternativeTile.split("_");
 
 				StringBuilder fileNameNew = new StringBuilder();
-				fileNameNew.append(currentTile.bluePrint.type.toString());
+				fileNameNew.append(currentTile.config.type.toString());
 				fileNameNew.append("_");
 				fileNameNew.append(alternativeTileParts[0]);
 				fileNameNew.append(alternativeTilePart);
@@ -363,12 +363,12 @@ public class LevelGenerator {
 		}
 	}
 
-	private static void replaceTile(Level level, int x, int y, TileBluePrint bluePrint, boolean lockTiles) {
+	private static void replaceTile(Level level, int x, int y, TileConfig config, boolean lockTiles) {
 		int id = x + y * level.width;
 		
 		if (level.tiles[x][y] != null) {
 			if (!level.tiles[x][y].locked) {
-				level.tiles[x][y] = new BasicTile(id, x, y, bluePrint, 1.0f);
+				level.tiles[x][y] = new BasicTile(id, x, y, config, 1.0f);
 				level.tiles[x][y].locked = lockTiles;
 				
 				if (!lockTiles) {
@@ -378,7 +378,7 @@ public class LevelGenerator {
 				}
 			}
 		} else {
-			level.tiles[x][y] = new BasicTile(id, x, y, bluePrint, 1.0f);
+			level.tiles[x][y] = new BasicTile(id, x, y, config, 1.0f);
 			level.tiles[x][y].locked = lockTiles;
 			
 			if (!lockTiles) {
@@ -399,8 +399,8 @@ public class LevelGenerator {
 		return Long.valueOf(result);
 	}
 	
-	private static TileBluePrint addGrassVariations() {
-		TileBluePrint result = Tiles.GRASS_CLEAN;
+	private static TileConfig addGrassVariations() {
+		TileConfig result = Tiles.GRASS_CLEAN;
 		
 		int randomValue = Misc.randomInteger(0, 100);
 		

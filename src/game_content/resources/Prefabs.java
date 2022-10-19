@@ -2,8 +2,9 @@ package game_content.resources;
 
 import engine.entities.Entity;
 import engine.entities.Entity.ENTITYTYPE;
-import engine.entities.Entity.RENDERTYPE;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
+import engine.entities.EntityRenderData;
+import engine.entities.EntityRenderData.RENDERTYPE;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import game_content.entities.prefabs.Ball;
@@ -28,154 +29,154 @@ import game_content.entities.prefabs.farming.SeedTomato;
 
 public class Prefabs {
 	
-	public static final EntityBluePrint[] entityList = new EntityBluePrint[2048];
+	public static final EntityConfig[] entityList = new EntityConfig[2048];
 	
-	public static final EntityBluePrint CAMPFIRE = new EntityBluePrint(entityList, 0, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "CAMPFIRE", new SpriteAtlas(Sheets.EFFECTS_SHEET, 0, 1, true, 250, 3, false), true, true, true);
-	public static final EntityBluePrint BALL_01 = new EntityBluePrint(entityList, 1, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "BALL_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 1, false, 0, 0, false), true, true, true);
+	public static final EntityConfig CAMPFIRE = new EntityConfig(entityList, 0, ENTITYTYPE.PREFAB, "CAMPFIRE", true, new EntityRenderData(new SpriteAtlas(Sheets.EFFECTS_SHEET, 0, 1, true, 250, 3, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig BALL_01 = new EntityConfig(entityList, 1, ENTITYTYPE.PREFAB, "BALL_01", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 1, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
 	
-	public static final EntityBluePrint SPAWNEGG_WOMAN_01 = new EntityBluePrint(entityList, 101, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_WOMAN_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_WOMAN_02 = new EntityBluePrint(entityList, 102, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_WOMAN_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_WOMAN_03 = new EntityBluePrint(entityList, 103, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_WOMAN_03", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_WOMAN_04 = new EntityBluePrint(entityList, 104, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_WOMAN_04", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
+	public static final EntityConfig SPAWNEGG_WOMAN_01 = new EntityConfig(entityList, 101, ENTITYTYPE.PREFAB, "SPAWNEGG_WOMAN_01", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_WOMAN_02 = new EntityConfig(entityList, 102, ENTITYTYPE.PREFAB, "SPAWNEGG_WOMAN_02", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_WOMAN_03 = new EntityConfig(entityList, 103, ENTITYTYPE.PREFAB, "SPAWNEGG_WOMAN_03", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_WOMAN_04 = new EntityConfig(entityList, 104, ENTITYTYPE.PREFAB, "SPAWNEGG_WOMAN_04", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
 
-	public static final EntityBluePrint SPAWNEGG_CHICKEN = new EntityBluePrint(entityList, 200, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_BUNNY_BROWN = new EntityBluePrint(entityList, 201, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY_BROWN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_BUNNY_BROWN_BABY = new EntityBluePrint(entityList, 202, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY_BROWN_BABY", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_BUNNY_GREY = new EntityBluePrint(entityList, 203, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY_GREY", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_BUNNY_GREY_BABY = new EntityBluePrint(entityList, 204, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_BUNNY_GREY_BABY", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_WHITE = new EntityBluePrint(entityList, 205, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_WHITE", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_YELLOW = new EntityBluePrint(entityList, 206, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_YELLOW", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
-	public static final EntityBluePrint SPAWNEGG_CHICKEN_BABY_BROWN = new EntityBluePrint(entityList, 207, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SPAWNEGG_CHICKEN_BABY_BROWN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), false, true, true);
+	public static final EntityConfig SPAWNEGG_CHICKEN = new EntityConfig(entityList, 200, ENTITYTYPE.PREFAB, "SPAWNEGG_CHICKEN", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_BUNNY_BROWN = new EntityConfig(entityList, 201, ENTITYTYPE.PREFAB, "SPAWNEGG_BUNNY_BROWN", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_BUNNY_BROWN_BABY = new EntityConfig(entityList, 202, ENTITYTYPE.PREFAB, "SPAWNEGG_BUNNY_BROWN_BABY", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_BUNNY_GREY = new EntityConfig(entityList, 203, ENTITYTYPE.PREFAB, "SPAWNEGG_BUNNY_GREY", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_BUNNY_GREY_BABY = new EntityConfig(entityList, 204, ENTITYTYPE.PREFAB, "SPAWNEGG_BUNNY_GREY_BABY", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_CHICKEN_BABY_WHITE = new EntityConfig(entityList, 205, ENTITYTYPE.PREFAB, "SPAWNEGG_CHICKEN_BABY_WHITE", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_CHICKEN_BABY_YELLOW = new EntityConfig(entityList, 206, ENTITYTYPE.PREFAB, "SPAWNEGG_CHICKEN_BABY_YELLOW", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SPAWNEGG_CHICKEN_BABY_BROWN = new EntityConfig(entityList, 207, ENTITYTYPE.PREFAB, "SPAWNEGG_CHICKEN_BABY_BROWN", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X1));
 	
-	public static final EntityBluePrint LAMPPOST_01 = new EntityBluePrint(entityList, 300, ENTITYTYPE.PREFAB, RENDERTYPE.R1X3, "LAMPPOST_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 5, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint LAMPPOST_02 = new EntityBluePrint(entityList, 301, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_02", new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 5, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint LAMPPOST_03 = new EntityBluePrint(entityList, 302, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_03", new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 5, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint LAMPPOST_04 = new EntityBluePrint(entityList, 303, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_04", new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 5, false, 0, 0, false), true, true, true);	
-	public static final EntityBluePrint LAMPPOST_05 = new EntityBluePrint(entityList, 304, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_05", new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 5, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint LAMPPOST_06 = new EntityBluePrint(entityList, 305, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_06", new SpriteAtlas(Sheets.OBJECTS_SHEET, 9, 5, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint LAMPPOST_07 = new EntityBluePrint(entityList, 306, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_07", new SpriteAtlas(Sheets.OBJECTS_SHEET, 11, 5, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint LAMPPOST_08 = new EntityBluePrint(entityList, 307, ENTITYTYPE.PREFAB, RENDERTYPE.R2X3, "LAMPPOST_08", new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 5, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint SCARECROW_PUMKIN = new EntityBluePrint(entityList, 308, ENTITYTYPE.PREFAB, RENDERTYPE.R1X2, "SCARECROW_PUMKIN", new SpriteAtlas(Sheets.OBJECTS_SHEET, 20, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint GLOWWORM = new EntityBluePrint(entityList, 309, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "GLOWWORM", new SpriteAtlas(Sheets.OBJECTS_SHEET, 18, 0, false, 0, 0, false), false, false, true);
+	public static final EntityConfig LAMPPOST_01 = new EntityConfig(entityList, 300, ENTITYTYPE.PREFAB, "LAMPPOST_01", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 0, 5, false, 0, 0, false), true, true, RENDERTYPE.R1X3));
+	public static final EntityConfig LAMPPOST_02 = new EntityConfig(entityList, 301, ENTITYTYPE.PREFAB, "LAMPPOST_02", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 1, 5, false, 0, 0, false), true, true, RENDERTYPE.R2X3));
+	public static final EntityConfig LAMPPOST_03 = new EntityConfig(entityList, 302, ENTITYTYPE.PREFAB, "LAMPPOST_03", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 3, 5, false, 0, 0, false), true, true, RENDERTYPE.R2X3));
+	public static final EntityConfig LAMPPOST_04 = new EntityConfig(entityList, 303, ENTITYTYPE.PREFAB, "LAMPPOST_04", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 5, 5, false, 0, 0, false), true, true, RENDERTYPE.R2X3));
+	public static final EntityConfig LAMPPOST_05 = new EntityConfig(entityList, 304, ENTITYTYPE.PREFAB, "LAMPPOST_05", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 7, 5, false, 0, 0, false), true, true, RENDERTYPE.R2X3));
+	public static final EntityConfig LAMPPOST_06 = new EntityConfig(entityList, 305, ENTITYTYPE.PREFAB, "LAMPPOST_06", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 9, 5, false, 0, 0, false), true, true, RENDERTYPE.R2X3));
+	public static final EntityConfig LAMPPOST_07 = new EntityConfig(entityList, 306, ENTITYTYPE.PREFAB, "LAMPPOST_07", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 11, 5, false, 0, 0, false), true, true, RENDERTYPE.R2X3));
+	public static final EntityConfig LAMPPOST_08 = new EntityConfig(entityList, 307, ENTITYTYPE.PREFAB, "LAMPPOST_08", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 13, 5, false, 0, 0, false), true, true, RENDERTYPE.R2X3));
+	public static final EntityConfig SCARECROW_PUMKIN = new EntityConfig(entityList, 308, ENTITYTYPE.PREFAB, "SCARECROW_PUMKIN", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 20, 0, false, 0, 0, false), true, true, RENDERTYPE.R1X2));
+	public static final EntityConfig GLOWWORM = new EntityConfig(entityList, 309, ENTITYTYPE.PREFAB, "GLOWWORM", false, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 18, 0, false, 0, 0, false), false, true, RENDERTYPE.R1X1));
 	
-	public static final EntityBluePrint FOUNTAIN_01 = new EntityBluePrint(entityList, 350, ENTITYTYPE.PREFAB, RENDERTYPE.R3X3, "FOUNTAIN_01", new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 6, false, 0, 0, false), true, true, true);
+	public static final EntityConfig FOUNTAIN_01 = new EntityConfig(entityList, 350, ENTITYTYPE.PREFAB, "FOUNTAIN_01", true, new EntityRenderData(new SpriteAtlas(Sheets.OBJECTS_SHEET, 15, 6, false, 0, 0, false), true, true, RENDERTYPE.R3X3));
 	
-	public static final EntityBluePrint HOUSE_01 = new EntityBluePrint(entityList, 500, ENTITYTYPE.PREFAB, RENDERTYPE.R5X5, "HOUSE_01", new SpriteAtlas(Sheets.BUILDINGS_SHEET, 0, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint BARN_01 = new EntityBluePrint(entityList, 510, ENTITYTYPE.PREFAB, RENDERTYPE.R5X5, "BARN_01", new SpriteAtlas(Sheets.BUILDINGS_SHEET, 5, 0, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint SILO_01 = new EntityBluePrint(entityList, 520, ENTITYTYPE.PREFAB, RENDERTYPE.R3X5, "SILO_01", new SpriteAtlas(Sheets.BUILDINGS_SHEET, 0, 5, false, 0, 0, false), true, true, true);
-	public static final EntityBluePrint SILO_02 = new EntityBluePrint(entityList, 521, ENTITYTYPE.PREFAB, RENDERTYPE.R3X5, "SILO_02", new SpriteAtlas(Sheets.BUILDINGS_SHEET, 3, 5, false, 0, 0, false), true, true, true);
+	public static final EntityConfig HOUSE_01 = new EntityConfig(entityList, 500, ENTITYTYPE.PREFAB, "HOUSE_01", true, new EntityRenderData(new SpriteAtlas(Sheets.BUILDINGS_SHEET, 0, 0, false, 0, 0, false), true, true, RENDERTYPE.R5X5));
+	public static final EntityConfig BARN_01 = new EntityConfig(entityList, 510, ENTITYTYPE.PREFAB, "BARN_01", true, new EntityRenderData(new SpriteAtlas(Sheets.BUILDINGS_SHEET, 5, 0, false, 0, 0, false), true, true, RENDERTYPE.R5X5));
+	public static final EntityConfig SILO_01 = new EntityConfig(entityList, 520, ENTITYTYPE.PREFAB, "SILO_01", true, new EntityRenderData(new SpriteAtlas(Sheets.BUILDINGS_SHEET, 0, 5, false, 0, 0, false), true, true, RENDERTYPE.R3X5));
+	public static final EntityConfig SILO_02 = new EntityConfig(entityList, 521, ENTITYTYPE.PREFAB, "SILO_02", true, new EntityRenderData(new SpriteAtlas(Sheets.BUILDINGS_SHEET, 3, 5, false, 0, 0, false), true, true, RENDERTYPE.R3X5));
 	
-	public static final EntityBluePrint SEED_CARROT = new EntityBluePrint(entityList, 1000, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_CARROT", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 0, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_TOMATO = new EntityBluePrint(entityList, 1001, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_TOMATO", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 1, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_STRAWBERRY = new EntityBluePrint(entityList, 1002, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_STRAWBERRY", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 2, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_PUMPKIN = new EntityBluePrint(entityList, 1003, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_PUMPKIN", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 3, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_CORN = new EntityBluePrint(entityList, 1004, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_CORN", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 4, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_POTATO = new EntityBluePrint(entityList, 1005, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_POTATO", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 5, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_MELON = new EntityBluePrint(entityList, 1006, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_MELON", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 6, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_RADISH = new EntityBluePrint(entityList, 1007, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_RADISH", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 7, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_SALAD = new EntityBluePrint(entityList, 1008, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_SALAD", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 8, false, 0, 6, false), false, true, true);
-	public static final EntityBluePrint SEED_AUBERGINE = new EntityBluePrint(entityList, 1009, ENTITYTYPE.PREFAB, RENDERTYPE.R1X1, "SEED_AUBERGINE", new SpriteAtlas(Sheets.FARMING_SHEET, 1, 10, false, 0, 6, false), false, true, true);
+	public static final EntityConfig SEED_CARROT = new EntityConfig(entityList, 1000, ENTITYTYPE.PREFAB, "SEED_CARROT", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 0, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_TOMATO = new EntityConfig(entityList, 1001, ENTITYTYPE.PREFAB, "SEED_TOMATO", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 1, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_STRAWBERRY = new EntityConfig(entityList, 1002, ENTITYTYPE.PREFAB, "SEED_STRAWBERRY", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 2, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_PUMPKIN = new EntityConfig(entityList, 1003, ENTITYTYPE.PREFAB, "SEED_PUMPKIN", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 3, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_CORN = new EntityConfig(entityList, 1004, ENTITYTYPE.PREFAB, "SEED_CORN", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 4, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_POTATO = new EntityConfig(entityList, 1005, ENTITYTYPE.PREFAB, "SEED_POTATO", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 5, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_MELON = new EntityConfig(entityList, 1006, ENTITYTYPE.PREFAB, "SEED_MELON", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 6, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_RADISH = new EntityConfig(entityList, 1007, ENTITYTYPE.PREFAB, "SEED_RADISH", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 7, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_SALAD = new EntityConfig(entityList, 1008, ENTITYTYPE.PREFAB, "SEED_SALAD", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 8, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
+	public static final EntityConfig SEED_AUBERGINE = new EntityConfig(entityList, 1009, ENTITYTYPE.PREFAB, "SEED_AUBERGINE", false, new EntityRenderData(new SpriteAtlas(Sheets.FARMING_SHEET, 1, 10, false, 0, 6, false), true, true, RENDERTYPE.R1X1));
 	
-	public static Entity addInstanceToLevel(EntityBluePrint blueprint, Level level, int x, int y) {
-		if (blueprint != null) {
-			switch(blueprint.name) {
+	public static Entity addInstanceToLevel(EntityConfig config, Level level, int x, int y) {
+		if (config != null) {
+			switch(config.name) {
 				case "CAMPFIRE" :
-					return level.addEntity(new CampFire(blueprint, level, x, y));
+					return level.addEntity(new CampFire(config, level, x, y));
 				case "BALL_01" :
-					return level.addEntity(new Ball(blueprint, level, x, y));
+					return level.addEntity(new Ball(config, level, x, y));
 				case "SPAWNEGG_WOMAN_01" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.HUMAN_WOMAN_01));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.HUMAN_WOMAN_01));
 				case "SPAWNEGG_WOMAN_02" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.HUMAN_WOMAN_02));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.HUMAN_WOMAN_02));
 				case "SPAWNEGG_WOMAN_03" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.HUMAN_WOMAN_03));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.HUMAN_WOMAN_03));
 				case "SPAWNEGG_WOMAN_04" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.HUMAN_WOMAN_04));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.HUMAN_WOMAN_04));
 				case "SPAWNEGG_CHICKEN" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.ANIMAL_CHICKEN));
 				case "SPAWNEGG_BUNNY_BROWN" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_BUNNY_BROWN));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.ANIMAL_BUNNY_BROWN));
 				case "SPAWNEGG_BUNNY_BROWN_BABY" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_BUNNY_BROWN_BABY));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.ANIMAL_BUNNY_BROWN_BABY));
 				case "SPAWNEGG_BUNNY_GREY" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_BUNNY_GREY));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.ANIMAL_BUNNY_GREY));
 				case "SPAWNEGG_BUNNY_GREY_BABY" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_BUNNY_GREY_BABY));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.ANIMAL_BUNNY_GREY_BABY));
 				case "SPAWNEGG_CHICKEN_BABY_WHITE" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_WHITE));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_WHITE));
 				case "SPAWNEGG_CHICKEN_BABY_YELLOW" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_YELLOW));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_YELLOW));
 				case "SPAWNEGG_CHICKEN_BABY_BROWN" :
-					return level.addEntity(new SpawnEgg(blueprint, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_BROWN));
+					return level.addEntity(new SpawnEgg(config, level, x, y, NPCs.ANIMAL_CHICKEN_BABY_BROWN));
 				case "LAMPPOST_01" :
-					return level.addEntity(new LampPost(blueprint, level, x, y));
+					return level.addEntity(new LampPost(config, level, x, y));
 				case "LAMPPOST_02" :
-					return level.addEntity(new LampPost(blueprint, level, x, y));
+					return level.addEntity(new LampPost(config, level, x, y));
 				case "LAMPPOST_03" :
-					return level.addEntity(new LampPost(blueprint, level, x, y));
+					return level.addEntity(new LampPost(config, level, x, y));
 				case "LAMPPOST_04" :
-					return level.addEntity(new LampPost(blueprint, level, x, y));
+					return level.addEntity(new LampPost(config, level, x, y));
 				case "LAMPPOST_05" :
-					return level.addEntity(new LampPost(blueprint, level, x, y));
+					return level.addEntity(new LampPost(config, level, x, y));
 				case "LAMPPOST_06" :
-					return level.addEntity(new LampPost(blueprint, level, x, y));
+					return level.addEntity(new LampPost(config, level, x, y));
 				case "LAMPPOST_07" :
-					return level.addEntity(new LampPost(blueprint, level, x, y));
+					return level.addEntity(new LampPost(config, level, x, y));
 				case "LAMPPOST_08" :
-					return level.addEntity(new LampPost(blueprint, level, x, y));
+					return level.addEntity(new LampPost(config, level, x, y));
 				case "FOUNTAIN_01" :
-					return level.addEntity(new Fountain(blueprint, level, x, y));
+					return level.addEntity(new Fountain(config, level, x, y));
 				case "SCARECROW_PUMKIN" :
-					return level.addEntity(new ScareCrowPumpkin(blueprint, level, x, y));	
+					return level.addEntity(new ScareCrowPumpkin(config, level, x, y));	
 				case "GLOWWORM" :
-					return level.addEntity(new GlowWorm(blueprint, level, x, y));
+					return level.addEntity(new GlowWorm(config, level, x, y));
 				case "HOUSE_01" :
-					return level.addEntity(new House(blueprint, level, x, y));
+					return level.addEntity(new House(config, level, x, y));
 				case "BARN_01" :
-					return level.addEntity(new House(blueprint, level, x, y));
+					return level.addEntity(new House(config, level, x, y));
 				case "SILO_01" :
-					return level.addEntity(new Silo(blueprint, level, x, y));
+					return level.addEntity(new Silo(config, level, x, y));
 				case "SILO_03" :
-					return level.addEntity(new Silo(blueprint, level, x, y));
+					return level.addEntity(new Silo(config, level, x, y));
 					
 					
 					
 				case "SEED_CARROT" :
-					return level.addEntity(new SeedCarrot(blueprint, level, x, y));
+					return level.addEntity(new SeedCarrot(config, level, x, y));
 				case "SEED_TOMATO" :
-					return level.addEntity(new SeedTomato(blueprint, level, x, y));
+					return level.addEntity(new SeedTomato(config, level, x, y));
 				case "SEED_STRAWBERRY" :
-					return level.addEntity(new SeedStrawberry(blueprint, level, x, y));
+					return level.addEntity(new SeedStrawberry(config, level, x, y));
 				case "SEED_PUMPKIN" :
-					return level.addEntity(new SeedPumpkin(blueprint, level, x, y));
+					return level.addEntity(new SeedPumpkin(config, level, x, y));
 				case "SEED_CORN" :
-					return level.addEntity(new SeedCorn(blueprint, level, x, y));
+					return level.addEntity(new SeedCorn(config, level, x, y));
 				case "SEED_POTATO" :
-					return level.addEntity(new SeedPotato(blueprint, level, x, y));
+					return level.addEntity(new SeedPotato(config, level, x, y));
 				case "SEED_MELON" :
-					return level.addEntity(new SeedMelon(blueprint, level, x, y));	
+					return level.addEntity(new SeedMelon(config, level, x, y));	
 				case "SEED_RADISH" :
-					return level.addEntity(new SeedRadish(blueprint, level, x, y));	
+					return level.addEntity(new SeedRadish(config, level, x, y));	
 				case "SEED_SALAD" :
-					return level.addEntity(new SeedSalad(blueprint, level, x, y));
+					return level.addEntity(new SeedSalad(config, level, x, y));
 				case "SEED_AUBERGINE" :
-					return level.addEntity(new SeedAubergine(blueprint, level, x, y));	
+					return level.addEntity(new SeedAubergine(config, level, x, y));	
 			}
 		}
 		
 		return null;
 	}
 
-	public static EntityBluePrint getBluePrintByID(int id) {
+	public static EntityConfig getBluePrintByID(int id) {
 		return entityList[id];
 	}
 	
 	
-	public static EntityBluePrint getBluePrintByName(String name) {
-		for (EntityBluePrint bluePrint : entityList) {
-			if (bluePrint != null) {
-				if (bluePrint.name.equals(name)) {
-					return bluePrint;
+	public static EntityConfig getBluePrintByName(String name) {
+		for (EntityConfig config : entityList) {
+			if (config != null) {
+				if (config.name.equals(name)) {
+					return config;
 				}
 			}
 		}
@@ -186,7 +187,7 @@ public class Prefabs {
 	public static int getListCount() {
 		int count = 0;
 		
-		for (EntityBluePrint entity : entityList) {
+		for (EntityConfig entity : entityList) {
 			if (entity != null) {
 				count++;
 			}

@@ -1,6 +1,6 @@
 package game_content.entities.objects;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.objects.ObjectStatic;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -13,16 +13,16 @@ public class Fence extends ObjectStatic {
 	private Tile placingTile = null;
 	private Vector2f placePosition = new Vector2f();
 	
-	public Fence(EntityBluePrint bluePrint, Level level, float x, float y) {
-		super(bluePrint, level, x, y);
+	public Fence(EntityConfig config, Level level, float x, float y) {
+		super(config, level, x, y);
 		
 		collissionOffset = 1;
 		
 		if (collissionBox != null) {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
-			collissionBox.minY = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize  / 2) - collissionOffset;
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minY = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize  / 2) - collissionOffset;
 		}
 		
 		initPlacePosition();
@@ -45,12 +45,12 @@ public class Fence extends ObjectStatic {
 	}
 
 	private void calculatePlacePosition() {
-		if (level != null && bluePrint.atlas != null) {
-			Tile currentTile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
+		if (level != null && config.renderData.atlas != null) {
+			Tile currentTile = level.getTile((int) position.x >> config.renderData.atlas.sheet.getShiftOperator(), (int) position.y >> config.renderData.atlas.sheet.getShiftOperator());
 		
 			if (currentTile != null) {
-				placePosition.x = (int) (currentTile.x << bluePrint.atlas.sheet.getShiftOperator()) + (bluePrint.atlas.sheet.tileSize / 2);
-				placePosition.y = (int) (currentTile.y << bluePrint.atlas.sheet.getShiftOperator()) + (bluePrint.atlas.sheet.tileSize / 2);
+				placePosition.x = (int) (currentTile.x << config.renderData.atlas.sheet.getShiftOperator()) + (config.renderData.atlas.sheet.tileSize / 2);
+				placePosition.y = (int) (currentTile.y << config.renderData.atlas.sheet.getShiftOperator()) + (config.renderData.atlas.sheet.tileSize / 2);
 				
 				if (placingTile == null) {
 					placingTile = currentTile;
@@ -69,14 +69,14 @@ public class Fence extends ObjectStatic {
 	}
 	
 	private void initPlacePosition() {
-		if (level != null && bluePrint.atlas != null) {
-			Tile currentTile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
+		if (level != null && config.renderData.atlas != null) {
+			Tile currentTile = level.getTile((int) position.x >> config.renderData.atlas.sheet.getShiftOperator(), (int) position.y >> config.renderData.atlas.sheet.getShiftOperator());
 		
 			if (currentTile != null) {
 				placingTile = currentTile;
 				
-				placePosition.x = (int) (currentTile.x << bluePrint.atlas.sheet.getShiftOperator()) + (bluePrint.atlas.sheet.tileSize / 2);
-				placePosition.y = (int) (currentTile.y << bluePrint.atlas.sheet.getShiftOperator()) + (bluePrint.atlas.sheet.tileSize / 2);
+				placePosition.x = (int) (currentTile.x << config.renderData.atlas.sheet.getShiftOperator()) + (config.renderData.atlas.sheet.tileSize / 2);
+				placePosition.y = (int) (currentTile.y << config.renderData.atlas.sheet.getShiftOperator()) + (config.renderData.atlas.sheet.tileSize / 2);
 				
 				position.x = placePosition.x;
 				position.y = placePosition.y;

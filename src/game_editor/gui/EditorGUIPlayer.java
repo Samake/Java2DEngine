@@ -19,7 +19,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.npc.clothes.ClothesNPC;
 import engine.entities.npc.clothes.ClothesNPC.CLOTHTYPE;
 import engine.utils.Misc;
@@ -221,7 +221,7 @@ public class EditorGUIPlayer {
 		skinComboBox.setMinimumSize(lineDimension);
 		skinComboBox.setPreferredSize(lineDimension);
 		
-		for (EntityBluePrint skin : NPCs.npcList) {
+		for (EntityConfig skin : NPCs.list) {
 			if (skin != null) {
 				if (skin.name.contains("HUMAN_CHAR")) {
 					skinComboBox.addItem(skin.name);
@@ -232,7 +232,7 @@ public class EditorGUIPlayer {
 		skinComboBox.addActionListener(new ActionListener() {
              public void actionPerformed(ActionEvent ae) {
             	 skinName = (String) skinComboBox.getSelectedItem(); 
-            	 EntityBluePrint skin = NPCs.getBluePrintByName(skinName);
+            	 EntityConfig skin = NPCs.getBluePrintByName(skinName);
             	 levelEditor.changePlayer(skin);
              }
          });
@@ -1424,8 +1424,8 @@ public class EditorGUIPlayer {
 			xPosTextField.setText(String.valueOf((int) player.position.x));
 			yPosTextField.setText(String.valueOf((int) player.position.y));
 	
-			if (!skinComboBox.getSelectedItem().toString().equals(player.bluePrint.name)) {
-				skinComboBox.setSelectedItem(player.bluePrint.name);
+			if (!skinComboBox.getSelectedItem().toString().equals(player.config.name)) {
+				skinComboBox.setSelectedItem(player.config.name);
 			}
 			
 			if (player.hatSlot.cloth != null) {

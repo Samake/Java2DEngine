@@ -23,7 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import game_content.resources.Prefabs;
 import game_content.resources.Sheets;
 import game_editor.Editor;
@@ -285,7 +285,7 @@ public class EditorGUIPrefabs {
 		int emptyButtonSpace = 0;
 		prefabsCount = emptyButtonSpace;
 		
-		for (EntityBluePrint entityBlueprint : Prefabs.entityList) {
+		for (EntityConfig entityBlueprint : Prefabs.entityList) {
 			if (entityBlueprint != null) {
 				prefabsCount++;
 			}
@@ -334,7 +334,7 @@ public class EditorGUIPrefabs {
 		int index = 0;
 		
 		for (int i = 0; i < Prefabs.entityList.length; i++) {
-			EntityBluePrint entityBlueprint = Prefabs.entityList[i];
+			EntityConfig entityBlueprint = Prefabs.entityList[i];
 		
 			if (entityBlueprint != null) {
 				EntityPanel buttonPanel = generatePrefabCard(entityBlueprint);
@@ -344,7 +344,7 @@ public class EditorGUIPrefabs {
 		}
 	}
 
-	private static EntityPanel generatePrefabCard(EntityBluePrint entityBlueprint) {
+	private static EntityPanel generatePrefabCard(EntityConfig entityBlueprint) {
 		int lineSize = buttonDimension.height;
 		Dimension buttonPanelDimension = new Dimension(width - 50, lineSize);
 		
@@ -390,7 +390,7 @@ public class EditorGUIPrefabs {
 		return buttonPanel;
 	}
 	
-	private static EntityPanel generateSelektorCard(EntityBluePrint entityBlueprint) {
+	private static EntityPanel generateSelektorCard(EntityConfig entityBlueprint) {
 		int lineSize = buttonDimension.height;
 		Dimension buttonPanelDimension = new Dimension(width - 50, lineSize);
 		
@@ -423,7 +423,7 @@ public class EditorGUIPrefabs {
 		
 		if (selectedPrefab != null) {
 			prefabID.setText(String.valueOf(selectedPrefab.hashCode()));
-			prefabName.setText(selectedPrefab.bluePrint.name);
+			prefabName.setText(selectedPrefab.config.name);
 			xPosTextField.setText(String.valueOf((int) selectedPrefab.position.x));
 			yPosTextField.setText(String.valueOf((int) selectedPrefab.position.y));
 		}

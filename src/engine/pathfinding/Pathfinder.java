@@ -39,7 +39,7 @@ public class Pathfinder {
 		Tile endTile = level.getTile((int) targetPosition.x >> shiftOperator, (int) targetPosition.y >> shiftOperator);
 		
 		if (startTile != null && endTile != null) {
-			if (!endTile.isSolid && !endTile.hasCollission && !endTile.bluePrint.type.equals(TILETYPE.WATER)) {
+			if (!endTile.isSolid && !endTile.hasCollission && !endTile.config.type.equals(TILETYPE.WATER)) {
 				findPath(startTile, endTile);
 				
 				if (nodeListValid && nodeList.size() > 2) {
@@ -178,7 +178,7 @@ public class Pathfinder {
 					leftCost += 1000;
 				}
 				
-				if (leftTile.bluePrint.type.equals(TILETYPE.WATER)) {
+				if (leftTile.config.type.equals(TILETYPE.WATER)) {
 					leftCost += 5;
 				}
 				
@@ -202,7 +202,7 @@ public class Pathfinder {
 					rightCost += 1000;
 				}
 				
-				if (rightTile.bluePrint.type.equals(TILETYPE.WATER)) {
+				if (rightTile.config.type.equals(TILETYPE.WATER)) {
 					rightCost += 5;
 				}
 				
@@ -226,7 +226,7 @@ public class Pathfinder {
 					upCost += 1000;
 				}
 				
-				if (upTile.bluePrint.type.equals(TILETYPE.WATER)) {
+				if (upTile.config.type.equals(TILETYPE.WATER)) {
 					upCost += 5;
 				}
 				
@@ -250,7 +250,7 @@ public class Pathfinder {
 					downCost += 1000;
 				}
 				
-				if (downTile.bluePrint.type.equals(TILETYPE.WATER)) {
+				if (downTile.config.type.equals(TILETYPE.WATER)) {
 					downCost += 5;
 				}
 				

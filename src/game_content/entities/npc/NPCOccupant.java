@@ -1,6 +1,6 @@
 package game_content.entities.npc;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.npc.NPCHuman;
 import engine.entities.npc.NPCJobs.JOBS;
 import engine.input.InputHandler;
@@ -9,8 +9,8 @@ import game_content.entities.player.Player;
 
 public class NPCOccupant extends NPCHuman {
 
-	public NPCOccupant(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, x, y, speed);
+	public NPCOccupant(EntityConfig config, Level level, float x, float y, float speed) {
+		super(config, level, x, y, speed);
 		
 		jobs.setJob(JOBS.WALK_AROUND, null);
 	}
@@ -22,7 +22,7 @@ public class NPCOccupant extends NPCHuman {
 		Player player = level.player;
 
 		if (player != null) {
-			if (player.collissionBox != null && player.bluePrint.collission) {
+			if (player.collissionBox != null && player.config.collission) {
 				if (checkCollission(player.collissionBox)) {
 					
 				};

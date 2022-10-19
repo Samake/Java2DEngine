@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.List;
 
 import engine.animation.Animation;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.lights.PointLight;
 import engine.entities.npc.clothes.ClothSlot;
 import engine.entities.npc.clothes.ClothesNPC.CLOTHTYPE;
@@ -25,8 +25,8 @@ public class NPCHuman extends NPCCore {
 	public ClothSlot hairSlot;
 	public ClothSlot hatSlot;
 	
-	public NPCHuman(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, "NPCHuman", NPCTYPE.HUMAN, x, y, speed, !bluePrint.entityType.equals(ENTITYTYPE.PLAYER));
+	public NPCHuman(EntityConfig config, Level level, float x, float y, float speed) {
+		super(config, level, "NPCHuman", NPCTYPE.HUMAN, x, y, speed, !config.entityType.equals(ENTITYTYPE.PLAYER));
 		
 		ANIMATION_IDLE = new Animation(16, 0, 100, 2);
 		ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);
@@ -35,13 +35,13 @@ public class NPCHuman extends NPCCore {
 		ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
 		
 		if (collissionBox != null) {
-			collissionBox.minX = (-bluePrint.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxX = (bluePrint.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
 			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (bluePrint.atlas.sheet.tileSize) - collissionOffset;
+			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
 		}
 		
-		if (!bluePrint.entityType.equals(ENTITYTYPE.PLAYER)) {
+		if (!config.entityType.equals(ENTITYTYPE.PLAYER)) {
 			jobs.targetRange = 256;
 			jobs.jobDelay = 1500;
 			jobs.jobDelayValue = jobs.jobDelay;

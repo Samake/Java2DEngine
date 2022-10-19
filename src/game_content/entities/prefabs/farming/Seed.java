@@ -1,6 +1,6 @@
 package game_content.entities.prefabs.farming;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -24,18 +24,25 @@ public class Seed extends Prefab {
 	public int growState = 0;
 	public boolean cropped = false;
 	
-	private int colNormalMinX = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-	private int colNormalMaxX = (bluePrint.atlas.sheet.tileSize / 2) - 2;
-	private int colNormalMinY = (-bluePrint.atlas.sheet.tileSize / 2) + 2;
-	private int colNormalMaxY = (bluePrint.atlas.sheet.tileSize / 2) - 2;
+	private int colNormalMinX = 0;
+	private int colNormalMaxX = 0;
+	private int colNormalMinY = 0;
+	private int colNormalMaxY = 0;
 	
 	private int colCroppedMinX = 0;
 	private int colCroppedMaxX = 0;
 	private int colCroppedMinY = 0;
 	private int colCroppedMaxY = 0;
+	
+	private boolean castShadow = true;
 
-	public Seed(EntityBluePrint bluePrint, Level level, int x, int y, int baseGrowSpeed) {
-		super(bluePrint, level, x, y);
+	public Seed(EntityConfig config, Level level, int x, int y, int baseGrowSpeed) {
+		super(config, level, x, y);
+		
+		colNormalMinX = (-config.renderData.atlas.sheet.tileSize / 2) + 2;
+		colNormalMaxX = (config.renderData.atlas.sheet.tileSize / 2) - 2;
+		colNormalMinY = (-config.renderData.atlas.sheet.tileSize / 2) + 2;
+		colNormalMaxY = (config.renderData.atlas.sheet.tileSize / 2) - 2;
 		
 		collissionBox.minX = colNormalMinX;
 		collissionBox.maxX = colNormalMaxX;
@@ -48,6 +55,7 @@ public class Seed extends Prefab {
 		growDelay = Misc.randomInteger(baseGrowSpeed, baseGrowSpeed * 5);
 		growState = 0;
 		cropped = false;
+		castShadow = config.renderData.castShadow;
 	}
 
 	@Override
@@ -55,14 +63,14 @@ public class Seed extends Prefab {
 		super.update(input, gameSpeed);
 		
 		if (growState == 0 || cropped) {
-			castShadow = false;
+			config.renderData.castShadow = false;
 			
 			collissionBox.minX = colCroppedMinX;
 			collissionBox.maxX = colCroppedMaxX;
 			collissionBox.minY = colCroppedMinY;
 			collissionBox.maxY = colCroppedMaxY;
 		} else {
-			castShadow = bluePrint.castShadow;
+			config.renderData.castShadow = castShadow;
 			
 			collissionBox.minX = colNormalMinX;
 			collissionBox.maxX = colNormalMaxX;
@@ -88,10 +96,10 @@ public class Seed extends Prefab {
 					placingTile.hasCollission = true;
 				}
 				
-				if (!placingTile.bluePrint.equals(Tiles.EARTH_CLEAN)) {
+				if (!placingTile.config.equals(Tiles.EARTH_CLEAN)) {
 					currentGrowDelay = growDelay * 9999999;
 					
-					if (placingTile.bluePrint.equals(Tiles.GRASS_CLEAN) || placingTile.bluePrint.equals(Tiles.GRASS_LUSH_01) || placingTile.bluePrint.equals(Tiles.GRASS_LUSH_02) || placingTile.bluePrint.equals(Tiles.GRASS_LUSH_03)) {
+					if (placingTile.config.equals(Tiles.GRASS_CLEAN) || placingTile.config.equals(Tiles.GRASS_LUSH_01) || placingTile.config.equals(Tiles.GRASS_LUSH_02) || placingTile.config.equals(Tiles.GRASS_LUSH_03)) {
 						currentGrowDelay = growDelay * 5;
 					}
 				}
@@ -115,7 +123,7 @@ public class Seed extends Prefab {
 					}
 				}
 			} else {
-				placingTile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
+				placingTile = level.getTile((int) position.x >> config.renderData.atlas.sheet.getShiftOperator(), (int) position.y >> config.renderData.atlas.sheet.getShiftOperator());
 			}
 		}
 	}
@@ -141,12 +149,12 @@ public class Seed extends Prefab {
 	}
 	
 	private void calculatePlacePosition() {
-		if (level != null && bluePrint.atlas != null) {
-			Tile currentTile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
+		if (level != null && config.renderData.atlas != null) {
+			Tile currentTile = level.getTile((int) position.x >> config.renderData.atlas.sheet.getShiftOperator(), (int) position.y >> config.renderData.atlas.sheet.getShiftOperator());
 		
 			if (currentTile != null) {
-				placePosition.x = (int) (currentTile.x << bluePrint.atlas.sheet.getShiftOperator()) + (bluePrint.atlas.sheet.tileSize / 2);
-				placePosition.y = (int) (currentTile.y << bluePrint.atlas.sheet.getShiftOperator()) + (bluePrint.atlas.sheet.tileSize / 2);
+				placePosition.x = (int) (currentTile.x << config.renderData.atlas.sheet.getShiftOperator()) + (config.renderData.atlas.sheet.tileSize / 2);
+				placePosition.y = (int) (currentTile.y << config.renderData.atlas.sheet.getShiftOperator()) + (config.renderData.atlas.sheet.tileSize / 2);
 				
 				if (placingTile == null) {
 					placingTile = currentTile;
@@ -165,14 +173,14 @@ public class Seed extends Prefab {
 	}
 	
 	private void initPlacePosition() {
-		if (level != null && bluePrint.atlas != null) {
-			Tile currentTile = level.getTile((int) position.x >> bluePrint.atlas.sheet.getShiftOperator(), (int) position.y >> bluePrint.atlas.sheet.getShiftOperator());
+		if (level != null && config.renderData.atlas != null) {
+			Tile currentTile = level.getTile((int) position.x >> config.renderData.atlas.sheet.getShiftOperator(), (int) position.y >> config.renderData.atlas.sheet.getShiftOperator());
 		
 			if (currentTile != null) {
 				placingTile = currentTile;
 				
-				placePosition.x = (int) (currentTile.x << bluePrint.atlas.sheet.getShiftOperator()) + (bluePrint.atlas.sheet.tileSize / 2);
-				placePosition.y = (int) (currentTile.y << bluePrint.atlas.sheet.getShiftOperator()) + (bluePrint.atlas.sheet.tileSize / 2);
+				placePosition.x = (int) (currentTile.x << config.renderData.atlas.sheet.getShiftOperator()) + (config.renderData.atlas.sheet.tileSize / 2);
+				placePosition.y = (int) (currentTile.y << config.renderData.atlas.sheet.getShiftOperator()) + (config.renderData.atlas.sheet.tileSize / 2);
 				
 				position.x = placePosition.x;
 				position.y = placePosition.y;

@@ -3,7 +3,9 @@ package engine.entities.lights;
 import java.awt.Color;
 
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
+import engine.entities.EntityRenderData;
+import engine.entities.EntityRenderData.RENDERTYPE;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
@@ -34,7 +36,7 @@ public abstract class Light extends Entity {
 	private Vector2f basePosition = new Vector2f();
 
 	public Light(Level level, float x, float y, Color color, int radius, boolean pulsing, boolean flickering, int flickeringOffset, int delay, boolean enabledAtDay) {
-		super(new EntityBluePrint(null, 0, ENTITYTYPE.LIGHT, RENDERTYPE.R1X1, "LIGHT", new SpriteAtlas(Sheets.EDITOR_SHEET, 2, 1, false, 0, 0, false), false, false, false), level, x, y);
+		super(new EntityConfig(null, 0, ENTITYTYPE.LIGHT, "LIGHT", false, new EntityRenderData(new SpriteAtlas(Sheets.EDITOR_SHEET, 2, 1, false, 0, 0, false), false, false, RENDERTYPE.R1X1)), level, x, y);
 		
 		this.position.x = x;
 		this.position.y = y;

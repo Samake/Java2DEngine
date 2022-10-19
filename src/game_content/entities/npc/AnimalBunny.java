@@ -1,6 +1,6 @@
 package game_content.entities.npc;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.npc.NPCAnimal;
 import engine.entities.npc.NPCJobs.JOBS;
 import engine.input.InputHandler;
@@ -10,8 +10,8 @@ import game_content.entities.player.Player;
 
 public class AnimalBunny extends NPCAnimal {
 
-	public AnimalBunny(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, x, y, speed);
+	public AnimalBunny(EntityConfig config, Level level, float x, float y, float speed) {
+		super(config, level, x, y, speed);
 		
 		animSpeed = 2;
 		
@@ -41,7 +41,7 @@ public class AnimalBunny extends NPCAnimal {
 				}
 			}
 			
-			if (player.collissionBox != null && player.bluePrint.collission) {
+			if (player.collissionBox != null && player.config.collission) {
 				if (checkCollission(player.collissionBox)) {
 					
 				};

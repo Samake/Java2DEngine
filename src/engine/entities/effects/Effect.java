@@ -1,7 +1,7 @@
 package engine.entities.effects;
 
 import engine.entities.Entity;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.input.InputHandler;
 import engine.level.Level;
 
@@ -13,9 +13,14 @@ public class Effect extends Entity {
 	
 	private long lastTick;
 	
-	public Effect(EntityBluePrint bluePrint, Level level, float x, float y, boolean endless, int duration) {
-		super(bluePrint, level, x, y);
+	public Effect(EntityConfig config,Level level, float x, float y, boolean endless, int duration) {
+		super(config, level, x, y);
 
+		collissionBox.minX = -1;
+		collissionBox.maxX = 1;
+		collissionBox.minY = -1;
+		collissionBox.maxY = 1;
+		
 		saveToMap = false;
 		
 		this.endless = endless;
@@ -23,14 +28,7 @@ public class Effect extends Entity {
 		
 		alive = true;
 		lastTick = System.currentTimeMillis();
-		
-		if (collissionBox != null) {
-			collissionBox.minX = -1;
-			collissionBox.maxX = 1;
-			collissionBox.minY = -1;
-			collissionBox.maxY = 1;
-		}
-		
+
 		level.addEntity(this);
 	}
 	

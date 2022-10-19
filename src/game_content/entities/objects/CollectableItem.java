@@ -1,6 +1,6 @@
 package game_content.entities.objects;
 
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.entities.objects.ObjectStatic;
 import engine.input.InputHandler;
 import engine.level.Level;
@@ -10,7 +10,7 @@ public class CollectableItem extends ObjectStatic {
 	
 	public Player player;
 	
-	public CollectableItem(EntityBluePrint blueprint, Level level, int x, int y) {
+	public CollectableItem(EntityConfig blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
 	}
 

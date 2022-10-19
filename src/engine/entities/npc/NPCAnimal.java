@@ -3,14 +3,14 @@ package engine.entities.npc;
 import java.awt.Color;
 
 import engine.animation.Animation;
-import engine.entities.EntityBluePrint;
+import engine.entities.EntityConfig;
 import engine.input.InputHandler;
 import engine.level.Level;
 
 public class NPCAnimal extends NPCCore {
 	
-	public NPCAnimal(EntityBluePrint bluePrint, Level level, float x, float y, float speed) {
-		super(bluePrint, level, "NPCAnimal", NPCTYPE.ANIMAL, x, y, speed, true);
+	public NPCAnimal(EntityConfig config, Level level, float x, float y, float speed) {
+		super(config, level, "NPCAnimal", NPCTYPE.ANIMAL, x, y, speed, true);
 		
 		ANIMATION_IDLE = new Animation(8, 0, 100, 2);
 		ANIMATION_WALK_UP = new Animation(0, 0, 100, 2);

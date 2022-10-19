@@ -182,8 +182,8 @@ public class NPCJobs {
 		stuckAttempts = 0;
 		
 		if (npc != null) {
-			int tileSize = npc.bluePrint.atlas.sheet.tileSize;
-			int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
+			int tileSize = npc.config.renderData.atlas.sheet.tileSize;
+			int shiftOperator = npc.config.renderData.atlas.sheet.getShiftOperator();
 			
 			startPosition.x = npc.position.x;
 			startPosition.y = npc.position.y;
@@ -212,8 +212,8 @@ public class NPCJobs {
 		stuckAttempts = 0;
 		
 		if (npc != null) {
-			int tileSize = npc.bluePrint.atlas.sheet.tileSize;
-			int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
+			int tileSize = npc.config.renderData.atlas.sheet.tileSize;
+			int shiftOperator = npc.config.renderData.atlas.sheet.getShiftOperator();
 			
 			startPosition.x = npc.position.x;
 			startPosition.y = npc.position.y;
@@ -268,8 +268,8 @@ public class NPCJobs {
 	
 	private void walkPath() {
 		if (npc != null && path != null) {
-			int shiftOperator = npc.bluePrint.atlas.sheet.getShiftOperator();
-			int tileSize = npc.bluePrint.atlas.sheet.tileSize;
+			int shiftOperator = npc.config.renderData.atlas.sheet.getShiftOperator();
+			int tileSize = npc.config.renderData.atlas.sheet.tileSize;
 			
 			for (int id = 0; id < path.size() + 1; id++) {
 				PathNode node = path.get(id);

@@ -92,15 +92,11 @@ public class Vector2f {
 	}
 	
 	public void normalize() {
-		float highAmount = this.x;
+		float xBase = this.x;
+		float yBase = this.y;
+		float length = (float) Math.sqrt(this.x * this.x + this.y * this.y);
 		
-		if (this.y > highAmount) {
-			highAmount = this.y;
-		}
-		
-		float value = 1 / highAmount;
-		
-		this.x = this.x * value;
-		this.y = this.y * value;
+		this.x = xBase / length;
+		this.y = yBase / length;
 	}
 }

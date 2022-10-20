@@ -9,6 +9,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 import engine.camera.Camera;
+import engine.core.Config;
 import engine.entities.lights.Light.LIGHTTYPE;
 import engine.entities.lights.PointLight;
 import engine.gui.GUI;
@@ -101,7 +102,7 @@ public class GameScene extends Scene {
 	}
 	
 	private void drawLight(Graphics2D graphic, float x, float y, Color lightColor, float radius, float alphaModifier, Color ambientColor) {
-        //graphic.setComposite(AlphaComposite.SrcOut);
+        //graphic.setComposite(AlphaComposite.SrcOver);
         
         Point2D center = new Point2D.Float(x, y);
         float[] fractions = {0.0f, 1.0f};
@@ -135,8 +136,65 @@ public class GameScene extends Scene {
             
             graphic.setPaint(paint);
             graphic.fillOval((int) x - (int) radius, (int) y - (int) radius, (int) radius * 2, (int) radius * 2);
+            
+            if (Config.LIGHT_SHINE) {
+            	drawLightShine(graphic, x, y, radius, center, fractions, colors, paint);
+            }
         }
     }
+
+	private void drawLightShine(Graphics2D graphic, float x, float y, float radius, Point2D center, float[] fractions, Color[] colors, RadialGradientPaint paint) {
+	    float radiusShine1 = radius * 0.5f;
+	    float radiusShine2 = radiusShine1 / 2;
+	    float radiusShine3 = radiusShine2 / 2;
+	    
+	    if (radiusShine1 > 0) {
+	    	paint = new RadialGradientPaint(center, radiusShine1, fractions, colors, CycleMethod.REFLECT);
+	    	graphic.setPaint(paint);
+	    	graphic.fillOval((int) x - (int) radiusShine1, (int) y - (int) radiusShine1, (int) radiusShine1 * 2, (int) radiusShine1 * 2);
+	    	
+	    	if (radiusShine2 > 0) {
+	    		paint = new RadialGradientPaint(center, radiusShine2, fractions, colors, CycleMethod.REFLECT);
+	        	graphic.setPaint(paint);
+	        	graphic.fillOval((int) x - (int) radiusShine2, (int) y - (int) radiusShine2, (int) radiusShine2 * 2, (int) radiusShine2 * 2);
+	        	
+	        	if (radiusShine3 > 0) {
+	        		paint = new RadialGradientPaint(center, radiusShine3, fractions, colors, CycleMethod.REFLECT);
+	            	graphic.setPaint(paint);
+	        		graphic.fillOval((int) x - (int) radiusShine3, (int) y - (int) radiusShine3, (int) radiusShine3 * 2, (int) radiusShine3 * 2);
+	        	}
+	        }
+	    }
+	}
+	
+	public void renderEffects(BufferedImage image) {
+		if (level != null) {
+			Graphics2D graphic = (Graphics2D) image.getGraphics();
+
+			if (Config.LIGHT_CORONA) {
+				for (PointLight light : level.renderListLights) {
+					if (light != null) {
+						if (light.enabled) {
+							light.updatePosition(level, screen);
+							
+							if (light.type.equals(LIGHTTYPE.POINTLIGHT) && light.coronaEnabled) {
+						        drawLightCorona(graphic, light.screenX, light.screenY, light.coronaRadius, light.corona);
+							}
+						}
+					}
+				}
+			}
+
+			graphic.dispose();
+		}
+	}
+	
+	private void drawLightCorona(Graphics2D graphic, float x, float y, float radius, BufferedImage corona) {
+		if (corona != null && radius > 0) {
+			//graphic.setComposite(AlphaComposite.DstIn);
+			graphic.drawImage(corona, (int) x - (int) radius, (int) y - (int) radius, (int) radius * 2, (int) radius * 2, null);
+		}
+	}
 
 	public void setLevel(Level level) {
 		this.level = level;

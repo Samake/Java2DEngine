@@ -108,7 +108,7 @@ public class EditorGUITiles {
 		slotsPanel.add(leftSlotLabel);
 		slotsPanel.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		leftSlotImage = new JLabel(Tiles.getBluePrintByID(Editor.tileSlotIDLeft).icon);
+		leftSlotImage = new JLabel(Tiles.getConfigByID(Editor.tileSlotIDLeft).icon);
 		slotsPanel.add(leftSlotImage);
 		slotsPanel.add(Box.createRigidArea(new Dimension(10, 10)));
 		
@@ -117,7 +117,7 @@ public class EditorGUITiles {
 		slotsPanel.add(rightSlotLabel);
 		slotsPanel.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		rightSlotImage = new JLabel(Tiles.getBluePrintByID(Editor.tileSlotIDRight).icon);
+		rightSlotImage = new JLabel(Tiles.getConfigByID(Editor.tileSlotIDRight).icon);
 		slotsPanel.add(rightSlotImage);
 		
 		slotsFinalPanel.add(slotsPanel);
@@ -203,7 +203,7 @@ public class EditorGUITiles {
 		int emptyButtonSpace = 5;
 		tilesCount = emptyButtonSpace;
 		
-		for (TileConfig tileBlueprint : Tiles.tileTypes) {
+		for (TileConfig tileBlueprint : Tiles.list) {
 			if (tileBlueprint != null) {
 				tilesCount++;
 			}
@@ -224,7 +224,7 @@ public class EditorGUITiles {
 		
 		int index = 0;
 		
-		for (TileConfig tileBlueprint : Tiles.tileTypes) {
+		for (TileConfig tileBlueprint : Tiles.list) {
 			if (tileBlueprint != null) {
 				JButton button = new JButton();
 				
@@ -242,7 +242,7 @@ public class EditorGUITiles {
 							Editor.tileSlotIDLeft = tileBlueprint.id;
 							
 							if (leftSlotImage != null) {
-								leftSlotImage.setIcon(Tiles.getBluePrintByID(tileBlueprint.id).icon);
+								leftSlotImage.setIcon(Tiles.getConfigByID(tileBlueprint.id).icon);
 							}
 		            	}
 						
@@ -250,7 +250,7 @@ public class EditorGUITiles {
 							Editor.tileSlotIDRight = tileBlueprint.id;
 							
 							if (rightSlotImage != null) {
-								rightSlotImage.setIcon(Tiles.getBluePrintByID(tileBlueprint.id).icon);
+								rightSlotImage.setIcon(Tiles.getConfigByID(tileBlueprint.id).icon);
 							}
 		            	}
 					}

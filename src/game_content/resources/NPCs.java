@@ -99,12 +99,12 @@ public class NPCs {
 		return null;
 	}
 
-	public static EntityConfig getBluePrintByID(int id) {
+	public static EntityConfig getConfigByID(int id) {
 		return list[id];
 	}
 	
 	
-	public static EntityConfig getBluePrintByName(String name) {
+	public static EntityConfig getConfigByName(String name) {
 		for (EntityConfig config : list) {
 			if (config != null) {
 				if (config.name.equals(name)) {

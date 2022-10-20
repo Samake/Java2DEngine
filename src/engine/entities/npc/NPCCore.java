@@ -36,7 +36,7 @@ public class NPCCore extends Entity {
 	
 	public int numSteps = 0;
 	
-	public int movingDir = 1;
+	public int viewDirection = 1;
 	
 	public boolean isMoving = false;
 	public boolean isSwimming = false;
@@ -90,8 +90,6 @@ public class NPCCore extends Entity {
 		if (!level.editorMode) {
 			if (!hasCollided(velocity.x, velocity.y)) {
 				if (velocity.y < 0) {
-					movingDir = 0;
-					
 					if (isCollidingUp) {
 						velocity.y = 0;
 						velocity.x = collidingVelocity.x;
@@ -99,8 +97,6 @@ public class NPCCore extends Entity {
 				}
 				
 				if (velocity.y > 0) {
-					movingDir = 1;
-					
 					if (isCollidingDown) {
 						velocity.y = 0;
 						velocity.x = collidingVelocity.x;
@@ -108,8 +104,6 @@ public class NPCCore extends Entity {
 				}
 				
 				if (velocity.x < 0) {
-					movingDir = 2;
-					
 					if (isCollidingLeft) {
 						velocity.x = 0;
 						velocity.y = collidingVelocity.y;
@@ -117,13 +111,13 @@ public class NPCCore extends Entity {
 				}
 				
 				if (velocity.x > 0) {
-					movingDir = 3;
-					
 					if (isCollidingRight) {
 						velocity.x = 0;
 						velocity.y = collidingVelocity.y;
 					}
 				}
+				
+				handleViewDirection();
 				
 				position.add(velocity);
 				numSteps++;
@@ -131,6 +125,24 @@ public class NPCCore extends Entity {
 			} else {
 				return;
 			}
+		}
+	}
+
+	public void handleViewDirection() {
+		if (velocity.y < 0) {
+			viewDirection = 0;
+		}
+		
+		if (velocity.y > 0) {
+			viewDirection = 1;
+		}
+		
+		if (velocity.x < 0) {
+			viewDirection = 2;
+		}
+		
+		if (velocity.x > 0) {
+			viewDirection = 3;
 		}
 	};
 	
@@ -226,16 +238,16 @@ public class NPCCore extends Entity {
 			}
 		} else {
 			// walk up
-			if (movingDir == 0) {
+			if (viewDirection == 0) {
 				animation = ANIMATION_WALK_UP;
 			// walk down
-			} else if (movingDir == 1) {
+			} else if (viewDirection == 1) {
 				animation = ANIMATION_WALK_DOWN;
 			// walk left
-			} else if (movingDir == 2) {
+			} else if (viewDirection == 2) {
 				animation = ANIMATION_WALK_LEFT;
 			// walk right
-			} else if (movingDir == 3) {
+			} else if (viewDirection == 3) {
 				animation = ANIMATION_WALK_RIGHT;
 			}
 		}

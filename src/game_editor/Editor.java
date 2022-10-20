@@ -136,13 +136,13 @@ public class Editor extends GameScene {
 			if (input.lmouse.isClicked()) {
 				int id = tile.x + tile.y * level.width;
 				
-				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDLeft), tile.brightness));
+				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getConfigByID(tileSlotIDLeft), tile.brightness));
 			}
 			
 			if (input.rmouse.isClicked()) {
 				int id = tile.x + tile.y * level.width;
 				
-				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDRight), tile.brightness));
+				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getConfigByID(tileSlotIDRight), tile.brightness));
 			}
 		}
 	}
@@ -154,13 +154,13 @@ public class Editor extends GameScene {
 			if (input.lmouse.isClicked()) {
 				int id = tile.x + tile.y * level.width;
 				
-				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDLeft), tile.brightness));
+				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getConfigByID(tileSlotIDLeft), tile.brightness));
 			}
 			
 			if (input.rmouse.isClicked()) {
 				int id = tile.x + tile.y * level.width;
 				
-				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getBluePrintByID(tileSlotIDRight), tile.brightness));
+				level.setTile(tile.x, tile.y, new BasicTile(id, tile.x, tile.y, Tiles.getConfigByID(tileSlotIDRight), tile.brightness));
 			}
 		}
 	}
@@ -182,7 +182,7 @@ public class Editor extends GameScene {
 			}
 		} else {
 			if (input.rmouse.isClicked()) {
-				EntityConfig entityBluePrint = Objects.getBluePrintByName(entitySlot);
+				EntityConfig entityBluePrint = Objects.getConfigByName(entitySlot);
 				
 				if (entityBluePrint != null) {
 					Vector2f position = ClickSystemEditor.worldPosition;
@@ -245,7 +245,7 @@ public class Editor extends GameScene {
 			if (input.rmouse.isClicked()) {
 				Vector2f position = ClickSystemEditor.worldPosition;
 				
-				EntityConfig skinBluePrint = NPCs.getBluePrintByName(EditorGUIPlayer.skinName);
+				EntityConfig skinBluePrint = NPCs.getConfigByName(EditorGUIPlayer.skinName);
 				
 				if (skinBluePrint == null) {
 					skinBluePrint = NPCs.HUMAN_WOMAN_01;
@@ -273,7 +273,7 @@ public class Editor extends GameScene {
 			}
 		} else {
 			if (input.rmouse.isClicked()) {
-				EntityConfig entityBluePrint = Prefabs.getBluePrintByName(prefabSlot);
+				EntityConfig entityBluePrint = Prefabs.getConfigByName(prefabSlot);
 				
 				if (entityBluePrint != null) {
 					Vector2f position = ClickSystemEditor.worldPosition;

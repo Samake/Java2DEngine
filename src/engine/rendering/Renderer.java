@@ -56,6 +56,14 @@ public class Renderer {
 		if (input.keyF4.isTyped()) {
 			Debug.toggleCollission();
 		}
+		
+		if (input.keyF5.isTyped()) {
+			Config.LIGHT_SHINE = !Config.LIGHT_SHINE;
+		}
+		
+		if (input.keyF6.isTyped()) {
+			Config.LIGHT_CORONA = !Config.LIGHT_CORONA;
+		}
 	}
 	
 	public void preRender(Graphics graphics, GameScene scene) {
@@ -69,6 +77,8 @@ public class Renderer {
 			scene.render();
 			
 			multiplyLightMap();
+			
+			scene.renderEffects(sceneImage);
 			
 			graphics.setColor(Color.black);
 			graphics.fillRect(0, 0, Config.RESOLUTION_WIDTH, Config.RESOLUTION_HEIGHT);

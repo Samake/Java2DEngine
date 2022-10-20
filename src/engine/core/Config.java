@@ -3,7 +3,7 @@ package engine.core;
 public class Config {
 
 	public static String APPLICATION_NAME = "Java 2D Game Engine";
-	public static String APPLICATION_VERSION = "v0.73.096";
+	public static String APPLICATION_VERSION = "v0.73.097";
 	
 	/** VISUAL SETTINGS */
 	public static int RESOLUTION_WIDTH = 1280;
@@ -14,6 +14,8 @@ public class Config {
 	
 	public static float NORMAL_STRENGTH = 0.035f;
 	public static boolean ADVANCED_LIGHT = false;
+	public static boolean LIGHT_SHINE = true;
+	public static boolean LIGHT_CORONA = true;
 	public static boolean SHADOWS = true;
 	public static boolean HEIGHT_INFORMATIONS = false;
 	

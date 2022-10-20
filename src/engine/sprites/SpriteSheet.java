@@ -19,8 +19,8 @@ public class SpriteSheet {
 	
 	public BufferedImage image = null;
 	
-	public SpriteSheet(SpriteSheet[] sheettypes, int id, String path, int slots) {
-		if (sheettypes[id] != null) throw new RuntimeException("Duplicate sheetType id on " + id);
+	public SpriteSheet(SpriteSheet[] list, int id, String path, int slots) {
+		if (list[id] != null) throw new RuntimeException("Duplicate sheetType id on " + id);
 		
 		this.id = id;
 		
@@ -44,7 +44,7 @@ public class SpriteSheet {
 		
 		pixels = image.getRGB(0, 0, width, height, null, 0, width);
 		
-		sheettypes[id] = this;
+		list[id] = this;
 		
 		//Log.print("Spritesheet " + path + " loaded! - Width: " + width + ", Height: " + height + ", Slots: " + slots + " , TileSize: " + tileSize + ", Pixels: " + pixels.length);
 	}

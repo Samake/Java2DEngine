@@ -288,7 +288,7 @@ public class EditorGUIEntities {
 		int emptyButtonSpace = 0;
 		entitiesCount = emptyButtonSpace;
 		
-		for (EntityConfig entityBlueprint : Objects.entityList) {
+		for (EntityConfig entityBlueprint : Objects.list) {
 			if (entityBlueprint != null) {
 				entitiesCount++;
 			}
@@ -336,8 +336,8 @@ public class EditorGUIEntities {
 		
 		int index = 0;
 		
-		for (int i = 0; i < Objects.entityList.length; i++) {
-			EntityConfig entityBlueprint = Objects.entityList[i];
+		for (int i = 0; i < Objects.list.length; i++) {
+			EntityConfig entityBlueprint = Objects.list[i];
 			
 			if (entityBlueprint != null) {
 				EntityPanel buttonPanel = generateEntityCard(entityBlueprint);

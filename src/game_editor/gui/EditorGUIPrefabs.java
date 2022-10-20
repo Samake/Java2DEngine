@@ -285,7 +285,7 @@ public class EditorGUIPrefabs {
 		int emptyButtonSpace = 0;
 		prefabsCount = emptyButtonSpace;
 		
-		for (EntityConfig entityBlueprint : Prefabs.entityList) {
+		for (EntityConfig entityBlueprint : Prefabs.list) {
 			if (entityBlueprint != null) {
 				prefabsCount++;
 			}
@@ -333,8 +333,8 @@ public class EditorGUIPrefabs {
 		
 		int index = 0;
 		
-		for (int i = 0; i < Prefabs.entityList.length; i++) {
-			EntityConfig entityBlueprint = Prefabs.entityList[i];
+		for (int i = 0; i < Prefabs.list.length; i++) {
+			EntityConfig entityBlueprint = Prefabs.list[i];
 		
 			if (entityBlueprint != null) {
 				EntityPanel buttonPanel = generatePrefabCard(entityBlueprint);

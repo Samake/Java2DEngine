@@ -12,10 +12,10 @@ import engine.utils.Vector2f;
 
 public class InputHandler implements KeyListener, MouseMotionListener, MouseListener {
 	
-	public Key playerUp = new Key();
-    public Key playerDown = new Key();
-    public Key playerLeft = new Key();
-    public Key playerRight = new Key();
+	public Key moveForward = new Key();
+    public Key moveBack = new Key();
+    public Key moveLeft = new Key();
+    public Key moveRight = new Key();
     
     public Key cameraUp = new Key();
     public Key cameraDown = new Key();
@@ -37,11 +37,20 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
     public Key num7 = new Key();
     public Key num8 = new Key();
     public Key num9 = new Key();
+    public Key num0 = new Key();
     
     public Key keyF1 = new Key();
     public Key keyF2 = new Key();
     public Key keyF3 = new Key();
     public Key keyF4 = new Key();
+    public Key keyF5 = new Key();
+    public Key keyF6 = new Key();
+    public Key keyF7 = new Key();
+    public Key keyF8 = new Key();
+    public Key keyF9 = new Key();
+    public Key keyF10 = new Key();
+    public Key keyF11 = new Key();
+    public Key keyF12 = new Key();
     
     public MouseKey lmouse = new MouseKey();
     public MouseKey mmouse = new MouseKey();
@@ -60,19 +69,19 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
 
 	public void toggleKeyPressed(int keyCode, boolean isPressed) {
         if (keyCode == KeyEvent.VK_W) {
-            playerUp.setPressed(isPressed);
+            moveForward.setPressed(isPressed);
         }
         
         if (keyCode == KeyEvent.VK_S) {
-            playerDown.setPressed(isPressed);
+            moveBack.setPressed(isPressed);
         }
         
         if (keyCode == KeyEvent.VK_A) {
-            playerLeft.setPressed(isPressed);
+            moveLeft.setPressed(isPressed);
         }
         
         if (keyCode == KeyEvent.VK_D) {
-            playerRight.setPressed(isPressed);
+            moveRight.setPressed(isPressed);
         }
         
         if (keyCode == KeyEvent.VK_UP) {
@@ -143,6 +152,10 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         	num9.setPressed(isPressed);
         }
         
+        if (keyCode == KeyEvent.VK_0) {
+        	num0.setPressed(isPressed);
+        }
+        
         if (keyCode == KeyEvent.VK_F1) {
         	keyF1.setPressed(isPressed);
         }
@@ -158,23 +171,55 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (keyCode == KeyEvent.VK_F4) {
         	keyF4.setPressed(isPressed);
         }
+        
+        if (keyCode == KeyEvent.VK_F5) {
+        	keyF5.setPressed(isPressed);
+        }
+        
+        if (keyCode == KeyEvent.VK_F6) {
+        	keyF6.setPressed(isPressed);
+        }
+        
+        if (keyCode == KeyEvent.VK_F7) {
+        	keyF7.setPressed(isPressed);
+        }
+        
+        if (keyCode == KeyEvent.VK_F8) {
+        	keyF8.setPressed(isPressed);
+        }
+        
+        if (keyCode == KeyEvent.VK_F9) {
+        	keyF9.setPressed(isPressed);
+        }
+        
+        if (keyCode == KeyEvent.VK_F10) {
+        	keyF10.setPressed(isPressed);
+        }
+        
+        if (keyCode == KeyEvent.VK_F11) {
+        	keyF11.setPressed(isPressed);
+        }
+        
+        if (keyCode == KeyEvent.VK_F12) {
+        	keyF12.setPressed(isPressed);
+        }
     }
 	
 	public void toggleKeyTyped(int keyCode, boolean isTyped) {
 		if (keyCode == KeyEvent.VK_W) {
-            playerUp.setTyped(isTyped);
+            moveForward.setTyped(isTyped);
         }
         
         if (keyCode == KeyEvent.VK_S) {
-            playerDown.setTyped(isTyped);
+            moveBack.setTyped(isTyped);
         }
         
         if (keyCode == KeyEvent.VK_A) {
-            playerLeft.setTyped(isTyped);
+            moveLeft.setTyped(isTyped);
         }
         
         if (keyCode == KeyEvent.VK_D) {
-            playerRight.setTyped(isTyped);
+            moveRight.setTyped(isTyped);
         }
         
         if (keyCode == KeyEvent.VK_UP) {
@@ -245,6 +290,10 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         	num9.setTyped(isTyped);
         }
         
+        if (keyCode == KeyEvent.VK_0) {
+        	num0.setTyped(isTyped);
+        }
+        
         if (keyCode == KeyEvent.VK_F1) {
         	keyF1.setTyped(isTyped);
         }
@@ -260,21 +309,50 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (keyCode == KeyEvent.VK_F4) {
         	keyF4.setTyped(isTyped);
         }
+        
+        if (keyCode == KeyEvent.VK_F5) {
+        	keyF5.setTyped(isTyped);
+        }
+        
+        if (keyCode == KeyEvent.VK_F6) {
+        	keyF6.setTyped(isTyped);
+        }
+        
+        if (keyCode == KeyEvent.VK_F7) {
+        	keyF7.setTyped(isTyped);
+        }
+        
+        if (keyCode == KeyEvent.VK_F8) {
+        	keyF8.setTyped(isTyped);
+        }
+        
+        if (keyCode == KeyEvent.VK_F9) {
+        	keyF9.setTyped(isTyped);
+        }
+        
+        if (keyCode == KeyEvent.VK_F10) {
+        	keyF10.setTyped(isTyped);
+        }
+        
+        if (keyCode == KeyEvent.VK_F11) {
+        	keyF11.setTyped(isTyped);
+        }
+        
+        if (keyCode == KeyEvent.VK_F12) {
+        	keyF12.setTyped(isTyped);
+        }
     }
 
     public void keyPressed(KeyEvent e) {
-    	//System.err.println(e.getKeyCode() + " keyPressed");
     	toggleKeyPressed(e.getKeyCode(), true);
     	toggleKeyTyped(e.getKeyCode(), true);
     }
 
     public void keyTyped(KeyEvent e) {
-    	//System.err.println(e.getKeyCode() + " keyTyped");
-    	//toggleKeyTyped(e.getKeyCode(), true);
+
     }
     
     public void keyReleased(KeyEvent e) {
-    	//System.err.println(e.getKeyCode() + " keyReleased");
     	toggleKeyPressed(e.getKeyCode(), false);
     }
     
@@ -321,22 +399,19 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
     }
     
     public void mousePressed(MouseEvent e) {
-    	//System.err.println(e.getButton() + " mousePressed");
     	toggleMouseKeyPressed(e.getButton(), true);
     	toggleMouseKeyClicked(e.getButton(), true);
 	}
     
 	public void mouseDragged(MouseEvent e) {
-		//System.err.println(e.getButton() + " mouseDragged");
 		toggleMouseKeyDragged(e.getButton(), true);
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		//System.err.println(e.getButton() + " mouseClicked");
+
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		//System.err.println(e.getButton() + " mouseReleased");
 		toggleMouseKeyPressed(e.getButton(), false);
 		toggleMouseKeyClicked(e.getButton(), false);
 		toggleMouseKeyDragged(e.getButton(), false);

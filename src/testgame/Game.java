@@ -14,6 +14,7 @@ import game_content.resources.Objects;
 import game_content.resources.Prefabs;
 import game_content.resources.Sheets;
 import game_content.resources.Sounds;
+import game_content.resources.Textures;
 import game_content.resources.Tiles;
 import testgame.input.ClickSystem;
 
@@ -37,6 +38,7 @@ public class Game extends Engine {
 		
 		Log.print(Sheets.getSpriteSheetsCount() + " tile sheets were loaded.");
 		Log.print(Tiles.getTilesCount() + " tiles were loaded.");
+		Log.print(Textures.getListCount() + " textures were loaded.");
 		Log.print(Sounds.getSoundsCount() + " sounds were loaded.");
 		Log.print(Objects.getListCount() + " objects were loaded.");
 		Log.print(Prefabs.getListCount() + " prefabs were loaded.");

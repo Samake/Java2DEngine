@@ -232,7 +232,7 @@ public class EditorGUIPlayer {
 		skinComboBox.addActionListener(new ActionListener() {
              public void actionPerformed(ActionEvent ae) {
             	 skinName = (String) skinComboBox.getSelectedItem(); 
-            	 EntityConfig skin = NPCs.getBluePrintByName(skinName);
+            	 EntityConfig skin = NPCs.getConfigByName(skinName);
             	 levelEditor.changePlayer(skin);
              }
          });

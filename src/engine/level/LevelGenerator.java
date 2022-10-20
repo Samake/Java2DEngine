@@ -25,7 +25,7 @@ public class LevelGenerator {
 		
 		if (tileName != null && !tileName.isEmpty()) {
 			Tile[][] tiles = new Tile[width][height];
-			TileConfig tileBluePrint = Tiles.getBluePrintByName(tileName);
+			TileConfig tileBluePrint = Tiles.getConfigByName(tileName);
 			
 			if (tileBluePrint == null) {
 				tileBluePrint = Tiles.GRASS_CLEAN;
@@ -337,7 +337,7 @@ public class LevelGenerator {
 	}
 
 	private static void findTileAndReplace(Level level, int x, int y, StringBuilder fileName, Tile currentTile, Tile newtile, String alternativeTilePart, boolean findAlternativeTile, boolean lockTiles) {
-		TileConfig blueluePrint = Tiles.getBluePrintByName(fileName.toString());
+		TileConfig blueluePrint = Tiles.getConfigByName(fileName.toString());
 		
 		if (blueluePrint != null) {
 			replaceTile(level, x, y, blueluePrint, lockTiles);
@@ -354,7 +354,7 @@ public class LevelGenerator {
 			
 				System.err.println(fileName.toString() + " failed. Alternative >> " + fileNameNew);
 				
-				blueluePrint = Tiles.getBluePrintByName(fileNameNew.toString());
+				blueluePrint = Tiles.getConfigByName(fileNameNew.toString());
 				
 				if (blueluePrint != null) {
 					replaceTile(level, x, y, blueluePrint, lockTiles);

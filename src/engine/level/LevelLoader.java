@@ -158,7 +158,7 @@ public class LevelLoader {
 				int x = Integer.valueOf(posXParts[1]);
 				int y = Integer.valueOf(posYParts[1]);
 				
-				level.tiles[x][y] = new BasicTile(id, x, y, Tiles.getBluePrintByID(blueprint), 1.0f);
+				level.tiles[x][y] = new BasicTile(id, x, y, Tiles.getConfigByID(blueprint), 1.0f);
 			}
 		}
 	}
@@ -186,7 +186,7 @@ public class LevelLoader {
 			float y = Float.valueOf(posYParts[1]);
 			//float speed = Float.valueOf(speedParts[1]);
 			
-			EntityConfig skinBluePrint = NPCs.getBluePrintByName(skin);
+			EntityConfig skinBluePrint = NPCs.getConfigByName(skin);
 			
 			if (skinBluePrint != null) {
 				Player player = NPCs.addPlayerInstanceToLevel(skinBluePrint, level, (int) x, (int) y);
@@ -219,7 +219,7 @@ public class LevelLoader {
 			float x = Float.valueOf(posXParts[1]);
 			float y = Float.valueOf(posYParts[1]);
 			
-			EntityConfig entityBluePrint = Objects.getBluePrintByName(name);
+			EntityConfig entityBluePrint = Objects.getConfigByName(name);
 			
 			if (entityBluePrint != null) {
 				Objects.addInstanceToLevel(entityBluePrint, level, (int) x, (int) y);
@@ -239,7 +239,7 @@ public class LevelLoader {
 			float x = Float.valueOf(posXParts[1]);
 			float y = Float.valueOf(posYParts[1]);
 			
-			EntityConfig entityBluePrint = Prefabs.getBluePrintByName(name);
+			EntityConfig entityBluePrint = Prefabs.getConfigByName(name);
 			
 			if (entityBluePrint != null) {
 				Prefabs.addInstanceToLevel(entityBluePrint, level, (int) x, (int) y);

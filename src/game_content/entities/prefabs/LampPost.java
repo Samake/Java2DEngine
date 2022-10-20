@@ -14,7 +14,6 @@ public class LampPost extends Prefab {
 	private PointLight light;
 	
 	private Vector2f lightOffset = new Vector2f();
-	private Vector2f smokeOffset = new Vector2f();
 	
 	private int yTileEnabled = 0;
 	private int yTileDisabled = 0;
@@ -22,7 +21,7 @@ public class LampPost extends Prefab {
 	public LampPost(EntityConfig config, Level level, int x, int y) {
 		super(config, level, x, y);
 		
-		smokeOffset.y = -config.renderData.atlas.sheet.tileSize;
+		lightOffset.y = -config.renderData.atlas.sheet.tileSize + 4;
 		yTileEnabled = yTile;
 		yTileDisabled = yTile + 3;
 		

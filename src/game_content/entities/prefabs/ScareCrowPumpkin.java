@@ -24,7 +24,7 @@ public class ScareCrowPumpkin extends Prefab {
 	public ScareCrowPumpkin(EntityConfig config, Level level, int x, int y) {
 		super(config, level, x, y);
 		
-		lightOffset.y = -config.renderData.atlas.sheet.tileSize / 2;
+		lightOffset.y = (-config.renderData.atlas.sheet.tileSize / 2) + 8;
 	}
 
 	@Override

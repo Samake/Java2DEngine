@@ -3,8 +3,8 @@ name:farmland.dat
 leveltype:OUTDOOR
 size:128x128
 tiles:16384
-daytime:6
-daycycle:false
+daytime:0
+daycycle:true
 [TILES]
 {id:0,tile:104,x:0,y:0}
 {id:128,tile:100,x:0,y:1}

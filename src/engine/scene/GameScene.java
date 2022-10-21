@@ -15,6 +15,7 @@ import engine.entities.lights.PointLight;
 import engine.gui.GUI;
 import engine.input.InputHandler;
 import engine.level.Level;
+import engine.level.environment.RainLayer;
 
 public class GameScene extends Scene {
 
@@ -184,6 +185,14 @@ public class GameScene extends Scene {
 					}
 				}
 			}
+			
+			if (level.environment.weatherManager.isRaining) {
+				for (RainLayer rainLayer : level.environment.weatherManager.rainLayers) {
+					if (rainLayer != null) {
+						drawRainLayer(graphic, rainLayer);
+					}
+				}
+			}
 
 			graphic.dispose();
 		}
@@ -193,6 +202,15 @@ public class GameScene extends Scene {
 		if (corona != null && radius > 0) {
 			//graphic.setComposite(AlphaComposite.DstIn);
 			graphic.drawImage(corona, (int) x - (int) radius, (int) y - (int) radius, (int) radius * 2, (int) radius * 2, null);
+		}
+	}
+	
+	private void drawRainLayer(Graphics2D graphic, RainLayer rainLayer) {
+		if (rainLayer != null) {
+			//graphic.setComposite(AlphaComposite.DstIn);
+			if (rainLayer.texture.image != null) {
+				graphic.drawImage(rainLayer.texture.image, (int) rainLayer.x - rainLayer.size / 2, (int) rainLayer.y - rainLayer.size / 2, rainLayer.size, rainLayer.size, null);
+			}
 		}
 	}
 

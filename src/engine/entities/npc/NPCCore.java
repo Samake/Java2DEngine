@@ -165,10 +165,9 @@ public class NPCCore extends Entity {
 		
 			flipModifier = (flipModifier + gameSpeed)%100;
 
-			int currentAnimSpeed = animSpeed * gameSpeed;
 			float currentSpeed = maxSpeed;
 			
-			animation.delay = 400 / currentAnimSpeed;
+			//animation.delay = 400 / currentAnimSpeed;
 			speed = currentSpeed * gameSpeed;
 			
 			if (level != null && config.renderData.atlas != null) {
@@ -189,17 +188,17 @@ public class NPCCore extends Entity {
 			}
 			
 			if (isMoving) {
-				animation.delay = 150 / currentAnimSpeed;
+				//animation.delay = 150 / currentAnimSpeed;
 			}
 			
 			if (isSprinting) {
 				//speed = currentSpeed * 1.5f;
-				animation.delay = 100 / currentAnimSpeed;
+				//animation.delay = 100 / currentAnimSpeed;
 			}
 			
 			if (isSneaking) {
 				//speed = currentSpeed * 0.5f;
-				animation.delay = 200 / currentAnimSpeed;
+				//animation.delay = 200 / currentAnimSpeed;
 			}
 			
 			flipValue = (flipModifier >> (int) flipSpeed * 2) & 1;
@@ -208,7 +207,7 @@ public class NPCCore extends Entity {
 				//speed = currentSpeed * 0.35f;
 				heightOffsetModifier = config.renderData.atlas.sheet.tileSize / 2;
 				inWater = true;
-				animation.delay = 400 / currentAnimSpeed;
+				//animation.delay = 400 / currentAnimSpeed;
 			} else {
 				heightOffsetModifier = 0;
 				inWater = false;

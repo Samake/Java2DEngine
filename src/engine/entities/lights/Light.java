@@ -106,7 +106,7 @@ public abstract class Light extends Entity {
 					int red = (color.getRed() * coronaColorRed * 3) / 255;
 					int green = (color.getGreen() * coronaColorGreen * 3) / 255;
 					int blue = (color.getBlue() * coronaColorBlue * 3) / 255;
-					int alpha = (int) (coronaColorAlpha * 0.9);
+					int alpha = (int) (coronaColorAlpha * 0.85);
 					
 					if (red < 0) red = 0;
 					if (red > 255) red = 255;

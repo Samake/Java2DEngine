@@ -381,6 +381,17 @@ public class Level {
 		return tiles[x][y];
 	}
 	
+	public Tile getWorldTile(int x, int y) {
+		x = x >> getTileAtlas().sheet.getShiftOperator();
+		y = y >> getTileAtlas().sheet.getShiftOperator();
+						
+		if (x < 0 || x > width - 1 || y < 0 || y > height - 1) {
+			return null;
+		}
+		
+		return tiles[x][y];
+	}
+	
 	public void selectTile(Tile tileToSelect) {
 		if (tileToSelect != null) {
 			for (int y = 0; y < height; y++) {

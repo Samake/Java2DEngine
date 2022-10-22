@@ -5,9 +5,12 @@ import java.util.List;
 
 import engine.level.Level;
 import engine.rendering.Canvas;
+import engine.tiles.Tile;
 import engine.utils.Misc;
+import game_content.entities.effects.EffectRainDrop;
 import game_content.entities.effects.EffectWaterRipples;
 import game_content.resources.Sheets;
+import game_content.resources.Tiles.TILETYPE;
 
 public class WeatherManager {
 
@@ -57,7 +60,18 @@ public class WeatherManager {
 			}
 
 			if (Misc.randomInteger(0, (int) maxRainLevel) <= rainLevel) {
-				new EffectWaterRipples(level, Misc.randomInteger(Canvas.minX << Sheets.TILES_SHEET.getShiftOperator(), Canvas.maxX << Sheets.TILES_SHEET.getShiftOperator()), Misc.randomInteger(Canvas.minY << Sheets.TILES_SHEET.getShiftOperator(), Canvas.maxY << Sheets.TILES_SHEET.getShiftOperator()));
+				int x = Misc.randomInteger(Canvas.minX << Sheets.TILES_SHEET.getShiftOperator(), Canvas.maxX << Sheets.TILES_SHEET.getShiftOperator());
+				int y = Misc.randomInteger(Canvas.minY << Sheets.TILES_SHEET.getShiftOperator(), Canvas.maxY << Sheets.TILES_SHEET.getShiftOperator());
+				
+				Tile tile = level.getWorldTile(x, y);
+				
+				if (tile != null) {
+					if (tile.config.type.equals(TILETYPE.WATER)) {
+						new EffectWaterRipples(level, x, y);
+					} else {
+						new EffectRainDrop(level, x, y);
+					}
+				}
 			}
 		}
 	}

@@ -34,12 +34,11 @@ public class NPCHuman extends NPCCore {
 		ANIMATION_WALK_LEFT = new Animation(8, 0, 100, 2);
 		ANIMATION_WALK_RIGHT = new Animation(12, 0, 100, 2);
 		
-		if (collissionBox != null) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
-		}
+		collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+		collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
+		collissionBox.minY = collissionOffset;
+		collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+		
 		
 		if (!config.entityType.equals(ENTITYTYPE.PLAYER)) {
 			jobs.targetRange = 256;

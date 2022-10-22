@@ -17,10 +17,16 @@ public class Player extends NPCHuman {
 	
 	public Player(EntityConfig config, Level level, float x, float y, float speed) {
 		super(config, level, x, y, speed);
+		
+		collissionOffset = 4;
+		collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+		collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
+		collissionBox.minY = -collissionOffset / 2;
+		collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset * 2;
 
 		ANIMATION_IDLE = new Animation(0, 8, 500, 2);
 		ANIMATION_WALK_UP = new Animation(0, 2, 100, 8);
-		ANIMATION_WALK_DOWN = new Animation(0, 0, 100, 8);
+		ANIMATION_WALK_DOWN = new Animation(0, 24, 100, 8);
 		ANIMATION_WALK_LEFT = new Animation(0, 6, 100, 8);
 		ANIMATION_WALK_RIGHT =  new Animation(0, 4, 100, 8);
 		

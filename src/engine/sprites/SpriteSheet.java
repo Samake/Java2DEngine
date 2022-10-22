@@ -19,7 +19,7 @@ public class SpriteSheet {
 	
 	public BufferedImage image = null;
 	
-	public SpriteSheet(SpriteSheet[] list, int id, String path, int slots) {
+	public SpriteSheet(SpriteSheet[] list, int id, String path, int slots, int offSet) {
 		if (list[id] != null) throw new RuntimeException("Duplicate sheetType id on " + id);
 		
 		this.id = id;
@@ -46,9 +46,51 @@ public class SpriteSheet {
 		
 		list[id] = this;
 		
+		if (offSet > 0) {
+			generateOffsetImage(offSet);
+		}
+		
 		//Log.print("Spritesheet " + path + " loaded! - Width: " + width + ", Height: " + height + ", Slots: " + slots + " , TileSize: " + tileSize + ", Pixels: " + pixels.length);
 	}
 	
+	private void generateOffsetImage(int offSet) {
+		int[] cutOff = new int[pixels.length];
+		int[] result = new int[pixels.length];
+		
+		BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		
+		if (newImage != null) {
+			
+			for (int i = 0; i < result.length; i++) {
+				cutOff[i] = 0;
+				result[i] = 0;
+			}
+			
+			int index = 0;
+
+			for(int y = 0; y < image.getHeight(); y++){
+		        for(int x = 0; x < image.getWidth(); x++){
+		          int pixel = pixels[x + y * image.getWidth()];
+		          
+		          if (y > offSet) {
+		        	  cutOff[index] = pixel;
+		        	  index++;
+		          }
+		        }       
+		    }
+			
+			for (int i = 0; i < cutOff.length; i++) {
+				result[i] = cutOff[i];
+			}
+			
+			newImage.setRGB(0, 0, image.getWidth(), image.getHeight(), result, 0, image.getWidth());
+			
+			pixels = result;
+			image = newImage;
+		}
+		
+	}
+
 	public int getShiftOperator() {
 		switch(tileSize){
         case 0:

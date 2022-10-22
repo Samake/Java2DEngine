@@ -3,7 +3,7 @@ name:farmland.dat
 leveltype:OUTDOOR
 size:128x128
 tiles:16384
-daytime:0
+daytime:10
 daycycle:true
 [TILES]
 {id:0,tile:104,x:0,y:0}
@@ -16391,7 +16391,7 @@ daycycle:true
 {id:16255,tile:100,x:127,y:126}
 {id:16383,tile:100,x:127,y:127}
 [Player]
-{type:Player,skin:HUMAN_CHAR_5,x:991.0,y:1048.0,speed:1.0,bodySlot:SKULL_WHITE,legSlot:PANT_SUIT_LILA,feetSlot:SHOES_GREEN,eyeSlot:EYES_08,mouthSlot:MOUTH_01,hairSlot:HAIR_CURLY_BLOND,hatSlot:NULL,beardSlot:NULL,accessoiresSlot:GLASSES_TURKIS,earSlot:NULL}
+{type:Player,skin:HUMAN_CHAR_5,x:991.0,y:1048.0,speed:1.0,bodySlot:SKULL_BLACK,legSlot:PANT_GREEN,feetSlot:SHOES_BLUE,eyeSlot:EYES_13,mouthSlot:MOUTH_05,hairSlot:HAIR_WAVY_BLOND,hatSlot:HAT_WITCH,beardSlot:NULL,accessoiresSlot:NULL,earSlot:NULL}
 [ENTITIES]
 {type:Entity,name:GRASS_01,x:1228.0,y:1020.0}
 {type:Entity,name:GRASS_01,x:1089.0,y:978.0}

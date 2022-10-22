@@ -3,16 +3,23 @@ package engine.level.environment;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.level.Level;
+import engine.rendering.Canvas;
+import engine.utils.Misc;
+import game_content.entities.effects.EffectWaterRipples;
+import game_content.resources.Sheets;
+
 public class WeatherManager {
 
+	private Level level;
 	public List<RainLayer> rainLayers = new ArrayList<RainLayer>();
 	public int dropLayers = 0;
 	public boolean isRaining = true;
 	public float rainLevel = 0.0f;
 	public float maxRainLevel = 25.0f;
 	
-	public WeatherManager () {
-
+	public WeatherManager (Level level) {
+		this.level = level;
 	}
 
 	public void update(Time time, int gameSpeed) {
@@ -47,6 +54,10 @@ public class WeatherManager {
 				if (layer != null) {
 					layer.update(gameSpeed);
 				}
+			}
+
+			if (Misc.randomInteger(0, (int) maxRainLevel) <= rainLevel) {
+				new EffectWaterRipples(level, Misc.randomInteger(Canvas.minX << Sheets.TILES_SHEET.getShiftOperator(), Canvas.maxX << Sheets.TILES_SHEET.getShiftOperator()), Misc.randomInteger(Canvas.minY << Sheets.TILES_SHEET.getShiftOperator(), Canvas.maxY << Sheets.TILES_SHEET.getShiftOperator()));
 			}
 		}
 	}

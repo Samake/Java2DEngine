@@ -13,7 +13,7 @@ public class Environment {
 	
 	public Environment(Level level) {
 		time = new Time(12, this);
-		weatherManager = new WeatherManager();
+		weatherManager = new WeatherManager(level);
 		ambientLight = new AmbientLight(level);
 		ambientSound = new AmbientSound(level);
 	}

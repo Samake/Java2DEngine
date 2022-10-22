@@ -21,15 +21,15 @@ public class AmbientLight {
 		sunlight.saveToMap = false;
 	}
 	
-	public void update(Time time, int gameSpeed) {	
-		calculateAmbientLight(time);
+	public void update(Time time, int gameSpeed, WeatherManager weatherManager) {	
+		calculateAmbientLight(time, weatherManager);
 		
 		if (sunlight != null) {
 			sunlight.updateLightValues(time, ambientColor);
 		}
 	}
 
-	private void calculateAmbientLight(Time time) {
+	private void calculateAmbientLight(Time time, WeatherManager weatherManager) {
 		float r = 0;
 		float g = 0;
 		float b = 0;
@@ -70,6 +70,18 @@ public class AmbientLight {
 			r = dayColor.getRed();
 			g = dayColor.getGreen();
 			b = dayColor.getBlue();
+		}
+		
+		if (weatherManager.rainLevel > 0) {
+			float greyValue = (r + g + b) / 3;
+			float fadeValue = (1.0f / weatherManager.maxRainLevel) * weatherManager.rainLevel;
+			r = (greyValue * fadeValue) + (r * (1.0f - fadeValue));
+			g = (greyValue * fadeValue) + (g * (1.0f - fadeValue));
+			b = (greyValue * fadeValue) + (b * (1.0f - fadeValue));
+			
+			r *= 1.0f - (fadeValue / 2);
+			g *= 1.0f - (fadeValue / 2);
+			b *= 1.0f - (fadeValue / 2);
 		}
 		
 		if (r < 0) r = 0;

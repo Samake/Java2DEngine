@@ -186,7 +186,7 @@ public class GameScene extends Scene {
 				}
 			}
 			
-			if (level.environment.weatherManager.isRaining) {
+			if (level.environment.weatherManager.rainLevel > 0) {
 				for (RainLayer rainLayer : level.environment.weatherManager.rainLayers) {
 					if (rainLayer != null) {
 						drawRainLayer(graphic, rainLayer);

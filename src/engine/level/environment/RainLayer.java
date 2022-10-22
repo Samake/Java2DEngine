@@ -21,7 +21,7 @@ public class RainLayer {
 		
 		size = Misc.randomInteger(32, 256);
 		x = Misc.randomInteger(0, Config.WINDOW_WIDTH);
-		speed = Misc.randomInteger(10000, 30000) / (size * 15);
+		speed = Misc.randomInteger(10000, 30000) / (size * 10);
 		y = 0;
 		
 		if (x < Config.WINDOW_WIDTH / 2) {
@@ -34,13 +34,13 @@ public class RainLayer {
 	}
 
 	public void update(int gameSpeed) {
-		y += speed * gameSpeed;
+		y += speed;
 		
 		if (y > Config.WINDOW_HEIGHT + size) {
 			weatherManager.removeRainLayer(this);
 		}
 		
-		x += xSpeed * gameSpeed;
+		x += xSpeed;
 		
 		if (x > Config.WINDOW_WIDTH + size) {
 			weatherManager.removeRainLayer(this);

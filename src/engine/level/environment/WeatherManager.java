@@ -6,20 +6,37 @@ import java.util.List;
 public class WeatherManager {
 
 	public List<RainLayer> rainLayers = new ArrayList<RainLayer>();
-	public int dropLayers = 25;
+	public int dropLayers = 0;
 	public boolean isRaining = true;
+	public float rainLevel = 0.0f;
+	public float maxRainLevel = 25.0f;
 	
 	public WeatherManager () {
-		 
-		if (isRaining) {
-			for (int amount = 0; amount < dropLayers; amount++) {
-				addRainLayer();
-			}
-		}
+
 	}
 
 	public void update(Time time, int gameSpeed) {
+		dropLayers = (int) rainLevel;
+		
 		if (isRaining) {
+			if (rainLevel < maxRainLevel) {
+				rainLevel += 0.05f * gameSpeed;
+			} else {
+				rainLevel = maxRainLevel;
+			}
+		} else {
+			if (rainLevel > 0) {
+				rainLevel -= 0.05f * gameSpeed;
+			} else {
+				rainLevel = 0;
+			}
+		}
+		
+		if (rainLevel == 0) {
+			if (!rainLayers.isEmpty()) {
+				rainLayers.clear();
+			}
+		} else {
 			List<RainLayer> updateList = new ArrayList<RainLayer>(rainLayers);
 			
 			if (updateList.size() < dropLayers) {
@@ -30,10 +47,6 @@ public class WeatherManager {
 				if (layer != null) {
 					layer.update(gameSpeed);
 				}
-			}
-		} else {
-			if (!rainLayers.isEmpty()) {
-				rainLayers.clear();
 			}
 		}
 	}

@@ -28,7 +28,7 @@ public class Environment {
 		}
 		
 		if (ambientLight != null) {
-			ambientLight.update(time, gameSpeed);
+			ambientLight.update(time, gameSpeed, weatherManager);
 		}
 		
 		if (ambientSound != null) {

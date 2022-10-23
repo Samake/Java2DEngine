@@ -91,29 +91,33 @@ public class NPCCore extends Entity {
 			if (!hasCollided(velocity.x, velocity.y)) {
 				if (velocity.y < 0) {
 					if (isCollidingUp) {
-						velocity.y = 0;
-						velocity.x = collidingVelocity.x;
+						if (velocity.y < 0) {
+							velocity.y = 0;
+						}
 					}
 				}
 				
 				if (velocity.y > 0) {
 					if (isCollidingDown) {
-						velocity.y = 0;
-						velocity.x = collidingVelocity.x;
+						if (velocity.y > 0) {
+							velocity.y = 0;
+						}
 					}
 				}
 				
 				if (velocity.x < 0) {
 					if (isCollidingLeft) {
-						velocity.x = 0;
-						velocity.y = collidingVelocity.y;
+						if (velocity.x < 0) {
+							velocity.x = 0;
+						}
 					}
 				}
 				
 				if (velocity.x > 0) {
 					if (isCollidingRight) {
-						velocity.x = 0;
-						velocity.y = collidingVelocity.y;
+						if (velocity.x > 0) {
+							velocity.x = 0;
+						}
 					}
 				}
 				
@@ -342,15 +346,10 @@ public class NPCCore extends Entity {
 		for (Entity entity : entityList) {
 			if (entity.config.entityType.equals(ENTITYTYPE.OBJECT) || entity.config.entityType.equals(ENTITYTYPE.PREFAB)) {
 				if (entity.checkCollission(collissionBox)) {
-					isCollidingLeft = entity.collissionBox.isCollidingLeft(collissionBox);
-					isCollidingRight = entity.collissionBox.isCollidingRight(collissionBox);
-					isCollidingUp = entity.collissionBox.isCollidingUp(collissionBox);
-					isCollidingDown = entity.collissionBox.isCollidingDown(collissionBox);
-					
-					if (isCollidingLeft || isCollidingRight || isCollidingUp || isCollidingDown) {
-						collidingVelocity.x = entity.collissionBox.collidingVelocity.x;
-						collidingVelocity.y = entity.collissionBox.collidingVelocity.y;
-					}
+					isCollidingLeft = entity.collissionBox.intersectsLeft(collissionBox);
+					isCollidingRight = entity.collissionBox.intersectsRight(collissionBox);
+					isCollidingUp = entity.collissionBox.intersectsUp(collissionBox);
+					isCollidingDown = entity.collissionBox.intersectsBottom(collissionBox);
 				};
 			}
 		}

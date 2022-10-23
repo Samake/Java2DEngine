@@ -5,9 +5,9 @@ import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
 
-public class House extends Prefab {
+public class Barn extends Prefab {
 
-	public House(EntityConfig blueprint, Level level, int x, int y) {
+	public Barn(EntityConfig blueprint, Level level, int x, int y) {
 		super(blueprint, level, x, y);
 		
 		collissionOffset = 12;

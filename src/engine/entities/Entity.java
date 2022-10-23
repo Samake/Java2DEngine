@@ -3,9 +3,9 @@ package engine.entities;
 import java.awt.Color;
 import java.util.List;
 
+import engine.collission.CollissionBox;
 import engine.core.Config;
 import engine.entities.EntityRenderData.RENDERTYPE;
-import engine.entities.collision.CollissionBox;
 import engine.entities.lights.Light.LIGHTTYPE;
 import engine.entities.lights.PointLight;
 import engine.input.InputHandler;
@@ -23,7 +23,6 @@ public class Entity {
 	public CollissionBox collissionBox = new CollissionBox();
 	public Vector2f position = new Vector2f();
 	public Vector2f velocity = new Vector2f();
-	public Vector2f collidingVelocity = new Vector2f();
 	
 	public EntityConfig config;
 	public Level level;
@@ -58,87 +57,87 @@ public class Entity {
 
 	private void defineDefaultCollissionBoxes() {
 		if (config.renderData.renderType.equals(RENDERTYPE.R1X1)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize / 2) - collissionOffset);
 			collissionBox.minY = 0;
-			collissionBox.maxY = config.renderData.atlas.sheet.tileSize / 2;
+			collissionBox.maxY =(int) (config.renderData.atlas.sheet.tileSize / 2);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R1X2)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize / 2) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R1X3)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
-			collissionBox.minY = (config.renderData.atlas.sheet.tileSize / 2) + collissionOffset ;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize / 2) - collissionOffset);
+			collissionBox.minY = (int) ((config.renderData.atlas.sheet.tileSize / 2) + collissionOffset );
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R2X2)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R2X3)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R3X2)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R3X3)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R3X5)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R4X4)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 2) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 2) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 2) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize * 2) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize * 2) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 2) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R4X6)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 2) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 2) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 3) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize * 2) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize * 2) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 3) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R5X5)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 2.5f) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize * 2.5f) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 2.5f) - collissionOffset);
 		}
 		
 		if (config.renderData.renderType.equals(RENDERTYPE.R6X6)) {
-			collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 3) + collissionOffset;
-			collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 3) - collissionOffset;
-			collissionBox.minY = collissionOffset;
-			collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 3) - collissionOffset;
+			collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize * 3) + collissionOffset);
+			collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize * 3) - collissionOffset);
+			collissionBox.minY = (int) (collissionOffset);
+			collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 3) - collissionOffset);
 		}
 	}
 	
@@ -516,7 +515,7 @@ public class Entity {
 	public boolean checkCollission(CollissionBox box) {
 		if (collissionBox != null && box != null) {
 			if (!collissionBox.equals(box)) {
-				if (collissionBox.checkCollission(box)) {
+				if (collissionBox.intersects(box)) {
 					return true;
 				}
 			}
@@ -527,7 +526,7 @@ public class Entity {
 	
 	public boolean checkCollission(int x, int y) {
 		if (this.collissionBox != null) {
-			if (this.collissionBox.checkCollission(x, y)) {
+			if (this.collissionBox.intersetcs(x, y)) {
 				return true;
 			}
 		}

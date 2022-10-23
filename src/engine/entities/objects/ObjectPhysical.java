@@ -2,8 +2,8 @@ package engine.entities.objects;
 
 import java.awt.Color;
 
+import engine.collission.CollissionBox;
 import engine.entities.EntityConfig;
-import engine.entities.collision.CollissionBox;
 import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;

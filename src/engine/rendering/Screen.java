@@ -2,9 +2,9 @@ package engine.rendering;
 
 import java.awt.Color;
 
+import engine.collission.CollissionBox;
 import engine.core.Config;
 import engine.debug.Log;
-import engine.entities.collision.CollissionBox;
 import engine.sprites.SpriteAtlas;
 import engine.sprites.SpriteSheet;
 
@@ -183,8 +183,8 @@ public class Screen {
 			int alphaValue = baseColor.getAlpha();
 			
 			if (isInWater) {
-				float waterFade = (size - height) / 16.0f;
-				alpha = waterFade;
+				float waterFade = 1.0f - ((1.0f / size) * height * 2);
+				alpha = waterFade * 0.5f;
 
 				red = (int) (baseColor.getRed() * (1.0 - alpha)) + (int) (drawColor.getRed() * alpha);
 				green = (int) (baseColor.getGreen() * (1.0 - alpha)) + (int) (drawColor.getGreen() * alpha);
@@ -325,12 +325,12 @@ public class Screen {
 	
 	public void renderDebug(CollissionBox box, Color debugColor) {
 		if (box != null) {
-			int minx = (int) (box.position.x + box.minX - xOffset);
+			int minX = (int) (box.position.x + box.minX - xOffset);
 			int maxX = (int) (box.position.x + box.maxX - xOffset);
 			int minY = (int) (box.position.y + box.minY - yOffset);
 			int maxY = (int) (box.position.y + box.maxY - yOffset);
 			
-			for (int x = minx; x < maxX; x++) {
+			for (int x = minX; x <= maxX; x++) {
 				int upperValue = x + minY * Config.WINDOW_WIDTH;
 				int downValue = x + maxY * Config.WINDOW_WIDTH;
 				
@@ -343,8 +343,8 @@ public class Screen {
 				}
 			}
 			
-			for (int y = minY; y < maxY; y++) {
-				int upperValue = minx + y * Config.WINDOW_WIDTH;
+			for (int y = minY; y <= maxY; y++) {
+				int upperValue = minX + y * Config.WINDOW_WIDTH;
 				int downValue = maxX + y * Config.WINDOW_WIDTH;
 				
 				if (pixelsGUI.length > upperValue && upperValue > 0) {

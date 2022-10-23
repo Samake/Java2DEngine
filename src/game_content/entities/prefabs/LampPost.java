@@ -21,6 +21,13 @@ public class LampPost extends Prefab {
 	public LampPost(EntityConfig config, Level level, int x, int y) {
 		super(config, level, x, y);
 		
+		collissionOffset = 4;
+		
+		collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset);
+		collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize / 2) - collissionOffset);
+		collissionBox.minY = (int) ((config.renderData.atlas.sheet.tileSize / 2) + collissionOffset );
+		collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
+		
 		lightOffset.y = -config.renderData.atlas.sheet.tileSize + 4;
 		yTileEnabled = yTile;
 		yTileDisabled = yTile + 3;

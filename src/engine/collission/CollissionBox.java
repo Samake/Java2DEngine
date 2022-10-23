@@ -1,4 +1,4 @@
-package engine.entities.collision;
+package engine.collission;
 
 import engine.utils.Misc;
 import engine.utils.Vector2f;
@@ -6,10 +6,10 @@ import engine.utils.Vector2f;
 public class CollissionBox {
 	
 	public Vector2f position = new Vector2f();
-	public float minX;
-	public float maxX;
-	public float minY;
-	public float maxY;
+	public int minX;
+	public int maxX;
+	public int minY;
+	public int maxY;
 	private int collissionGap = 1;
 	public Vector2f collidingVelocity = new Vector2f();
 	
@@ -52,7 +52,7 @@ public class CollissionBox {
 		return false;
 	}
 	
-	public boolean checkCollission(CollissionBox box) {
+	public boolean intersects(CollissionBox box) {
 		if (box != null && !box.equals(this)) {
 			if (isInRange(box)) {
 				int otherX = (int) box.position.x;
@@ -101,123 +101,7 @@ public class CollissionBox {
 		return false;
 	}
 	
-	public boolean isCollidingLeft(CollissionBox box) {
-		if (box != null && !box.equals(this)) {
-			if (isInRange(box)) {
-				int otherX = (int) box.position.x;
-				int otherY = (int) box.position.y;
-				int otherLeftX = otherX + (int) box.minX;
-				int otherRightX = otherX + (int) box.maxX;
-				
-				int selfX = (int) this.position.x;
-				int selfY = (int) this.position.y;
-				int selfRightX = selfX + (int) this.maxX;
-
-				if (selfRightX > otherLeftX) {
-					if (selfRightX < otherRightX) {
-						if (selfY < otherY) {
-							collidingVelocity.y = 1;
-						} else {
-							collidingVelocity.y = -1;
-						}
-						
-						return true;
-					}
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	public boolean isCollidingRight(CollissionBox box) {
-		if (box != null && !box.equals(this)) {
-			if (isInRange(box)) {
-				int otherX = (int) box.position.x;
-				int otherY = (int) box.position.y;
-				int otherLeftX = otherX + (int) box.minX;
-				int otherRightX = otherX + (int) box.maxX;
-				
-				int selfX = (int) this.position.x;
-				int selfY = (int) this.position.y;
-				int selfLeftX = selfX + (int) this.minX;
-
-				if (selfLeftX < otherRightX) {
-					if (selfLeftX > otherLeftX) {
-						if (selfY <= otherY) {
-							collidingVelocity.y = 1;
-						} else {
-							collidingVelocity.y = -1;
-						}
-						
-						return true;
-					}
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	public boolean isCollidingUp(CollissionBox box) {
-		if (box != null && !box.equals(this)) {
-			if (isInRange(box)) {
-				int otherX = (int) box.position.x;
-				int otherY = (int) box.position.y;
-				int otherUpperY = otherY + (int) box.minY;
-				int otherDownY = otherY + (int) box.maxY;
-				
-				int selfX = (int) this.position.x;
-				int selfY = (int) this.position.y;
-				int selfDownY = selfY + (int) this.maxY;
-
-				if (selfDownY > otherUpperY) {
-					if (selfDownY < otherDownY) {
-						if (selfX <= otherX) {
-							collidingVelocity.x = 1;
-						} else {
-							collidingVelocity.x = -1;
-						}
-						
-						return true;
-					}
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	public boolean isCollidingDown(CollissionBox box) {
-		if (box != null && !box.equals(this)) {
-			if (isInRange(box)) {
-				int otherX = (int) box.position.x;
-				int otherY = (int) box.position.y;
-				int otherUpperY = otherY + (int) box.minY;
-				int otherDownY = otherY + (int) box.maxY;
-				
-				int selfX = (int) this.position.x;
-				int selfY = (int) this.position.y;
-				int selfUpperY = selfY + (int) this.minY;
-
-				if (selfUpperY < otherDownY) {
-					if (selfUpperY > otherUpperY) {
-						if (selfX <= otherX) {
-							collidingVelocity.x = 1;
-						} else {
-							collidingVelocity.x = -1;
-						}
-						
-						return true;
-					}
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	public boolean checkCollission(int x, int y) {
+	public boolean intersetcs(int x, int y) {
 		int cx = (int) this.position.x;
 		int cy = (int) this.position.y;
 		int cMinX = cx + (int) this.minX;
@@ -247,5 +131,121 @@ public class CollissionBox {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean intersectsLeft(CollissionBox box) {
+		if (box != null && !box.equals(this)) {
+			if (isInRange(box)) {
+				int otherX = (int) box.position.x;
+				int otherY = (int) box.position.y;
+				int otherLeftX = otherX + (int) box.minX;
+				int otherRightX = otherX + (int) box.maxX;
+				
+				int selfX = (int) this.position.x;
+				int selfY = (int) this.position.y;
+				int selfRightX = selfX + (int) this.maxX;
+
+				if (selfRightX > otherLeftX) {
+					if (selfRightX < otherRightX) {
+						if (selfY < otherY) {
+							collidingVelocity.y = 1;
+						} else {
+							collidingVelocity.y = -1;
+						}
+						
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean intersectsRight(CollissionBox box) {
+		if (box != null && !box.equals(this)) {
+			if (isInRange(box)) {
+				int otherX = (int) box.position.x;
+				int otherY = (int) box.position.y;
+				int otherLeftX = otherX + (int) box.minX;
+				int otherRightX = otherX + (int) box.maxX;
+				
+				int selfX = (int) this.position.x;
+				int selfY = (int) this.position.y;
+				int selfLeftX = selfX + (int) this.minX;
+
+				if (selfLeftX < otherRightX) {
+					if (selfLeftX > otherLeftX) {
+						if (selfY <= otherY) {
+							collidingVelocity.y = 1;
+						} else {
+							collidingVelocity.y = -1;
+						}
+						
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean intersectsUp(CollissionBox box) {
+		if (box != null && !box.equals(this)) {
+			if (isInRange(box)) {
+				int otherX = (int) box.position.x;
+				int otherY = (int) box.position.y;
+				int otherUpperY = otherY + (int) box.minY;
+				int otherDownY = otherY + (int) box.maxY;
+				
+				int selfX = (int) this.position.x;
+				int selfY = (int) this.position.y;
+				int selfDownY = selfY + (int) this.maxY;
+
+				if (selfDownY > otherUpperY) {
+					if (selfDownY < otherDownY) {
+						if (selfX <= otherX) {
+							collidingVelocity.x = 1;
+						} else {
+							collidingVelocity.x = -1;
+						}
+						
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean intersectsBottom(CollissionBox box) {
+		if (box != null && !box.equals(this)) {
+			if (isInRange(box)) {
+				int otherX = (int) box.position.x;
+				int otherY = (int) box.position.y;
+				int otherUpperY = otherY + (int) box.minY;
+				int otherDownY = otherY + (int) box.maxY;
+				
+				int selfX = (int) this.position.x;
+				int selfY = (int) this.position.y;
+				int selfUpperY = selfY + (int) this.minY;
+
+				if (selfUpperY < otherDownY) {
+					if (selfUpperY > otherUpperY) {
+						if (selfX <= otherX) {
+							collidingVelocity.x = 1;
+						} else {
+							collidingVelocity.x = -1;
+						}
+						
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
 	}
 }

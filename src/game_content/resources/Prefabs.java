@@ -8,6 +8,7 @@ import engine.entities.EntityRenderData.RENDERTYPE;
 import engine.level.Level;
 import engine.sprites.SpriteAtlas;
 import game_content.entities.prefabs.Ball;
+import game_content.entities.prefabs.Barn;
 import game_content.entities.prefabs.CampFire;
 import game_content.entities.prefabs.Fountain;
 import game_content.entities.prefabs.GlowWorm;
@@ -133,7 +134,7 @@ public class Prefabs {
 				case "HOUSE_01" :
 					return level.addEntity(new House(config, level, x, y));
 				case "BARN_01" :
-					return level.addEntity(new House(config, level, x, y));
+					return level.addEntity(new Barn(config, level, x, y));
 				case "SILO_01" :
 					return level.addEntity(new Silo(config, level, x, y));
 				case "SILO_03" :

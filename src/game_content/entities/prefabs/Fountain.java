@@ -13,10 +13,10 @@ public class Fountain extends Prefab {
 		
 		collissionOffset = 8;
 		
-		collissionBox.minX = (-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset;
-		collissionBox.maxX = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
-		collissionBox.minY = collissionOffset;
-		collissionBox.maxY = (config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset;
+		collissionBox.minX = (int) ((-config.renderData.atlas.sheet.tileSize * 1.5f) + collissionOffset);
+		collissionBox.maxX = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
+		collissionBox.minY = (int) (collissionOffset);
+		collissionBox.maxY = (int) ((config.renderData.atlas.sheet.tileSize * 1.5f) - collissionOffset);
 	}
 
 	@Override

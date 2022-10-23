@@ -39,10 +39,12 @@ public class Seed extends Prefab {
 	public Seed(EntityConfig config, Level level, int x, int y, int baseGrowSpeed) {
 		super(config, level, x, y);
 		
-		colNormalMinX = (-config.renderData.atlas.sheet.tileSize / 2) + 2;
-		colNormalMaxX = (config.renderData.atlas.sheet.tileSize / 2) - 2;
-		colNormalMinY = (-config.renderData.atlas.sheet.tileSize / 2) + 2;
-		colNormalMaxY = (config.renderData.atlas.sheet.tileSize / 2) - 2;
+		collissionOffset = 4;
+		
+		colNormalMinX = (-config.renderData.atlas.sheet.tileSize / 2) + collissionOffset;
+		colNormalMaxX = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
+		colNormalMinY = (-config.renderData.atlas.sheet.tileSize / 2);
+		colNormalMaxY = (config.renderData.atlas.sheet.tileSize / 2) - collissionOffset;
 		
 		collissionBox.minX = colNormalMinX;
 		collissionBox.maxX = colNormalMaxX;

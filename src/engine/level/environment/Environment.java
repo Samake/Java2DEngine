@@ -32,7 +32,7 @@ public class Environment {
 		}
 		
 		if (ambientSound != null) {
-			ambientSound.update(time, gameSpeed);
+			ambientSound.update(time, gameSpeed, weatherManager);
 		}
 	}
 

@@ -47,7 +47,7 @@ public class LevelLoader {
 					int width = 0;
 				    int height = 0;
 				    
-				    Level level = new Level(width, height, null, false);
+				    Level level = new Level(width, height, null, false, false);
 				    
 					bufferedReader = new BufferedReader(new FileReader(fileObject));
 					

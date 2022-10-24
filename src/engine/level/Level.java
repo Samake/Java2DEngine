@@ -63,14 +63,16 @@ public class Level {
 	private int xOffset = 0;
 	private int yOffset = 0;
 	
-	public Level(int width, int height, String tileName, boolean logging) {
+	public Level(int width, int height, String tileName, boolean logging, boolean generateNewLevel) {
 		this.width = width;
 		this.height = height;
 		tiles = new Tile[width][height];
 		
 		environment = new Environment(this);
 		
-		generateNewEmptyLevel(tileName, logging);	
+		if (generateNewLevel) {
+			generateNewEmptyLevel(tileName, logging);	
+		}	
 	}
 	
 	public void setSize(int width, int height) {

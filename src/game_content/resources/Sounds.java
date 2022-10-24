@@ -9,6 +9,7 @@ public class Sounds {
 	
 	public static SoundFile AMBIENT_LAKE_01 = new SoundFile(soundFiles, 50, "ambient_lake.wav");
 	public static SoundFile AMBIENT_CAMPFIRE = new SoundFile(soundFiles, 51, "ambient_campfire.wav");
+	public static SoundFile AMBIENT_RAIN = new SoundFile(soundFiles, 52, "ambient_rain.wav");
 	
 	public static SoundFile EFFECT_EGG_CRACK = new SoundFile(soundFiles, 100, "egg_crack.wav");
 	public static SoundFile EFFECT_FOOTSTEP_GRASS = new SoundFile(soundFiles, 101, "footstep_grass.wav");

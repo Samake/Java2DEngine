@@ -290,7 +290,7 @@ public class LevelEditor extends Engine {
 			int height = Integer.valueOf(heightField.getText().trim());
 			String tileName = tileChoose.getSelectedItem().toString().trim();
 			
-			scene.setLevel(new Level(width, height, tileName, true));
+			scene.setLevel(new Level(width, height, tileName, true, true));
 			
 			Log.print("New map with size " + width + "x" + height + " were created!");
 		}

@@ -5,6 +5,7 @@ import engine.entities.prefabs.Prefab;
 import engine.input.InputHandler;
 import engine.level.Level;
 import engine.sound.SoundManager;
+import game_content.entities.decals.DecalEggSplash;
 import game_content.entities.effects.EffectSmokePuffGrey;
 import game_content.resources.NPCs;
 import game_content.resources.Sounds;
@@ -37,9 +38,9 @@ public class SpawnEgg extends Prefab {
 						if (!isCracked) {
 							isCracked = true;
 							
-							SoundManager.playSound(Sounds.EFFECT_EGG_CRACK, 45.0f);
+							SoundManager.playSoundGlobal(Sounds.EFFECT_EGG_CRACK, 75.0f, false);
 							
-							//new Decal(new EntityConfig(null, 0, ENTITYTYPE.DECAL, RENDERTYPE.R1X1, "DECAL", new SpriteAtlas(Sheets.EFFECTS_SHEET, 0, 2, false, 0, 0, false), true, false, true), level, (int) position.x, (int) position.y, 10000);
+							new DecalEggSplash(level, position.x, position.y);
 							new EffectSmokePuffGrey(level, position.x, position.y);
 							
 							if (spawnBlueprint != null) {

@@ -10,7 +10,7 @@ public class Decal extends Entity {
 	private long duration;
 	private long startTick;
 
-	public Decal(EntityConfig config, Level level, int x, int y, long duration) {
+	public Decal(EntityConfig config, Level level, float x, float y, long duration) {
 		super(config, level, x, y);
 		
 		collissionBox.minX = (-config.renderData.atlas.sheet.tileSize / 2) + 2;

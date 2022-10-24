@@ -18,7 +18,6 @@ public class Sound implements Runnable {
 	public Vector2f position = new Vector2f();
 	public float maxDistance;
 	public float maxVolume = 100.0f;
-	public boolean isStarted = false;
 	public boolean saveToMap = true;
 	
 	public Sound(String path, float x, float y, float volume, float distance, boolean looped, boolean global) {
@@ -35,9 +34,9 @@ public class Sound implements Runnable {
 			
 			clip.addLineListener(event -> {
 				if (!looped) {
-			      if (event.getType() == LineEvent.Type.STOP) {
-			        stop();
-			      }
+					if (event.getType() == LineEvent.Type.STOP) {
+						stop();
+					}
 				} else {
 					clip.loop(Clip.LOOP_CONTINUOUSLY);
 				}
@@ -48,25 +47,23 @@ public class Sound implements Runnable {
 			clip.open(audioStream);
 			
 			if (!global) {
-				setVolume(-100.0f);
+				setVolume(0.0f);
 			} else {
 				setVolume(maxVolume);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		SoundManager.addSound(this);
 	}
-	
+
 	@Override
 	public void run() {
 
 	}
 	
 	public void update(int gameSpeed) {
-		if (clip != null) {
-			if (!global && isStarted) {
+		if (clip != null && clip.isRunning()) {
+			if (!global) {
 				if (SoundManager.listenerPosition != null) {
 					double distance = Misc.getDistance(SoundManager.listenerPosition, position);
 					
@@ -74,76 +71,48 @@ public class Sound implements Runnable {
 						float volume = (float) (maxVolume - ((maxVolume / maxDistance) * distance));
 						setVolume(volume);
 					} else {
-						//setVolume(-80.0f);
+						setVolume(0.0f);
 					}
+				} else {
+					setVolume(0.0f);
 				}
 			}
 		}
 	}
 	
-	private void setVolume(float volume) {
-		FloatControl volumeBase = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		volume = 100.0f - volume;
-		float volumeRange = Math.abs(volumeBase.getMinimum() - volumeBase.getMaximum());
-		float volumeValue = volumeBase.getMaximum() - ((volumeRange / 100.0f) * volume);
-		
-		if (volumeValue < volumeBase.getMinimum()) {
-			volumeValue = volumeBase.getMinimum();
+	public void setVolume(float volume) {
+		if (clip != null) {
+			FloatControl volumeBase = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			volume = 100.0f - volume;
+			float volumeRange = Math.abs(volumeBase.getMinimum() - volumeBase.getMaximum());
+			float volumeValue = volumeBase.getMaximum() - ((volumeRange / 100.0f) * volume);
+			
+			if (volumeValue < volumeBase.getMinimum()) {
+				volumeValue = volumeBase.getMinimum();
+			}
+			
+			if (volumeValue > volumeBase.getMaximum()) {
+				volumeValue = volumeBase.getMaximum();
+			}
+			
+			volumeBase.setValue(volumeValue);
 		}
-		
-		if (volumeValue > volumeBase.getMaximum()) {
-			volumeValue = volumeBase.getMaximum();
-		}
-		
-		volumeBase.setValue(volumeValue);
 	}
 	
 	public void start() {
-		if (!isStarted) {
-			if (clip != null) {
-				clip.start();
-				isStarted = true;
+		if (clip != null) {
+			if (clip.isRunning()) {
+				clip.stop();
 			}
+			
+			clip.setFramePosition(0);
+			clip.start();
 		}
 	}
 	
 	public void stop() {
 		if (clip != null) {
-			 clip.close();
-			 isStarted = false;
-			 SoundManager.removeSound(this);
+			clip.stop();
 		}
-	}
-
-	public boolean isLooped() {
-		return looped;
-	}
-
-	public void setLooped(boolean looped) {
-		this.looped = looped;
-	}
-
-	public boolean isGlobal() {
-		return global;
-	}
-
-	public void setGlobal(boolean global) {
-		this.global = global;
-	}
-
-	public Vector2f getPosition() {
-		return position;
-	}
-
-	public void setPosition(Vector2f position) {
-		this.position = position;
-	}
-
-	public float getMaxDistance() {
-		return maxDistance;
-	}
-
-	public void setMaxDistance(float maxDistance) {
-		this.maxDistance = maxDistance;
 	}
 }

@@ -11,6 +11,7 @@ import engine.level.Level;
 import engine.rendering.Screen;
 import engine.scene.GameScene;
 import engine.scene.MenuScene;
+import engine.sound.SoundManager;
 import game_content.entities.player.Player;
 
 public class DebugGUI extends GUI {
@@ -62,7 +63,6 @@ public class DebugGUI extends GUI {
 					
 					graphics.setColor(backColor);
 					graphics.fillRect(x, y, width, height);
-	
 					graphics.setColor(fontColor);
 					
 					graphics.drawString("Memory: " + totalMemory + " MB, Free: " + freeMemory + " MB, Used: " + usedMenory + " MB, Percent: " + percentMemory + " %", x + 10, y + lineSpace * index++);
@@ -73,6 +73,7 @@ public class DebugGUI extends GUI {
 					graphics.drawString("Decals: " + Debug.decals + ", Decals rendered: " + Debug.decalsRendered, x + 10, y + lineSpace * index++);
 					graphics.drawString("Entities: " + Debug.entities + ", Entities rendered: " + Debug.entitiesRendered, x + 10, y + lineSpace * index++);
 					graphics.drawString("Lights: " + Debug.lights + ", Lights rendered: " + Debug.lightsRendered, x + 10, y + lineSpace * index++);
+					graphics.drawString("Sounds played: " + SoundManager.getSoundsCountPlayed(), x + 10, y + lineSpace * index++);
 				}
 			}
 		}

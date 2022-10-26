@@ -11,6 +11,7 @@ import engine.level.Level;
 import engine.rendering.Screen;
 import engine.scene.GameScene;
 import engine.scene.MenuScene;
+import engine.sound.SoundManager;
 
 public class DebugGUIEditor extends GUI {
 
@@ -43,15 +44,18 @@ public class DebugGUIEditor extends GUI {
 		Camera camera = scene.camera;
 		
 		if (level != null && camera != null) {
+				int index = 1;
+			
 				graphics.setColor(backColor);
 				graphics.fillRect(x, y, width, height);
 				graphics.setColor(fontColor);
 				
-				graphics.drawString("Camera Position: x: " + (int) camera.position.x + ", y: " +  (int) camera.position.y, x + 10, y + lineSpace * 1);
-				graphics.drawString("Tiles: " + Debug.tiles + ", Tiles rendered: " + Debug.tilesRendered, x + 10, y + lineSpace * 2);
-				graphics.drawString("Decals: " + Debug.decals + ", Decals rendered: " + Debug.decalsRendered, x + 10, y + lineSpace * 3);
-				graphics.drawString("Entities: " + Debug.entities + ", Entities rendered: " + Debug.entitiesRendered, x + 10, y + lineSpace * 4);
-				graphics.drawString("Lights: " + Debug.lights + ", Lights rendered: " + Debug.lightsRendered, x + 10, y + lineSpace * 5);
+				graphics.drawString("Camera Position: x: " + (int) camera.position.x + ", y: " +  (int) camera.position.y, x + 10, y + lineSpace * index++);
+				graphics.drawString("Tiles: " + Debug.tiles + ", Tiles rendered: " + Debug.tilesRendered, x + 10, y + lineSpace * index++);
+				graphics.drawString("Decals: " + Debug.decals + ", Decals rendered: " + Debug.decalsRendered, x + 10, y + lineSpace * index++);
+				graphics.drawString("Entities: " + Debug.entities + ", Entities rendered: " + Debug.entitiesRendered, x + 10, y + lineSpace * index++);
+				graphics.drawString("Lights: " + Debug.lights + ", Lights rendered: " + Debug.lightsRendered, x + 10, y + lineSpace * index++);
+				graphics.drawString("Sounds played: " + SoundManager.getSoundsCountPlayed(), x + 10, y + lineSpace * index++);
 			}
 		}
 	}

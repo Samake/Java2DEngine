@@ -7,18 +7,25 @@ import java.util.Map.Entry;
 import engine.debug.Log;
 import engine.debug.Log.OUTPUTTYPE;
 import engine.utils.Vector2f;
+import game_content.resources.Sounds;
 
 public class SoundManager {
 	
-	private static Map<SoundFile, Sound> sounds = new HashMap<SoundFile, Sound>();
+	private static Map<String, Sound> sounds = new HashMap<String, Sound>();
 	public static Vector2f listenerPosition = new Vector2f();
 	public static boolean isActive = true;
 	
 	public static void update(int gameSpeed) {
 		if (isActive) {
-			for (Entry<SoundFile, Sound> soundEntry : sounds.entrySet()) {
+			Map<String, Sound> updateSounds = new HashMap<String, Sound>(sounds);
+			
+			for (Entry<String, Sound> soundEntry : updateSounds.entrySet()) {
 				if (soundEntry != null) {
 					soundEntry.getValue().update(gameSpeed);
+					
+//					if (!soundEntry.getValue().soundFile.clip.isRunning()) {
+//						sounds.remove(soundEntry.getKey());
+//					}
 				}
 			}
 		}
@@ -51,10 +58,8 @@ public class SoundManager {
 				sound.setVolume(volume);
 				sound.maxDistance = distance;
 
-				Log.print("Sound " + soundFile.path + " were started!", OUTPUTTYPE.DEBUG);
-				
-				sound.start();
-				
+				Log.print("Sound " + sound.id + " were started!", OUTPUTTYPE.TEXT);
+
 				return sound;
 			}
 		}
@@ -63,23 +68,32 @@ public class SoundManager {
 	}
 
 	private static Sound getSound(SoundFile soundFile, float x, float y, float volume, float distance, boolean looped, boolean global) {
-		if (sounds.containsKey(soundFile)) {
-			return sounds.get(soundFile);
-		} else {
-			Sound sound = new Sound(soundFile.path, x, y, volume, distance, looped, global);
-			sounds.put(soundFile, sound);
+			String id = soundFile.id + "_" + (int) x + "_" + (int) y + "_" + (int) distance + "_" + looped + "_" + global;
+			Sound sound = new Sound(id, soundFile, x, y, volume, distance, looped, global);
+			sounds.put(id, sound);
 			
 			return sound;
-		}
+	}
+	
+	public static int getSoundsCountPlayed() {
+		return sounds.size();
 	}
 
 	public static void cleanUp() {
 		isActive = false;
 		
-		for (Entry<SoundFile, Sound> soundEntry : sounds.entrySet()) {
-			if (soundEntry != null) {
-				soundEntry.getValue().clip.close();
-			}
+		for (Entry<String, Sound> soundEntry : sounds.entrySet()) {
+//			if (soundEntry != null) {
+//				soundEntry.getValue().soundFile.clip.stop();
+//			}
+		}
+		
+		sounds.clear();
+		
+		for (SoundFile soundFile : Sounds.list) {
+//			if (soundFile != null) {
+//				soundFile.clip.close();
+//			}
 		}
 	}
 }

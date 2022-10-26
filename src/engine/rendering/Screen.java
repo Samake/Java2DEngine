@@ -203,7 +203,14 @@ public class Screen {
 				blue = (int) (baseColor.getBlue() * (1.0 - alpha)) + (int) (drawColor.getBlue() * alpha);
 			}
 			
-			Color mergedColor = new Color(red , green, blue, alphaValue);
+			if (red < 0) {red = 0;}
+			if (red > 255) {red = 255;}
+			if (green < 0) {green = 0;}
+			if (green > 255) {green = 255;}
+			if (blue < 0) {blue = 0;}
+			if (blue > 255) {blue = 255;}
+			
+			Color mergedColor = new Color(red ,green, blue, alphaValue);
 		
 			return mergedColor.getRGB();
 		}

@@ -21,7 +21,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import engine.entities.lights.PointLight;
-import testgame.LevelEditor;
+import runnables.LevelEditor;
 
 public class EditorGUILights {
 	

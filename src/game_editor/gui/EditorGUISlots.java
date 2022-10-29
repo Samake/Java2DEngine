@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import engine.sprites.IconLoader;
 import game_content.resources.Sheets;
-import testgame.LevelEditor;
+import runnables.LevelEditor;
 
 public class EditorGUISlots {
 

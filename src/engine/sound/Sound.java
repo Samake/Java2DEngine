@@ -1,15 +1,18 @@
 package engine.sound;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
+
+import engine.debug.Log;
+import engine.debug.Log.OUTPUTTYPE;
 import engine.utils.Misc;
 import engine.utils.Vector2f;
-import simple.audio.Audio;
-import simple.audio.AudioEvent;
-import simple.audio.AudioException;
-import simple.audio.StreamedAudio;
 
-public class Sound {
+public class Sound implements Runnable {
 	
-	public static final int BUFFER_SIZE = 8192;
 	public String id;
 	public SoundFile soundFile;
 	public boolean looped = false;
@@ -19,7 +22,9 @@ public class Sound {
 	public float maxVolume = 100.0f;
 	public boolean saveToMap = true;
 	
-	public Audio audio;
+	public Thread thread;
+	public Clip audio;
+	public boolean isPlaying = false;
 
 	public Sound(String id, SoundFile soundFile, float x, float y, float volume, float distance, boolean looped, boolean global) {
 		this.id = id;
@@ -33,25 +38,36 @@ public class Sound {
 		
 		position.x = x;
 		position.y = y;
+
+		thread = new Thread(this, id);
+		thread.start();
 		
 		try {
-			audio = new StreamedAudio(Sound.class.getResource(soundFile.path));
-			audio.addAudioListener(event -> {
-				if(event.getType() == AudioEvent.Type.REACHED_END) {
-					stop();
-				}
-			});
-			
-			audio.open();
-			
-			setBalance(0.0f);
+			audio = AudioSystem.getClip();
+	        AudioInputStream inputStream = AudioSystem.getAudioInputStream(Sound.class.getResourceAsStream(soundFile.path));
+	        audio.open(inputStream);
+
+	        audio.addLineListener(event -> {
+	            if (event.getType() == LineEvent.Type.STOP) {
+	            	if (!looped) {
+						stop();
+					}
+	            }
+	        });
+		
 			setVolume(0.0f);
 			
 			play();
-		} catch(AudioException exception) {
-			exception.printStackTrace();
+		} catch(Exception ex) {
+			Log.print(ex.getStackTrace().toString(), OUTPUTTYPE.EXCEPTION);
 		}
-
+		
+		Log.print("Sound " + id + " were started!", OUTPUTTYPE.TEXT);
+	}
+	
+	@Override
+	public void run() {
+//		d
 	}
 	
 	public void update(int gameSpeed) {
@@ -81,25 +97,28 @@ public class Sound {
 	
 	public void setVolume(float volume) {
 		if (audio != null) {
-			audio.setVolume(calculateVolume(volume));
+			FloatControl volumeControl = (FloatControl) audio.getControl(FloatControl.Type.MASTER_GAIN);
+			float volumeModifier = calculateVolume(volume);
+			float dB = 20f * (float) Math.log10(volumeModifier);
+			volumeControl.shift(volumeControl.getValue(), dB, 10);
 		}
 	}
 	
 	public void setBalance(float balance) {
 		if (audio != null) {
-			audio.setBalance(balance);
+			FloatControl balanceControl = (FloatControl) audio.getControl(FloatControl.Type.BALANCE);
+			float balanceValue = calculateBalance();
+			balanceControl.shift(balanceControl.getValue(), balanceValue, 10);
 		}
 	}
 	
 	private float calculateVolume(float volume) {
-		float volumeRange = 160;
-		float volumeModifier = (volumeRange / 100.0f) * volume;
-		float volumeValue = -(volumeRange / 2) + volumeModifier;
+		float volumeModifier = (1.0f / 100.0f) * volume;
 		
-		if (volumeValue < -80.0f) {volumeValue = -80.0f;}
-		if (volumeValue > 80.0f) {volumeValue = 80.0f;}
+		if (volumeModifier < 0.0001f) {volumeModifier = 0.0001f;}
+		if (volumeModifier > 1.0f) {volumeModifier = 1.0f;}
 		
-		return volumeValue;
+		return volumeModifier;
 	};
 	
 	private float calculateBalance() {
@@ -120,24 +139,28 @@ public class Sound {
 			stop();
 			
 			if (looped) {
-				audio.loop();
+				audio.loop(Clip.LOOP_CONTINUOUSLY);
 			} else {
-				audio.play();
+				audio.start();;
 			}
+			
+			isPlaying = true;
 		}
 	}
 	
 	public void stop() {
 		if (audio != null) {
-			if (audio.isPlaying()) {
+			if (audio.isRunning()) {
+				audio.setFramePosition(0);
 				audio.stop();
+				isPlaying = false;
 			}
 		}
 	}
 	
 	public void pause() {
 		if (audio != null) {
-			audio.pause();
+
 		}
 	}
 	

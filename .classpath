@@ -7,6 +7,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="resources"/>
-	<classpathentry kind="lib" path="libs/audio-engine.jar" sourcepath="libs/SimpleAudio-1.0ex.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

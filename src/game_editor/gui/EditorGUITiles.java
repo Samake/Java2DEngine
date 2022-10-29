@@ -28,7 +28,7 @@ import engine.tiles.TileConfig;
 import game_content.resources.Sheets;
 import game_content.resources.Tiles;
 import game_editor.Editor;
-import testgame.LevelEditor;
+import runnables.LevelEditor;
 
 public class EditorGUITiles {
 

@@ -1,4 +1,4 @@
-package testgame;
+package runnables;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -16,6 +16,7 @@ import game_content.resources.Sheets;
 import game_content.resources.Sounds;
 import game_content.resources.Textures;
 import game_content.resources.Tiles;
+import testgame.TestGame;
 import testgame.input.ClickSystem;
 
 public class Game extends Engine {

@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-import testgame.LevelEditor;
+import runnables.LevelEditor;
 
 public class EditorGUISlot8 {
 

@@ -26,7 +26,7 @@ import engine.utils.Misc;
 import game_content.entities.player.Player;
 import game_content.resources.Clothes;
 import game_content.resources.NPCs;
-import testgame.LevelEditor;
+import runnables.LevelEditor;
 
 public class EditorGUIPlayer {
 	

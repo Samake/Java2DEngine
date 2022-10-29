@@ -28,7 +28,7 @@ import game_content.resources.Objects;
 import game_content.resources.Sheets;
 import game_editor.Editor;
 import game_editor.gui.elements.EntityPanel;
-import testgame.LevelEditor;
+import runnables.LevelEditor;
 
 public class EditorGUIEntities {
 

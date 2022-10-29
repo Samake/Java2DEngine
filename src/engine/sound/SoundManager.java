@@ -4,10 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import engine.debug.Log;
-import engine.debug.Log.OUTPUTTYPE;
 import engine.utils.Vector2f;
-import game_content.resources.Sounds;
 
 public class SoundManager {
 	
@@ -23,9 +20,9 @@ public class SoundManager {
 				if (soundEntry != null) {
 					soundEntry.getValue().update(gameSpeed);
 					
-//					if (!soundEntry.getValue().soundFile.clip.isRunning()) {
-//						sounds.remove(soundEntry.getKey());
-//					}
+					if (!soundEntry.getValue().isPlaying) {
+						sounds.remove(soundEntry.getKey());
+					}
 				}
 			}
 		}
@@ -57,9 +54,7 @@ public class SoundManager {
 				sound.position.y = x;
 				sound.setVolume(volume);
 				sound.maxDistance = distance;
-
-				Log.print("Sound " + sound.id + " were started!", OUTPUTTYPE.TEXT);
-
+				
 				return sound;
 			}
 		}
@@ -83,17 +78,12 @@ public class SoundManager {
 		isActive = false;
 		
 		for (Entry<String, Sound> soundEntry : sounds.entrySet()) {
-//			if (soundEntry != null) {
-//				soundEntry.getValue().soundFile.clip.stop();
-//			}
+			if (soundEntry != null) {
+				soundEntry.getValue().stop();
+				soundEntry.getValue().cleanUp();;
+			}
 		}
 		
 		sounds.clear();
-		
-		for (SoundFile soundFile : Sounds.list) {
-//			if (soundFile != null) {
-//				soundFile.clip.close();
-//			}
-		}
 	}
 }

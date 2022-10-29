@@ -25,7 +25,7 @@ import javax.swing.event.ChangeListener;
 import engine.core.Config;
 import engine.level.Level;
 import engine.level.Level.LEVELTYPE;
-import testgame.LevelEditor;
+import runnables.LevelEditor;
 
 public class EditorGUIWorld {
 

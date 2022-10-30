@@ -56,6 +56,8 @@ public class Sound implements Runnable {
 	        });
 		
 			setVolume(0.0f);
+			setBalance(0.0f);
+			audio.flush();
 			
 			play();
 		} catch(Exception ex) {
@@ -67,7 +69,7 @@ public class Sound implements Runnable {
 	
 	@Override
 	public void run() {
-//		d
+
 	}
 	
 	public void update(int gameSpeed) {
@@ -81,16 +83,13 @@ public class Sound implements Runnable {
 						setVolume(volume);
 						setBalance(calculateBalance());
 					} else {
+						audio.flush();
 						setVolume(0.0f);
 						setBalance(0.0f);
 					}
-				} else {
-					setVolume(0.0f);
-					setBalance(0.0f);
 				}
 			} else {
 				setVolume(maxVolume);
-				setBalance(0.0f);
 			}
 		}
 	}
@@ -100,7 +99,8 @@ public class Sound implements Runnable {
 			FloatControl volumeControl = (FloatControl) audio.getControl(FloatControl.Type.MASTER_GAIN);
 			float volumeModifier = calculateVolume(volume);
 			float dB = 20f * (float) Math.log10(volumeModifier);
-			volumeControl.shift(volumeControl.getValue(), dB, 10);
+			//audio.flush();
+			volumeControl.shift(volumeControl.getValue(), dB, 0);
 		}
 	}
 	
@@ -108,7 +108,8 @@ public class Sound implements Runnable {
 		if (audio != null) {
 			FloatControl balanceControl = (FloatControl) audio.getControl(FloatControl.Type.BALANCE);
 			float balanceValue = calculateBalance();
-			balanceControl.shift(balanceControl.getValue(), balanceValue, 10);
+			audio.flush();
+			balanceControl.shift(balanceControl.getValue(), balanceValue, 0);
 		}
 	}
 	

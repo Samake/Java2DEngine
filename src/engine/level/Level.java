@@ -15,6 +15,7 @@ import engine.entities.lights.Light.LIGHTTYPE;
 import engine.entities.lights.PointLight;
 import engine.input.InputHandler;
 import engine.level.environment.Environment;
+import engine.level.environment.WeatherManager;
 import engine.rendering.Canvas;
 import engine.rendering.Screen;
 import engine.sprites.SpriteAtlas;
@@ -271,13 +272,13 @@ public class Level {
 		Debug.lightsRendered = renderListLights.size();
 	}
 	
-	public void renderTiles(Screen screen) {
+	public void renderTiles(Screen screen, WeatherManager weatherManager) {
 		if (renderListTiles != null) {
 			screen.setOffset(xOffset, yOffset);
 			
 			for (Tile tile : renderListTiles) {
 				if (tile != null) {
-					tile.render(screen, this, tile.x << Sheets.TILES_SHEET.getShiftOperator(), tile.y << Sheets.TILES_SHEET.getShiftOperator());
+					tile.render(screen, this, tile.x << Sheets.TILES_SHEET.getShiftOperator(), tile.y << Sheets.TILES_SHEET.getShiftOperator(), weatherManager);
 					
 					if (Debug.enabled) {
 						tile.renderDebug(screen, this, tile.x << Sheets.TILES_SHEET.getShiftOperator(), tile.y << Sheets.TILES_SHEET.getShiftOperator());

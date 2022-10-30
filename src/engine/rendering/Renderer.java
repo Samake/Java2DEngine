@@ -87,8 +87,6 @@ public class Renderer {
 	
 	public void render(Engine canvas, BufferStrategy bufferStrategy, Graphics graphics, GameScene scene) {
 		if (scene != null) {
-
-			
 			graphics.drawImage(sceneImage, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 			graphics.drawImage(guiImage, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 			

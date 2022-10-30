@@ -3,6 +3,7 @@ package engine.tiles;
 import java.awt.Color;
 
 import engine.level.Level;
+import engine.level.environment.WeatherManager;
 import engine.rendering.Screen;
 import engine.sprites.SpriteAtlas;
 
@@ -38,6 +39,6 @@ public abstract class Tile {
 	}
 	
 	public abstract void update(int gameSpeed);
-	public abstract void render(Screen screen, Level level, int x, int y);
+	public abstract void render(Screen screen, Level level, int x, int y, WeatherManager weatherManager);
 	public abstract void renderDebug(Screen screen, Level level, int x, int y);
 }

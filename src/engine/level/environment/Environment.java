@@ -1,8 +1,6 @@
 package engine.level.environment;
 
-import engine.debug.Log;
 import engine.level.Level;
-import engine.utils.Misc;
 
 public class Environment {
 	
@@ -36,15 +34,9 @@ public class Environment {
 		}
 	}
 
-	public void changeWeather(int hour) {
-		int randomValue = Misc.randomInteger(0, 100);
-		
-		if (randomValue > 70) {
-			weatherManager.isRaining = true;
-		} else {
-			weatherManager.isRaining = false;
+	public void recalculateWeather(int hour) {
+		if (weatherManager != null) {
+			weatherManager.performWeatherChange(hour);
 		}
-		
-		Log.print("Its " + hour + " o´clock. IsRaining: " + weatherManager.isRaining + " ... because random value was: " + randomValue);
 	}
 }

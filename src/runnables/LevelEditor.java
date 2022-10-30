@@ -643,6 +643,30 @@ public class LevelEditor extends Engine {
 		}
 	}
 	
+	public void setChangeWeather(boolean changeWeather) {
+		if (scene.level != null) {
+			scene.level.environment.weatherManager.changeWeather = changeWeather;
+		}
+	}
+	
+	public void setRaining(boolean isRaining) {
+		if (scene.level != null) {
+			scene.level.environment.weatherManager.isRaining = isRaining;
+		}
+	}
+	
+	public void setThunderStorm(boolean isThunderStorm) {
+		if (scene.level != null) {
+			scene.level.environment.weatherManager.isThunderStorm = isThunderStorm;
+		}
+	}
+	
+	public void changeRainLevel(int rainLevel) {
+		if (scene.level != null) {
+			scene.level.environment.weatherManager.rainLevel = rainLevel;
+		}
+	}
+	
 	public void generateWorld() {
 		if (scene.level != null) {
 			scene.level.generateNewRandomLevel();

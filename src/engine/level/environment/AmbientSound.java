@@ -10,9 +10,9 @@ public class AmbientSound {
 	private Sound rainSound;
 	
 	public AmbientSound(Level level) {
-		SoundManager.playSoundGlobal(Sounds.MUSIC_BG_01, 65.0f, false);
+		SoundManager.playSoundGlobal(Sounds.MUSIC_BG_01, 85.0f, false);
 		
-		rainSound = SoundManager.playSoundGlobal(Sounds.AMBIENT_RAIN, 40.0f, true);
+		rainSound = SoundManager.playSoundGlobal(Sounds.AMBIENT_RAIN, 70.0f, true);
 	}
 	
 	public void update(Time time, int gameSpeed, WeatherManager weatherManager) {

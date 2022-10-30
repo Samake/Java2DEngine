@@ -5,6 +5,7 @@ import java.awt.Color;
 import engine.collission.CollissionBox;
 import engine.core.Config;
 import engine.debug.Log;
+import engine.level.environment.WeatherManager;
 import engine.sprites.SpriteAtlas;
 import engine.sprites.SpriteSheet;
 
@@ -101,7 +102,7 @@ public class Screen {
 		}
 	}
 	
-	public void render(SpriteAtlas atlas, float inX, float inY, int tileID, int mirrorDir, float scale, float alpha, float brightness, boolean isInWater) {
+	public void render(SpriteAtlas atlas, float inX, float inY, int tileID, int mirrorDir, float scale, float alpha, float brightness, boolean isInWater, WeatherManager weatherManager) {
 		int xPos = (int) (inX - xOffset);
 		int yPos = (int) (inY - yOffset);
 		
@@ -157,7 +158,7 @@ public class Screen {
 
 									int currentColor = pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH];
 									
-									pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH] = mergeIntColors(currentColor, drawColor, alpha, isInWater, sheet.tileSize, y);
+									pixelsScene[((int) xPixel + xScale) + ((int) yPixel + yScale) * Config.WINDOW_WIDTH] = mergeIntColors(currentColor, drawColor, alpha, isInWater, sheet.tileSize, y, weatherManager);
 								}
 							}
 						} else {
@@ -169,7 +170,7 @@ public class Screen {
 		}
 	}
 	
-	private int mergeIntColors(int currentColor, Color drawColor, float alpha, boolean isInWater, int size, int height) {
+	private int mergeIntColors(int currentColor, Color drawColor, float alpha, boolean isInWater, int size, int height, WeatherManager weatherManager) {
 		if (isInWater) {
 			alpha *= 0.99f;
 		}
@@ -203,6 +204,12 @@ public class Screen {
 				blue = (int) (baseColor.getBlue() * (1.0 - alpha)) + (int) (drawColor.getBlue() * alpha);
 			}
 			
+			if (weatherManager.isThunderStorm && weatherManager.thunderLight > 0) {
+				red += weatherManager.thunderLight;
+				green += weatherManager.thunderLight;
+				blue += weatherManager.thunderLight;
+			}
+			
 			if (red < 0) {red = 0;}
 			if (red > 255) {red = 255;}
 			if (green < 0) {green = 0;}
@@ -213,9 +220,29 @@ public class Screen {
 			Color mergedColor = new Color(red ,green, blue, alphaValue);
 		
 			return mergedColor.getRGB();
+		} else {
+			int red = drawColor.getRed();
+			int green = drawColor.getGreen();
+			int blue = drawColor.getBlue();
+			int alphaValue = drawColor.getAlpha();
+			
+			if (weatherManager.isThunderStorm && weatherManager.thunderLight > 0) {
+				red += weatherManager.thunderLight;
+				green += weatherManager.thunderLight;
+				blue += weatherManager.thunderLight;
+			}
+			
+			if (red < 0) {red = 0;}
+			if (red > 255) {red = 255;}
+			if (green < 0) {green = 0;}
+			if (green > 255) {green = 255;}
+			if (blue < 0) {blue = 0;}
+			if (blue > 255) {blue = 255;}
+			
+			Color mergedColor = new Color(red ,green, blue, alphaValue);
+			
+			return mergedColor.getRGB();
 		}
-		
-		return drawColor.getRGB(); 
 	}
 	
 	public void renderFont(SpriteAtlas atlas, float inX, float inY, int tileID, int mirrorDir, float scale, Color fontColor) {

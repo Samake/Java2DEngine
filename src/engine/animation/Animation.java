@@ -33,7 +33,6 @@ public class Animation {
 		
 		if (renderType.equals(RENDERTYPE.R2X2)) {
 			currentOffset *= 2;
-			currentLength *= 2;
 		}
 		
 		if (lastTick + currentDelay < currentTick) {

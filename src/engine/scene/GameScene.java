@@ -52,7 +52,7 @@ public class GameScene extends Scene {
 		
 		if (level != null && screen != null) {
 
-			level.renderTiles(screen);
+			level.renderTiles(screen, level.environment.weatherManager);
 			level.renderDecals(screen);
 			level.renderEntities(screen);
 			

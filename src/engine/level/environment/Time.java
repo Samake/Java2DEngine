@@ -25,7 +25,7 @@ public class Time {
 			
 			if (minuteValue >= timeOperator) {
 				hour += 1;
-				environment.changeWeather(hour);
+				environment.recalculateWeather(hour);
 				
 				if (hour > 23) {
 					hour = 0;

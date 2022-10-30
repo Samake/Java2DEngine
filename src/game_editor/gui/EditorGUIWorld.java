@@ -33,6 +33,11 @@ public class EditorGUIWorld {
 	public static JLabel timeOfDayLabel;
 	public static JSlider timeOfDaySlider;
 	public static JCheckBox dayCycleCheckBox;
+	public static JCheckBox changeWeatherCheckBox;
+	public static JCheckBox rainCheckBox;
+	public static JCheckBox thunderStormCheckBox;
+	public static JLabel rainLevelLabel;
+	public static JSlider rainLevelSlider;
 	public static int currentHour = 0;
 
 	public static int width = 280;
@@ -48,6 +53,7 @@ public class EditorGUIWorld {
 		addGameSpeed(finalPanel);
 		addTimeOfDay(levelEditor, finalPanel);
 		addDayCycle(levelEditor, finalPanel);
+		addWeatherChooser(levelEditor, finalPanel);
 		//addWorldGenerator(levelEditor, finalPanel);
 		//addWorldSmooth(levelEditor, finalPanel);
 		//addUnlock(levelEditor, finalPanel);
@@ -226,19 +232,17 @@ public class EditorGUIWorld {
 	
 	private static void addDayCycle(LevelEditor levelEditor, JPanel finalPanel) {
 		Dimension labelPanelDimension = new Dimension(width / 2, (int) (lineHeight * 1.5));
+		Dimension dayCyclePanelDimension = new Dimension(width - 20, (int) (lineHeight * 1.5));
 		
 		JPanel dayCyclePanel = new JPanel();
 		dayCyclePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		dayCyclePanel.setBackground(Color.DARK_GRAY);
-		
-		Dimension dayCyclePanelDimension = new Dimension(width - 20, (int) (lineHeight * 1.5));
-		
 		dayCyclePanel.setSize(dayCyclePanelDimension);
 		dayCyclePanel.setMaximumSize(dayCyclePanelDimension);
 		dayCyclePanel.setMinimumSize(dayCyclePanelDimension);
 		dayCyclePanel.setPreferredSize(dayCyclePanelDimension);
 		
-		JCheckBox dayCycleCheckBox = new JCheckBox("DayCycle");
+		dayCycleCheckBox = new JCheckBox("DayCycle");
 		dayCycleCheckBox.setBackground(Color.DARK_GRAY);
 		dayCycleCheckBox.setForeground(Color.WHITE);
 		dayCycleCheckBox.setSize(labelPanelDimension);
@@ -260,6 +264,121 @@ public class EditorGUIWorld {
 		finalPanel.add(dayCyclePanel);
 	}
 	
+	private static void addWeatherChooser(LevelEditor levelEditor, JPanel finalPanel) {
+		Dimension labelPanelDimension = new Dimension(width / 2, (int) (lineHeight * 1.5));
+		Dimension weatherChooserPanelDimension = new Dimension(width - 20, (int) (lineHeight * 6.5));
+		Dimension rainLevelPanelDimension = new Dimension(width - 20, (int) (lineHeight * 2));
+		Dimension sliderDimension = new Dimension(width - 20, (int) (lineHeight * 0.5));
+		
+		JPanel weatherChooserPanel = new JPanel();
+		weatherChooserPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+		weatherChooserPanel.setBackground(Color.DARK_GRAY);
+		weatherChooserPanel.setSize(weatherChooserPanelDimension);
+		weatherChooserPanel.setMaximumSize(weatherChooserPanelDimension);
+		weatherChooserPanel.setMinimumSize(weatherChooserPanelDimension);
+		weatherChooserPanel.setPreferredSize(weatherChooserPanelDimension);
+		
+		changeWeatherCheckBox = new JCheckBox("Change Weather");
+		changeWeatherCheckBox.setBackground(Color.DARK_GRAY);
+		changeWeatherCheckBox.setForeground(Color.WHITE);
+		changeWeatherCheckBox.setSize(labelPanelDimension);
+		changeWeatherCheckBox.setMaximumSize(labelPanelDimension);
+		changeWeatherCheckBox.setMinimumSize(labelPanelDimension);
+		changeWeatherCheckBox.setPreferredSize(labelPanelDimension);
+		
+		changeWeatherCheckBox.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		    	JCheckBox cb = (JCheckBox) event.getSource();
+		    	
+		    	levelEditor.setChangeWeather(cb.isSelected());
+		    }
+		});
+		
+		weatherChooserPanel.add(changeWeatherCheckBox);
+		
+		JPanel rainStormPanel = new JPanel();
+		rainStormPanel.setLayout(new BoxLayout(rainStormPanel, BoxLayout.LINE_AXIS));
+		rainStormPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		rainStormPanel.setBackground(Color.DARK_GRAY);
+		
+		rainCheckBox = new JCheckBox("isRaning");
+		rainCheckBox.setBackground(Color.DARK_GRAY);
+		rainCheckBox.setForeground(Color.WHITE);
+		rainCheckBox.setSize(labelPanelDimension);
+		rainCheckBox.setMaximumSize(labelPanelDimension);
+		rainCheckBox.setMinimumSize(labelPanelDimension);
+		rainCheckBox.setPreferredSize(labelPanelDimension);
+		
+		rainCheckBox.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		    	JCheckBox cb = (JCheckBox) event.getSource();
+		    	
+		    	levelEditor.setRaining(cb.isSelected());
+		    }
+		});
+		
+		rainStormPanel.add(rainCheckBox);
+		
+		thunderStormCheckBox = new JCheckBox("isThunderStorm");
+		thunderStormCheckBox.setBackground(Color.DARK_GRAY);
+		thunderStormCheckBox.setForeground(Color.WHITE);
+		thunderStormCheckBox.setSize(labelPanelDimension);
+		thunderStormCheckBox.setMaximumSize(labelPanelDimension);
+		thunderStormCheckBox.setMinimumSize(labelPanelDimension);
+		thunderStormCheckBox.setPreferredSize(labelPanelDimension);
+		
+		thunderStormCheckBox.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		    	JCheckBox cb = (JCheckBox) event.getSource();
+		    	
+		    	levelEditor.setThunderStorm(cb.isSelected());
+		    }
+		});
+		
+		rainStormPanel.add(thunderStormCheckBox);
+		
+		weatherChooserPanel.add(rainStormPanel);
+		
+		JPanel rainLevelPanel = new JPanel();
+		rainLevelPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		rainLevelPanel.setBackground(Color.DARK_GRAY);
+		rainLevelPanel.setSize(rainLevelPanelDimension);
+		rainLevelPanel.setMaximumSize(rainLevelPanelDimension);
+		rainLevelPanel.setMinimumSize(rainLevelPanelDimension);
+		rainLevelPanel.setPreferredSize(rainLevelPanelDimension);
+		
+		rainLevelLabel = new JLabel("RainLevel: 0");
+		rainLevelLabel.setForeground(Color.WHITE);
+		
+		rainLevelPanel.add(rainLevelLabel);
+		
+		rainLevelSlider = new JSlider();
+		rainLevelSlider.setPreferredSize(sliderDimension);
+		rainLevelSlider.setMaximumSize(sliderDimension);
+		rainLevelSlider.setMinimumSize(sliderDimension);
+		rainLevelSlider.setSize(sliderDimension);
+		rainLevelSlider.setMinimum(0);
+		rainLevelSlider.setMaximum(25);
+		rainLevelSlider.setValue(0);
+		
+		rainLevelSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				int value = rainLevelSlider.getValue();
+				levelEditor.changeRainLevel(value);
+			}
+		});
+		
+		rainLevelPanel.add(rainLevelSlider);
+		
+		weatherChooserPanel.add(rainLevelPanel);
+		
+		finalPanel.add(weatherChooserPanel);
+		
+	}
+	
 	public static void updateWorldValues(Level level) {
 		if (level != null) {
 			currentHour = level.environment.time.hour;
@@ -270,6 +389,32 @@ public class EditorGUIWorld {
 				if (dayCycleCheckBox.isSelected() != level.environment.time.dayCycle) {
 					dayCycleCheckBox.setSelected(level.environment.time.dayCycle);
 				}
+			}
+			
+			if (changeWeatherCheckBox != null) {
+				if (changeWeatherCheckBox.isSelected() != level.environment.weatherManager.changeWeather) {
+					changeWeatherCheckBox.setSelected(level.environment.weatherManager.changeWeather);
+				}
+			}
+			
+			if (rainCheckBox != null) {
+				if (rainCheckBox.isSelected() != level.environment.weatherManager.isRaining) {
+					rainCheckBox.setSelected(level.environment.weatherManager.isRaining);
+				}
+			}
+			
+			if (thunderStormCheckBox != null) {
+				if (thunderStormCheckBox.isSelected() != level.environment.weatherManager.isThunderStorm) {
+					thunderStormCheckBox.setSelected(level.environment.weatherManager.isThunderStorm);
+				}
+			}
+			
+			if (rainLevelLabel != null) {
+				rainLevelLabel.setText("RainLevel: " + (int) level.environment.weatherManager.rainLevel);
+			}
+			
+			if (rainLevelSlider != null) {
+				rainLevelSlider.setValue((int) level.environment.weatherManager.rainLevel);
 			}
 			
 			if (!levelTypeComboBox.getSelectedItem().equals(level.type.name())) {

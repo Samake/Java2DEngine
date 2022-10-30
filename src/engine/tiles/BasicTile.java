@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import engine.debug.Debug;
 import engine.level.Level;
+import engine.level.environment.WeatherManager;
 import engine.rendering.Screen;
 
 public class BasicTile extends Tile {
@@ -32,16 +33,15 @@ public class BasicTile extends Tile {
 	}
 
 	@Override
-	public void render(Screen screen, Level level, int x, int y) {
+	public void render(Screen screen, Level level, int x, int y, WeatherManager weatherManager) {
 		if (hasCollission) {
 			if (!Debug.renderCollission) {
-				screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness, false);
+				screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness, false, weatherManager);
 			} 
 		} else {
-			screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness, false);
+			screen.render(atlas, x, y, atlas.getCurrentSprite(), 0x00, 1.0f, 1.0f, brightness, false, weatherManager);
 		}
-
-		
+	
 		if (selected) {
 			renderSelected(screen, x, y, atlas.sheet.tileSize, atlas.sheet.tileSize, selectedColor);
 		}

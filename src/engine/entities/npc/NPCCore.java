@@ -171,15 +171,12 @@ public class NPCCore extends Entity {
 
 			float currentSpeed = maxSpeed;
 			
-			//animation.delay = 400 / currentAnimSpeed;
 			speed = currentSpeed * gameSpeed;
 			
 			if (level != null && config.renderData.atlas != null) {
 				Tile tile = level.getTile((int) position.x >> config.renderData.atlas.sheet.getShiftOperator(), (int) position.y >> config.renderData.atlas.sheet.getShiftOperator());
 				
 				if (tile != null) {
-					//speed = currentSpeed * tile.hesitation;
-					
 					checkIfInWater(tile);
 				}
 			}
@@ -190,28 +187,16 @@ public class NPCCore extends Entity {
 			} else {
 				isMoving = false;
 			}
-			
-			if (isMoving) {
-				//animation.delay = 150 / currentAnimSpeed;
-			}
-			
+
 			if (isSprinting) {
-				//speed = currentSpeed * 1.5f;
-				//animation.delay = 100 / currentAnimSpeed;
-			}
-			
-			if (isSneaking) {
-				//speed = currentSpeed * 0.5f;
-				//animation.delay = 200 / currentAnimSpeed;
+
 			}
 			
 			flipValue = (flipModifier >> (int) flipSpeed * 2) & 1;
 
 			if (isSwimming) {
-				//speed = currentSpeed * 0.35f;
 				heightOffsetModifier = config.renderData.atlas.sheet.tileSize / 2;
 				inWater = true;
-				//animation.delay = 400 / currentAnimSpeed;
 			} else {
 				heightOffsetModifier = 0;
 				inWater = false;

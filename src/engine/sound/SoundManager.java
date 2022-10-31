@@ -20,7 +20,7 @@ public class SoundManager {
 				if (soundEntry != null) {
 					soundEntry.getValue().update(gameSpeed);
 					
-					if (!soundEntry.getValue().isPlaying) {
+					if (!soundEntry.getValue().audio.isRunning()) {
 						sounds.remove(soundEntry.getKey());
 					}
 				}
@@ -52,8 +52,12 @@ public class SoundManager {
 				sound.global = global;
 				sound.position.x = x;
 				sound.position.y = x;
-				sound.setVolume(volume);
+				sound.maxVolume = volume;
 				sound.maxDistance = distance;
+				sound.looped = looped;
+				
+				
+				sound.play();
 				
 				return sound;
 			}
@@ -63,11 +67,16 @@ public class SoundManager {
 	}
 
 	private static Sound getSound(SoundFile soundFile, float x, float y, float volume, float distance, boolean looped, boolean global) {
-			String id = soundFile.id + "_" + (int) x + "_" + (int) y + "_" + (int) distance + "_" + looped + "_" + global;
+		String id = soundFile.id + "_" + (int) x + "_" + (int) y + "_" + (int) distance + "_" + looped + "_" + global;
+		
+		if (sounds.containsKey(id)) {
+			return sounds.get(id);
+		} else {
 			Sound sound = new Sound(id, soundFile, x, y, volume, distance, looped, global);
 			sounds.put(id, sound);
 			
 			return sound;
+		}
 	}
 	
 	public static int getSoundsCountPlayed() {

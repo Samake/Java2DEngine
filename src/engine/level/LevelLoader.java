@@ -88,6 +88,34 @@ public class LevelLoader {
 					    		level.environment.time.dayCycle = dayCycle;
 					    	}
 					    	
+					    	if (line.contains("changeWeather")) {
+					    		String[] changeWeatherLine = line.split(":");
+					    		boolean changeWeather = Boolean.valueOf(changeWeatherLine[1]);
+					    		
+					    		level.environment.weatherManager.changeWeather = changeWeather;
+					    	}
+					    	
+					    	if (line.contains("isRaining")) {
+					    		String[] isRainingLine = line.split(":");
+					    		boolean isRaining = Boolean.valueOf(isRainingLine[1]);
+					    		
+					    		level.environment.weatherManager.isRaining = isRaining;
+					    	}
+					    	
+					    	if (line.contains("isThunderStorm")) {
+					    		String[] isThunderStormLine = line.split(":");
+					    		boolean isThunderStorm = Boolean.valueOf(isThunderStormLine[1]);
+					    		
+					    		level.environment.weatherManager.isThunderStorm = isThunderStorm;
+					    	}
+					    	
+					    	if (line.contains("rainLevel")) {
+					    		String[] rainLevelLine = line.split(":");
+					    		float rainLevel = Float.valueOf(rainLevelLine[1]);
+					    		
+					    		level.environment.weatherManager.rainLevel = rainLevel;
+					    	}
+					    	
 					    	if (line.contains("tile:")) {
 					    		line = line.replace("{", "");
 					    		line = line.replace("}", "");
@@ -373,6 +401,14 @@ public class LevelLoader {
 		bufferedWriter.write("daytime:" + level.environment.time.hour);
 		bufferedWriter.newLine();
 		bufferedWriter.write("daycycle:" + level.environment.time.dayCycle);
+		bufferedWriter.newLine();
+		bufferedWriter.write("changeWeather:" + level.environment.weatherManager.changeWeather);
+		bufferedWriter.newLine();
+		bufferedWriter.write("isRaining:" + level.environment.weatherManager.isRaining);
+		bufferedWriter.newLine();
+		bufferedWriter.write("isThunderStorm:" + level.environment.weatherManager.isThunderStorm);
+		bufferedWriter.newLine();
+		bufferedWriter.write("rainLevel:" + level.environment.weatherManager.rainLevel);
 		bufferedWriter.newLine();
 	}
 	

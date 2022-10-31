@@ -259,7 +259,7 @@ public class NPCCore extends Entity {
 			if (flipValue == 2) {
 				if (flipChanged) {
 					int randomX = Misc.randomInteger(-(config.renderData.atlas.sheet.tileSize / 4), (config.renderData.atlas.sheet.tileSize / 4));
-					int randomY = Misc.randomInteger(0, (config.renderData.atlas.sheet.tileSize / 2));
+					int randomY = Misc.randomInteger(0, (config.renderData.atlas.sheet.tileSize / 4));
 					
 					new EffectWaterRipples(level, position.x + randomX, position.y + randomY + heightOffsetModifier);
 					flipChanged = false;
@@ -270,7 +270,7 @@ public class NPCCore extends Entity {
 				if (flipChanged) {
 					if (waterDripCount < 5) {
 						int randomX = Misc.randomInteger(-(config.renderData.atlas.sheet.tileSize / 4), (config.renderData.atlas.sheet.tileSize / 4));
-						int randomY = Misc.randomInteger(0, (config.renderData.atlas.sheet.tileSize / 2));
+						int randomY = Misc.randomInteger(0, (config.renderData.atlas.sheet.tileSize / 4));
 						
 						new EffectWaterRipples(level, position.x + randomX, position.y + randomY + config.renderData.atlas.sheet.tileSize);
 						flipChanged = false;

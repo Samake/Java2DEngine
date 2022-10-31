@@ -38,7 +38,7 @@ public class SpawnEgg extends Prefab {
 						if (!isCracked) {
 							isCracked = true;
 							
-							SoundManager.playSoundGlobal(Sounds.EFFECT_EGG_CRACK, 55.0f, false);
+							SoundManager.playSoundLocal(Sounds.EFFECT_EGG_CRACK, position.x, position.y, 65.0f, 65, false);
 							
 							new DecalEggSplash(level, position.x, position.y);
 							new EffectSmokePuffGrey(level, position.x, position.y);

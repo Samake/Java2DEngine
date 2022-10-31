@@ -26,7 +26,7 @@ public class Player extends NPCHuman {
 
 		ANIMATION_IDLE = new Animation(0, 8, 500, 2);
 		ANIMATION_WALK_UP = new Animation(0, 2, 100, 8);
-		ANIMATION_WALK_DOWN = new Animation(0, 24, 100, 8);
+		ANIMATION_WALK_DOWN = new Animation(0, 8, 100, 8);
 		ANIMATION_WALK_LEFT = new Animation(0, 6, 100, 8);
 		ANIMATION_WALK_RIGHT =  new Animation(0, 4, 100, 8);
 		

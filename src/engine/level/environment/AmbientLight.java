@@ -3,6 +3,7 @@ package engine.level.environment;
 import java.awt.Color;
 
 import engine.level.Level;
+import engine.utils.Misc;
 
 public class AmbientLight {
 	
@@ -82,6 +83,15 @@ public class AmbientLight {
 			r *= 1.0f - (fadeValue / 2);
 			g *= 1.0f - (fadeValue / 2);
 			b *= 1.0f - (fadeValue / 2);
+		}
+		
+		if (weatherManager.performFlash) {
+			r /= 3;
+			g /= 3;
+			b /= 3;
+			r += Misc.randomInteger(35, 255);
+			g += Misc.randomInteger(35, 255);
+			b += Misc.randomInteger(35, 255);
 		}
 		
 		if (r < 0) r = 0;

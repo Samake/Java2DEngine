@@ -278,7 +278,7 @@ public class Level {
 			
 			for (Tile tile : renderListTiles) {
 				if (tile != null) {
-					tile.render(screen, this, tile.x << Sheets.TILES_SHEET.getShiftOperator(), tile.y << Sheets.TILES_SHEET.getShiftOperator(), weatherManager);
+					tile.render(screen, this, tile.x << Sheets.TILES_SHEET.getShiftOperator(), tile.y << Sheets.TILES_SHEET.getShiftOperator());
 					
 					if (Debug.enabled) {
 						tile.renderDebug(screen, this, tile.x << Sheets.TILES_SHEET.getShiftOperator(), tile.y << Sheets.TILES_SHEET.getShiftOperator());

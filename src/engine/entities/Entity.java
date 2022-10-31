@@ -501,11 +501,11 @@ public class Entity {
 	}
 
 	private void renderPart(Screen screen, int xTileID, int yTileID, boolean isInWater) {
-		screen.render(config.renderData.atlas, xOffset, yOffset, config.renderData.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater, level.environment.weatherManager);
+		screen.render(config.renderData.atlas, xOffset, yOffset, config.renderData.atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater);
 	}
 	
 	private void renderPartbyAtlas(Screen screen, SpriteAtlas atlas, int xTileID, int yTileID, boolean isInWater) {
-		screen.render(atlas, xOffset, yOffset, atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater, level.environment.weatherManager);
+		screen.render(atlas, xOffset, yOffset, atlas.getCurrentSprite(xTileID, yTileID), 0x00, scale, alpha, brightness, isInWater);
 	}
 
 	public void renderDebug(Screen screen) {

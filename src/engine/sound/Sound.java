@@ -24,7 +24,6 @@ public class Sound implements Runnable {
 	
 	public Thread thread;
 	public Clip audio;
-	public boolean isPlaying = false;
 
 	public Sound(String id, SoundFile soundFile, float x, float y, float volume, float distance, boolean looped, boolean global) {
 		this.id = id;
@@ -57,9 +56,8 @@ public class Sound implements Runnable {
 		
 			setVolume(0.0f);
 			setBalance(0.0f);
-			audio.flush();
 			
-			play();
+			audio.flush();
 		} catch(Exception ex) {
 			Log.print(ex.getStackTrace().toString(), OUTPUTTYPE.EXCEPTION);
 		}
@@ -83,7 +81,7 @@ public class Sound implements Runnable {
 						setVolume(volume);
 						setBalance(calculateBalance());
 					} else {
-						audio.flush();
+						//audio.flush();
 						setVolume(0.0f);
 						setBalance(0.0f);
 					}
@@ -108,7 +106,7 @@ public class Sound implements Runnable {
 		if (audio != null) {
 			FloatControl balanceControl = (FloatControl) audio.getControl(FloatControl.Type.BALANCE);
 			float balanceValue = calculateBalance();
-			audio.flush();
+			//audio.flush();
 			balanceControl.shift(balanceControl.getValue(), balanceValue, 0);
 		}
 	}
@@ -139,23 +137,20 @@ public class Sound implements Runnable {
 		if (audio != null) {
 			stop();
 			
+			audio.setFramePosition(0);
+			
 			if (looped) {
 				audio.loop(Clip.LOOP_CONTINUOUSLY);
 			} else {
 				audio.start();;
 			}
-			
-			isPlaying = true;
 		}
 	}
 	
 	public void stop() {
 		if (audio != null) {
-			if (audio.isRunning()) {
-				audio.setFramePosition(0);
-				audio.stop();
-				isPlaying = false;
-			}
+			audio.setFramePosition(0);
+			audio.stop();
 		}
 	}
 	

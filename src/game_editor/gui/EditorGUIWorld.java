@@ -36,8 +36,11 @@ public class EditorGUIWorld {
 	public static JCheckBox changeWeatherCheckBox;
 	public static JCheckBox rainCheckBox;
 	public static JCheckBox thunderStormCheckBox;
+	public static JCheckBox fogCheckBox;
 	public static JLabel rainLevelLabel;
 	public static JSlider rainLevelSlider;
+	public static JLabel fogLevelLabel;
+	public static JSlider fogLevelSlider;
 	public static int currentHour = 0;
 
 	public static int width = 280;
@@ -266,8 +269,8 @@ public class EditorGUIWorld {
 	
 	private static void addWeatherChooser(LevelEditor levelEditor, JPanel finalPanel) {
 		Dimension labelPanelDimension = new Dimension(width / 2, (int) (lineHeight * 1.5));
-		Dimension weatherChooserPanelDimension = new Dimension(width - 20, (int) (lineHeight * 6.5));
-		Dimension rainLevelPanelDimension = new Dimension(width - 20, (int) (lineHeight * 2));
+		Dimension weatherChooserPanelDimension = new Dimension(width - 20, (int) (lineHeight * 15));
+		Dimension sliderPanelDimension = new Dimension(width - 20, (int) (lineHeight * 2));
 		Dimension sliderDimension = new Dimension(width - 20, (int) (lineHeight * 0.5));
 		
 		JPanel weatherChooserPanel = new JPanel();
@@ -297,12 +300,7 @@ public class EditorGUIWorld {
 		
 		weatherChooserPanel.add(changeWeatherCheckBox);
 		
-		JPanel rainStormPanel = new JPanel();
-		rainStormPanel.setLayout(new BoxLayout(rainStormPanel, BoxLayout.LINE_AXIS));
-		rainStormPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		rainStormPanel.setBackground(Color.DARK_GRAY);
-		
-		rainCheckBox = new JCheckBox("isRaning");
+		rainCheckBox = new JCheckBox("Rain");
 		rainCheckBox.setBackground(Color.DARK_GRAY);
 		rainCheckBox.setForeground(Color.WHITE);
 		rainCheckBox.setSize(labelPanelDimension);
@@ -319,9 +317,9 @@ public class EditorGUIWorld {
 		    }
 		});
 		
-		rainStormPanel.add(rainCheckBox);
+		weatherChooserPanel.add(rainCheckBox);
 		
-		thunderStormCheckBox = new JCheckBox("isThunderStorm");
+		thunderStormCheckBox = new JCheckBox("ThunderStorm");
 		thunderStormCheckBox.setBackground(Color.DARK_GRAY);
 		thunderStormCheckBox.setForeground(Color.WHITE);
 		thunderStormCheckBox.setSize(labelPanelDimension);
@@ -338,17 +336,35 @@ public class EditorGUIWorld {
 		    }
 		});
 		
-		rainStormPanel.add(thunderStormCheckBox);
+		weatherChooserPanel.add(thunderStormCheckBox);
 		
-		weatherChooserPanel.add(rainStormPanel);
+
+		fogCheckBox = new JCheckBox("Fog");
+		fogCheckBox.setBackground(Color.DARK_GRAY);
+		fogCheckBox.setForeground(Color.WHITE);
+		fogCheckBox.setSize(labelPanelDimension);
+		fogCheckBox.setMaximumSize(labelPanelDimension);
+		fogCheckBox.setMinimumSize(labelPanelDimension);
+		fogCheckBox.setPreferredSize(labelPanelDimension);
+		
+		fogCheckBox.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent event) {
+		    	JCheckBox cb = (JCheckBox) event.getSource();
+		    	
+		    	levelEditor.setFog(cb.isSelected());
+		    }
+		});
+		
+		weatherChooserPanel.add(fogCheckBox);
 		
 		JPanel rainLevelPanel = new JPanel();
 		rainLevelPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		rainLevelPanel.setBackground(Color.DARK_GRAY);
-		rainLevelPanel.setSize(rainLevelPanelDimension);
-		rainLevelPanel.setMaximumSize(rainLevelPanelDimension);
-		rainLevelPanel.setMinimumSize(rainLevelPanelDimension);
-		rainLevelPanel.setPreferredSize(rainLevelPanelDimension);
+		rainLevelPanel.setSize(sliderPanelDimension);
+		rainLevelPanel.setMaximumSize(sliderPanelDimension);
+		rainLevelPanel.setMinimumSize(sliderPanelDimension);
+		rainLevelPanel.setPreferredSize(sliderPanelDimension);
 		
 		rainLevelLabel = new JLabel("RainLevel: 0");
 		rainLevelLabel.setForeground(Color.WHITE);
@@ -374,6 +390,39 @@ public class EditorGUIWorld {
 		rainLevelPanel.add(rainLevelSlider);
 		
 		weatherChooserPanel.add(rainLevelPanel);
+		
+		JPanel fogLevelPanel = new JPanel();
+		fogLevelPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		fogLevelPanel.setBackground(Color.DARK_GRAY);
+		fogLevelPanel.setSize(sliderPanelDimension);
+		fogLevelPanel.setMaximumSize(sliderPanelDimension);
+		fogLevelPanel.setMinimumSize(sliderPanelDimension);
+		fogLevelPanel.setPreferredSize(sliderPanelDimension);
+		
+		fogLevelLabel = new JLabel("FogLevel: 0");
+		fogLevelLabel.setForeground(Color.WHITE);
+		
+		fogLevelPanel.add(fogLevelLabel);
+		
+		fogLevelSlider = new JSlider();
+		fogLevelSlider.setPreferredSize(sliderDimension);
+		fogLevelSlider.setMaximumSize(sliderDimension);
+		fogLevelSlider.setMinimumSize(sliderDimension);
+		fogLevelSlider.setSize(sliderDimension);
+		fogLevelSlider.setMinimum(0);
+		fogLevelSlider.setMaximum(25);
+		fogLevelSlider.setValue(0);
+		
+		fogLevelSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				int value = fogLevelSlider.getValue();
+				levelEditor.changeFogLevel(value);
+			}
+		});
+		
+		fogLevelPanel.add(fogLevelSlider);
+		
+		weatherChooserPanel.add(fogLevelPanel);
 		
 		finalPanel.add(weatherChooserPanel);
 		
@@ -409,12 +458,26 @@ public class EditorGUIWorld {
 				}
 			}
 			
+			if (fogCheckBox != null) {
+				if (fogCheckBox.isSelected() != level.environment.weatherManager.isFoggy) {
+					fogCheckBox.setSelected(level.environment.weatherManager.isFoggy);
+				}
+			}
+			
 			if (rainLevelLabel != null) {
 				rainLevelLabel.setText("RainLevel: " + (int) level.environment.weatherManager.rainLevel);
 			}
-			
+
 			if (rainLevelSlider != null) {
 				rainLevelSlider.setValue((int) level.environment.weatherManager.rainLevel);
+			}
+			
+			if (fogLevelLabel != null) {
+				fogLevelLabel.setText("FogLevel: " + (int) level.environment.weatherManager.fogLevel);
+			}
+			
+			if (fogLevelSlider != null) {
+				fogLevelSlider.setValue((int) level.environment.weatherManager.fogLevel);
 			}
 			
 			if (!levelTypeComboBox.getSelectedItem().equals(level.type.name())) {

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import engine.utils.Misc;
 import engine.utils.Vector2f;
 
 public class SoundManager {
@@ -67,7 +68,7 @@ public class SoundManager {
 	}
 
 	private static Sound getSound(SoundFile soundFile, float x, float y, float volume, float distance, boolean looped, boolean global) {
-		String id = soundFile.id + "_" + (int) x + "_" + (int) y + "_" + (int) distance + "_" + looped + "_" + global;
+		String id = soundFile.id + "_" + (int) x + "_" + (int) y + "_" + (int) distance + "_" + looped + "_" + global + "_" + Misc.randomInteger(111111, 999999);
 		
 		if (sounds.containsKey(id)) {
 			return sounds.get(id);

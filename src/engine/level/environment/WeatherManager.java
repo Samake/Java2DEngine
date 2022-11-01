@@ -20,10 +20,10 @@ public class WeatherManager {
 	public List<FogLayer> fogLayers = new ArrayList<FogLayer>();
 
 	public boolean changeWeather = true;
-	public boolean isFoggy = true;
-	public boolean isRaining = true;
-	public boolean isThunderStorm = true;
-	public float fogLevel = 10.0f;
+	public boolean isFoggy = false;
+	public boolean isRaining = false;
+	public boolean isThunderStorm = false;
+	public float fogLevel = 0.0f;
 	public float maxFogLevel = 25.0f;
 	public float rainLevel = 0.0f;
 	public float maxRainLevel = 25.0f;

@@ -102,6 +102,13 @@ public class LevelLoader {
 					    		level.environment.weatherManager.isRaining = isRaining;
 					    	}
 					    	
+					    	if (line.contains("rainLevel")) {
+					    		String[] rainLevelLine = line.split(":");
+					    		float rainLevel = Float.valueOf(rainLevelLine[1]);
+					    		
+					    		level.environment.weatherManager.rainLevel = rainLevel;
+					    	}
+					    	
 					    	if (line.contains("isThunderStorm")) {
 					    		String[] isThunderStormLine = line.split(":");
 					    		boolean isThunderStorm = Boolean.valueOf(isThunderStormLine[1]);
@@ -109,11 +116,18 @@ public class LevelLoader {
 					    		level.environment.weatherManager.isThunderStorm = isThunderStorm;
 					    	}
 					    	
-					    	if (line.contains("rainLevel")) {
-					    		String[] rainLevelLine = line.split(":");
-					    		float rainLevel = Float.valueOf(rainLevelLine[1]);
+					    	if (line.contains("isFoggy")) {
+					    		String[] isFoggyLine = line.split(":");
+					    		boolean isFoggy = Boolean.valueOf(isFoggyLine[1]);
 					    		
-					    		level.environment.weatherManager.rainLevel = rainLevel;
+					    		level.environment.weatherManager.isFoggy = isFoggy;
+					    	}
+					    	
+					    	if (line.contains("fogLevel")) {
+					    		String[] fogLevelLine = line.split(":");
+					    		float fogLevel = Float.valueOf(fogLevelLine[1]);
+					    		
+					    		level.environment.weatherManager.fogLevel = fogLevel;
 					    	}
 					    	
 					    	if (line.contains("tile:")) {
@@ -409,6 +423,10 @@ public class LevelLoader {
 		bufferedWriter.write("isThunderStorm:" + level.environment.weatherManager.isThunderStorm);
 		bufferedWriter.newLine();
 		bufferedWriter.write("rainLevel:" + level.environment.weatherManager.rainLevel);
+		bufferedWriter.newLine();
+		bufferedWriter.write("isFoggy:" + level.environment.weatherManager.isFoggy);
+		bufferedWriter.newLine();
+		bufferedWriter.write("fogLevel:" + level.environment.weatherManager.fogLevel);
 		bufferedWriter.newLine();
 	}
 	

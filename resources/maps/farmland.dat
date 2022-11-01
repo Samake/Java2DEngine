@@ -9,6 +9,8 @@ changeWeather:false
 isRaining:true
 isThunderStorm:true
 rainLevel:25.0
+isFoggy:true
+fogLevel:5.0
 [TILES]
 {id:0,tile:104,x:0,y:0}
 {id:128,tile:100,x:0,y:1}

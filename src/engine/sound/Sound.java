@@ -104,10 +104,10 @@ public class Sound implements Runnable {
 	
 	public void setBalance(float balance) {
 		if (audio != null) {
-			FloatControl balanceControl = (FloatControl) audio.getControl(FloatControl.Type.BALANCE);
-			float balanceValue = calculateBalance();
-			//audio.flush();
-			balanceControl.shift(balanceControl.getValue(), balanceValue, 0);
+//			FloatControl balanceControl = (FloatControl) audio.getControl(FloatControl.Type.BALANCE);
+//			float balanceValue = calculateBalance();
+//			//audio.flush();
+//			balanceControl.shift(balanceControl.getValue(), balanceValue, 0);
 		}
 	}
 	

@@ -86,12 +86,14 @@ public class AmbientLight {
 		}
 		
 		if (weatherManager.performFlash) {
-			r /= 3;
-			g /= 3;
-			b /= 3;
-			r += Misc.randomInteger(35, 255);
-			g += Misc.randomInteger(35, 255);
-			b += Misc.randomInteger(35, 255);
+			float greyValue = (r + g + b) / 3;
+			
+			r = greyValue / 4;
+			g = greyValue / 4;
+			b = greyValue / 4;
+			r += Misc.randomInteger(15, 255);
+			g += Misc.randomInteger(15, 255);
+			b += Misc.randomInteger(15, 255);
 		}
 		
 		if (r < 0) r = 0;

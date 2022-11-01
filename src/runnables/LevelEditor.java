@@ -661,9 +661,21 @@ public class LevelEditor extends Engine {
 		}
 	}
 	
+	public void setFog(boolean isFoggy) {
+		if (scene.level != null) {
+			scene.level.environment.weatherManager.isFoggy = isFoggy;
+		}
+	}
+	
 	public void changeRainLevel(int rainLevel) {
 		if (scene.level != null) {
 			scene.level.environment.weatherManager.rainLevel = rainLevel;
+		}
+	}
+	
+	public void changeFogLevel(int fogLevel) {
+		if (scene.level != null) {
+			scene.level.environment.weatherManager.fogLevel = fogLevel;
 		}
 	}
 	

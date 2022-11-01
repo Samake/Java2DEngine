@@ -17,11 +17,11 @@ public class DebugGUIEditor extends GUI {
 
 	private int x = 0;
 	private int y = 0;
-	private int width = 300;
+	private int width = 400;
 	private int height = 115;
 	private int lineSpace = 12;
 	
-	private Color backColor = new Color(0, 0, 0, 220);
+	private Color backColor = new Color(0, 0, 0, 180);
 	private Color fontColor = new Color(255, 255, 255, 255);
 	
 	public DebugGUIEditor() {

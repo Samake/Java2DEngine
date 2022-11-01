@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MultipleGradientPaint.CycleMethod;
 import java.awt.RadialGradientPaint;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
@@ -15,6 +16,7 @@ import engine.entities.lights.PointLight;
 import engine.gui.GUI;
 import engine.input.InputHandler;
 import engine.level.Level;
+import engine.level.environment.FogLayer;
 import engine.level.environment.RainLayer;
 
 public class GameScene extends Scene {
@@ -193,6 +195,14 @@ public class GameScene extends Scene {
 					}
 				}
 			}
+			
+			if (level.environment.weatherManager.fogLevel > 0) {
+				for (FogLayer fogLayer : level.environment.weatherManager.fogLayers) {
+					if (fogLayer != null) {
+						drawFogLayer(graphic, fogLayer);
+					}
+				}
+			}
 
 			graphic.dispose();
 		}
@@ -202,6 +212,18 @@ public class GameScene extends Scene {
 		if (corona != null && radius > 0) {
 			//graphic.setComposite(AlphaComposite.DstIn);
 			graphic.drawImage(corona, (int) x - (int) radius, (int) y - (int) radius, (int) radius * 2, (int) radius * 2, null);
+		}
+	}
+	
+	private void drawFogLayer(Graphics2D graphic, FogLayer fogLayer) {
+		if (fogLayer != null) {
+			//graphic.setComposite(AlphaComposite.DstOver);
+			if (fogLayer.texture.image != null) {
+				AffineTransform old = graphic.getTransform();
+				graphic.rotate(Math.toRadians(fogLayer.rotation), fogLayer.size / 2, fogLayer.size / 2);
+				graphic.drawImage(fogLayer.texture.image, (int) fogLayer.x - fogLayer.size / 2, (int) fogLayer.y - fogLayer.size / 2, fogLayer.size, fogLayer.size, null);
+				graphic.setTransform(old);
+			}
 		}
 	}
 	

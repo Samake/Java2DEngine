@@ -17,15 +17,22 @@ public class WeatherManager {
 
 	private Level level;
 	public List<RainLayer> rainLayers = new ArrayList<RainLayer>();
-	public int dropLayers = 0;
+	public List<FogLayer> fogLayers = new ArrayList<FogLayer>();
+
 	public boolean changeWeather = true;
+	public boolean isFoggy = true;
 	public boolean isRaining = true;
 	public boolean isThunderStorm = true;
+	public float fogLevel = 10.0f;
+	public float maxFogLevel = 25.0f;
 	public float rainLevel = 0.0f;
 	public float maxRainLevel = 25.0f;
 
 	public boolean performFlash = false;
 	public boolean performThunder = false;
+	
+	public int rainLayerCount = 0;
+	public int fogLayerCount = 0;
 	
 	private long lastTick = System.currentTimeMillis();
 	private int flashFrames = Misc.randomInteger(15, 45);
@@ -39,7 +46,8 @@ public class WeatherManager {
 	}
 
 	public void update(Time time, int gameSpeed) {
-		dropLayers = (int) rainLevel;
+		rainLayerCount = (int) rainLevel;
+		fogLayerCount = (int) fogLevel;
 		
 		if (isRaining) {
 			if (rainLevel < maxRainLevel) {
@@ -53,6 +61,38 @@ public class WeatherManager {
 			} else {
 				rainLevel = 0;
 				isThunderStorm = false;
+			}
+		}
+		
+		if (isFoggy) {
+			if (fogLevel < maxFogLevel) {
+				changeFogLevel(0.05f * gameSpeed);
+			} else {
+				fogLevel = maxFogLevel;
+			}
+		} else {
+			if (fogLevel > 0) {
+				changeFogLevel(-0.05f * gameSpeed);
+			} else {
+				fogLevel = 0;
+			}
+		}
+		
+		if (fogLevel == 0) {
+			if (!fogLayers.isEmpty()) {
+				fogLayers.clear();
+			}
+		} else {
+			List<FogLayer> updateListFog = new ArrayList<FogLayer>(fogLayers);
+			
+			if (updateListFog.size() < fogLayerCount) {
+				addFogLayer();
+			}
+			
+			for (FogLayer layer : updateListFog) {
+				if (layer != null) {
+					layer.update(gameSpeed);
+				}
 			}
 		}
 		
@@ -73,13 +113,13 @@ public class WeatherManager {
 				isThunderStorm = false;
 			}
 		} else {
-			List<RainLayer> updateList = new ArrayList<RainLayer>(rainLayers);
+			List<RainLayer> updateListRain = new ArrayList<RainLayer>(rainLayers);
 			
-			if (updateList.size() < dropLayers) {
+			if (updateListRain.size() < rainLayerCount) {
 				addRainLayer();
 			}
 			
-			for (RainLayer layer : updateList) {
+			for (RainLayer layer : updateListRain) {
 				if (layer != null) {
 					layer.update(gameSpeed);
 				}
@@ -127,10 +167,26 @@ public class WeatherManager {
 			}
 		}
 	}
+	
+	private void changeFogLevel(float value) {
+		if (changeWeather) {
+			fogLevel += value;
+		}
+	}
 
 	private void changeRainLevel(float value) {
 		if (changeWeather) {
 			rainLevel += value;
+		}
+	}
+	
+	public void addFogLayer() {
+		fogLayers.add(new FogLayer(this));
+	}
+	
+	public void removeFogLayer(FogLayer layerIn) {
+		if (fogLayers.contains(layerIn)) {
+			fogLayers.remove(layerIn);
 		}
 	}
 	

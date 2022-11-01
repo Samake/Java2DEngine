@@ -11,7 +11,8 @@ public class Textures {
 	public final static Texture TEXTURE_RAIN_02 = new Texture(list, 2, "/textures/effects/rain_02.png", 0.25f);
 	public final static Texture TEXTURE_RAIN_03 = new Texture(list, 3, "/textures/effects/rain_03.png", 0.25f);
 	public final static Texture TEXTURE_RAIN_04 = new Texture(list, 4, "/textures/effects/rain_04.png", 0.25f);
-	
+	public final static Texture TEXTURE_FOG_01 = new Texture(list, 5, "/textures/effects/fog_01.png", 0.05f);
+
 	public static Texture getTextureByID(int id) {
 		return list[id];
 	}
